@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s msg='BEGIN' st_id='0000000029' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='70' msg='added'> ? ( ∀ e : A ( ∃ v : V ( from ( e ) = v ) ) ) ?</st_store>
+<infx_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</infx_subst>
+<defc_subst msg='!DEBUG! begin' tid='71'><defc_subst msg='!WARNING! Id e does not exist in entities!'/><defc_subst msg='!WARNING! Id v does not exist in entities!'/>
+<defc_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</defc_subst><defc_subst msg='!DEBUG! end' RC='0'/></defc_subst>
+<deff_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</deff_subst>
+!trm_Val!DEBUG! IN rid=trma (tid=71,nid=22)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='0'>
+!trm_Val.trma!DEBUG!EMPTY! sort='A'! </trma>
+!q_term!DEBUG! after trm_Val point! rc=1.<term tid='71' nid='22' up='29' rid='trma' v='' irn='2' ref='34' type='14' flg='2' flg2='-2147483648'><l_p tid='71' nid='23' up='22' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='71' nid='24' up='22' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='71' nid='25' up='22' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='71' nid='26' up='22' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='71' nid='27' up='22' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='71' nid='15' up='22' rid='trme' v='' irn='6' ref='34' type='14' flg='2' flg2='-2147483648'><l_p tid='71' nid='16' up='15' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='71' nid='17' up='15' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='71' nid='18' up='15' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='71' nid='19' up='15' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='71' nid='20' up='15' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='71' nid='11' up='15' rid='trmf' v='' irn='6' ref='34' type='14' flg='2' flg2='-2147483648'><term tid='71' nid='64' up='11' rid='trmi' v='' irn='1' ref='34' type='15' flg='2' flg2='-2147483648'><Id tid='71' nid='65' up='64' rid='' v='EQU_V' irn='1' ref='34' type='15' flg='2' flg2='-2147483648'/></term><l_p tid='71' nid='12' up='11' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='71' nid='66' up='11' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='71' nid='6' up='66' rid='trmf' v='' irn='-2' ref='49' type='172' flg='2' flg2='-2147483648'><term tid='71' nid='1' up='6' rid='trmi' v='' irn='1' ref='49' type='173' flg='2' flg2='-2147483648'><Id tid='71' nid='2' up='1' rid='' v='from' irn='1' ref='49' type='173' flg='2' flg2='-2147483648'/></term><l_p tid='71' nid='7' up='6' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='71' nid='5' up='6' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='71' nid='3' up='5' rid='trmi' v='' irn='-1' ref='71' type='27' flg='2' flg2='-2147483648'><Id tid='71' nid='4' up='3' rid='' v='e' irn='1' ref='0' type='22' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='71' nid='8' up='6' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='71' nid='9' up='66' rid='trmi' v='' irn='-1' ref='71' type='20' flg='2' flg2='-2147483648'><Id tid='71' nid='10' up='9' rid='' v='v' irn='1' ref='0' type='15' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='71' nid='14' up='11' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='71' nid='21' up='15' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='71' nid='28' up='22' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term>
+<st_del msg='.DEBUG.after commit' tid='70'/>
+<st_del msg='.DEBUG.after commit' tid='71'/></q_term>
+<answer msg='NO VALUE' />
+</Yp1s>
+<Yp1s msg='BEGIN' st_id='0000000061' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='72' msg='added'> ? ( ∀ e : A ( ∃ v : V ( tov ( e ) = v ) ) ) ?</st_store>
+<infx_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</infx_subst>
+<defc_subst msg='!DEBUG! begin' tid='73'><defc_subst msg='!WARNING! Id e does not exist in entities!'/><defc_subst msg='!WARNING! Id v does not exist in entities!'/>
+<defc_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</defc_subst><defc_subst msg='!DEBUG! end' RC='0'/></defc_subst>
+<deff_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</deff_subst>
+!trm_Val!DEBUG! IN rid=trma (tid=73,nid=54)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='0'>
+!trm_Val.trma!DEBUG!EMPTY! sort='A'! </trma>
+!q_term!DEBUG! after trm_Val point! rc=1.<term tid='73' nid='54' up='61' rid='trma' v='' irn='2' ref='34' type='14' flg='2' flg2='-2147483648'><l_p tid='73' nid='55' up='54' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='73' nid='56' up='54' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='73' nid='57' up='54' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='73' nid='58' up='54' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='73' nid='59' up='54' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='73' nid='47' up='54' rid='trme' v='' irn='6' ref='34' type='14' flg='2' flg2='-2147483648'><l_p tid='73' nid='48' up='47' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='73' nid='49' up='47' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='73' nid='50' up='47' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='73' nid='51' up='47' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='73' nid='52' up='47' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='73' nid='43' up='47' rid='trmf' v='' irn='6' ref='34' type='14' flg='2' flg2='-2147483648'><term tid='73' nid='67' up='43' rid='trmi' v='' irn='1' ref='34' type='15' flg='2' flg2='-2147483648'><Id tid='73' nid='68' up='67' rid='' v='EQU_V' irn='1' ref='34' type='15' flg='2' flg2='-2147483648'/></term><l_p tid='73' nid='44' up='43' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='73' nid='69' up='43' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='73' nid='38' up='69' rid='trmf' v='' irn='-2' ref='50' type='185' flg='2' flg2='-2147483648'><term tid='73' nid='33' up='38' rid='trmi' v='' irn='1' ref='50' type='186' flg='2' flg2='-2147483648'><Id tid='73' nid='34' up='33' rid='' v='tov' irn='1' ref='50' type='186' flg='2' flg2='-2147483648'/></term><l_p tid='73' nid='39' up='38' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='73' nid='37' up='38' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='73' nid='35' up='37' rid='trmi' v='' irn='-1' ref='73' type='59' flg='2' flg2='-2147483648'><Id tid='73' nid='36' up='35' rid='' v='e' irn='1' ref='0' type='54' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='73' nid='40' up='38' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='73' nid='41' up='69' rid='trmi' v='' irn='-1' ref='73' type='52' flg='2' flg2='-2147483648'><Id tid='73' nid='42' up='41' rid='' v='v' irn='1' ref='0' type='47' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='73' nid='46' up='43' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='73' nid='53' up='47' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='73' nid='60' up='54' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term>
+<st_del msg='.DEBUG.after commit' tid='72'/>
+<st_del msg='.DEBUG.after commit' tid='73'/></q_term>
+<answer msg='NO VALUE' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

@@ -1,0 +1,9 @@
+﻿!0!
+--=================Обязательное начало
+
+--=================Обяз закончен
+﻿--тестирование всякой всячины
+Declaration AND TV TV : TV prime .
+Declaration OR TV TV : TV prime .
+Declaration NOT TV : TV prime .
+Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .

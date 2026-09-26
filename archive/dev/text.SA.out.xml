@@ -1,0 +1,14 @@
+﻿	
+--comment
+"string"
+1.2%
+<SA.yyerror msg='Error syntax error after this token:'>
+12
+<LA BAD_BYTE BYTE.lng=1, BYTE.HEX=25, BYTE.s=%>
+∀∃#Σ↓
+.
+<SA STOP_DOT_Statement_token='1.2%'>,:(){}!?
+Declaration fset fseq func definition prime
+String Number Natural Ide
+I_d1¬∧∨→≡≠≤≥=<>*/
+_I_de2

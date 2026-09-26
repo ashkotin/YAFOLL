@@ -1,0 +1,13 @@
+﻿--Declaration pla R R:R prime.
+--!pla(1 -1):_pla!
+--?( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) )?
+--?( ∀ x : TV ((x∨x)=x))? --даёт True:-)
+--?( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) )?
+--?(∀x:sample (∀y:sample ((authorial_number(x)=authorial_number(y))  → (x=y))))?
+Axiom AN_full ( ∀ x : sample ( ∃ y : S ( authorial_number ( x ) = y ) ) ) .
+--!(¬True):True!
+--!( ∃ y : TV ( rhyolite ( x ) = y ) ):True! --куча РУГАНИ
+--!NOT(NOT(True)):False!
+--?NOT ( NOT ( True ) )?
+--?AND ( OR ( NOT ( True ) False ) OR ( NOT ( False ) True ) )? --=? False
+--?((2+3)*4.0)?

@@ -1,0 +1,58 @@
+﻿!0!
+--=================Обязательное начало
+
+--=================Обяз закончен
+﻿--тестирование работы Сиф deff_subst - подстановки определения функции.
+Declaration TV sort. 
+Declaration EQU_TV TV TV:TV. Add infix "=" to EQU_TV. 
+!True TV!
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT.     Add infix "not"  to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND.     Add infix "and"  to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR.      Add infix "or"   to OR.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition  IMPL_d IMPLIES(x z): ((¬x)∨z).
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV.   Add infix "eqv"  to EQUIV. 
+Definition  EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+--!!!НЕРАВЕНСТВО
+Declaration NEQ_TV TV TV:TV. Add infix "≠" to NEQ_TV. Add infix "neq" to NEQ_TV.
+Definition  NEQ_TV_d NEQ_TV(x y): (¬(x=y)).
+
+--тест-1
+
+Declaration o sort. 
+
+Declaration ObjectInverseOf (o o:TV):(o o:TV).
+Definition T1_1 ObjectInverseOf(OP)(x y) : OP(y x).
+
+Declaration  part_of o o:TV prime.
+
+!Somebody_1 o!
+!Somebody_2 o!
+
+--Здесь должна быть подстановка определения!
+!ObjectInverseOf(part_of)(Somebody_1 Somebody_2):True! 
+
+--тест-2
+
+Declaration man o:TV. Declaration woman o:TV. Declaration human_being o:TV.
+
+
+Declaration SubClassOf (o:TV)(o:TV):TV.
+Definition T5_1 SubClassOf(C1 C2) : (∀z:o (C1(z) → C2(z))).
+
+--Здесь должна быть подстановка определения!
+Theorem HB_1 SubClassOf(man human_being).
+
+--тест-3
+
+Declaration ObID (o o:TV):(o o:TV).
+Definition T1_0 ObID(OP) : OP.
+
+--Здесь должна быть подстановка определения!
+!ObID(part_of)(Somebody_1 Somebody_2):True! 
+
+
+

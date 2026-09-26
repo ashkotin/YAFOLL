@@ -1,0 +1,1 @@
+select id||' [label="'||id||'\n'||sid||' '||COALESCE(v,'')||'\n'||COALESCE(rid,'')||'"];' from dt order by id;

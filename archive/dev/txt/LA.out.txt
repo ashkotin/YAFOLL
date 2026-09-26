@@ -1,0 +1,21 @@
+$WS BOM$Diclaration o sort. Declaration r sort. 
+
+Declaration Neq o o:TV. 
+Definition Neq_d Neq(x1 x2): NOT(EQ(x1 x2)).
+Axiom Neq_ax ($FOR_ANY$x:o ($EXISTS$y:o EQV(NEQ(x y) Neq(x y)))). --∃ не правильно;-)
+
+--комментарий!
+
+Declaration  Opx o:TV. Declaration  Cpx o:TV.
+Axiom Opx_Cpx DisjointClasses(Opx Cpx).
+Declaration  Px o:TV. Definition D_Px Px(x): ObjectUnionOf(Opx Cpx)(x).
+Declaration VPC o:(o:r).	-- functor (o). 
+
+--!Эта функция не нужна! Но конечно может быть определена:-) Надо смотреть в отчёте где она используется!
+Declaration  VPC_Px o:r.
+Definition VPC_Px_d VPC_Px(sb1): PLUS(VPC(Opx)(sb1) VPC(Cpx)(sb1) 100.1). --число для теста!
+
+Theorem Theorem
+ Px_1 ($FOR_ANY$x:o EQ(VPC(Px)(x) PLUS(VPC(Opx)(x) VPC(Cpx)(x)))).
+
+

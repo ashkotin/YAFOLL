@@ -1,0 +1,1995 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+</Yp1s>
+<Yp1s st_id='0000000006' st_rid='st-3'>
+<st_store Tree='1' msg='added'> "TV DAD"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000013' st_rid='st-1'>
+<st_store Tree='2' msg='added'> Declaration TV sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000014' st_rid='st-3'>
+<st_store Tree='3' msg='added'> "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000031' st_rid='st-1'>
+<st_store Tree='4' msg='added'> Declaration EQ_TV TV TV : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000032' st_rid='st-4'>
+<st_store Tree='5' msg='added'> Add infix "=" to EQ_TV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000051' st_rid='st-1'>
+<st_store Tree='6' msg='added'> Declaration NOT TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000052' st_rid='st-4'>
+<st_store Tree='7' msg='added'> Add infix "¬" to NOT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000059' st_rid='st-4'>
+<st_store Tree='8' msg='added'> Add infix "not" to NOT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000080' st_rid='st-1'>
+<st_store Tree='9' msg='added'> Declaration AND TV TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000081' st_rid='st-4'>
+<st_store Tree='10' msg='added'> Add infix "∧" to AND .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000088' st_rid='st-4'>
+<st_store Tree='11' msg='added'> Add infix "and" to AND .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000109' st_rid='st-1'>
+<st_store Tree='12' msg='added'> Declaration OR TV TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000110' st_rid='st-4'>
+<st_store Tree='13' msg='added'> Add infix "∨" to OR .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000117' st_rid='st-4'>
+<st_store Tree='14' msg='added'> Add infix "or" to OR .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000137' st_rid='st-1'>
+<st_store Tree='15' msg='added'> Declaration IMPLIES TV TV : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000138' st_rid='st-4'>
+<st_store Tree='16' msg='added'> Add infix "→" to IMPLIES .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000145' st_rid='st-4'>
+<st_store Tree='17' msg='added'> Add infix "impl" to IMPLIES .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000177' st_rid='st-2'>
+<st_store Tree='18' msg='added'> Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=18 Ilbch=158) (sigf_t=15 sigf=131)
+<infx_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id z does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=1.
+<return msg='' />
+<def_proc st_id='0000000177'/>
+</Yp1s>
+<Yp1s st_id='0000000191' st_rid='st-1'>
+<st_store Tree='20' msg='added'> Declaration EQUIV TV TV : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000192' st_rid='st-4'>
+<st_store Tree='21' msg='added'> Add infix "≡" to EQUIV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000199' st_rid='st-4'>
+<st_store Tree='22' msg='added'> Add infix "eqv" to EQUIV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000239' st_rid='st-2'>
+<st_store Tree='23' msg='added'> Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=23 Ilbch=212) (sigf_t=20 sigf=185)
+<infx_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=3.
+<return msg='' />
+<def_proc st_id='0000000239'/>
+</Yp1s>
+<Yp1s st_id='0000000240' st_rid='fmca'>
+<st_store Tree='25' msg='added'> ! _True TV !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000245' st_rid='fmca'>
+<st_store Tree='26' msg='added'> ! _False TV !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000250' st_rid='st-3'>
+<st_store Tree='27' msg='added'> "String DAD"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000252' st_rid='st-3'>
+<st_store Tree='28' msg='added'> "sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000260' st_rid='st-1'>
+<st_store Tree='29' msg='added'> Declaration S sort "[^DQ]*" .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000276' st_rid='st-1'>
+<st_store Tree='30' msg='added'> Declaration S_EQ S S : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000277' st_rid='st-4'>
+<st_store Tree='31' msg='added'> Add infix "=" to S_EQ .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000284' st_rid='st-3'>
+<st_store Tree='32' msg='added'> "Number DAD"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000286' st_rid='st-3'>
+<st_store Tree='33' msg='added'> "Числа"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000294' st_rid='st-1'>
+<st_store Tree='34' msg='added'> Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?" .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000295' st_rid='st-3'>
+<st_store Tree='35' msg='added'> "Объявления функций арифметики десятичных рациональных чисел"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000297' st_rid='st-3'>
+<st_store Tree='36' msg='added'> "--первичные"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000314' st_rid='st-1'>
+<st_store Tree='37' msg='added'> Declaration R_EQ R R : TV prime fm_req .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000315' st_rid='st-4'>
+<st_store Tree='38' msg='added'> Add infix "=" to R_EQ .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000337' st_rid='st-1'>
+<st_store Tree='39' msg='added'> Declaration R_LT R R : TV prime fm_rlt .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000338' st_rid='st-4'>
+<st_store Tree='40' msg='added'> Add infix "<" to R_LT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000360' st_rid='st-1'>
+<st_store Tree='41' msg='added'> Declaration R_PLUS R R : R prime fm_radd .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000361' st_rid='st-4'>
+<st_store Tree='42' msg='added'> Add infix "+" to R_PLUS .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000383' st_rid='st-1'>
+<st_store Tree='43' msg='added'> Declaration R_MINUS R R : R prime fm_rminus .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000384' st_rid='st-4'>
+<st_store Tree='44' msg='added'> Add infix "-" to R_MINUS .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000406' st_rid='st-1'>
+<st_store Tree='45' msg='added'> Declaration R_MULTIPLY R R : R prime fm_rmult .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000407' st_rid='st-4'>
+<st_store Tree='46' msg='added'> Add infix "*" to R_MULTIPLY .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000429' st_rid='st-1'>
+<st_store Tree='47' msg='added'> Declaration R_DEVIDE R R : R prime fm_rdev .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000430' st_rid='st-4'>
+<st_store Tree='48' msg='added'> Add infix "/" to R_DEVIDE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000437' st_rid='st-3'>
+<st_store Tree='49' msg='added'> "--могли бы иметь определения"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000454' st_rid='st-1'>
+<st_store Tree='50' msg='added'> Declaration R_GT R R : TV prime fm_rgt .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000455' st_rid='st-4'>
+<st_store Tree='51' msg='added'> Add infix ">" to R_GT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000477' st_rid='st-1'>
+<st_store Tree='52' msg='added'> Declaration R_LE R R : TV prime fm_rle .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000478' st_rid='st-4'>
+<st_store Tree='53' msg='added'> Add infix "≤" to R_LE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000500' st_rid='st-1'>
+<st_store Tree='54' msg='added'> Declaration R_GE R R : TV prime fm_rge .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000501' st_rid='st-4'>
+<st_store Tree='55' msg='added'> Add infix "≥" to R_GE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000508' st_rid='st-3'>
+<st_store Tree='56' msg='added'> ""</st_store>
+</Yp1s>
+<Yp1s st_id='0000000510' st_rid='st-3'>
+<st_store Tree='57' msg='added'> "БД Проба DAD"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000512' st_rid='st-3'>
+<st_store Tree='58' msg='added'> "сорта с равенством"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000519' st_rid='st-1'>
+<st_store Tree='59' msg='added'> Declaration publication sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000535' st_rid='st-1'>
+<st_store Tree='60' msg='added'> Declaration EQU_publication publication publication : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000536' st_rid='st-4'>
+<st_store Tree='61' msg='added'> Add infix "=" to EQU_publication .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000548' st_rid='st-1'>
+<st_store Tree='62' msg='added'> Declaration sample sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000564' st_rid='st-1'>
+<st_store Tree='63' msg='added'> Declaration EQU_sample sample sample : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000565' st_rid='st-4'>
+<st_store Tree='64' msg='added'> Add infix "=" to EQU_sample .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000577' st_rid='st-1'>
+<st_store Tree='65' msg='added'> Declaration place sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000593' st_rid='st-1'>
+<st_store Tree='66' msg='added'> Declaration EQU_place place place : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000594' st_rid='st-4'>
+<st_store Tree='67' msg='added'> Add infix "=" to EQU_place .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000601' st_rid='st-3'>
+<st_store Tree='68' msg='added'> "атрибуты статьи"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000615' st_rid='st-1'>
+<st_store Tree='69' msg='added'> Declaration title publication : S prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000628' st_rid='st-1'>
+<st_store Tree='70' msg='added'> Declaration journal_reference publication : S prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000641' st_rid='st-1'>
+<st_store Tree='71' msg='added'> Declaration year publication : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000654' st_rid='st-1'>
+<st_store Tree='72' msg='added'> Declaration first_page publication : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000667' st_rid='st-1'>
+<st_store Tree='73' msg='added'> Declaration last_page publication : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000668' st_rid='st-3'>
+<st_store Tree='74' msg='added'> "атрибуты образца"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000682' st_rid='st-1'>
+<st_store Tree='75' msg='added'> Declaration authorial_number sample : S prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000695' st_rid='st-1'>
+<st_store Tree='76' msg='added'> Declaration reference sample : S prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000696' st_rid='st-3'>
+<st_store Tree='77' msg='added'> "связи образца"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000710' st_rid='st-1'>
+<st_store Tree='78' msg='added'> Declaration described sample : publication prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000723' st_rid='st-1'>
+<st_store Tree='79' msg='added'> Declaration gathering_place sample : place prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000724' st_rid='st-3'>
+<st_store Tree='80' msg='added'> "атрибуты места"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000738' st_rid='st-1'>
+<st_store Tree='81' msg='added'> Declaration latitude place : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000751' st_rid='st-1'>
+<st_store Tree='82' msg='added'> Declaration longitude place : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000752' st_rid='st-3'>
+<st_store Tree='83' msg='added'> "связи места"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000768' st_rid='st-1'>
+<st_store Tree='84' msg='added'> Declaration part_of place place : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000769' st_rid='st-3'>
+<st_store Tree='85' msg='added'> "оператор весового процентного содержания вещества"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000799' st_rid='st-1'>
+<st_store Tree='86' msg='added'> Declaration WPC ( sample : TV ) : ( sample : R ) prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000800' st_rid='st-3'>
+<st_store Tree='87' msg='added'> "аксиомы"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000802' st_rid='st-3'>
+<st_store Tree='88' msg='added'> "GPfull: Каждый образец имеет место сбора."</st_store>
+</Yp1s>
+<Yp1s st_id='0000000832' st_rid='st-5'>
+<st_store Tree='89' msg='added'> Axiom GPfull ( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Axiom GPfull ( ∀ x : sample ( ∃ y : place EQU_place ( gathering_place ( x ) y ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Axiom GPfull ( ∀ x : sample ( ∃ y : place EQU_place ( gathering_place ( x ) y ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Axiom GPfull ( ∀ x : sample ( ∃ y : place EQU_place ( gathering_place ( x ) y ) ) ) .
+</deff_subst>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000836' st_rid='st-3'>
+<st_store Tree='91' msg='added'> "Dfull: Каждый образец описан."</st_store>
+</Yp1s>
+<Yp1s st_id='0000000866' st_rid='st-13'>
+<st_store Tree='92' msg='added'> Theorem Dfull ( ∀ x : sample ( ∃ y : publication ( described ( x ) = y ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Theorem Dfull ( ∀ x : sample ( ∃ y : publication EQU_publication ( described ( x ) y ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Theorem Dfull ( ∀ x : sample ( ∃ y : publication EQU_publication ( described ( x ) y ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Theorem Dfull ( ∀ x : sample ( ∃ y : publication EQU_publication ( described ( x ) y ) ) ) .
+</deff_subst>
+theo_add(DEBUG)st_trans.rc=1.
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000870' st_rid='st-3'>
+<st_store Tree='94' msg='added'> "горные породы"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000884' st_rid='st-1'>
+<st_store Tree='95' msg='added'> Declaration rhyolite sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000913' st_rid='st-5'>
+<st_store Tree='96' msg='added'> Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV EQ_TV ( rhyolite ( x ) y ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV EQ_TV ( rhyolite ( x ) y ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV EQ_TV ( rhyolite ( x ) y ) ) ) .
+</deff_subst>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000929' st_rid='st-1'>
+<st_store Tree='98' msg='added'> Declaration basalt_and_olivine sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000942' st_rid='st-1'>
+<st_store Tree='99' msg='added'> Declaration trachydolerite sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000955' st_rid='st-1'>
+<st_store Tree='100' msg='added'> Declaration trachyte sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000968' st_rid='st-1'>
+<st_store Tree='101' msg='added'> Declaration obsidian sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000981' st_rid='st-1'>
+<st_store Tree='102' msg='added'> Declaration basalt sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000994' st_rid='st-1'>
+<st_store Tree='103' msg='added'> Declaration trachyandesite sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001007' st_rid='st-1'>
+<st_store Tree='104' msg='added'> Declaration andesite sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001008' st_rid='st-3'>
+<st_store Tree='105' msg='added'> "химические вещества, элементы, изотопы..."</st_store>
+</Yp1s>
+<Yp1s st_id='0000001022' st_rid='st-1'>
+<st_store Tree='106' msg='added'> Declaration SIO2 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001035' st_rid='st-1'>
+<st_store Tree='107' msg='added'> Declaration AL2O3 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001048' st_rid='st-1'>
+<st_store Tree='108' msg='added'> Declaration FE2O3 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001061' st_rid='st-1'>
+<st_store Tree='109' msg='added'> Declaration MGO sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001074' st_rid='st-1'>
+<st_store Tree='110' msg='added'> Declaration CAO sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001087' st_rid='st-1'>
+<st_store Tree='111' msg='added'> Declaration NA2O sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001100' st_rid='st-1'>
+<st_store Tree='112' msg='added'> Declaration K2O sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001113' st_rid='st-1'>
+<st_store Tree='113' msg='added'> Declaration H2Op sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001126' st_rid='st-1'>
+<st_store Tree='114' msg='added'> Declaration TIO2 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001139' st_rid='st-1'>
+<st_store Tree='115' msg='added'> Declaration FEO sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001152' st_rid='st-1'>
+<st_store Tree='116' msg='added'> Declaration MNO sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001165' st_rid='st-1'>
+<st_store Tree='117' msg='added'> Declaration P2O5 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001178' st_rid='st-1'>
+<st_store Tree='118' msg='added'> Declaration CO2 sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001191' st_rid='st-1'>
+<st_store Tree='119' msg='added'> Declaration H2Om sample : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001192' st_rid='st-3'>
+<st_store Tree='120' msg='added'> "географические названия"</st_store>
+</Yp1s>
+<Yp1s st_id='0000001194' st_rid='fmca'>
+<st_store Tree='121' msg='added'> ! _Iceland place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001199' st_rid='fmca'>
+<st_store Tree='122' msg='added'> ! _Atlantic_Ocean place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001204' st_rid='fmca'>
+<st_store Tree='123' msg='added'> ! _Ascension place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001209' st_rid='fmca'>
+<st_store Tree='124' msg='added'> ! _Second_Aleutian_Arc place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001214' st_rid='fmca'>
+<st_store Tree='125' msg='added'> ! _Aleutian_Arc place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001219' st_rid='st-3'>
+<st_store Tree='126' msg='added'> "постатейная часть"</st_store>
+</Yp1s>
+<Yp1s st_id='0000001221' st_rid='fmca'>
+<st_store Tree='127' msg='added'> ! _PUB5633 publication !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001226' st_rid='fmca'>
+<st_store Tree='128' msg='added'> ! _PLC1809 place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001231' st_rid='fmca'>
+<st_store Tree='129' msg='added'> ! _SAM32994 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001236' st_rid='fmca'>
+<st_store Tree='130' msg='added'> ! _SAM32995 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001241' st_rid='fmca'>
+<st_store Tree='131' msg='added'> ! _SAM32996 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001246' st_rid='fmca'>
+<st_store Tree='132' msg='added'> ! _PUB5918 publication !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001251' st_rid='fmca'>
+<st_store Tree='133' msg='added'> ! _SAM30681 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001256' st_rid='fmca'>
+<st_store Tree='134' msg='added'> ! _PLC1555 place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001261' st_rid='fmca'>
+<st_store Tree='135' msg='added'> ! _SAM30683 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001266' st_rid='fmca'>
+<st_store Tree='136' msg='added'> ! _SAM30684 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001271' st_rid='fmca'>
+<st_store Tree='137' msg='added'> ! _SAM30685 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001276' st_rid='fmca'>
+<st_store Tree='138' msg='added'> ! _SAM30686 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001281' st_rid='fmca'>
+<st_store Tree='139' msg='added'> ! _SAM30687 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001286' st_rid='fmca'>
+<st_store Tree='140' msg='added'> ! _SAM30688 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001291' st_rid='fmca'>
+<st_store Tree='141' msg='added'> ! _SAM30689 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001296' st_rid='fmca'>
+<st_store Tree='142' msg='added'> ! _SAM30690 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001301' st_rid='fmca'>
+<st_store Tree='143' msg='added'> ! _SAM30691 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001306' st_rid='fmca'>
+<st_store Tree='144' msg='added'> ! _SAM30692 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001311' st_rid='fmca'>
+<st_store Tree='145' msg='added'> ! _SAM30693 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001316' st_rid='fmca'>
+<st_store Tree='146' msg='added'> ! _SAM30696 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001321' st_rid='fmca'>
+<st_store Tree='147' msg='added'> ! _SAM30697 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001326' st_rid='fmca'>
+<st_store Tree='148' msg='added'> ! _SAM30682 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001331' st_rid='fmca'>
+<st_store Tree='149' msg='added'> ! _SAM30695 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001336' st_rid='fmca'>
+<st_store Tree='150' msg='added'> ! _SAM30694 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001341' st_rid='fmca'>
+<st_store Tree='151' msg='added'> ! _PUB4061 publication !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001346' st_rid='fmca'>
+<st_store Tree='152' msg='added'> ! _SAM56195 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001351' st_rid='fmca'>
+<st_store Tree='153' msg='added'> ! _PLC2318 place !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001356' st_rid='fmca'>
+<st_store Tree='154' msg='added'> ! _SAM56196 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001390' st_rid='st-1'>
+<st_store Tree='155' msg='added'> Declaration disjoint ( sample : TV ) ( sample : TV ) : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001391' st_rid='fmca'>
+<st_store Tree='156' msg='added'> ! _s1_ sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001396' st_rid='fmca'>
+<st_store Tree='157' msg='added'> ! _s2_ sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001401' st_rid='fmca'>
+<st_store Tree='158' msg='added'> ! _a1 sample !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001426' st_rid='st-1'>
+<st_store Tree='159' msg='added'> Declaration rock ( sample : TV ) : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001456' st_rid='st-1'>
+<st_store Tree='160' msg='added'> Declaration disjoint_sample ( sample : TV ) ( sample : TV ) : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001501' st_rid='st-2'>
+<st_store Tree='161' msg='added'> Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample ( ¬ ( z ( x ) ∧ y ( x ) ) ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=161 Ilbch=1463) (sigf_t=160 sigf=1450)
+<infx_subst msg='RESULT'> Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample NOT ( AND ( z ( x ) y ( x ) ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample NOT ( AND ( z ( x ) y ( x ) ) ) ) .
+</defc_subst>
+!deff_subst!WARNING! Id z does not exist in entities!
+!deff_subst!WARNING! Id y does not exist in entities!
+<deff_subst msg='RESULT'> Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample NOT ( AND ( z ( x ) y ( x ) ) ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=1.
+<return msg='' />
+<def_proc st_id='0000001501'/>
+</Yp1s>
+<Yp1s st_id='0000001502' st_rid='st-3'>
+<st_store Tree='163' msg='added'> "the end"</st_store>
+</Yp1s>
+<Yp1s st_id='0000001504' st_rid='st-3'>
+<st_store Tree='164' msg='added'> "相机就绪"</st_store>
+</Yp1s>
+<Yp1s st_id='0000001511' st_rid='st-1'>
+<st_store Tree='165' msg='added'> Declaration String sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001526' st_rid='st-1'>
+<st_store Tree='166' msg='added'> Declaration pla R R : R prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001538' st_rid='st-1'>
+<st_store Tree='167' msg='added'> Declaration harzburgite sample : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000001551' st_rid='fmta'>
+<st_store Tree='168' msg='added'> ! AND ( _False _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001567' st_rid='fmta'>
+<st_store Tree='169' msg='added'> ! AND ( _False _True ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001583' st_rid='fmta'>
+<st_store Tree='170' msg='added'> ! AND ( _True _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001599' st_rid='fmta'>
+<st_store Tree='171' msg='added'> ! AND ( _True _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001613' st_rid='fmta'>
+<st_store Tree='172' msg='added'> ! andesite ( _SAM56196 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001627' st_rid='fmta'>
+<st_store Tree='173' msg='added'> ! authorial_number ( _SAM32994 ) : "A" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001641' st_rid='fmta'>
+<st_store Tree='174' msg='added'> ! authorial_number ( _SAM32995 ) : "B" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001655' st_rid='fmta'>
+<st_store Tree='175' msg='added'> ! authorial_number ( _SAM32996 ) : "C" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001669' st_rid='fmta'>
+<st_store Tree='176' msg='added'> ! authorial_number ( _SAM56195 ) : "E" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001683' st_rid='fmta'>
+<st_store Tree='177' msg='added'> ! authorial_number ( _SAM56196 ) : "F" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001697' st_rid='fmta'>
+<st_store Tree='178' msg='added'> ! basalt ( _SAM30682 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001711' st_rid='fmta'>
+<st_store Tree='179' msg='added'> ! basalt ( _SAM56195 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001725' st_rid='fmta'>
+<st_store Tree='180' msg='added'> ! basalt_and_olivine ( _SAM30681 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001739' st_rid='fmta'>
+<st_store Tree='181' msg='added'> ! described ( _SAM30681 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001753' st_rid='fmta'>
+<st_store Tree='182' msg='added'> ! described ( _SAM30682 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001767' st_rid='fmta'>
+<st_store Tree='183' msg='added'> ! described ( _SAM30683 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001781' st_rid='fmta'>
+<st_store Tree='184' msg='added'> ! described ( _SAM30684 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001795' st_rid='fmta'>
+<st_store Tree='185' msg='added'> ! described ( _SAM30685 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001809' st_rid='fmta'>
+<st_store Tree='186' msg='added'> ! described ( _SAM30686 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001823' st_rid='fmta'>
+<st_store Tree='187' msg='added'> ! described ( _SAM30687 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001837' st_rid='fmta'>
+<st_store Tree='188' msg='added'> ! described ( _SAM30688 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001851' st_rid='fmta'>
+<st_store Tree='189' msg='added'> ! described ( _SAM30689 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001865' st_rid='fmta'>
+<st_store Tree='190' msg='added'> ! described ( _SAM30690 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001879' st_rid='fmta'>
+<st_store Tree='191' msg='added'> ! described ( _SAM30691 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001893' st_rid='fmta'>
+<st_store Tree='192' msg='added'> ! described ( _SAM30692 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001907' st_rid='fmta'>
+<st_store Tree='193' msg='added'> ! described ( _SAM30693 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001921' st_rid='fmta'>
+<st_store Tree='194' msg='added'> ! described ( _SAM30694 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001935' st_rid='fmta'>
+<st_store Tree='195' msg='added'> ! described ( _SAM30695 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001949' st_rid='fmta'>
+<st_store Tree='196' msg='added'> ! described ( _SAM30696 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001963' st_rid='fmta'>
+<st_store Tree='197' msg='added'> ! described ( _SAM30697 ) : _PUB5918 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001977' st_rid='fmta'>
+<st_store Tree='198' msg='added'> ! described ( _SAM32994 ) : _PUB5633 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000001991' st_rid='fmta'>
+<st_store Tree='199' msg='added'> ! described ( _SAM32995 ) : _PUB5633 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002005' st_rid='fmta'>
+<st_store Tree='200' msg='added'> ! described ( _SAM32996 ) : _PUB5633 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002019' st_rid='fmta'>
+<st_store Tree='201' msg='added'> ! described ( _SAM56195 ) : _PUB4061 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002033' st_rid='fmta'>
+<st_store Tree='202' msg='added'> ! described ( _SAM56196 ) : _PUB4061 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002047' st_rid='fmta'>
+<st_store Tree='203' msg='added'> ! first_page ( _PUB4061 ) : 268 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002061' st_rid='fmta'>
+<st_store Tree='204' msg='added'> ! first_page ( _PUB5633 ) : 1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002075' st_rid='fmta'>
+<st_store Tree='205' msg='added'> ! first_page ( _PUB5918 ) : 3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002089' st_rid='fmta'>
+<st_store Tree='206' msg='added'> ! gathering_place ( _SAM30681 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002103' st_rid='fmta'>
+<st_store Tree='207' msg='added'> ! gathering_place ( _SAM30682 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002117' st_rid='fmta'>
+<st_store Tree='208' msg='added'> ! gathering_place ( _SAM30683 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002131' st_rid='fmta'>
+<st_store Tree='209' msg='added'> ! gathering_place ( _SAM30684 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002145' st_rid='fmta'>
+<st_store Tree='210' msg='added'> ! gathering_place ( _SAM30685 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002159' st_rid='fmta'>
+<st_store Tree='211' msg='added'> ! gathering_place ( _SAM30686 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002173' st_rid='fmta'>
+<st_store Tree='212' msg='added'> ! gathering_place ( _SAM30687 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002187' st_rid='fmta'>
+<st_store Tree='213' msg='added'> ! gathering_place ( _SAM30688 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002201' st_rid='fmta'>
+<st_store Tree='214' msg='added'> ! gathering_place ( _SAM30689 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002215' st_rid='fmta'>
+<st_store Tree='215' msg='added'> ! gathering_place ( _SAM30690 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002229' st_rid='fmta'>
+<st_store Tree='216' msg='added'> ! gathering_place ( _SAM30691 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002243' st_rid='fmta'>
+<st_store Tree='217' msg='added'> ! gathering_place ( _SAM30692 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002257' st_rid='fmta'>
+<st_store Tree='218' msg='added'> ! gathering_place ( _SAM30693 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002271' st_rid='fmta'>
+<st_store Tree='219' msg='added'> ! gathering_place ( _SAM30694 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002285' st_rid='fmta'>
+<st_store Tree='220' msg='added'> ! gathering_place ( _SAM30695 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002299' st_rid='fmta'>
+<st_store Tree='221' msg='added'> ! gathering_place ( _SAM30696 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002313' st_rid='fmta'>
+<st_store Tree='222' msg='added'> ! gathering_place ( _SAM30697 ) : _PLC1555 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002327' st_rid='fmta'>
+<st_store Tree='223' msg='added'> ! gathering_place ( _SAM32994 ) : _PLC1809 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002341' st_rid='fmta'>
+<st_store Tree='224' msg='added'> ! gathering_place ( _SAM32995 ) : _PLC1809 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002355' st_rid='fmta'>
+<st_store Tree='225' msg='added'> ! gathering_place ( _SAM32996 ) : _PLC1809 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002369' st_rid='fmta'>
+<st_store Tree='226' msg='added'> ! gathering_place ( _SAM56195 ) : _PLC2318 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002383' st_rid='fmta'>
+<st_store Tree='227' msg='added'> ! gathering_place ( _SAM56196 ) : _PLC2318 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002397' st_rid='fmta'>
+<st_store Tree='228' msg='added'> ! journal_reference ( _PUB4061 ) : "NATURE 308" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002411' st_rid='fmta'>
+<st_store Tree='229' msg='added'> ! journal_reference ( _PUB5633 ) : "ACTA NAT. ISLAND. 1 (2)" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002425' st_rid='fmta'>
+<st_store Tree='230' msg='added'> ! journal_reference ( _PUB5918 ) : "PROC. AM. ACAD. ARTS SCI. 60" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002439' st_rid='fmta'>
+<st_store Tree='231' msg='added'> ! last_page ( _PUB4061 ) : 270 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002453' st_rid='fmta'>
+<st_store Tree='232' msg='added'> ! last_page ( _PUB5633 ) : 15 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002467' st_rid='fmta'>
+<st_store Tree='233' msg='added'> ! last_page ( _PUB5918 ) : 80 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002481' st_rid='fmta'>
+<st_store Tree='234' msg='added'> ! latitude ( _PLC1555 ) : -7.93 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002495' st_rid='fmta'>
+<st_store Tree='235' msg='added'> ! latitude ( _PLC1809 ) : 64.7 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002509' st_rid='fmta'>
+<st_store Tree='236' msg='added'> ! latitude ( _PLC2318 ) : 53.95 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002523' st_rid='fmta'>
+<st_store Tree='237' msg='added'> ! longitude ( _PLC1555 ) : -14.37 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002537' st_rid='fmta'>
+<st_store Tree='238' msg='added'> ! longitude ( _PLC1809 ) : -19.2 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002551' st_rid='fmta'>
+<st_store Tree='239' msg='added'> ! longitude ( _PLC2318 ) : -168.07 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002565' st_rid='fmta'>
+<st_store Tree='240' msg='added'> ! NOT ( _False ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002585' st_rid='fmta'>
+<st_store Tree='241' msg='added'> ! NOT ( NOT ( _True ) ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002599' st_rid='fmta'>
+<st_store Tree='242' msg='added'> ! NOT ( _True ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002613' st_rid='fmta'>
+<st_store Tree='243' msg='added'> ! obsidian ( _SAM30696 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002629' st_rid='fmta'>
+<st_store Tree='244' msg='added'> ! OR ( _False _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002645' st_rid='fmta'>
+<st_store Tree='245' msg='added'> ! OR ( _False _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002661' st_rid='fmta'>
+<st_store Tree='246' msg='added'> ! OR ( _True _False ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002677' st_rid='fmta'>
+<st_store Tree='247' msg='added'> ! OR ( _True _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002693' st_rid='fmta'>
+<st_store Tree='248' msg='added'> ! part_of ( _PLC1555 _Ascension ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002709' st_rid='fmta'>
+<st_store Tree='249' msg='added'> ! part_of ( _PLC1555 _Atlantic_Ocean ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002725' st_rid='fmta'>
+<st_store Tree='250' msg='added'> ! part_of ( _PLC1809 _Atlantic_Ocean ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002741' st_rid='fmta'>
+<st_store Tree='251' msg='added'> ! part_of ( _PLC1809 _Iceland ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002757' st_rid='fmta'>
+<st_store Tree='252' msg='added'> ! part_of ( _PLC2318 _Aleutian_Arc ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002773' st_rid='fmta'>
+<st_store Tree='253' msg='added'> ! part_of ( _PLC2318 _Second_Aleutian_Arc ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002789' st_rid='fmta'>
+<st_store Tree='254' msg='added'> ! pla ( 1 1 ) : 1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002803' st_rid='fmta'>
+<st_store Tree='255' msg='added'> ! reference ( _SAM32994 ) : "KERLINGARFJELL" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002817' st_rid='fmta'>
+<st_store Tree='256' msg='added'> ! reference ( _SAM32995 ) : "KERLINGARFJELL" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002831' st_rid='fmta'>
+<st_store Tree='257' msg='added'> ! reference ( _SAM32996 ) : "KERLINGARFJELL" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002845' st_rid='fmta'>
+<st_store Tree='258' msg='added'> ! reference ( _SAM56195 ) : "BOGOSLOF" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002859' st_rid='fmta'>
+<st_store Tree='259' msg='added'> ! reference ( _SAM56196 ) : "BOGOSLOF" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002873' st_rid='fmta'>
+<st_store Tree='260' msg='added'> ! rhyolite ( _SAM30697 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002887' st_rid='fmta'>
+<st_store Tree='261' msg='added'> ! rhyolite ( _SAM32994 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002901' st_rid='fmta'>
+<st_store Tree='262' msg='added'> ! rhyolite ( _SAM32995 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002915' st_rid='fmta'>
+<st_store Tree='263' msg='added'> ! rhyolite ( _SAM32996 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002929' st_rid='fmta'>
+<st_store Tree='264' msg='added'> ! rock ( basalt ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002943' st_rid='fmta'>
+<st_store Tree='265' msg='added'> ! title ( _PUB4061 ) : "ON HORNBLENDE ANDESITES FROM THE NEW VOLCANO ON BOGOSLOF ISLAND IN THE BERING SEA " !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002957' st_rid='fmta'>
+<st_store Tree='266' msg='added'> ! title ( _PUB5633 ) : "A CONTRIBUTION TO THE GEOLOGY OF THE KERLINGARFJELL" !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002971' st_rid='fmta'>
+<st_store Tree='267' msg='added'> ! title ( _PUB5918 ) : "THE GEOLOGY OF ASCENSION ISLAND. " !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002985' st_rid='fmta'>
+<st_store Tree='268' msg='added'> ! trachyandesite ( _SAM30686 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000002999' st_rid='fmta'>
+<st_store Tree='269' msg='added'> ! trachydolerite ( _SAM30683 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003013' st_rid='fmta'>
+<st_store Tree='270' msg='added'> ! trachydolerite ( _SAM30684 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003027' st_rid='fmta'>
+<st_store Tree='271' msg='added'> ! trachydolerite ( _SAM30685 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003041' st_rid='fmta'>
+<st_store Tree='272' msg='added'> ! trachyte ( _SAM30687 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003055' st_rid='fmta'>
+<st_store Tree='273' msg='added'> ! trachyte ( _SAM30688 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003069' st_rid='fmta'>
+<st_store Tree='274' msg='added'> ! trachyte ( _SAM30689 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003083' st_rid='fmta'>
+<st_store Tree='275' msg='added'> ! trachyte ( _SAM30690 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003097' st_rid='fmta'>
+<st_store Tree='276' msg='added'> ! trachyte ( _SAM30691 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003111' st_rid='fmta'>
+<st_store Tree='277' msg='added'> ! trachyte ( _SAM30692 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003125' st_rid='fmta'>
+<st_store Tree='278' msg='added'> ! trachyte ( _SAM30693 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003139' st_rid='fmta'>
+<st_store Tree='279' msg='added'> ! trachyte ( _SAM30694 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003153' st_rid='fmta'>
+<st_store Tree='280' msg='added'> ! trachyte ( _SAM30695 ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003173' st_rid='fmta'>
+<st_store Tree='281' msg='added'> ! WPC ( AL2O3 ) ( _SAM30681 ) : 16.23 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003193' st_rid='fmta'>
+<st_store Tree='282' msg='added'> ! WPC ( AL2O3 ) ( _SAM30682 ) : 15.54 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003213' st_rid='fmta'>
+<st_store Tree='283' msg='added'> ! WPC ( AL2O3 ) ( _SAM30683 ) : 16.68 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003233' st_rid='fmta'>
+<st_store Tree='284' msg='added'> ! WPC ( AL2O3 ) ( _SAM30684 ) : 21.41 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003253' st_rid='fmta'>
+<st_store Tree='285' msg='added'> ! WPC ( AL2O3 ) ( _SAM30685 ) : 19.58 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003273' st_rid='fmta'>
+<st_store Tree='286' msg='added'> ! WPC ( AL2O3 ) ( _SAM30686 ) : 14.92 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003293' st_rid='fmta'>
+<st_store Tree='287' msg='added'> ! WPC ( AL2O3 ) ( _SAM30687 ) : 15.91 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003313' st_rid='fmta'>
+<st_store Tree='288' msg='added'> ! WPC ( AL2O3 ) ( _SAM30688 ) : 14.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003333' st_rid='fmta'>
+<st_store Tree='289' msg='added'> ! WPC ( AL2O3 ) ( _SAM30689 ) : 15.51 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003353' st_rid='fmta'>
+<st_store Tree='290' msg='added'> ! WPC ( AL2O3 ) ( _SAM30690 ) : 16 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003373' st_rid='fmta'>
+<st_store Tree='291' msg='added'> ! WPC ( AL2O3 ) ( _SAM30691 ) : 15.43 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003393' st_rid='fmta'>
+<st_store Tree='292' msg='added'> ! WPC ( AL2O3 ) ( _SAM30692 ) : 15.75 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003413' st_rid='fmta'>
+<st_store Tree='293' msg='added'> ! WPC ( AL2O3 ) ( _SAM30693 ) : 18.56 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003433' st_rid='fmta'>
+<st_store Tree='294' msg='added'> ! WPC ( AL2O3 ) ( _SAM30694 ) : 12.85 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003453' st_rid='fmta'>
+<st_store Tree='295' msg='added'> ! WPC ( AL2O3 ) ( _SAM30695 ) : 14.84 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003473' st_rid='fmta'>
+<st_store Tree='296' msg='added'> ! WPC ( AL2O3 ) ( _SAM30696 ) : 12.8 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003493' st_rid='fmta'>
+<st_store Tree='297' msg='added'> ! WPC ( AL2O3 ) ( _SAM30697 ) : 14.09 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003513' st_rid='fmta'>
+<st_store Tree='298' msg='added'> ! WPC ( AL2O3 ) ( _SAM32994 ) : 15 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003533' st_rid='fmta'>
+<st_store Tree='299' msg='added'> ! WPC ( AL2O3 ) ( _SAM32995 ) : 12.8 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003553' st_rid='fmta'>
+<st_store Tree='300' msg='added'> ! WPC ( AL2O3 ) ( _SAM32996 ) : 14.35 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003573' st_rid='fmta'>
+<st_store Tree='301' msg='added'> ! WPC ( CAO ) ( _SAM30681 ) : 10.02 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003593' st_rid='fmta'>
+<st_store Tree='302' msg='added'> ! WPC ( CAO ) ( _SAM30682 ) : 9.03 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003613' st_rid='fmta'>
+<st_store Tree='303' msg='added'> ! WPC ( CAO ) ( _SAM30683 ) : 7.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003633' st_rid='fmta'>
+<st_store Tree='304' msg='added'> ! WPC ( CAO ) ( _SAM30684 ) : 6.56 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003653' st_rid='fmta'>
+<st_store Tree='305' msg='added'> ! WPC ( CAO ) ( _SAM30685 ) : 5.54 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003673' st_rid='fmta'>
+<st_store Tree='306' msg='added'> ! WPC ( CAO ) ( _SAM30686 ) : 4.5 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003693' st_rid='fmta'>
+<st_store Tree='307' msg='added'> ! WPC ( CAO ) ( _SAM30687 ) : 0.81 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003713' st_rid='fmta'>
+<st_store Tree='308' msg='added'> ! WPC ( CAO ) ( _SAM30688 ) : 0.83 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003733' st_rid='fmta'>
+<st_store Tree='309' msg='added'> ! WPC ( CAO ) ( _SAM30689 ) : 1.05 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003753' st_rid='fmta'>
+<st_store Tree='310' msg='added'> ! WPC ( CAO ) ( _SAM30690 ) : 1.58 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003773' st_rid='fmta'>
+<st_store Tree='311' msg='added'> ! WPC ( CAO ) ( _SAM30691 ) : 1.06 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003793' st_rid='fmta'>
+<st_store Tree='312' msg='added'> ! WPC ( CAO ) ( _SAM30692 ) : 1.49 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003813' st_rid='fmta'>
+<st_store Tree='313' msg='added'> ! WPC ( CAO ) ( _SAM30693 ) : 0.7 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003833' st_rid='fmta'>
+<st_store Tree='314' msg='added'> ! WPC ( CAO ) ( _SAM30694 ) : 0.6 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003853' st_rid='fmta'>
+<st_store Tree='315' msg='added'> ! WPC ( CAO ) ( _SAM30695 ) : 0.6 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003873' st_rid='fmta'>
+<st_store Tree='316' msg='added'> ! WPC ( CAO ) ( _SAM30696 ) : 0.58 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003893' st_rid='fmta'>
+<st_store Tree='317' msg='added'> ! WPC ( CAO ) ( _SAM30697 ) : 0.8 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003913' st_rid='fmta'>
+<st_store Tree='318' msg='added'> ! WPC ( CAO ) ( _SAM32994 ) : 0.72 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003933' st_rid='fmta'>
+<st_store Tree='319' msg='added'> ! WPC ( CAO ) ( _SAM32995 ) : 2.55 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003953' st_rid='fmta'>
+<st_store Tree='320' msg='added'> ! WPC ( CAO ) ( _SAM32996 ) : 1.22 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003973' st_rid='fmta'>
+<st_store Tree='321' msg='added'> ! WPC ( CO2 ) ( _SAM30681 ) : 0.04 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000003993' st_rid='fmta'>
+<st_store Tree='322' msg='added'> ! WPC ( CO2 ) ( _SAM30682 ) : 0.03 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004013' st_rid='fmta'>
+<st_store Tree='323' msg='added'> ! WPC ( CO2 ) ( _SAM30687 ) : 0.09 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004033' st_rid='fmta'>
+<st_store Tree='324' msg='added'> ! WPC ( FE2O3 ) ( _SAM30681 ) : 2.2 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004053' st_rid='fmta'>
+<st_store Tree='325' msg='added'> ! WPC ( FE2O3 ) ( _SAM30682 ) : 5.31 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004073' st_rid='fmta'>
+<st_store Tree='326' msg='added'> ! WPC ( FE2O3 ) ( _SAM30683 ) : 4.54 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004093' st_rid='fmta'>
+<st_store Tree='327' msg='added'> ! WPC ( FE2O3 ) ( _SAM30684 ) : 4.63 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004113' st_rid='fmta'>
+<st_store Tree='328' msg='added'> ! WPC ( FE2O3 ) ( _SAM30685 ) : 5.09 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004133' st_rid='fmta'>
+<st_store Tree='329' msg='added'> ! WPC ( FE2O3 ) ( _SAM30686 ) : 1.73 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004153' st_rid='fmta'>
+<st_store Tree='330' msg='added'> ! WPC ( FE2O3 ) ( _SAM30687 ) : 4.41 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004173' st_rid='fmta'>
+<st_store Tree='331' msg='added'> ! WPC ( FE2O3 ) ( _SAM30688 ) : 3.85 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004193' st_rid='fmta'>
+<st_store Tree='332' msg='added'> ! WPC ( FE2O3 ) ( _SAM30689 ) : 3.27 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004213' st_rid='fmta'>
+<st_store Tree='333' msg='added'> ! WPC ( FE2O3 ) ( _SAM30690 ) : 2.57 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004233' st_rid='fmta'>
+<st_store Tree='334' msg='added'> ! WPC ( FE2O3 ) ( _SAM30691 ) : 3.25 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004253' st_rid='fmta'>
+<st_store Tree='335' msg='added'> ! WPC ( FE2O3 ) ( _SAM30692 ) : 0.52 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004273' st_rid='fmta'>
+<st_store Tree='336' msg='added'> ! WPC ( FE2O3 ) ( _SAM30693 ) : 6.8 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004293' st_rid='fmta'>
+<st_store Tree='337' msg='added'> ! WPC ( FE2O3 ) ( _SAM30694 ) : 3.6 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004313' st_rid='fmta'>
+<st_store Tree='338' msg='added'> ! WPC ( FE2O3 ) ( _SAM30695 ) : 3.76 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004333' st_rid='fmta'>
+<st_store Tree='339' msg='added'> ! WPC ( FE2O3 ) ( _SAM30696 ) : 2.64 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004353' st_rid='fmta'>
+<st_store Tree='340' msg='added'> ! WPC ( FE2O3 ) ( _SAM30697 ) : 1.41 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004373' st_rid='fmta'>
+<st_store Tree='341' msg='added'> ! WPC ( FE2O3 ) ( _SAM32994 ) : 1.05 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004393' st_rid='fmta'>
+<st_store Tree='342' msg='added'> ! WPC ( FE2O3 ) ( _SAM32995 ) : 5.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004413' st_rid='fmta'>
+<st_store Tree='343' msg='added'> ! WPC ( FE2O3 ) ( _SAM32996 ) : 3.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004433' st_rid='fmta'>
+<st_store Tree='344' msg='added'> ! WPC ( FEO ) ( _SAM30681 ) : 9.93 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004453' st_rid='fmta'>
+<st_store Tree='345' msg='added'> ! WPC ( FEO ) ( _SAM30682 ) : 7.73 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004473' st_rid='fmta'>
+<st_store Tree='346' msg='added'> ! WPC ( FEO ) ( _SAM30683 ) : 4.79 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004493' st_rid='fmta'>
+<st_store Tree='347' msg='added'> ! WPC ( FEO ) ( _SAM30684 ) : 3.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004513' st_rid='fmta'>
+<st_store Tree='348' msg='added'> ! WPC ( FEO ) ( _SAM30685 ) : 3.75 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004533' st_rid='fmta'>
+<st_store Tree='349' msg='added'> ! WPC ( FEO ) ( _SAM30686 ) : 5.78 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004553' st_rid='fmta'>
+<st_store Tree='350' msg='added'> ! WPC ( FEO ) ( _SAM30687 ) : 0.98 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004573' st_rid='fmta'>
+<st_store Tree='351' msg='added'> ! WPC ( FEO ) ( _SAM30688 ) : 0.33 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004593' st_rid='fmta'>
+<st_store Tree='352' msg='added'> ! WPC ( FEO ) ( _SAM30689 ) : 0.93 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004613' st_rid='fmta'>
+<st_store Tree='353' msg='added'> ! WPC ( FEO ) ( _SAM30690 ) : 2.12 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004633' st_rid='fmta'>
+<st_store Tree='354' msg='added'> ! WPC ( FEO ) ( _SAM30691 ) : 1.25 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004653' st_rid='fmta'>
+<st_store Tree='355' msg='added'> ! WPC ( FEO ) ( _SAM30692 ) : 3.15 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004673' st_rid='fmta'>
+<st_store Tree='356' msg='added'> ! WPC ( FEO ) ( _SAM30693 ) : 0.03 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004693' st_rid='fmta'>
+<st_store Tree='357' msg='added'> ! WPC ( FEO ) ( _SAM30694 ) : 0.05 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004713' st_rid='fmta'>
+<st_store Tree='358' msg='added'> ! WPC ( FEO ) ( _SAM30695 ) : 0.35 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004733' st_rid='fmta'>
+<st_store Tree='359' msg='added'> ! WPC ( FEO ) ( _SAM30696 ) : 1.48 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004753' st_rid='fmta'>
+<st_store Tree='360' msg='added'> ! WPC ( FEO ) ( _SAM30697 ) : 2.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004773' st_rid='fmta'>
+<st_store Tree='361' msg='added'> ! WPC ( H2Om ) ( _SAM30681 ) : 0.09 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004793' st_rid='fmta'>
+<st_store Tree='362' msg='added'> ! WPC ( H2Om ) ( _SAM30682 ) : 0.16 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004813' st_rid='fmta'>
+<st_store Tree='363' msg='added'> ! WPC ( H2Om ) ( _SAM30683 ) : 0.4 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004833' st_rid='fmta'>
+<st_store Tree='364' msg='added'> ! WPC ( H2Om ) ( _SAM30684 ) : 1.08 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004853' st_rid='fmta'>
+<st_store Tree='365' msg='added'> ! WPC ( H2Om ) ( _SAM30685 ) : 1.16 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004873' st_rid='fmta'>
+<st_store Tree='366' msg='added'> ! WPC ( H2Om ) ( _SAM30686 ) : 0.09 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004893' st_rid='fmta'>
+<st_store Tree='367' msg='added'> ! WPC ( H2Om ) ( _SAM30687 ) : 0.45 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004913' st_rid='fmta'>
+<st_store Tree='368' msg='added'> ! WPC ( H2Om ) ( _SAM30688 ) : 0.08 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004933' st_rid='fmta'>
+<st_store Tree='369' msg='added'> ! WPC ( H2Om ) ( _SAM30694 ) : 0.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004953' st_rid='fmta'>
+<st_store Tree='370' msg='added'> ! WPC ( H2Op ) ( _SAM30681 ) : 0.19 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004973' st_rid='fmta'>
+<st_store Tree='371' msg='added'> ! WPC ( H2Op ) ( _SAM30682 ) : 0.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000004993' st_rid='fmta'>
+<st_store Tree='372' msg='added'> ! WPC ( H2Op ) ( _SAM30683 ) : 0.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005013' st_rid='fmta'>
+<st_store Tree='373' msg='added'> ! WPC ( H2Op ) ( _SAM30686 ) : 0.31 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005033' st_rid='fmta'>
+<st_store Tree='374' msg='added'> ! WPC ( H2Op ) ( _SAM30687 ) : 0.53 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005053' st_rid='fmta'>
+<st_store Tree='375' msg='added'> ! WPC ( H2Op ) ( _SAM30688 ) : 0.44 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005073' st_rid='fmta'>
+<st_store Tree='376' msg='added'> ! WPC ( H2Op ) ( _SAM30689 ) : 1.98 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005093' st_rid='fmta'>
+<st_store Tree='377' msg='added'> ! WPC ( H2Op ) ( _SAM30690 ) : 0.61 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005113' st_rid='fmta'>
+<st_store Tree='378' msg='added'> ! WPC ( H2Op ) ( _SAM30691 ) : 0.56 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005133' st_rid='fmta'>
+<st_store Tree='379' msg='added'> ! WPC ( H2Op ) ( _SAM30692 ) : 4.83 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005153' st_rid='fmta'>
+<st_store Tree='380' msg='added'> ! WPC ( H2Op ) ( _SAM30693 ) : 8.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005173' st_rid='fmta'>
+<st_store Tree='381' msg='added'> ! WPC ( H2Op ) ( _SAM30694 ) : 0.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005193' st_rid='fmta'>
+<st_store Tree='382' msg='added'> ! WPC ( H2Op ) ( _SAM30695 ) : 0.4 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005213' st_rid='fmta'>
+<st_store Tree='383' msg='added'> ! WPC ( H2Op ) ( _SAM30696 ) : 0.48 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005233' st_rid='fmta'>
+<st_store Tree='384' msg='added'> ! WPC ( H2Op ) ( _SAM30697 ) : 0.85 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005253' st_rid='fmta'>
+<st_store Tree='385' msg='added'> ! WPC ( H2Op ) ( _SAM32994 ) : 0.51 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005273' st_rid='fmta'>
+<st_store Tree='386' msg='added'> ! WPC ( H2Op ) ( _SAM32995 ) : 1.27 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005293' st_rid='fmta'>
+<st_store Tree='387' msg='added'> ! WPC ( H2Op ) ( _SAM32996 ) : 3.08 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005313' st_rid='fmta'>
+<st_store Tree='388' msg='added'> ! WPC ( K2O ) ( _SAM30681 ) : 0.64 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005333' st_rid='fmta'>
+<st_store Tree='389' msg='added'> ! WPC ( K2O ) ( _SAM30682 ) : 1.24 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005353' st_rid='fmta'>
+<st_store Tree='390' msg='added'> ! WPC ( K2O ) ( _SAM30683 ) : 2.06 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005373' st_rid='fmta'>
+<st_store Tree='391' msg='added'> ! WPC ( K2O ) ( _SAM30684 ) : 3.53 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005393' st_rid='fmta'>
+<st_store Tree='392' msg='added'> ! WPC ( K2O ) ( _SAM30685 ) : 3.78 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005413' st_rid='fmta'>
+<st_store Tree='393' msg='added'> ! WPC ( K2O ) ( _SAM30686 ) : 2.76 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005433' st_rid='fmta'>
+<st_store Tree='394' msg='added'> ! WPC ( K2O ) ( _SAM30687 ) : 4.6 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005453' st_rid='fmta'>
+<st_store Tree='395' msg='added'> ! WPC ( K2O ) ( _SAM30688 ) : 4.34 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005473' st_rid='fmta'>
+<st_store Tree='396' msg='added'> ! WPC ( K2O ) ( _SAM30689 ) : 5.4 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005493' st_rid='fmta'>
+<st_store Tree='397' msg='added'> ! WPC ( K2O ) ( _SAM30690 ) : 5.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005513' st_rid='fmta'>
+<st_store Tree='398' msg='added'> ! WPC ( K2O ) ( _SAM30691 ) : 5.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005533' st_rid='fmta'>
+<st_store Tree='399' msg='added'> ! WPC ( K2O ) ( _SAM30692 ) : 5.21 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005553' st_rid='fmta'>
+<st_store Tree='400' msg='added'> ! WPC ( K2O ) ( _SAM30693 ) : 4 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005573' st_rid='fmta'>
+<st_store Tree='401' msg='added'> ! WPC ( K2O ) ( _SAM30694 ) : 4.78 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005593' st_rid='fmta'>
+<st_store Tree='402' msg='added'> ! WPC ( K2O ) ( _SAM30695 ) : 2.4 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005613' st_rid='fmta'>
+<st_store Tree='403' msg='added'> ! WPC ( K2O ) ( _SAM30696 ) : 3.87 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005633' st_rid='fmta'>
+<st_store Tree='404' msg='added'> ! WPC ( K2O ) ( _SAM30697 ) : 3.52 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005653' st_rid='fmta'>
+<st_store Tree='405' msg='added'> ! WPC ( K2O ) ( _SAM32994 ) : 2.37 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005673' st_rid='fmta'>
+<st_store Tree='406' msg='added'> ! WPC ( K2O ) ( _SAM32995 ) : 1.68 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005693' st_rid='fmta'>
+<st_store Tree='407' msg='added'> ! WPC ( K2O ) ( _SAM32996 ) : 1.55 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005713' st_rid='fmta'>
+<st_store Tree='408' msg='added'> ! WPC ( MGO ) ( _SAM30681 ) : 7.15 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005733' st_rid='fmta'>
+<st_store Tree='409' msg='added'> ! WPC ( MGO ) ( _SAM30682 ) : 4.96 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005753' st_rid='fmta'>
+<st_store Tree='410' msg='added'> ! WPC ( MGO ) ( _SAM30683 ) : 3.92 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005773' st_rid='fmta'>
+<st_store Tree='411' msg='added'> ! WPC ( MGO ) ( _SAM30684 ) : 1.75 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005793' st_rid='fmta'>
+<st_store Tree='412' msg='added'> ! WPC ( MGO ) ( _SAM30685 ) : 1.99 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005813' st_rid='fmta'>
+<st_store Tree='413' msg='added'> ! WPC ( MGO ) ( _SAM30686 ) : 2.23 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005833' st_rid='fmta'>
+<st_store Tree='414' msg='added'> ! WPC ( MGO ) ( _SAM30687 ) : 0.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005853' st_rid='fmta'>
+<st_store Tree='415' msg='added'> ! WPC ( MGO ) ( _SAM30688 ) : 0.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005873' st_rid='fmta'>
+<st_store Tree='416' msg='added'> ! WPC ( MGO ) ( _SAM30689 ) : 0.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005893' st_rid='fmta'>
+<st_store Tree='417' msg='added'> ! WPC ( MGO ) ( _SAM30690 ) : 0.64 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005913' st_rid='fmta'>
+<st_store Tree='418' msg='added'> ! WPC ( MGO ) ( _SAM30691 ) : 0.16 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005933' st_rid='fmta'>
+<st_store Tree='419' msg='added'> ! WPC ( MGO ) ( _SAM30692 ) : 0.38 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005953' st_rid='fmta'>
+<st_store Tree='420' msg='added'> ! WPC ( MGO ) ( _SAM30693 ) : 0.62 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005973' st_rid='fmta'>
+<st_store Tree='421' msg='added'> ! WPC ( MGO ) ( _SAM30694 ) : 0.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000005993' st_rid='fmta'>
+<st_store Tree='422' msg='added'> ! WPC ( MGO ) ( _SAM30695 ) : 0.14 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006013' st_rid='fmta'>
+<st_store Tree='423' msg='added'> ! WPC ( MGO ) ( _SAM30696 ) : 0.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006033' st_rid='fmta'>
+<st_store Tree='424' msg='added'> ! WPC ( MGO ) ( _SAM30697 ) : 0.08 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006053' st_rid='fmta'>
+<st_store Tree='425' msg='added'> ! WPC ( MGO ) ( _SAM32994 ) : 0.15 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006073' st_rid='fmta'>
+<st_store Tree='426' msg='added'> ! WPC ( MGO ) ( _SAM32995 ) : 0.25 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006093' st_rid='fmta'>
+<st_store Tree='427' msg='added'> ! WPC ( MGO ) ( _SAM32996 ) : 0.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006113' st_rid='fmta'>
+<st_store Tree='428' msg='added'> ! WPC ( MNO ) ( _SAM30681 ) : 0.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006133' st_rid='fmta'>
+<st_store Tree='429' msg='added'> ! WPC ( MNO ) ( _SAM30682 ) : 0.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006153' st_rid='fmta'>
+<st_store Tree='430' msg='added'> ! WPC ( MNO ) ( _SAM30683 ) : 0.37 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006173' st_rid='fmta'>
+<st_store Tree='431' msg='added'> ! WPC ( MNO ) ( _SAM30686 ) : 0.11 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006193' st_rid='fmta'>
+<st_store Tree='432' msg='added'> ! WPC ( MNO ) ( _SAM30687 ) : 0.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006213' st_rid='fmta'>
+<st_store Tree='433' msg='added'> ! WPC ( MNO ) ( _SAM30688 ) : 0.21 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006233' st_rid='fmta'>
+<st_store Tree='434' msg='added'> ! WPC ( MNO ) ( _SAM30694 ) : 0.29 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006253' st_rid='fmta'>
+<st_store Tree='435' msg='added'> ! WPC ( NA2O ) ( _SAM30681 ) : 2.87 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006273' st_rid='fmta'>
+<st_store Tree='436' msg='added'> ! WPC ( NA2O ) ( _SAM30682 ) : 3.6 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006293' st_rid='fmta'>
+<st_store Tree='437' msg='added'> ! WPC ( NA2O ) ( _SAM30683 ) : 4.63 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006313' st_rid='fmta'>
+<st_store Tree='438' msg='added'> ! WPC ( NA2O ) ( _SAM30684 ) : 4.72 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006333' st_rid='fmta'>
+<st_store Tree='439' msg='added'> ! WPC ( NA2O ) ( _SAM30685 ) : 4.7 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006353' st_rid='fmta'>
+<st_store Tree='440' msg='added'> ! WPC ( NA2O ) ( _SAM30686 ) : 5.88 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006373' st_rid='fmta'>
+<st_store Tree='441' msg='added'> ! WPC ( NA2O ) ( _SAM30687 ) : 6.24 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006393' st_rid='fmta'>
+<st_store Tree='442' msg='added'> ! WPC ( NA2O ) ( _SAM30688 ) : 6.76 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006413' st_rid='fmta'>
+<st_store Tree='443' msg='added'> ! WPC ( NA2O ) ( _SAM30689 ) : 6.31 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006433' st_rid='fmta'>
+<st_store Tree='444' msg='added'> ! WPC ( NA2O ) ( _SAM30690 ) : 6.45 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006453' st_rid='fmta'>
+<st_store Tree='445' msg='added'> ! WPC ( NA2O ) ( _SAM30691 ) : 6.12 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006473' st_rid='fmta'>
+<st_store Tree='446' msg='added'> ! WPC ( NA2O ) ( _SAM30692 ) : 6.11 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006493' st_rid='fmta'>
+<st_store Tree='447' msg='added'> ! WPC ( NA2O ) ( _SAM30693 ) : 3.17 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006513' st_rid='fmta'>
+<st_store Tree='448' msg='added'> ! WPC ( NA2O ) ( _SAM30694 ) : 5.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006533' st_rid='fmta'>
+<st_store Tree='449' msg='added'> ! WPC ( NA2O ) ( _SAM30695 ) : 5.94 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006553' st_rid='fmta'>
+<st_store Tree='450' msg='added'> ! WPC ( NA2O ) ( _SAM30696 ) : 6.5 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006573' st_rid='fmta'>
+<st_store Tree='451' msg='added'> ! WPC ( NA2O ) ( _SAM30697 ) : 6.01 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006593' st_rid='fmta'>
+<st_store Tree='452' msg='added'> ! WPC ( NA2O ) ( _SAM32994 ) : 5.3 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006613' st_rid='fmta'>
+<st_store Tree='453' msg='added'> ! WPC ( NA2O ) ( _SAM32995 ) : 4.33 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006633' st_rid='fmta'>
+<st_store Tree='454' msg='added'> ! WPC ( NA2O ) ( _SAM32996 ) : 4.22 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006653' st_rid='fmta'>
+<st_store Tree='455' msg='added'> ! WPC ( P2O5 ) ( _SAM30681 ) : 0.59 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006673' st_rid='fmta'>
+<st_store Tree='456' msg='added'> ! WPC ( P2O5 ) ( _SAM30682 ) : 0.64 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006693' st_rid='fmta'>
+<st_store Tree='457' msg='added'> ! WPC ( P2O5 ) ( _SAM30683 ) : 0.52 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006713' st_rid='fmta'>
+<st_store Tree='458' msg='added'> ! WPC ( P2O5 ) ( _SAM30684 ) : 0.48 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006733' st_rid='fmta'>
+<st_store Tree='459' msg='added'> ! WPC ( P2O5 ) ( _SAM30685 ) : 0.31 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006753' st_rid='fmta'>
+<st_store Tree='460' msg='added'> ! WPC ( P2O5 ) ( _SAM30686 ) : 0.71 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006773' st_rid='fmta'>
+<st_store Tree='461' msg='added'> ! WPC ( P2O5 ) ( _SAM30687 ) : 0.08 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006793' st_rid='fmta'>
+<st_store Tree='462' msg='added'> ! WPC ( P2O5 ) ( _SAM30688 ) : 0.22 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006813' st_rid='fmta'>
+<st_store Tree='463' msg='added'> ! WPC ( P2O5 ) ( _SAM30691 ) : 0.04 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006833' st_rid='fmta'>
+<st_store Tree='464' msg='added'> ! WPC ( P2O5 ) ( _SAM30694 ) : 0.05 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006853' st_rid='fmta'>
+<st_store Tree='465' msg='added'> ! WPC ( SIO2 ) ( _SAM30681 ) : 47.69 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006873' st_rid='fmta'>
+<st_store Tree='466' msg='added'> ! WPC ( SIO2 ) ( _SAM30682 ) : 48.64 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006893' st_rid='fmta'>
+<st_store Tree='467' msg='added'> ! WPC ( SIO2 ) ( _SAM30683 ) : 52.87 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006913' st_rid='fmta'>
+<st_store Tree='468' msg='added'> ! WPC ( SIO2 ) ( _SAM30684 ) : 51.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006933' st_rid='fmta'>
+<st_store Tree='469' msg='added'> ! WPC ( SIO2 ) ( _SAM30685 ) : 54.04 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006953' st_rid='fmta'>
+<st_store Tree='470' msg='added'> ! WPC ( SIO2 ) ( _SAM30686 ) : 58 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006973' st_rid='fmta'>
+<st_store Tree='471' msg='added'> ! WPC ( SIO2 ) ( _SAM30687 ) : 65.18 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000006993' st_rid='fmta'>
+<st_store Tree='472' msg='added'> ! WPC ( SIO2 ) ( _SAM30688 ) : 66.98 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007013' st_rid='fmta'>
+<st_store Tree='473' msg='added'> ! WPC ( SIO2 ) ( _SAM30689 ) : 66.12 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007033' st_rid='fmta'>
+<st_store Tree='474' msg='added'> ! WPC ( SIO2 ) ( _SAM30690 ) : 63.98 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007053' st_rid='fmta'>
+<st_store Tree='475' msg='added'> ! WPC ( SIO2 ) ( _SAM30691 ) : 67.05 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007073' st_rid='fmta'>
+<st_store Tree='476' msg='added'> ! WPC ( SIO2 ) ( _SAM30692 ) : 63.02 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007093' st_rid='fmta'>
+<st_store Tree='477' msg='added'> ! WPC ( SIO2 ) ( _SAM30693 ) : 55.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007113' st_rid='fmta'>
+<st_store Tree='478' msg='added'> ! WPC ( SIO2 ) ( _SAM30694 ) : 71.88 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007133' st_rid='fmta'>
+<st_store Tree='479' msg='added'> ! WPC ( SIO2 ) ( _SAM30695 ) : 70.99 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007153' st_rid='fmta'>
+<st_store Tree='480' msg='added'> ! WPC ( SIO2 ) ( _SAM30696 ) : 72.71 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007173' st_rid='fmta'>
+<st_store Tree='481' msg='added'> ! WPC ( SIO2 ) ( _SAM30697 ) : 71.42 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007193' st_rid='fmta'>
+<st_store Tree='482' msg='added'> ! WPC ( SIO2 ) ( _SAM32994 ) : 73.95 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007213' st_rid='fmta'>
+<st_store Tree='483' msg='added'> ! WPC ( SIO2 ) ( _SAM32995 ) : 72.25 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007233' st_rid='fmta'>
+<st_store Tree='484' msg='added'> ! WPC ( SIO2 ) ( _SAM32996 ) : 71.32 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007253' st_rid='fmta'>
+<st_store Tree='485' msg='added'> ! WPC ( TIO2 ) ( _SAM30681 ) : 2.79 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007273' st_rid='fmta'>
+<st_store Tree='486' msg='added'> ! WPC ( TIO2 ) ( _SAM30682 ) : 3.52 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007293' st_rid='fmta'>
+<st_store Tree='487' msg='added'> ! WPC ( TIO2 ) ( _SAM30683 ) : 2.01 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007313' st_rid='fmta'>
+<st_store Tree='488' msg='added'> ! WPC ( TIO2 ) ( _SAM30684 ) : 1.34 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007333' st_rid='fmta'>
+<st_store Tree='489' msg='added'> ! WPC ( TIO2 ) ( _SAM30685 ) : 0.94 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007353' st_rid='fmta'>
+<st_store Tree='490' msg='added'> ! WPC ( TIO2 ) ( _SAM30686 ) : 3.38 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007373' st_rid='fmta'>
+<st_store Tree='491' msg='added'> ! WPC ( TIO2 ) ( _SAM30687 ) : 0.44 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007393' st_rid='fmta'>
+<st_store Tree='492' msg='added'> ! WPC ( TIO2 ) ( _SAM30688 ) : 0.89 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007413' st_rid='fmta'>
+<st_store Tree='493' msg='added'> ! WPC ( TIO2 ) ( _SAM30690 ) : 0.28 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007433' st_rid='fmta'>
+<st_store Tree='494' msg='added'> ! WPC ( TIO2 ) ( _SAM30691 ) : 0.1 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007453' st_rid='fmta'>
+<st_store Tree='495' msg='added'> ! WPC ( TIO2 ) ( _SAM30694 ) : 0.25 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007467' st_rid='fmta'>
+<st_store Tree='496' msg='added'> ! year ( _PUB4061 ) : 1886 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007481' st_rid='fmta'>
+<st_store Tree='497' msg='added'> ! year ( _PUB5633 ) : 1946 !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000007495' st_rid='fmta'>
+<st_store Tree='498' msg='added'> ! year ( _PUB5918 ) : 1925 !</st_store>
+<return msg='' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

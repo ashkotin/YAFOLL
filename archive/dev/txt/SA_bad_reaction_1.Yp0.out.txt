@@ -1,0 +1,25 @@
+﻿!PUB5633 publication!
+!title(PUB5633):"A CONTRIBUTION TO THE GEOLOGY OF THE KERLINGARFJELL"!
+!journal_reference(PUB5633):"ACTA NAT. ISLAND. 1 (2)"!
+!year(PUB5633):1946!
+!first_page(PUB5633):1!
+!last_page(PUB5633):15!
+!SAM32994 sample!
+!authorial_number(SAM32994):"A"!
+!rhyolite(SAM32994):True!
+!describes(PUB5633 SAM32994):True!
+!PLC32994 place!
+!latitude(PLC32994):64.7!
+!longitude(PLC32994):-19.2!
+!reference(PLC32994):"KERLINGARFJELL"!
+!part_of(PLC32994 Iceland):True.<<----SA>>
+<SA BAD_Statement='.'>
+<ABORT up_node-update: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: 100
+sqlerrm.sqlerrml: 25
+sqlerrm.sqlerrmc: no data found on line 140
+sqlerrd: 0 0 0 0 0 0
+sqlwarn: 0 0 0 0 0 0 0 0
+sqlstate: 02000
+===============

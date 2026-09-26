@@ -1,0 +1,909 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: _w; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE _w (
+    nid integer NOT NULL,
+    flg integer DEFAULT 0
+);
+
+
+ALTER TABLE public._w OWNER TO postgres;
+
+--
+-- Name: TABLE _w; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE _w IS 'рабочая таблица для множества узлов';
+
+
+--
+-- Name: COLUMN _w.nid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN _w.nid IS 'ид узла';
+
+
+--
+-- Name: COLUMN _w.flg; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN _w.flg IS 'Флажок. 0 - не обработан, 1 - обработан.';
+
+
+--
+-- Name: dt; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE dt (
+    id character varying(21) NOT NULL,
+    up character varying(21),
+    sid character varying(121),
+    rid character varying(21),
+    v character varying(121),
+    irn integer
+);
+
+
+ALTER TABLE public.dt OWNER TO postgres;
+
+--
+-- Name: TABLE dt; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE dt IS 'ДРВ';
+
+
+--
+-- Name: COLUMN dt.id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.id IS 'УИД';
+
+
+--
+-- Name: COLUMN dt.up; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.up IS 'ссылка вверх';
+
+
+--
+-- Name: COLUMN dt.sid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.sid IS 'идентификатор нт. для внутреннего узла - синтаксический нт - левая часть некоего правила.
+для листа - его лнт.';
+
+
+--
+-- Name: COLUMN dt.rid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.rid IS 'УИД правила. для внутреннего узла - правило по которому он был развёрнут.
+Для лнт пока "".';
+
+
+--
+-- Name: COLUMN dt.v; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.v IS 'Синтаксическое значение нт. Пока только для лнт. Для внутреннего узла - "".';
+
+
+--
+-- Name: COLUMN dt.irn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dt.irn IS '"номер в правиле". для корня - Null,
+для ребёнка нт+ - его номер в цепи,
+для обычного правила - номер позиции в правиле.';
+
+
+--
+-- Name: dts; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE dts (
+    tid integer NOT NULL,
+    nid integer NOT NULL,
+    up integer,
+    sid character varying(121),
+    rid character varying(21),
+    v character varying(121),
+    irn integer,
+    ref integer,
+    flg integer,
+    flg2 integer,
+    type integer
+);
+
+
+ALTER TABLE public.dts OWNER TO postgres;
+
+--
+-- Name: TABLE dts; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE dts IS 'Хранилище поддеревьев ДРВ';
+
+
+--
+-- Name: COLUMN dts.tid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.tid IS 'УИД дерева';
+
+
+--
+-- Name: COLUMN dts.nid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.nid IS 'УИД узла';
+
+
+--
+-- Name: COLUMN dts.up; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.up IS 'ссылка вверх';
+
+
+--
+-- Name: COLUMN dts.sid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.sid IS 'идентификатор нт. для внутреннего узла - синтаксический нт - левая часть некоего правила.
+для листа - его лнт.';
+
+
+--
+-- Name: COLUMN dts.rid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.rid IS 'УИД правила. для внутреннего узла - правило по которому он был развёрнут.
+Для лнт пока "".';
+
+
+--
+-- Name: COLUMN dts.v; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.v IS 'Синтаксическое значение нт. Пока только для лнт. Для внутреннего узла - "".';
+
+
+--
+-- Name: COLUMN dts.irn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.irn IS '"номер в правиле". для корня - Null,
+для ребёнка нт+ - его номер в цепи,
+для обычного правила - номер позиции в правиле.';
+
+
+--
+-- Name: COLUMN dts.ref; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.ref IS 'для значаших узлов терма - ссылка на узел декларации. см. код
+назначается после идентификации.
+используется при типизации.';
+
+
+--
+-- Name: COLUMN dts.flg; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.flg IS 'Флаг обработки для всяческих алгоритмов на дереве';
+
+
+--
+-- Name: COLUMN dts.flg2; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.flg2 IS 'Флаг обработки для всяческих алгоритмов на дереве. Если flg занят.';
+
+
+--
+-- Name: COLUMN dts.type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN dts.type IS 'nid узла типа (см. док)';
+
+
+--
+-- Name: entities; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE entities (
+    id character varying(21) NOT NULL,
+    ref_r character varying(21),
+    def_id character varying(21),
+    expr character varying(1021),
+    type character varying(20) NOT NULL,
+    ref_arg character varying(21),
+    fp_id character varying(21),
+    prime integer,
+    ein integer,
+    sers character varying(121),
+    tid integer
+);
+
+
+ALTER TABLE public.entities OWNER TO postgres;
+
+--
+-- Name: COLUMN entities.id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.id IS 'См. YAFOLL. БД. Правила заполнения полей';
+
+
+--
+-- Name: COLUMN entities.ref_r; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.ref_r IS 'Функция: ссылка на сорт или сигнатуру результата. Константа - ссылка на сорт.';
+
+
+--
+-- Name: COLUMN entities.def_id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.def_id IS 'идентификатор определения функции';
+
+
+--
+-- Name: COLUMN entities.expr; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.expr IS 'заполняется для
+- сорт:  РВ
+- определения, аксиома, теорема : терм
+- доказательство:  выражение вывода';
+
+
+--
+-- Name: COLUMN entities.type; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.type IS 'тип записи см. YAFOLL. БД. Правила заполнения полей.';
+
+
+--
+-- Name: COLUMN entities.ref_arg; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.ref_arg IS 'ссылка на сорт или сигнатуру функции или сигнатуру цепи аргументов';
+
+
+--
+-- Name: COLUMN entities.fp_id; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.fp_id IS 'идентификатор формального параметра ф-и. Если он один и сиг его - сорт.';
+
+
+--
+-- Name: COLUMN entities.prime; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.prime IS '0 - нет, 1 - да.';
+
+
+--
+-- Name: COLUMN entities.ein; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.ein IS 'Номер сущего в порядке ввода. Свободный номер лежит в записи system.';
+
+
+--
+-- Name: COLUMN entities.sers; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.sers IS 'Сериализация сигнатуры. См. док.';
+
+
+--
+-- Name: COLUMN entities.tid; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN entities.tid IS 'Ссылка в лес деревьев';
+
+
+--
+-- Name: infixes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE infixes (
+    v character varying(21) NOT NULL,
+    ref_f character varying(21) NOT NULL
+);
+
+
+ALTER TABLE public.infixes OWNER TO postgres;
+
+--
+-- Name: COLUMN infixes.v; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN infixes.v IS 'значение инфикса';
+
+
+--
+-- Name: COLUMN infixes.ref_f; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN infixes.ref_f IS 'Ссылка на ф-ю для которой инфикс.';
+
+
+--
+-- Name: sinfixes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sinfixes (
+    v character varying(22) NOT NULL
+);
+
+
+ALTER TABLE public.sinfixes OWNER TO postgres;
+
+--
+-- Name: TABLE sinfixes; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE sinfixes IS 'Здесь хранятся многозначные инфиксы.';
+
+
+--
+-- Name: COLUMN sinfixes.v; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN sinfixes.v IS 'Значение инфикса';
+
+
+--
+-- Name: system; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE system (
+    id character varying(21) NOT NULL,
+    fsn integer NOT NULL,
+    fen integer NOT NULL,
+    ftn integer NOT NULL,
+    fnn integer,
+    ftrn integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.system OWNER TO postgres;
+
+--
+-- Name: TABLE system; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TABLE system IS 'Хранит значения системных переменных и версию Yp.';
+
+
+--
+-- Name: COLUMN system.fsn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN system.fsn IS 'free sig number';
+
+
+--
+-- Name: COLUMN system.fen; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN system.fen IS 'свободный номер для сущего при вводе. Фактически его номер в полном тексте теории.
+Начальное значение - 1.';
+
+
+--
+-- Name: COLUMN system.ftn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN system.ftn IS 'свободный номер для ид терма.';
+
+
+--
+-- Name: COLUMN system.fnn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN system.fnn IS 'свободный номер узла ДРВ';
+
+
+--
+-- Name: COLUMN system.ftrn; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN system.ftrn IS 'свободный номер для дерева в dts';
+
+
+--
+-- Data for Name: _w; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY _w (nid, flg) FROM stdin;
+\.
+
+
+--
+-- Data for Name: dt; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY dt (id, up, sid, rid, v, irn) FROM stdin;
+0000000002	0000000001	e_m	\N	!	1
+0000000003	0000000001	Number	\N	0	2
+0000000004	0000000001	e_m	\N	!	3
+0000000005	\N	Statements	#st	\N	\N
+0000000001	0000000005	Statement	st-6	\N	1
+0000000007	0000000006	DECLARATION	\N	Declaration	1
+0000000008	0000000006	Id	\N	TV	2
+0000000009	0000000006	sort	\N	sort	3
+0000000010	0000000006	Dot	\N	.	4
+0000000006	0000000011	Declaration	Dcl-1	\N	1
+0000000011	0000000005	Statement	st-1	\N	2
+0000000013	0000000012	e_m	\N	!	1
+0000000014	0000000012	Id	\N	True	2
+0000000015	0000000012	Id	\N	TV	3
+0000000016	0000000012	e_m	\N	!	4
+0000000012	0000000005	Statement	fmca	\N	3
+0000000018	0000000017	DECLARATION	\N	Declaration	1
+0000000019	0000000017	Id	\N	o	2
+0000000020	0000000017	sort	\N	sort	3
+0000000021	0000000017	Dot	\N	.	4
+0000000017	0000000022	Declaration	Dcl-1	\N	1
+0000000022	0000000005	Statement	st-1	\N	4
+0000000024	0000000023	Id	\N	o	1
+0000000023	0000000025	sig_e	sig_eI	\N	1
+0000000027	0000000026	Id	\N	o	1
+0000000026	0000000025	sig_e	sig_eI	\N	2
+0000000029	0000000028	Id	\N	TV	1
+0000000025	0000000030	sig_arg	#sig_arg	\N	1
+0000000031	0000000030	COLON	\N	:	2
+0000000028	0000000030	sig_e	sig_eI	\N	3
+0000000033	0000000032	l_p	\N	(	1
+0000000030	0000000032	sig_f	sig_f	\N	2
+0000000034	0000000032	r_p	\N	)	3
+0000000032	0000000035	sig_e	sig_eF	\N	1
+0000000037	0000000036	Id	\N	o	1
+0000000036	0000000038	sig_e	sig_eI	\N	1
+0000000040	0000000039	Id	\N	o	1
+0000000039	0000000038	sig_e	sig_eI	\N	2
+0000000042	0000000041	Id	\N	TV	1
+0000000038	0000000043	sig_arg	#sig_arg	\N	1
+0000000044	0000000043	COLON	\N	:	2
+0000000041	0000000043	sig_e	sig_eI	\N	3
+0000000046	0000000045	l_p	\N	(	1
+0000000043	0000000045	sig_f	sig_f	\N	2
+0000000047	0000000045	r_p	\N	)	3
+0000000035	0000000048	sig_arg	#sig_arg	\N	1
+0000000049	0000000048	COLON	\N	:	2
+0000000045	0000000048	sig_e	sig_eF	\N	3
+0000000051	0000000050	DECLARATION	\N	Declaration	1
+0000000052	0000000050	Id	\N	ObjectInverseOf	2
+0000000048	0000000050	sig_f	sig_f	\N	3
+0000000053	0000000050	Dot	\N	.	4
+0000000050	0000000054	Declaration	Dcl-5	\N	1
+0000000054	0000000005	Statement	st-1	\N	5
+0000000056	0000000055	Id	\N	OP	1
+0000000058	0000000057	l_p	\N	(	1
+0000000055	0000000057	Id_list	#Id_list	\N	2
+0000000059	0000000057	r_p	\N	)	3
+0000000057	0000000060	Id_list_b	Id_list_b-1	\N	1
+0000000062	0000000061	Id	\N	x	1
+0000000063	0000000061	Id	\N	y	2
+0000000065	0000000064	l_p	\N	(	1
+0000000061	0000000064	Id_list	#Id_list	\N	2
+0000000066	0000000064	r_p	\N	)	3
+0000000064	0000000060	Id_list_b	Id_list_b-1	\N	2
+0000000068	0000000067	Id	\N	OP	1
+0000000070	0000000069	Id	\N	y	1
+0000000072	0000000071	Id	\N	x	1
+0000000071	0000000073	term	trmi	\N	-1
+0000000069	0000000073	term	trmi	\N	-2
+0000000067	0000000074	term	trmi	\N	1
+0000000075	0000000074	l_p	\N	(	2
+0000000073	0000000074	TermList	#trml	\N	3
+0000000076	0000000074	r_p	\N	)	4
+0000000078	0000000077	DEFINITION	\N	Definition	1
+0000000079	0000000077	Id	\N	T1_1	2
+0000000080	0000000077	Id	\N	ObjectInverseOf	3
+0000000060	0000000077	Id_list_bch	#Id_list_bch	\N	4
+0000000081	0000000077	COLON	\N	:	5
+0000000074	0000000077	term	trmf	\N	6
+0000000082	0000000077	Dot	\N	.	7
+0000000077	0000000083	Definition	Def-2	\N	1
+0000000083	0000000005	Statement	st-2	\N	6
+0000000085	0000000084	Id	\N	o	1
+0000000084	0000000086	sig_e	sig_eI	\N	1
+0000000088	0000000087	Id	\N	o	1
+0000000087	0000000086	sig_e	sig_eI	\N	2
+0000000090	0000000089	Id	\N	TV	1
+0000000086	0000000091	sig_arg	#sig_arg	\N	1
+0000000092	0000000091	COLON	\N	:	2
+0000000089	0000000091	sig_e	sig_eI	\N	3
+0000000094	0000000093	DECLARATION	\N	Declaration	1
+0000000095	0000000093	Id	\N	part_of	2
+0000000091	0000000093	sig_f	sig_f	\N	3
+0000000096	0000000093	PRIME	\N	prime	4
+0000000097	0000000093	Dot	\N	.	5
+0000000093	0000000098	Declaration	Dcl-4	\N	1
+0000000098	0000000005	Statement	st-1	\N	7
+0000000100	0000000099	e_m	\N	!	1
+0000000101	0000000099	Id	\N	Somebody_1	2
+0000000102	0000000099	Id	\N	o	3
+0000000103	0000000099	e_m	\N	!	4
+0000000099	0000000005	Statement	fmca	\N	8
+0000000105	0000000104	e_m	\N	!	1
+0000000106	0000000104	Id	\N	Somebody_2	2
+0000000107	0000000104	Id	\N	o	3
+0000000108	0000000104	e_m	\N	!	4
+0000000104	0000000005	Statement	fmca	\N	9
+0000000110	0000000109	Id	\N	ObjectInverseOf	1
+0000000112	0000000111	Id	\N	part_of	1
+0000000111	0000000113	term	trmi	\N	-1
+0000000109	0000000114	term	trmi	\N	1
+0000000115	0000000114	l_p	\N	(	2
+0000000113	0000000114	TermList	#trml	\N	3
+0000000116	0000000114	r_p	\N	)	4
+0000000118	0000000117	Id	\N	Somebody_1	1
+0000000120	0000000119	Id	\N	Somebody_2	1
+0000000119	0000000121	term	trmi	\N	-1
+0000000117	0000000121	term	trmi	\N	-2
+0000000114	0000000122	term	trmf	\N	1
+0000000123	0000000122	l_p	\N	(	2
+0000000121	0000000122	TermList	#trml	\N	3
+0000000124	0000000122	r_p	\N	)	4
+0000000126	0000000125	Id	\N	True	1
+0000000128	0000000127	e_m	\N	!	1
+0000000122	0000000127	term	trmf	\N	2
+0000000129	0000000127	COLON	\N	:	3
+0000000125	0000000127	term	trmi	\N	4
+0000000130	0000000127	e_m	\N	!	5
+0000000127	0000000005	Statement	fmta	\N	10
+\.
+
+
+--
+-- Data for Name: dts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY dts (tid, nid, up, sid, rid, v, irn, ref, flg, flg2, type) FROM stdin;
+1	6	11	Declaration	Dcl-1	\N	1	\N	\N	\N	\N
+1	7	6	DECLARATION	\N	Declaration	1	\N	\N	\N	\N
+1	8	6	Id	\N	TV	2	\N	\N	\N	\N
+1	9	6	sort	\N	sort	3	\N	\N	\N	\N
+1	10	6	Dot	\N	.	4	\N	\N	\N	\N
+1	11	\N	Statement	st-1	\N	\N	\N	\N	\N	\N
+2	13	12	e_m	\N	!	1	\N	\N	\N	\N
+2	14	12	Id	\N	True	2	\N	\N	\N	\N
+2	15	12	Id	\N	TV	3	\N	\N	\N	\N
+2	16	12	e_m	\N	!	4	\N	\N	\N	\N
+2	12	\N	Statement	fmca	\N	\N	\N	\N	\N	\N
+3	17	22	Declaration	Dcl-1	\N	1	\N	\N	\N	\N
+3	18	17	DECLARATION	\N	Declaration	1	\N	\N	\N	\N
+3	19	17	Id	\N	o	2	\N	\N	\N	\N
+3	20	17	sort	\N	sort	3	\N	\N	\N	\N
+3	21	17	Dot	\N	.	4	\N	\N	\N	\N
+3	22	\N	Statement	st-1	\N	\N	\N	\N	\N	\N
+4	23	25	sig_e	sig_eI	\N	1	\N	\N	\N	\N
+4	24	23	Id	\N	o	1	\N	\N	\N	\N
+4	25	30	sig_arg	#sig_arg	\N	1	\N	\N	\N	\N
+4	26	25	sig_e	sig_eI	\N	2	\N	\N	\N	\N
+4	27	26	Id	\N	o	1	\N	\N	\N	\N
+4	28	30	sig_e	sig_eI	\N	3	\N	\N	\N	\N
+4	29	28	Id	\N	TV	1	\N	\N	\N	\N
+4	30	32	sig_f	sig_f	\N	2	\N	\N	\N	\N
+4	31	30	COLON	\N	:	2	\N	\N	\N	\N
+4	32	35	sig_e	sig_eF	\N	1	\N	\N	\N	\N
+4	33	32	l_p	\N	(	1	\N	\N	\N	\N
+4	34	32	r_p	\N	)	3	\N	\N	\N	\N
+4	35	48	sig_arg	#sig_arg	\N	1	\N	\N	\N	\N
+4	36	38	sig_e	sig_eI	\N	1	\N	\N	\N	\N
+4	37	36	Id	\N	o	1	\N	\N	\N	\N
+4	38	43	sig_arg	#sig_arg	\N	1	\N	\N	\N	\N
+4	39	38	sig_e	sig_eI	\N	2	\N	\N	\N	\N
+4	40	39	Id	\N	o	1	\N	\N	\N	\N
+4	41	43	sig_e	sig_eI	\N	3	\N	\N	\N	\N
+4	42	41	Id	\N	TV	1	\N	\N	\N	\N
+4	43	45	sig_f	sig_f	\N	2	\N	\N	\N	\N
+4	44	43	COLON	\N	:	2	\N	\N	\N	\N
+4	45	48	sig_e	sig_eF	\N	3	\N	\N	\N	\N
+4	46	45	l_p	\N	(	1	\N	\N	\N	\N
+4	47	45	r_p	\N	)	3	\N	\N	\N	\N
+4	48	50	sig_f	sig_f	\N	3	\N	\N	\N	\N
+4	49	48	COLON	\N	:	2	\N	\N	\N	\N
+4	50	54	Declaration	Dcl-5	\N	1	\N	\N	\N	\N
+4	51	50	DECLARATION	\N	Declaration	1	\N	\N	\N	\N
+4	52	50	Id	\N	ObjectInverseOf	2	\N	\N	\N	\N
+4	53	50	Dot	\N	.	4	\N	\N	\N	\N
+4	54	\N	Statement	st-1	\N	\N	\N	\N	\N	\N
+5	77	83	Definition	Def-2	\N	1	\N	0	0	\N
+5	73	74	TermList	#trml	\N	3	\N	1	0	\N
+5	75	74	l_p	\N	(	2	\N	1	0	\N
+5	76	74	r_p	\N	)	4	\N	1	0	\N
+5	60	77	Id_list_bch	#Id_list_bch	\N	4	\N	0	1	\N
+5	57	60	Id_list_b	Id_list_b-1	\N	1	\N	0	1	\N
+5	55	57	Id_list	#Id_list	\N	2	\N	0	1	\N
+5	58	57	l_p	\N	(	1	\N	0	1	\N
+5	59	57	r_p	\N	)	3	\N	0	1	\N
+5	64	60	Id_list_b	Id_list_b-1	\N	2	\N	0	1	\N
+5	61	64	Id_list	#Id_list	\N	2	\N	0	1	\N
+5	65	64	l_p	\N	(	1	\N	0	1	\N
+5	66	64	r_p	\N	)	3	\N	0	1	\N
+5	68	67	Id	\N	OP	1	56	2	0	0
+5	70	69	Id	\N	y	1	63	2	0	0
+5	72	71	Id	\N	x	1	62	2	0	0
+5	67	74	term	trmi	\N	1	4	2	0	30
+5	69	73	term	trmi	\N	-2	4	2	0	37
+5	71	73	term	trmi	\N	-1	4	2	0	37
+5	78	77	DEFINITION	\N	Definition	1	\N	0	0	\N
+5	79	77	Id	\N	T1_1	2	\N	0	0	\N
+5	80	77	Id	\N	ObjectInverseOf	3	\N	0	0	\N
+5	81	77	COLON	\N	:	5	\N	0	0	\N
+5	82	77	Dot	\N	.	7	\N	0	0	\N
+5	56	55	Id	\N	OP	1	4	0	1	30
+5	62	61	Id	\N	x	1	4	0	1	37
+5	63	61	Id	\N	y	2	4	0	1	37
+5	74	77	term	trmf	\N	6	4	2	0	29
+5	83	\N	Statement	st-2	\N	\N	6	0	0	\N
+6	77	83	Definition	Def-2	\N	1	\N	0	\N	\N
+6	73	74	TermList	#trml	\N	3	\N	0	\N	\N
+6	75	74	l_p	\N	(	2	\N	0	\N	\N
+6	76	74	r_p	\N	)	4	\N	0	\N	\N
+6	60	77	Id_list_bch	#Id_list_bch	\N	4	\N	0	\N	\N
+6	57	60	Id_list_b	Id_list_b-1	\N	1	\N	0	\N	\N
+6	55	57	Id_list	#Id_list	\N	2	\N	0	\N	\N
+6	58	57	l_p	\N	(	1	\N	0	\N	\N
+6	59	57	r_p	\N	)	3	\N	0	\N	\N
+6	64	60	Id_list_b	Id_list_b-1	\N	2	\N	0	\N	\N
+6	61	64	Id_list	#Id_list	\N	2	\N	0	\N	\N
+6	65	64	l_p	\N	(	1	\N	0	\N	\N
+6	66	64	r_p	\N	)	3	\N	0	\N	\N
+6	67	74	term	trmi	\N	1	4	0	\N	30
+6	69	73	term	trmi	\N	-2	4	0	\N	37
+6	71	73	term	trmi	\N	-1	4	0	\N	37
+6	78	77	DEFINITION	\N	Definition	1	\N	0	\N	\N
+6	81	77	COLON	\N	:	5	\N	0	\N	\N
+6	82	77	Dot	\N	.	7	\N	0	\N	\N
+6	74	77	term	trmf	\N	6	4	0	\N	29
+6	83	\N	Statement	st-2	\N	\N	5	0	\N	\N
+6	56	55	Id	\N	OP	1	4	0	\N	30
+6	62	61	Id	\N	x	1	4	0	\N	37
+6	63	61	Id	\N	y	2	4	0	\N	37
+6	68	67	Id	\N	OP	1	56	0	\N	0
+6	70	69	Id	\N	y	1	63	0	\N	0
+6	72	71	Id	\N	x	1	62	0	\N	0
+6	79	77	Id	\N	T1_1	2	\N	0	\N	\N
+6	80	77	Id	\N	ObjectInverseOf	3	\N	0	\N	\N
+7	84	86	sig_e	sig_eI	\N	1	\N	\N	\N	\N
+7	85	84	Id	\N	o	1	\N	\N	\N	\N
+7	86	91	sig_arg	#sig_arg	\N	1	\N	\N	\N	\N
+7	87	86	sig_e	sig_eI	\N	2	\N	\N	\N	\N
+7	88	87	Id	\N	o	1	\N	\N	\N	\N
+7	89	91	sig_e	sig_eI	\N	3	\N	\N	\N	\N
+7	90	89	Id	\N	TV	1	\N	\N	\N	\N
+7	91	93	sig_f	sig_f	\N	3	\N	\N	\N	\N
+7	92	91	COLON	\N	:	2	\N	\N	\N	\N
+7	93	98	Declaration	Dcl-4	\N	1	\N	\N	\N	\N
+7	94	93	DECLARATION	\N	Declaration	1	\N	\N	\N	\N
+7	95	93	Id	\N	part_of	2	\N	\N	\N	\N
+7	96	93	PRIME	\N	prime	4	\N	\N	\N	\N
+7	97	93	Dot	\N	.	5	\N	\N	\N	\N
+7	98	\N	Statement	st-1	\N	\N	\N	\N	\N	\N
+8	100	99	e_m	\N	!	1	\N	\N	\N	\N
+8	101	99	Id	\N	Somebody_1	2	\N	\N	\N	\N
+8	102	99	Id	\N	o	3	\N	\N	\N	\N
+8	103	99	e_m	\N	!	4	\N	\N	\N	\N
+8	99	\N	Statement	fmca	\N	\N	\N	\N	\N	\N
+9	105	104	e_m	\N	!	1	\N	\N	\N	\N
+9	106	104	Id	\N	Somebody_2	2	\N	\N	\N	\N
+9	107	104	Id	\N	o	3	\N	\N	\N	\N
+9	108	104	e_m	\N	!	4	\N	\N	\N	\N
+9	104	\N	Statement	fmca	\N	\N	\N	\N	\N	\N
+10	114	122	term	trmf	\N	1	4	0	\N	43
+10	122	127	term	trmf	\N	2	4	0	\N	42
+10	128	127	e_m	\N	!	1	\N	0	\N	\N
+10	129	127	COLON	\N	:	3	\N	0	\N	\N
+10	130	127	e_m	\N	!	5	\N	0	\N	\N
+10	113	114	TermList	#trml	\N	3	\N	0	\N	\N
+10	115	114	l_p	\N	(	2	\N	0	\N	\N
+10	127	\N	Statement	fmta	\N	\N	11	0	\N	\N
+11	114	122	term	trmf	\N	1	4	0	\N	43
+10	116	114	r_p	\N	)	4	\N	0	\N	\N
+10	121	122	TermList	#trml	\N	3	\N	0	\N	\N
+10	123	122	l_p	\N	(	2	\N	0	\N	\N
+10	124	122	r_p	\N	)	4	\N	0	\N	\N
+10	110	109	Id	\N	ObjectInverseOf	1	4	0	\N	48
+10	112	111	Id	\N	part_of	1	7	0	\N	91
+10	118	117	Id	\N	Somebody_1	1	8	0	\N	0
+10	120	119	Id	\N	Somebody_2	1	9	0	\N	0
+10	109	114	term	trmi	\N	1	4	0	\N	48
+10	111	113	term	trmi	\N	-1	7	0	\N	91
+10	117	121	term	trmi	\N	-2	8	0	\N	102
+10	119	121	term	trmi	\N	-1	9	0	\N	107
+11	110	109	Id	\N	ObjectInverseOf	1	4	0	\N	48
+10	126	125	Id	\N	True	1	2	2	\N	0
+10	125	127	term	trmi	\N	4	2	2	\N	15
+11	122	127	term	trmf	\N	2	4	0	\N	42
+11	128	127	e_m	\N	!	1	\N	0	\N	\N
+11	129	127	COLON	\N	:	3	\N	0	\N	\N
+11	130	127	e_m	\N	!	5	\N	0	\N	\N
+11	113	114	TermList	#trml	\N	3	\N	0	\N	\N
+11	115	114	l_p	\N	(	2	\N	0	\N	\N
+11	116	114	r_p	\N	)	4	\N	0	\N	\N
+11	121	122	TermList	#trml	\N	3	\N	0	\N	\N
+11	123	122	l_p	\N	(	2	\N	0	\N	\N
+11	124	122	r_p	\N	)	4	\N	0	\N	\N
+11	109	114	term	trmi	\N	1	4	0	\N	48
+11	111	113	term	trmi	\N	-1	7	0	\N	91
+11	117	121	term	trmi	\N	-2	8	0	\N	102
+11	119	121	term	trmi	\N	-1	9	0	\N	107
+11	125	127	term	trmi	\N	4	2	0	\N	15
+11	127	\N	Statement	fmta	\N	\N	10	0	\N	\N
+11	112	111	Id	\N	part_of	1	7	0	\N	91
+11	118	117	Id	\N	Somebody_1	1	8	0	\N	0
+11	120	119	Id	\N	Somebody_2	1	9	0	\N	0
+11	126	125	Id	\N	True	1	2	0	\N	0
+\.
+
+
+--
+-- Data for Name: entities; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY entities (id, ref_r, def_id, expr, type, ref_arg, fp_id, prime, ein, sers, tid) FROM stdin;
+TV	\N	\N	\N	sort	\N	\N	\N	1	\N	1
+o	\N	\N	\N	sort	\N	\N	\N	2	\N	3
+ObjectInverseOf	0000000045	T1_1	\N	func	0000000035	\N	0	3	\N	4
+T1_1	\N	\N	0000000074	def	\N	0000000060	\N	4	\N	5
+part_of	0000000089	\N	\N	func	0000000086	\N	1	5	\N	7
+\.
+
+
+--
+-- Data for Name: infixes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY infixes (v, ref_f) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sinfixes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sinfixes (v) FROM stdin;
+=
+<
+≠
+≤
+>
+≥
+neq
+leq
+geq
+\.
+
+
+--
+-- Data for Name: system; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY system (id, fsn, fen, ftn, fnn, ftrn) FROM stdin;
+YL	1	6	1	131	12
+\.
+
+
+--
+-- Name: PK_sinfx; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sinfixes
+    ADD CONSTRAINT "PK_sinfx" PRIMARY KEY (v);
+
+
+--
+-- Name: PK_w; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY _w
+    ADD CONSTRAINT "PK_w" PRIMARY KEY (nid);
+
+
+--
+-- Name: dt_PK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY dt
+    ADD CONSTRAINT "dt_PK" PRIMARY KEY (id);
+
+
+--
+-- Name: dts_PK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY dts
+    ADD CONSTRAINT "dts_PK" PRIMARY KEY (tid, nid);
+
+
+--
+-- Name: e_PK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY entities
+    ADD CONSTRAINT "e_PK" PRIMARY KEY (id);
+
+
+--
+-- Name: infx_PK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY infixes
+    ADD CONSTRAINT "infx_PK" PRIMARY KEY (v, ref_f);
+
+
+--
+-- Name: s_PK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY system
+    ADD CONSTRAINT "s_PK" PRIMARY KEY (id);
+
+
+--
+-- Name: dt_PKI; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX "dt_PKI" ON dt USING btree (id);
+
+
+--
+-- Name: ein_uniq; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX ein_uniq ON entities USING btree (ein);
+
+
+--
+-- Name: INDEX ein_uniq; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON INDEX ein_uniq IS 'для уникальности ein';
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

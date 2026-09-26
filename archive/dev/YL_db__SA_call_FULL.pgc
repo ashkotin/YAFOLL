@@ -1,0 +1,40 @@
+/*это пакет ф-й вызываемых из СА для построения ДРВ*/
+void dt_reset(int mod){/*зачищает ДРВ-часть БД. mod = 1 - чистить, иначе - нет.*//*ВЫЗЫВАЕТСЯ в СА!!!*/
+ if(mod!=1) return;
+ EXEC SQL delete from dt; if ((sqlca.sqlcode!=0) && (sqlca.sqlcode!=100)) YL_abort("dt_reset-del");
+ EXEC SQL update system set fnn=1; if (sqlca.sqlcode!=0) YL_abort("dt_reset-upd");
+ /*printf("\n!dt_reset!DEBUG! reset done!");*/
+ commit(); return;
+}
+void up_node(char* from, char* to, int irn)/*ДРВ. назначает узлу ид=from родителя ид=to, и номер "в родителе" - irn.*/{
+ /*from - id ребё, to - id родителя, irn - номер в правиле/цепи.*/
+ /*ДЛЯ INCLUDE-НОЙ работы pgc!!!*/
+ EXEC SQL BEGIN DECLARE SECTION;
+ extern int wi;
+ extern char wc1[YLsbl];
+ extern char wc2[YLsbl];
+ EXEC SQL END DECLARE SECTION;
+ int dbg=0/*управление отладочными сообщениями*/;
+ if (dbg==1) printf("\n!up_node!DEBUG!begin from=%s, to=%s, irn=%i!",from,to,irn);
+ strcpy(wc1,from); strcpy(wc2,to); wi=irn;
+ EXEC SQL update dt set up=:wc2,irn=:wi where id=:wc1; if (sqlca.sqlcode==100) {printf("\n!up_node!SERROR!from node not found: from=%s, to=%s, irn=%i!",from,to,irn);return;};
+ if (sqlca.sqlcode!=0) YL_abort("up_node-update");
+ commit(); return;
+}
+char* crt_prnt(char* sid, char* rid, char* v)/*ДРВ.создаётся узел ("для родителя") и его ид закатывается в кучу и именно на это значение возвращается указатель!*/{
+ char* ch0=crt_node(sid,rid,v); 
+ return to_buff(ch0,strlen(ch0)+1);
+}
+void crt_up_node(char* sid, char* rid, char* v, char* to, int irn)/*ДРВ. создаёт и сразу подключает ребё.*/{
+ char* ch0=crt_node(sid,rid,v);up_node(ch0,to,irn);
+}
+int get_chn(char* id)/*ДРВ. возвращает К1 - количество “детей” данного узла (id).*/{
+	 /*ДЛЯ INCLUDE-НОЙ работы pgc!!!*/
+ EXEC SQL BEGIN DECLARE SECTION;
+ extern int wi;
+ extern char wc1[YLsbl];
+ EXEC SQL END DECLARE SECTION;
+ strcpy(wc1,id);
+ EXEC SQL select count(*) into :wi from dt where up=:wc1;  if (sqlca.sqlcode!=0) YL_abort("get_chn-sel_count");
+ return wi;
+}

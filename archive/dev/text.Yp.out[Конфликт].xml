@@ -1,0 +1,14 @@
+﻿?( ∀ x : TV ( ∃ y : TV ( ( ¬x ) ≡ y ) ) )?
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000027' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='94' msg='added'> ? ( ∀ x : TV ( ∃ y : TV ( ( ¬ x ) ≡ y ) ) ) ?</st_store>
+<infx_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV EQUIV ( NOT ( x ) y ) ) ) ?
+</infx_subst>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV AND ( OR ( NOT ( NOT ( x ) ) y ) OR ( NOT ( y ) NOT ( x ) ) ) ) ) ?
+</deff_subst></q_term>
+<return msg='_True' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

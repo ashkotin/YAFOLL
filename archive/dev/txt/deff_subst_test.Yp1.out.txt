@@ -1,0 +1,354 @@
+
+
+<Yp1 BEGIN st_id=0000000006>
+<st_store Tree=1 added=1>
+					 Declaration TV sort .
+<dcl_proc: st_id=0000000006>
+<Yp1 END st_id=0000000006>
+
+<Yp1 BEGIN st_id=0000000021>
+<st_store Tree=2 added=1>
+					 Declaration EQU_TV TV TV : TV .
+<dcl_proc: st_id=0000000021>
+<Yp1 END st_id=0000000021>
+
+<Yp1 BEGIN st_id=0000000022>
+<st_store Tree=3 added=1>
+					 Add infix = to EQU_TV .
+<Yp1 st_id=0000000022 st-4>
+<Yp1 END st_id=0000000022>
+
+<Yp1 BEGIN st_id=0000000029>
+<st_store Tree=4 added=1>
+					 ! True TV !
+<Yp1 st_id=0000000029 fmca>
+<Yp1 END st_id=0000000029>
+
+<Yp1 BEGIN st_id=0000000046>
+<st_store Tree=5 added=1>
+					 Declaration NOT TV : TV prime .
+<dcl_proc: st_id=0000000046>
+<Yp1 END st_id=0000000046>
+
+<Yp1 BEGIN st_id=0000000047>
+<st_store Tree=6 added=1>
+					 Add infix ¬ to NOT .
+<Yp1 st_id=0000000047 st-4>
+<Yp1 END st_id=0000000047>
+
+<Yp1 BEGIN st_id=0000000054>
+<st_store Tree=7 added=1>
+					 Add infix not to NOT .
+<Yp1 st_id=0000000054 st-4>
+<Yp1 END st_id=0000000054>
+
+<Yp1 BEGIN st_id=0000000075>
+<st_store Tree=8 added=1>
+					 Declaration AND TV TV : TV prime .
+<dcl_proc: st_id=0000000075>
+<Yp1 END st_id=0000000075>
+
+<Yp1 BEGIN st_id=0000000076>
+<st_store Tree=9 added=1>
+					 Add infix ∧ to AND .
+<Yp1 st_id=0000000076 st-4>
+<Yp1 END st_id=0000000076>
+
+<Yp1 BEGIN st_id=0000000083>
+<st_store Tree=10 added=1>
+					 Add infix and to AND .
+<Yp1 st_id=0000000083 st-4>
+<Yp1 END st_id=0000000083>
+
+<Yp1 BEGIN st_id=0000000104>
+<st_store Tree=11 added=1>
+					 Declaration OR TV TV : TV prime .
+<dcl_proc: st_id=0000000104>
+<Yp1 END st_id=0000000104>
+
+<Yp1 BEGIN st_id=0000000105>
+<st_store Tree=12 added=1>
+					 Add infix ∨ to OR .
+<Yp1 st_id=0000000105 st-4>
+<Yp1 END st_id=0000000105>
+
+<Yp1 BEGIN st_id=0000000112>
+<st_store Tree=13 added=1>
+					 Add infix or to OR .
+<Yp1 st_id=0000000112 st-4>
+<Yp1 END st_id=0000000112>
+
+<Yp1 BEGIN st_id=0000000132>
+<st_store Tree=14 added=1>
+					 Declaration IMPLIES TV TV : TV .
+<dcl_proc: st_id=0000000132>
+<Yp1 END st_id=0000000132>
+
+<Yp1 BEGIN st_id=0000000133>
+<st_store Tree=15 added=1>
+					 Add infix → to IMPLIES .
+<Yp1 st_id=0000000133 st-4>
+<Yp1 END st_id=0000000133>
+
+<Yp1 BEGIN st_id=0000000140>
+<st_store Tree=16 added=1>
+					 Add infix impl to IMPLIES .
+<Yp1 st_id=0000000140 st-4>
+<Yp1 END st_id=0000000140>
+
+<Yp1 BEGIN st_id=0000000172>
+<st_store Tree=17 added=1>
+					 Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=17 Ilbch=153) (sigf_t=14 sigf=126)
+<infx_subst RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!defc_subst!DEBUG! begin tid=18
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id z does not exist in entities!
+(defc_subst: RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=18
+(deff_subst: RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=1.
+<def_proc! st_id=0000000172>
+<Yp1 END st_id=0000000172>
+
+<Yp1 BEGIN st_id=0000000186>
+<st_store Tree=19 added=1>
+					 Declaration EQUIV TV TV : TV .
+<dcl_proc: st_id=0000000186>
+<Yp1 END st_id=0000000186>
+
+<Yp1 BEGIN st_id=0000000187>
+<st_store Tree=20 added=1>
+					 Add infix ≡ to EQUIV .
+<Yp1 st_id=0000000187 st-4>
+<Yp1 END st_id=0000000187>
+
+<Yp1 BEGIN st_id=0000000194>
+<st_store Tree=21 added=1>
+					 Add infix eqv to EQUIV .
+<Yp1 st_id=0000000194 st-4>
+<Yp1 END st_id=0000000194>
+
+<Yp1 BEGIN st_id=0000000234>
+<st_store Tree=22 added=1>
+					 Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=22 Ilbch=207) (sigf_t=19 sigf=180)
+<infx_subst RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+!defc_subst!DEBUG! begin tid=23
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+!defc_subst!WARNING! Id x does not exist in entities!
+(defc_subst: RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=23
+!deff_subst!DEBUG! loop! function with def found: cnid=600 Id=IMPLIES def_id=IMPL_d.
+!deff_subst!DEBUG! loop! function with def found: cnid=603 Id=IMPLIES def_id=IMPL_d.
+(deff_subst: RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+!deff_subst!DEBUG! end RC=2
+func_add_d(DEBUG)st_trans.rc=3.
+<def_proc! st_id=0000000234>
+<Yp1 END st_id=0000000234>
+
+<Yp1 BEGIN st_id=0000000248>
+<st_store Tree=24 added=1>
+					 Declaration NEQ_TV TV TV : TV .
+<dcl_proc: st_id=0000000248>
+<Yp1 END st_id=0000000248>
+
+<Yp1 BEGIN st_id=0000000249>
+<st_store Tree=25 added=1>
+					 Add infix ≠ to NEQ_TV .
+<Yp1 st_id=0000000249 st-4>
+<Yp1 END st_id=0000000249>
+
+<Yp1 BEGIN st_id=0000000256>
+<st_store Tree=26 added=1>
+					 Add infix neq to NEQ_TV .
+<Yp1 st_id=0000000256 st-4>
+<Yp1 END st_id=0000000256>
+
+<Yp1 BEGIN st_id=0000000288>
+<st_store Tree=27 added=1>
+					 Definition NEQ_TV_d NEQ_TV ( x y ) : ( ¬ ( x = y ) ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=27 Ilbch=269) (sigf_t=24 sigf=242)
+<infx_subst RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!defc_subst!DEBUG! begin tid=28
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+(defc_subst: RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=28
+(deff_subst: RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=1.
+<def_proc! st_id=0000000288>
+<Yp1 END st_id=0000000288>
+
+<Yp1 BEGIN st_id=0000000294>
+<st_store Tree=29 added=1>
+					 Declaration o sort .
+<dcl_proc: st_id=0000000294>
+<Yp1 END st_id=0000000294>
+
+<Yp1 BEGIN st_id=0000000326>
+<st_store Tree=30 added=1>
+					 Declaration ObjectInverseOf ( o o : TV ) : ( o o : TV ) .
+<dcl_proc: st_id=0000000326>
+<Yp1 END st_id=0000000326>
+
+<Yp1 BEGIN st_id=0000000355>
+<st_store Tree=31 added=1>
+					 Definition T1_1 ObjectInverseOf ( OP ) ( x y ) : OP ( y x ) .
+!type_fps!DEBUG! loop-in (IlbN=2): Ilbi=1 (tid=31 Ilbch=332) (sigf_t=30 sigf=320)
+!type_fps!DEBUG! loop-in (IlbN=2): Ilbi=2 (tid=31 Ilbch=332) (sigf_t=30 sigf=315)
+!defc_subst!DEBUG! begin tid=32
+!defc_subst!WARNING! Id y does not exist in entities!
+!defc_subst!WARNING! Id x does not exist in entities!
+(defc_subst: RESULT			 Definition T1_1 ObjectInverseOf ( OP ) ( x y ) : OP ( y x ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=32
+!deff_subst!WARNING! Id OP does not exist in entities!
+(deff_subst: RESULT			 Definition T1_1 ObjectInverseOf ( OP ) ( x y ) : OP ( y x ) .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=0.
+<def_proc! st_id=0000000355>
+<Yp1 END st_id=0000000355>
+
+<Yp1 BEGIN st_id=0000000370>
+<st_store Tree=33 added=1>
+					 Declaration part_of o o : TV prime .
+<dcl_proc: st_id=0000000370>
+<Yp1 END st_id=0000000370>
+
+<Yp1 BEGIN st_id=0000000371>
+<st_store Tree=34 added=1>
+					 ! Somebody_1 o !
+<Yp1 st_id=0000000371 fmca>
+<Yp1 END st_id=0000000371>
+
+<Yp1 BEGIN st_id=0000000376>
+<st_store Tree=35 added=1>
+					 ! Somebody_2 o !
+<Yp1 st_id=0000000376 fmca>
+<Yp1 END st_id=0000000376>
+
+<Yp1 BEGIN st_id=0000000399>
+<st_store Tree=36 added=1>
+					 ! ObjectInverseOf ( part_of ) ( Somebody_1 Somebody_2 ) : True !
+!defc_subst!DEBUG! begin tid=37
+!defc_subst!WARNING! Id part_of is not a constant!
+!defc_subst!WARNING! Id Somebody_1 does not exist in entities!
+!defc_subst!WARNING! Id Somebody_2 does not exist in entities!
+(defc_subst: RESULT			 ! ObjectInverseOf ( part_of ) ( Somebody_1 Somebody_2 ) : True !
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=37
+!deff_subst!DEBUG! loop! function with def found: cnid=382 Id=ObjectInverseOf def_id=T1_1.
+(deff_subst: RESULT			 ! part_of ( Somebody_2 Somebody_1 ) : True !
+!deff_subst!DEBUG! end RC=1
+(DEBUG)fmta_proc.st_trans.rc=1.
+!fmta_proc!DEBUG! fmta not done yet!
+<Yp1 st_id=0000000399 fmta>
+<Yp1 END st_id=0000000399>
+
+<Yp1 BEGIN st_id=0000000414>
+<st_store Tree=38 added=1>
+					 Declaration man o : TV .
+<dcl_proc: st_id=0000000414>
+<Yp1 END st_id=0000000414>
+
+<Yp1 BEGIN st_id=0000000426>
+<st_store Tree=39 added=1>
+					 Declaration woman o : TV .
+<dcl_proc: st_id=0000000426>
+<Yp1 END st_id=0000000426>
+
+<Yp1 BEGIN st_id=0000000438>
+<st_store Tree=40 added=1>
+					 Declaration human_being o : TV .
+<dcl_proc: st_id=0000000438>
+<Yp1 END st_id=0000000438>
+
+<Yp1 BEGIN st_id=0000000468>
+<st_store Tree=41 added=1>
+					 Declaration SubClassOf ( o : TV ) ( o : TV ) : TV .
+<dcl_proc: st_id=0000000468>
+<Yp1 END st_id=0000000468>
+
+<Yp1 BEGIN st_id=0000000509>
+<st_store Tree=42 added=1>
+					 Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o ( C1 ( z ) → C2 ( z ) ) ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=42 Ilbch=475) (sigf_t=41 sigf=462)
+<infx_subst RESULT			 Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o IMPLIES ( C1 ( z ) C2 ( z ) ) ) .
+!defc_subst!DEBUG! begin tid=43
+!defc_subst!WARNING! Id z does not exist in entities!
+!defc_subst!WARNING! Id z does not exist in entities!
+(defc_subst: RESULT			 Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o IMPLIES ( C1 ( z ) C2 ( z ) ) ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=43
+!deff_subst!WARNING! Id C1 does not exist in entities!
+!deff_subst!WARNING! Id C2 does not exist in entities!
+!deff_subst!DEBUG! loop! function with def found: cnid=615 Id=IMPLIES def_id=IMPL_d.
+(deff_subst: RESULT			 Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o OR ( NOT ( C1 ( z ) ) C2 ( z ) ) ) .
+!deff_subst!DEBUG! end RC=1
+func_add_d(DEBUG)st_trans.rc=2.
+<def_proc! st_id=0000000509>
+<Yp1 END st_id=0000000509>
+
+<Yp1 BEGIN st_id=0000000520>
+<st_store Tree=44 added=1>
+					 Theorem HB_1 SubClassOf ( man human_being ) .
+!defc_subst!DEBUG! begin tid=45
+!defc_subst!WARNING! Id man is not a constant!
+!defc_subst!WARNING! Id human_being is not a constant!
+(defc_subst: RESULT			 Theorem HB_1 SubClassOf ( man human_being ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=45
+!deff_subst!DEBUG! loop! function with def found: cnid=511 Id=SubClassOf def_id=T5_1.
+(deff_subst: RESULT			 Theorem HB_1 ( ∀ z : o OR ( NOT ( man ( z ) ) human_being ( z ) ) ) .
+!deff_subst!DEBUG! end RC=1
+theo_add(DEBUG)st_trans.rc=1.
+<Yp1 st_id=0000000520 st-13>
+<Yp1 END st_id=0000000520>
+
+<Yp1 BEGIN st_id=0000000555>
+<st_store Tree=46 added=1>
+					 Declaration ObID ( o o : TV ) : ( o o : TV ) .
+<dcl_proc: st_id=0000000555>
+<Yp1 END st_id=0000000555>
+
+<Yp1 BEGIN st_id=0000000570>
+<st_store Tree=47 added=1>
+					 Definition T1_0 ObID ( OP ) : OP .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=47 Ilbch=561) (sigf_t=46 sigf=549)
+!type_fps:!WARNING! Number of arg-sets in decl (tid=46, nid=536) > number of fp-sets (IlbN=1) in def (tid=47, nid=556). flg=1!
+!defc_subst!DEBUG! begin tid=48
+(defc_subst: RESULT			 Definition T1_0 ObID ( OP ) : OP .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=48
+(deff_subst: RESULT			 Definition T1_0 ObID ( OP ) : OP .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=0.
+<def_proc! st_id=0000000570>
+<Yp1 END st_id=0000000570>
+
+<Yp1 BEGIN st_id=0000000589>
+<st_store Tree=49 added=1>
+					 ! ObID ( part_of ) ( Somebody_1 Somebody_2 ) : True !
+!defc_subst!DEBUG! begin tid=50
+!defc_subst!WARNING! Id part_of is not a constant!
+!defc_subst!WARNING! Id Somebody_1 does not exist in entities!
+!defc_subst!WARNING! Id Somebody_2 does not exist in entities!
+(defc_subst: RESULT			 ! ObID ( part_of ) ( Somebody_1 Somebody_2 ) : True !
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=50
+!deff_subst!DEBUG! loop! function with def found: cnid=572 Id=ObID def_id=T1_0.
+(deff_subst: RESULT			 ! part_of ( Somebody_1 Somebody_2 ) : True !
+!deff_subst!DEBUG! end RC=1
+(DEBUG)fmta_proc.st_trans.rc=1.
+!fmta_proc!DEBUG! fmta not done yet!
+<Yp1 st_id=0000000589 fmta>
+<Yp1 END st_id=0000000589>
+<:-)End of Statement nodes in dt. Stop.>

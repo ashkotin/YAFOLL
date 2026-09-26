@@ -1,0 +1,1399 @@
+Terminals unused in grammar
+
+   COMMA
+   PRIME
+
+
+Состояние 12 конфликты: 2 сдвига/вывода
+Состояние 27 конфликты: 7 сдвига/вывода
+Состояние 30 конфликты: 2 сдвига/вывода
+Состояние 36 конфликты: 1 сдвига/вывода
+Состояние 89 конфликты: 7 сдвига/вывода
+
+
+Грамматика
+
+    0 $accept: Statements $end
+
+    1 Statements: Statement
+    2           | Statements Statement
+
+    3 type: TYPE
+    4     | Id
+    5     | FINSET l_p type r_p
+    6     | FINSEQ l_p types r_p
+    7     | FUNC l_p types r_p
+
+    8 types: type
+    9      | types type
+
+   10 Statement: String
+   11          | DECLARATION Id type DOT
+   12          | DECLARATION Id type Id DOT
+   13          | e_m term Id e_m
+   14          | e_m Id term e_m
+   15          | e_m Id Natural term e_m
+   16          | e_m Id Natural e_m
+   17          | e_m term COLON term e_m
+   18          | e_m term COLON e_m
+   19          | q_m term q_m
+   20          | DECLARATION Id type DEFINITION Id_list_bch COLON term DOT
+   21          | e_m Natural e_m
+   22          | e_m error e_m
+   23          | error DOT
+
+   24 term: Id
+   25     | Ide
+   26     | Number
+   27     | String
+   28     | Natural
+   29     | l_p Id term r_p
+   30     | l_p term Id term r_p
+   31     | term l_p TermList r_p
+   32     | l_p QUANT Id COLON term term r_p
+   33     | conds term
+
+   34 conds: l_cb term r_cb
+
+   35 TermList: /* пусто */
+   36         | term TermList
+
+   37 Id_list_bch: Id_list_b
+   38            | Id_list_bch Id_list_b
+
+   39 Id_list_b: l_p Id_list r_p
+
+   40 Id_list: /* пусто */
+   41        | Id_list Id
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+error (256) 22 23
+QUANT (258) 32
+DOT (259) 11 12 20 23
+COMMA (260)
+COLON (261) 17 18 20 32
+l_p (262) 5 6 7 29 30 31 32 39
+r_p (263) 5 6 7 29 30 31 32 39
+l_cb (264) 34
+r_cb (265) 34
+e_m (266) 13 14 15 16 17 18 21 22
+q_m (267) 19
+DECLARATION (268) 11 12 20
+PRIME (269)
+DEFINITION (270) 20
+FINSET (271) 5
+FINSEQ (272) 6
+FUNC (273) 7
+TYPE (274) 3
+Id (275) 4 11 12 13 14 15 16 20 24 29 30 32 41
+Ide (276) 25
+Number (277) 26
+String (278) 10 27
+Natural (279) 15 16 21 28
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (25)
+    налево: 0
+Statements (26)
+    налево: 1 2, направо: 0 2
+type (27)
+    налево: 3 4 5 6 7, направо: 5 8 9 11 12 20
+types (28)
+    налево: 8 9, направо: 6 7 9
+Statement (29)
+    налево: 10 11 12 13 14 15 16 17 18 19 20 21 22 23, направо: 1 2
+term (30)
+    налево: 24 25 26 27 28 29 30 31 32 33, направо: 13 14 15 17 18
+    19 20 29 30 31 32 33 34 36
+conds (31)
+    налево: 34, направо: 33
+TermList (32)
+    налево: 35 36, направо: 31 36
+Id_list_bch (33)
+    налево: 37 38, направо: 20 38
+Id_list_b (34)
+    налево: 39, направо: 37 38
+Id_list (35)
+    налево: 40 41, направо: 39 41
+
+
+состояние 0
+
+    0 $accept: . Statements $end
+    1 Statements: . Statement
+    2           | . Statements Statement
+   10 Statement: . String
+   11          | . DECLARATION Id type DOT
+   12          | . DECLARATION Id type Id DOT
+   13          | . e_m term Id e_m
+   14          | . e_m Id term e_m
+   15          | . e_m Id Natural term e_m
+   16          | . e_m Id Natural e_m
+   17          | . e_m term COLON term e_m
+   18          | . e_m term COLON e_m
+   19          | . q_m term q_m
+   20          | . DECLARATION Id type DEFINITION Id_list_bch COLON term DOT
+   21          | . e_m Natural e_m
+   22          | . e_m error e_m
+   23          | . error DOT
+
+    error        сдвиг, и переход в состояние 1
+    e_m          сдвиг, и переход в состояние 2
+    q_m          сдвиг, и переход в состояние 3
+    DECLARATION  сдвиг, и переход в состояние 4
+    String       сдвиг, и переход в состояние 5
+
+    Statements  переход в состояние 6
+    Statement   переход в состояние 7
+
+
+состояние 1
+
+   23 Statement: error . DOT
+
+    DOT  сдвиг, и переход в состояние 8
+
+
+состояние 2
+
+   13 Statement: e_m . term Id e_m
+   14          | e_m . Id term e_m
+   15          | e_m . Id Natural term e_m
+   16          | e_m . Id Natural e_m
+   17          | e_m . term COLON term e_m
+   18          | e_m . term COLON e_m
+   21          | e_m . Natural e_m
+   22          | e_m . error e_m
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    error    сдвиг, и переход в состояние 9
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 12
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 16
+
+    term   переход в состояние 17
+    conds  переход в состояние 18
+
+
+состояние 3
+
+   19 Statement: q_m . term q_m
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 21
+    conds  переход в состояние 18
+
+
+состояние 4
+
+   11 Statement: DECLARATION . Id type DOT
+   12          | DECLARATION . Id type Id DOT
+   20          | DECLARATION . Id type DEFINITION Id_list_bch COLON term DOT
+
+    Id  сдвиг, и переход в состояние 22
+
+
+состояние 5
+
+   10 Statement: String .
+
+    $default  вывод с использованием правила 10 (Statement)
+
+
+состояние 6
+
+    0 $accept: Statements . $end
+    2 Statements: Statements . Statement
+   10 Statement: . String
+   11          | . DECLARATION Id type DOT
+   12          | . DECLARATION Id type Id DOT
+   13          | . e_m term Id e_m
+   14          | . e_m Id term e_m
+   15          | . e_m Id Natural term e_m
+   16          | . e_m Id Natural e_m
+   17          | . e_m term COLON term e_m
+   18          | . e_m term COLON e_m
+   19          | . q_m term q_m
+   20          | . DECLARATION Id type DEFINITION Id_list_bch COLON term DOT
+   21          | . e_m Natural e_m
+   22          | . e_m error e_m
+   23          | . error DOT
+
+    $end         сдвиг, и переход в состояние 23
+    error        сдвиг, и переход в состояние 1
+    e_m          сдвиг, и переход в состояние 2
+    q_m          сдвиг, и переход в состояние 3
+    DECLARATION  сдвиг, и переход в состояние 4
+    String       сдвиг, и переход в состояние 5
+
+    Statement  переход в состояние 24
+
+
+состояние 7
+
+    1 Statements: Statement .
+
+    $default  вывод с использованием правила 1 (Statements)
+
+
+состояние 8
+
+   23 Statement: error DOT .
+
+    $default  вывод с использованием правила 23 (Statement)
+
+
+состояние 9
+
+   22 Statement: e_m error . e_m
+
+    e_m  сдвиг, и переход в состояние 25
+
+
+состояние 10
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   29     | l_p . Id term r_p
+   30     | . l_p term Id term r_p
+   30     | l_p . term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   32     | l_p . QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    QUANT    сдвиг, и переход в состояние 26
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 27
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 28
+    conds  переход в состояние 18
+
+
+состояние 11
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+   34      | l_cb . term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 29
+    conds  переход в состояние 18
+
+
+состояние 12
+
+   14 Statement: e_m Id . term e_m
+   15          | e_m Id . Natural term e_m
+   16          | e_m Id . Natural e_m
+   24 term: . Id
+   24     | Id .  [COLON, l_p, Id]
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 30
+
+    l_p       [вывод с использованием правила 24 (term)]
+    Id        [вывод с использованием правила 24 (term)]
+    $default  вывод с использованием правила 24 (term)
+
+    term   переход в состояние 31
+    conds  переход в состояние 18
+
+
+состояние 13
+
+   25 term: Ide .
+
+    $default  вывод с использованием правила 25 (term)
+
+
+состояние 14
+
+   26 term: Number .
+
+    $default  вывод с использованием правила 26 (term)
+
+
+состояние 15
+
+   27 term: String .
+
+    $default  вывод с использованием правила 27 (term)
+
+
+состояние 16
+
+   21 Statement: e_m Natural . e_m
+   28 term: Natural .  [COLON, l_p, Id]
+
+    e_m  сдвиг, и переход в состояние 32
+
+    $default  вывод с использованием правила 28 (term)
+
+
+состояние 17
+
+   13 Statement: e_m term . Id e_m
+   17          | e_m term . COLON term e_m
+   18          | e_m term . COLON e_m
+   31 term: term . l_p TermList r_p
+
+    COLON  сдвиг, и переход в состояние 33
+    l_p    сдвиг, и переход в состояние 34
+    Id     сдвиг, и переход в состояние 35
+
+
+состояние 18
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   33     | conds . term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 36
+    conds  переход в состояние 18
+
+
+состояние 19
+
+   24 term: Id .
+
+    $default  вывод с использованием правила 24 (term)
+
+
+состояние 20
+
+   28 term: Natural .
+
+    $default  вывод с использованием правила 28 (term)
+
+
+состояние 21
+
+   19 Statement: q_m term . q_m
+   31 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    q_m  сдвиг, и переход в состояние 37
+
+
+состояние 22
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    6     | . FINSEQ l_p types r_p
+    7     | . FUNC l_p types r_p
+   11 Statement: DECLARATION Id . type DOT
+   12          | DECLARATION Id . type Id DOT
+   20          | DECLARATION Id . type DEFINITION Id_list_bch COLON term DOT
+
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type  переход в состояние 43
+
+
+состояние 23
+
+    0 $accept: Statements $end .
+
+    $default  accept
+
+
+состояние 24
+
+    2 Statements: Statements Statement .
+
+    $default  вывод с использованием правила 2 (Statements)
+
+
+состояние 25
+
+   22 Statement: e_m error e_m .
+
+    $default  вывод с использованием правила 22 (Statement)
+
+
+состояние 26
+
+   32 term: l_p QUANT . Id COLON term term r_p
+
+    Id  сдвиг, и переход в состояние 44
+
+
+состояние 27
+
+   24 term: . Id
+   24     | Id .  [l_p, r_p, l_cb, Id, Ide, Number, String, Natural]
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   29     | l_p Id . term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    l_p       [вывод с использованием правила 24 (term)]
+    l_cb      [вывод с использованием правила 24 (term)]
+    Id        [вывод с использованием правила 24 (term)]
+    Ide       [вывод с использованием правила 24 (term)]
+    Number    [вывод с использованием правила 24 (term)]
+    String    [вывод с использованием правила 24 (term)]
+    Natural   [вывод с использованием правила 24 (term)]
+    $default  вывод с использованием правила 24 (term)
+
+    term   переход в состояние 45
+    conds  переход в состояние 18
+
+
+состояние 28
+
+   30 term: l_p term . Id term r_p
+   31     | term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    Id   сдвиг, и переход в состояние 46
+
+
+состояние 29
+
+   31 term: term . l_p TermList r_p
+   34 conds: l_cb term . r_cb
+
+    l_p   сдвиг, и переход в состояние 34
+    r_cb  сдвиг, и переход в состояние 47
+
+
+состояние 30
+
+   15 Statement: e_m Id Natural . term e_m
+   16          | e_m Id Natural . e_m
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   28     | Natural .  [l_p, e_m]
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    e_m      сдвиг, и переход в состояние 48
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    l_p  [вывод с использованием правила 28 (term)]
+    e_m  [вывод с использованием правила 28 (term)]
+
+    term   переход в состояние 49
+    conds  переход в состояние 18
+
+
+состояние 31
+
+   14 Statement: e_m Id term . e_m
+   31 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    e_m  сдвиг, и переход в состояние 50
+
+
+состояние 32
+
+   21 Statement: e_m Natural e_m .
+
+    $default  вывод с использованием правила 21 (Statement)
+
+
+состояние 33
+
+   17 Statement: e_m term COLON . term e_m
+   18          | e_m term COLON . e_m
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    e_m      сдвиг, и переход в состояние 51
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 52
+    conds  переход в состояние 18
+
+
+состояние 34
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   31     | term l_p . TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+   35 TermList: .  [r_p]
+   36         | . term TermList
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 35 (TermList)
+
+    term      переход в состояние 53
+    conds     переход в состояние 18
+    TermList  переход в состояние 54
+
+
+состояние 35
+
+   13 Statement: e_m term Id . e_m
+
+    e_m  сдвиг, и переход в состояние 55
+
+
+состояние 36
+
+   31 term: term . l_p TermList r_p
+   33     | conds term .  [DOT, COLON, l_p, r_p, l_cb, r_cb, e_m, q_m, Id, Ide, Number, String, Natural]
+
+    l_p  сдвиг, и переход в состояние 34
+
+    l_p       [вывод с использованием правила 33 (term)]
+    $default  вывод с использованием правила 33 (term)
+
+
+состояние 37
+
+   19 Statement: q_m term q_m .
+
+    $default  вывод с использованием правила 19 (Statement)
+
+
+состояние 38
+
+    5 type: FINSET . l_p type r_p
+
+    l_p  сдвиг, и переход в состояние 56
+
+
+состояние 39
+
+    6 type: FINSEQ . l_p types r_p
+
+    l_p  сдвиг, и переход в состояние 57
+
+
+состояние 40
+
+    7 type: FUNC . l_p types r_p
+
+    l_p  сдвиг, и переход в состояние 58
+
+
+состояние 41
+
+    3 type: TYPE .
+
+    $default  вывод с использованием правила 3 (type)
+
+
+состояние 42
+
+    4 type: Id .
+
+    $default  вывод с использованием правила 4 (type)
+
+
+состояние 43
+
+   11 Statement: DECLARATION Id type . DOT
+   12          | DECLARATION Id type . Id DOT
+   20          | DECLARATION Id type . DEFINITION Id_list_bch COLON term DOT
+
+    DOT         сдвиг, и переход в состояние 59
+    DEFINITION  сдвиг, и переход в состояние 60
+    Id          сдвиг, и переход в состояние 61
+
+
+состояние 44
+
+   32 term: l_p QUANT Id . COLON term term r_p
+
+    COLON  сдвиг, и переход в состояние 62
+
+
+состояние 45
+
+   29 term: l_p Id term . r_p
+   31     | term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    r_p  сдвиг, и переход в состояние 63
+
+
+состояние 46
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   30     | l_p term Id . term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 64
+    conds  переход в состояние 18
+
+
+состояние 47
+
+   34 conds: l_cb term r_cb .
+
+    $default  вывод с использованием правила 34 (conds)
+
+
+состояние 48
+
+   16 Statement: e_m Id Natural e_m .
+
+    $default  вывод с использованием правила 16 (Statement)
+
+
+состояние 49
+
+   15 Statement: e_m Id Natural term . e_m
+   31 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    e_m  сдвиг, и переход в состояние 65
+
+
+состояние 50
+
+   14 Statement: e_m Id term e_m .
+
+    $default  вывод с использованием правила 14 (Statement)
+
+
+состояние 51
+
+   18 Statement: e_m term COLON e_m .
+
+    $default  вывод с использованием правила 18 (Statement)
+
+
+состояние 52
+
+   17 Statement: e_m term COLON term . e_m
+   31 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    e_m  сдвиг, и переход в состояние 66
+
+
+состояние 53
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   31     | term . l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+   35 TermList: .  [r_p]
+   36         | . term TermList
+   36         | term . TermList
+
+    l_p      сдвиг, и переход в состояние 67
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 35 (TermList)
+
+    term      переход в состояние 53
+    conds     переход в состояние 18
+    TermList  переход в состояние 68
+
+
+состояние 54
+
+   31 term: term l_p TermList . r_p
+
+    r_p  сдвиг, и переход в состояние 69
+
+
+состояние 55
+
+   13 Statement: e_m term Id e_m .
+
+    $default  вывод с использованием правила 13 (Statement)
+
+
+состояние 56
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    5     | FINSET l_p . type r_p
+    6     | . FINSEQ l_p types r_p
+    7     | . FUNC l_p types r_p
+
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type  переход в состояние 70
+
+
+состояние 57
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    6     | . FINSEQ l_p types r_p
+    6     | FINSEQ l_p . types r_p
+    7     | . FUNC l_p types r_p
+    8 types: . type
+    9      | . types type
+
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type   переход в состояние 71
+    types  переход в состояние 72
+
+
+состояние 58
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    6     | . FINSEQ l_p types r_p
+    7     | . FUNC l_p types r_p
+    7     | FUNC l_p . types r_p
+    8 types: . type
+    9      | . types type
+
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type   переход в состояние 71
+    types  переход в состояние 73
+
+
+состояние 59
+
+   11 Statement: DECLARATION Id type DOT .
+
+    $default  вывод с использованием правила 11 (Statement)
+
+
+состояние 60
+
+   20 Statement: DECLARATION Id type DEFINITION . Id_list_bch COLON term DOT
+   37 Id_list_bch: . Id_list_b
+   38            | . Id_list_bch Id_list_b
+   39 Id_list_b: . l_p Id_list r_p
+
+    l_p  сдвиг, и переход в состояние 74
+
+    Id_list_bch  переход в состояние 75
+    Id_list_b    переход в состояние 76
+
+
+состояние 61
+
+   12 Statement: DECLARATION Id type Id . DOT
+
+    DOT  сдвиг, и переход в состояние 77
+
+
+состояние 62
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   32     | l_p QUANT Id COLON . term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 78
+    conds  переход в состояние 18
+
+
+состояние 63
+
+   29 term: l_p Id term r_p .
+
+    $default  вывод с использованием правила 29 (term)
+
+
+состояние 64
+
+   30 term: l_p term Id term . r_p
+   31     | term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    r_p  сдвиг, и переход в состояние 79
+
+
+состояние 65
+
+   15 Statement: e_m Id Natural term e_m .
+
+    $default  вывод с использованием правила 15 (Statement)
+
+
+состояние 66
+
+   17 Statement: e_m term COLON term e_m .
+
+    $default  вывод с использованием правила 17 (Statement)
+
+
+состояние 67
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   29     | l_p . Id term r_p
+   30     | . l_p term Id term r_p
+   30     | l_p . term Id term r_p
+   31     | . term l_p TermList r_p
+   31     | term l_p . TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   32     | l_p . QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+   35 TermList: .  [r_p]
+   36         | . term TermList
+
+    QUANT    сдвиг, и переход в состояние 26
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 27
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 35 (TermList)
+
+    term      переход в состояние 80
+    conds     переход в состояние 18
+    TermList  переход в состояние 54
+
+
+состояние 68
+
+   36 TermList: term TermList .
+
+    $default  вывод с использованием правила 36 (TermList)
+
+
+состояние 69
+
+   31 term: term l_p TermList r_p .
+
+    $default  вывод с использованием правила 31 (term)
+
+
+состояние 70
+
+    5 type: FINSET l_p type . r_p
+
+    r_p  сдвиг, и переход в состояние 81
+
+
+состояние 71
+
+    8 types: type .
+
+    $default  вывод с использованием правила 8 (types)
+
+
+состояние 72
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    6     | . FINSEQ l_p types r_p
+    6     | FINSEQ l_p types . r_p
+    7     | . FUNC l_p types r_p
+    9 types: types . type
+
+    r_p     сдвиг, и переход в состояние 82
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type  переход в состояние 83
+
+
+состояние 73
+
+    3 type: . TYPE
+    4     | . Id
+    5     | . FINSET l_p type r_p
+    6     | . FINSEQ l_p types r_p
+    7     | . FUNC l_p types r_p
+    7     | FUNC l_p types . r_p
+    9 types: types . type
+
+    r_p     сдвиг, и переход в состояние 84
+    FINSET  сдвиг, и переход в состояние 38
+    FINSEQ  сдвиг, и переход в состояние 39
+    FUNC    сдвиг, и переход в состояние 40
+    TYPE    сдвиг, и переход в состояние 41
+    Id      сдвиг, и переход в состояние 42
+
+    type  переход в состояние 83
+
+
+состояние 74
+
+   39 Id_list_b: l_p . Id_list r_p
+   40 Id_list: .
+   41        | . Id_list Id
+
+    $default  вывод с использованием правила 40 (Id_list)
+
+    Id_list  переход в состояние 85
+
+
+состояние 75
+
+   20 Statement: DECLARATION Id type DEFINITION Id_list_bch . COLON term DOT
+   38 Id_list_bch: Id_list_bch . Id_list_b
+   39 Id_list_b: . l_p Id_list r_p
+
+    COLON  сдвиг, и переход в состояние 86
+    l_p    сдвиг, и переход в состояние 74
+
+    Id_list_b  переход в состояние 87
+
+
+состояние 76
+
+   37 Id_list_bch: Id_list_b .
+
+    $default  вывод с использованием правила 37 (Id_list_bch)
+
+
+состояние 77
+
+   12 Statement: DECLARATION Id type Id DOT .
+
+    $default  вывод с использованием правила 12 (Statement)
+
+
+состояние 78
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   31     | term . l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   32     | l_p QUANT Id COLON term . term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 67
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 88
+    conds  переход в состояние 18
+
+
+состояние 79
+
+   30 term: l_p term Id term r_p .
+
+    $default  вывод с использованием правила 30 (term)
+
+
+состояние 80
+
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   30     | l_p term . Id term r_p
+   31     | . term l_p TermList r_p
+   31     | term . l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+   35 TermList: .  [r_p]
+   36         | . term TermList
+   36         | term . TermList
+
+    l_p      сдвиг, и переход в состояние 67
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 89
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    $default  вывод с использованием правила 35 (TermList)
+
+    term      переход в состояние 53
+    conds     переход в состояние 18
+    TermList  переход в состояние 68
+
+
+состояние 81
+
+    5 type: FINSET l_p type r_p .
+
+    $default  вывод с использованием правила 5 (type)
+
+
+состояние 82
+
+    6 type: FINSEQ l_p types r_p .
+
+    $default  вывод с использованием правила 6 (type)
+
+
+состояние 83
+
+    9 types: types type .
+
+    $default  вывод с использованием правила 9 (types)
+
+
+состояние 84
+
+    7 type: FUNC l_p types r_p .
+
+    $default  вывод с использованием правила 7 (type)
+
+
+состояние 85
+
+   39 Id_list_b: l_p Id_list . r_p
+   41 Id_list: Id_list . Id
+
+    r_p  сдвиг, и переход в состояние 90
+    Id   сдвиг, и переход в состояние 91
+
+
+состояние 86
+
+   20 Statement: DECLARATION Id type DEFINITION Id_list_bch COLON . term DOT
+   24 term: . Id
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    term   переход в состояние 92
+    conds  переход в состояние 18
+
+
+состояние 87
+
+   38 Id_list_bch: Id_list_bch Id_list_b .
+
+    $default  вывод с использованием правила 38 (Id_list_bch)
+
+
+состояние 88
+
+   31 term: term . l_p TermList r_p
+   32     | l_p QUANT Id COLON term term . r_p
+
+    l_p  сдвиг, и переход в состояние 34
+    r_p  сдвиг, и переход в состояние 93
+
+
+состояние 89
+
+   24 term: . Id
+   24     | Id .  [l_p, r_p, l_cb, Id, Ide, Number, String, Natural]
+   25     | . Ide
+   26     | . Number
+   27     | . String
+   28     | . Natural
+   29     | . l_p Id term r_p
+   30     | . l_p term Id term r_p
+   30     | l_p term Id . term r_p
+   31     | . term l_p TermList r_p
+   32     | . l_p QUANT Id COLON term term r_p
+   33     | . conds term
+   34 conds: . l_cb term r_cb
+
+    l_p      сдвиг, и переход в состояние 10
+    l_cb     сдвиг, и переход в состояние 11
+    Id       сдвиг, и переход в состояние 19
+    Ide      сдвиг, и переход в состояние 13
+    Number   сдвиг, и переход в состояние 14
+    String   сдвиг, и переход в состояние 15
+    Natural  сдвиг, и переход в состояние 20
+
+    l_p       [вывод с использованием правила 24 (term)]
+    l_cb      [вывод с использованием правила 24 (term)]
+    Id        [вывод с использованием правила 24 (term)]
+    Ide       [вывод с использованием правила 24 (term)]
+    Number    [вывод с использованием правила 24 (term)]
+    String    [вывод с использованием правила 24 (term)]
+    Natural   [вывод с использованием правила 24 (term)]
+    $default  вывод с использованием правила 24 (term)
+
+    term   переход в состояние 64
+    conds  переход в состояние 18
+
+
+состояние 90
+
+   39 Id_list_b: l_p Id_list r_p .
+
+    $default  вывод с использованием правила 39 (Id_list_b)
+
+
+состояние 91
+
+   41 Id_list: Id_list Id .
+
+    $default  вывод с использованием правила 41 (Id_list)
+
+
+состояние 92
+
+   20 Statement: DECLARATION Id type DEFINITION Id_list_bch COLON term . DOT
+   31 term: term . l_p TermList r_p
+
+    DOT  сдвиг, и переход в состояние 94
+    l_p  сдвиг, и переход в состояние 34
+
+
+состояние 93
+
+   32 term: l_p QUANT Id COLON term term r_p .
+
+    $default  вывод с использованием правила 32 (term)
+
+
+состояние 94
+
+   20 Statement: DECLARATION Id type DEFINITION Id_list_bch COLON term DOT .
+
+    $default  вывод с использованием правила 20 (Statement)

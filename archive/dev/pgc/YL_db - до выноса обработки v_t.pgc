@@ -1,0 +1,541 @@
+/*Группа функций работы с БД YL. 
+First version. Begin. 27.06.2013. Alex Shkotin. alex.shkotin@gmail.com
+*/
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+/*глобальные переменные*/
+EXEC SQL BEGIN DECLARE SECTION;
+   int wi, wi1;
+   char wc[1022];/*Это буфер для всех строк БД*/
+   char wc1[220];/*Это буфер для малых строк БД*/
+   char wc2[220];/*Это буфер для малых строк БД*/
+   char wc3[220];/*Это буфер для малых строк БД*/
+   char wc4[220];/*Это буфер для малых строк БД*/
+   char wc5[220];/*Это буфер для малых строк БД*/
+EXEC SQL END DECLARE SECTION;
+/*отладка*/
+void print_sqlca()
+{
+    printf("==== sqlca ====\n");
+    printf("sqlcode: %ld\n", sqlca.sqlcode);
+    printf("sqlerrm.sqlerrml: %d\n", sqlca.sqlerrm.sqlerrml);
+    printf("sqlerrm.sqlerrmc: %s\n", sqlca.sqlerrm.sqlerrmc);
+    printf("sqlerrd: %ld %ld %ld %ld %ld %ld\n", sqlca.sqlerrd[0],sqlca.sqlerrd[1],sqlca.sqlerrd[2], sqlca.sqlerrd[3],sqlca.sqlerrd[4],sqlca.sqlerrd[5]);
+    printf("sqlwarn: %d %d %d %d %d %d %d %d\n", sqlca.sqlwarn[0], sqlca.sqlwarn[1], sqlca.sqlwarn[2], sqlca.sqlwarn[3], sqlca.sqlwarn[4], sqlca.sqlwarn[5], sqlca.sqlwarn[6], sqlca.sqlwarn[7]);
+    printf("sqlstate: %5s\n", sqlca.sqlstate);
+    printf("===============\n");
+}
+/*наши функции*/
+int connect()
+{EXEC SQL CONNECT TO YL@127.0.0.1:5432 USER postgres/postgres; 
+ return sqlca.sqlcode;
+}
+int commit()
+{EXEC SQL COMMIT; 
+return sqlca.sqlcode;
+}
+int disconnect()
+{EXEC SQL DISCONNECT; 
+return sqlca.sqlcode;
+}
+void YL_abort(char *msg)
+{ printf("<ABORT %s: UNEXPECTED sqlcode!\n",msg); print_sqlca(); exit(EXIT_FAILURE);
+}
+/***YAFOLL***/
+/*обработка команд YL*/
+int doc(char *cc/*номер команды*/)
+{if (*cc=='0') /*очистка БД*/
+ {EXEC SQL delete from arg_seq; 
+  EXEC SQL delete from entities; 
+  EXEC SQL delete from infixes; 
+  EXEC SQL delete from terms_l;
+  EXEC SQL delete from terms; 
+  /*EXEC SQL vacuum; после него команды не работают:-(*/
+  EXEC SQL update system set fsn=1, fen=1, ftn=1;
+  commit();
+  return 0;
+ };
+ return 1;
+}
+char* SIGe(char *e)/*получает элемент и возвращает его sers*/
+/*аргумент сорт - вернуть его,
+  аргумент sigf - вернут его sers в скобках.*/
+{char bf1[220]; char bf2[220]; /*буфера переменных обмена с БД*/
+ static char w[221];/*место сборки результата*/
+ if (*e==':') {strcpy(bf1,wc1); strcpy(bf2,wc2); strcpy(wc1,e); 
+ EXEC SQL SELECT sers INTO :wc2 FROM entities WHERE id = :wc1; if (sqlca.sqlcode!=0) YL_abort("SIGe");
+ strcpy(w,"("); strcat(w,wc2);strcat(w,")");
+ strcpy(wc1,bf1); strcpy(wc2,bf2);
+ return w;};
+ /*!!!мы не проверяем, что аргумент сорт!!!*/
+ return e;
+}
+char* SIGa(char *e)/*получает элемент аргумента и возвращает его sers*/
+/*если аргумент один, вернуть его SIGe
+если аргументов несколько, то вернуть sers.sigc.*/
+{char bf1[220]; char bf2[220]; /*буфера переменных обмена с БД*/
+ static char w[221];/*место хранения результата*/
+ if (*e=='#') {strcpy(bf1,wc1); strcpy(bf2,wc2); strcpy(wc1,e); 
+ EXEC SQL SELECT sers INTO :wc2 FROM entities WHERE id = :wc1; if (sqlca.sqlcode!=0) YL_abort("SIGa");
+ strcpy(w,wc2);
+ strcpy(wc1,bf1); strcpy(wc2,bf2);
+ return w;};
+ /*!!!мы не проверяем, что аргумент "один"!!!*/
+ return SIGe(e);
+}
+int e_exists_q(char *s, char *t/*out - type*/)
+{strcpy(wc,s); 
+ EXEC SQL SELECT type INTO :wc1 FROM entities WHERE id = :wc;
+ if (sqlca.sqlcode==0) {sprintf(t,"%s",wc1); return 0;} /*Да*/
+ if (sqlca.sqlcode==100) return 1; /*Нет*/
+ YL_abort("e_exists_q");
+}
+int sort_add(char *s, char *t, char *re) /*s - Id для сорта, t - тип если уже есть, re - РВ (если не x00)*/
+{if (e_exists_q(s,t)==0) return 1;/*не порядок - сущее уже есть!*/
+ EXEC SQL SELECT fen INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("sort_add-1");
+ EXEC SQL update system set fen=fen+1; if (sqlca.sqlcode!=0) YL_abort("sort_add-2");
+ strcpy(wc1,s); 
+ if (*re!=0) {/*РВ есть*/strcpy(wc,re); 
+ EXEC SQL insert into entities (id,type,ein,expr) values (:wc1,'sort',:wi,:wc); if (sqlca.sqlcode!=0) YL_abort("sort_add-3");}
+ else {EXEC SQL insert into entities (id,type,ein) values (:wc1,'sort',:wi); if (sqlca.sqlcode!=0) YL_abort("sort_add-4");};
+ commit(); return 0; /*ОК*/
+}
+int const_add(char *c, char *s, char *t) /*c - Id константы, s - Id сорта константы, t - тип если уже есть*/
+{char st[22]; /*тип назначаемого как сорт*/
+ if (e_exists_q(c,t)==0) return 1;/*не порядок - сущее уже есть!*/
+ if (e_exists_q(s,st)!=0) return 2;/*не порядок - сущего для сорта нет!*/
+ if (strcmp(st,"sort")!=0) return 3;/*не порядок - сущее для сорта есть, но не сорт!*/
+ EXEC SQL SELECT fen INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("const_add-1");
+ EXEC SQL update system set fen=fen+1; if (sqlca.sqlcode!=0) YL_abort("const_add-2");
+ strcpy(wc,c); strcpy(wc1,s); 
+ EXEC SQL insert into entities (id,type,ein,ref_r) values (:wc,'const',:wi,:wc1);
+ if (sqlca.sqlcode==0) {commit(); return 0;}; /*ОК*/
+ YL_abort("const_add-3");
+}
+char* const_add_d(char *defid, char *cid, char *term) /*defid - Id определения, cid - Id константы, term - tid терма определения.*/
+{char t[22]; /*тип проверяемого*/
+ static char msg[256]="";
+ /*WFC: def_id не должен использоваться для сущего!*/
+ if (e_exists_q(defid,t)==0) {sprintf(msg,"Id %s is already used as %s!",defid,t); return &msg[0];}; /*не порядок - сущее уже есть!*/
+ /*WFC: def_id должен быть уникален на всех сущих!*/
+ strcpy(wc,defid);
+ EXEC SQL SELECT count(*) INTO :wi FROM entities WHERE def_id = :wc; if (sqlca.sqlcode!=0) YL_abort("const_add_d-SC");
+ if (wi!=0) {sprintf(msg,"Id %s is already used as def id!",defid); return &msg[0];}; 
+ /*А есть ли константа?*/
+ if (e_exists_q(cid,t)!=0) {sprintf(msg,"Id %s does not exist!",cid); return &msg[0];}; /*не порядок - сущего нет!*/
+ if (strcmp(t,"const")!=0) {sprintf(msg,"Id %s must be a constant!",cid); return &msg[0];};/*не порядок - сущее есть, но не константа!*/
+ /*проверяем что определения ещё нет!*/
+ strcpy(wc,cid); strcpy(wc1,"");
+ EXEC SQL SELECT def_id INTO :wc1 FROM entities WHERE id = :wc; if (sqlca.sqlcode!=0) YL_abort("const_add_d-SD");
+ if (wc1[0]!=0) {sprintf(msg,"Constant %s already has definition %s!",cid,wc1); return &msg[0];};/*не порядок - определение уже есть!*/
+ /*правильно ф-но устроен*/
+ 
+ /*все листовые аргументы - константы*/
+ 
+ /*заносим*/
+ strcpy(wc,defid); strcpy(wc1,cid); strcpy(wc2,term); 
+ EXEC SQL update entities set def_id=:wc, expr=:wc2 where id=:wc1; if (sqlca.sqlcode!=0) YL_abort("const_add_d-UE");
+ commit(); strcpy(msg,""); return &msg[0];
+}
+int sigf_add(char *arg, char *res, char **sig)/*arg - сиг аргумента, res - сиг рез-та, sig - созданный сиг*/
+{/*проверяем наличие сигов аргу- и резу-. получаем свободный номер сига. вставляем запись. возвращаем сиг- и RC.*/
+char t[22]; /*тип проверяемого сига*/
+ if (e_exists_q(arg,t)!=0) return 1;/*не порядок - сиг арг нет!*/
+ /*+добываем sers*/
+ if (e_exists_q(res,t)!=0) return 2;/*не порядок - сиг рез нет!*/
+ /*+добываем sers*/
+ EXEC SQL SELECT fsn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("sigf_add-1");
+ EXEC SQL update system set fsn=fsn+1; if (sqlca.sqlcode!=0) YL_abort("sigf_add-2");
+ /*в wi номер создаваемого сига*/
+ strcpy(wc,arg); strcpy(wc1,res);
+ sprintf(wc2,":%010i",wi); /*формируем сиг ид*/
+ /*сохранить сиг в куче!!!*/
+ *sig=to_buff(wc2);/* printf("\n!!!sigf_add!DEBUG sig='%s'.\n",*sig);*/
+ /*формируем sers в wc3*/
+ strcpy(wc3,SIGa(arg)); strcat(wc3,":"); strcat(wc3,SIGe(res));
+ EXEC SQL insert into entities (id,type,ref_arg,ref_r,sers) values (:wc2,'sigf',:wc,:wc1,:wc3);
+ if (sqlca.sqlcode==0){commit(); return 0;}; /*ОК*/
+ YL_abort("sigf_add-3");
+}
+int sigc_add(char *m1, char *m2, char **sig)/*m1 - первый член, m2 - второй член, sig - созданный сиг*/
+{/*проверяем наличие сигов m1- и m2-. получаем свободный номер сига. вставляем запись сигц и две ссылающиеся на неё записи членов.
+ возвращаем сиг- и RC.*/
+ char t[22]; /*тип проверяемого сига*/ 
+ if (e_exists_q(m1,t)!=0) return 1;/*не порядок - сига нет!*/
+ if (e_exists_q(m2,t)!=0) return 2;/*не порядок - сига нет!*/
+ EXEC SQL SELECT fsn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("sigc_add-1");
+ EXEC SQL update system set fsn=fsn+1; if (sqlca.sqlcode!=0) YL_abort("sigc_add-2");
+ /*в wi номер создаваемого сига*/
+ strcpy(wc,m1); strcpy(wc1,m2);
+ sprintf(wc2,"#%010i",wi); /*формируем сиг ид*/
+ /*сохранить сиг в куче!!!*/
+ *sig=to_buff(wc2);/* printf("\n!!!sigc_add!DEBUG sig='%s'.\n",*sig);*/
+ /*формируем sers в wc3*/
+ strcpy(wc3,SIGe(m1)); strcat(wc3," "); strcat(wc3,SIGe(m2));
+ EXEC SQL insert into entities (id,type,sers) values (:wc2,'sigc',:wc3); if (sqlca.sqlcode!=0)YL_abort("sigc_add-3");
+ EXEC SQL insert into arg_seq (ref_in,seq_n,ref_si) values (:wc2,1,:wc); if (sqlca.sqlcode!=0)YL_abort("sigc_add-4");
+ EXEC SQL insert into arg_seq (ref_in,seq_n,ref_si) values (:wc2,2,:wc1); if (sqlca.sqlcode!=0)YL_abort("sigc_add-5");
+ return 0;
+}
+int sigc_add2(char *ms, char *lm)/*ms - главный сиг, lm - добавляемый в конец сиг*/
+{/*проверяем наличие сигов. получаем номер последнего члена. вставляем запись члена.
+ возвращаем RC.*/
+ char t[22]; /*тип проверяемого сига*/ 
+ if (e_exists_q(ms,t)!=0) return 1;/*не порядок - сига нет!*/
+ if (e_exists_q(lm,t)!=0) return 2;/*не порядок - сига нет!*/
+ strcpy(wc,ms); strcpy(wc1,lm);
+ EXEC SQL SELECT max(seq_n)+1 INTO :wi FROM arg_seq WHERE ref_in = :wc; if (sqlca.sqlcode!=0) YL_abort("sigc_add2-1");
+ /*в wi номер добавляемого члена*/
+ EXEC SQL insert into arg_seq (ref_in,seq_n,ref_si) values (:wc,:wi,:wc1); if (sqlca.sqlcode!=0)YL_abort("sigc_add-4");
+ /*обновляем sers в главном сиге*/
+ EXEC SQL SELECT sers INTO :wc3 FROM entities WHERE id = :wc; if (sqlca.sqlcode!=0) YL_abort("sigc_add2-2");
+ strcat(wc3," "); strcat(wc3,SIGe(lm));
+ EXEC SQL update entities set sers=:wc3 WHERE id = :wc; if (sqlca.sqlcode!=0) YL_abort("sigc_add2-3");
+ return 0;
+}
+int sort_seq_q(char* sig)/*Сиг - цепь не РВ-сортов?*/
+{/*критерий: членов у которых начало ":" или "#" не должно быть!*/
+ strcpy(wc,sig);
+ EXEC SQL SELECT count(*) INTO :wi FROM arg_seq WHERE ref_in=:wc and (substr(ref_si,1,1)=':' or substr(ref_si,1,1)='#');
+																		if (sqlca.sqlcode!=0) YL_abort("sort_seq_q-1");
+ if (wi!=0) return 0;/*нет, т.к. есть не простые аргументы*/
+ EXEC SQL SELECT count(*) INTO :wi FROM arg_seq a_s JOIN entities e ON a_s.ref_si=e.id WHERE a_s.ref_in=:wc and e.expr is not Null;
+																		if (sqlca.sqlcode!=0) YL_abort("sort_seq_q-2");
+ if (wi!=0) return 0;/*нет, т.к. есть РВ-аргументы*/
+ return 1;/*да*/
+ }
+int crt_ft(char* name) /*создаёт в БД таблицу для первичной ф-и*/
+/*!!!То что ф-и первичная не проверяется!*/
+{char t[22]; /*тип проверяемого сущего*/
+ if (e_exists_q(name ,t)!=0) return 1;/*не порядок - нет такой ф-и!*/
+ if (strcmp(t,"func")!=0) return 2;/*не порядок - это не ф-я!*/
+ /*сносим предыдущую!*/
+ sprintf(wc,"drop table IF EXISTS \"%s_\";",name);
+ EXEC SQL EXECUTE IMMEDIATE :wc; if (sqlca.sqlcode!=0) YL_abort("crt_ft-4");
+ /*wc1 - сиг аргумента
+   wc  - формируемый SQL
+   wc2 - имя ф-и
+   wi  - к-во членов цепи*/
+  strcpy(wc2,name);
+ EXEC SQL SELECT ref_arg INTO :wc1 FROM entities WHERE id=:wc2; if (sqlca.sqlcode!=0) YL_abort("crt_ft-1");
+ /*формируем SQL в wc*/
+ if (strncmp(wc1,"#",1)==0) {/*обрабатываем цепь*/
+ /*получить к-во членов*/
+ EXEC SQL SELECT count(*) INTO :wi FROM arg_seq WHERE ref_in=:wc1; if (sqlca.sqlcode!=0) YL_abort("crt_ft-2");
+ sprintf(wc,"create table \"%s_\"(",name);
+ int cn; /*счётчик*/ char bf[255]; /*буфер*/
+ for (cn=1;cn<wi+1;cn++) {sprintf(bf,"arg%i  character varying(21) NOT NULL,",cn); strcat(wc,bf);};
+ strcat(wc," res character varying(256) NOT NULL,");
+ sprintf(bf,"CONSTRAINT \"%s_PK\" PRIMARY KEY (",name); strcat(wc,bf);
+ for (cn=1;cn<wi;cn++) {sprintf(bf,"arg%i,",cn); strcat(wc,bf);};
+ sprintf(bf,"arg%i",wi); strcat(wc,bf); strcat(wc,"));");
+ }
+ else {/*обрабатываем унарик*/
+ sprintf(wc,"create table \"%s_\"(arg1 character varying(21) NOT NULL, res character varying(256) NOT NULL, CONSTRAINT \"%s_PK\" PRIMARY KEY (arg1));",name,name);
+ };
+ /*выполняем SQL*/
+ EXEC SQL EXECUTE IMMEDIATE :wc; if (sqlca.sqlcode!=0) YL_abort("crt_ft-3");
+ return 0; 
+}
+int f_add(char *id, char *arg, char *res, int prime, char** msg)/*id - создаваемой ф-и, arg - сиг аргумента, res - сиг рез-та,
+ prime - 0 - нет, 1 - да; msg - для сообщений*/
+{/*проверяем что id свободен. проверяем наличие сигов аргу- и резу-. вставляем запись. возвращаем RC.*/
+ char t[22]; /*тип проверяемого сущего*/
+ static char err_msg_1[]="Id  is already used!";
+ static char err_msg_2[]="No sig arg!";
+ static char err_msg_3[]="No sig res!"; 
+ static char err_msg_4[]="sig arg is not for prime!";
+ static char err_msg_5[]="sig res is not for prime!";
+ static char err_msg_6[]="Can't create table!";
+ if (e_exists_q(id ,t)==0) {*msg=&err_msg_1[0]; return 1;};/*не порядок - id занят!*/
+ if (e_exists_q(arg,t)!=0) {*msg=&err_msg_2[0]; return 2;};/*не порядок - сиг арг нет!*/
+ if ((prime==1)&&(strcmp(t,"sort")==0)) goto res1;
+ if ((prime==1)&&((sort_seq_q(arg)!=1)||(strncmp(arg,":",1)==0))) {*msg=&err_msg_4[0]; return 4;}; /*сиг аргумента не подходит для первичного*/
+ res1:
+ if (e_exists_q(res,t)!=0) {*msg=&err_msg_3[0]; return 3;};/*не порядок - сиг рез нет!*/
+ if ((prime==1)&&(strcmp(t,"sort")!=0)) {*msg=&err_msg_5[0]; return 5;};/*сиг результата не подходит для первичного*/
+ EXEC SQL SELECT fen INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("f_add-1");
+ EXEC SQL update system set fen=fen+1; if (sqlca.sqlcode!=0) YL_abort("f_add-2");
+ /*в wi порядковый номер создаваемого сущего*/
+ strcpy(wc2,id); strcpy(wc,arg); strcpy(wc1,res); wi1=prime;
+ /*формируем sers в wc3*/
+ strcpy(wc3,SIGa(arg)); strcat(wc3,":"); strcat(wc3,SIGe(res));
+ EXEC SQL insert into entities (id,type,ref_arg,ref_r,ein,prime,sers) values (:wc2,'func',:wc,:wc1,:wi,:wi1,:wc3); if (sqlca.sqlcode!=0) YL_abort("f_add-3");
+ commit(); 
+ if (prime==1) {if (crt_ft(id)!=0) {*msg=&err_msg_6[0]; return 6;};};/*не прошло создание таблицы*/
+ return 0; /*ОК*/
+}
+int a_i2f(char* fid, char* str, char** msg)/*добавляет инфикс str к функции fid. Возвращает rc и msg.*/
+{static char err_msg_1[]="Infix can't be Null!";
+ static char err_msg_2[]="Infix is already used!";
+ static char err_msg_3[]="There is no such function!";
+ if (*str==0) {*msg=&err_msg_1[0]; return 1;};
+ /*проверяем что инфикс не занят*/
+ strcpy(wc1,str);
+ EXEC SQL SELECT count(*) INTO :wi FROM infixes WHERE v = :wc1; if (sqlca.sqlcode!=0) YL_abort("a_i2f-1");
+ if (wi!=0) {*msg=&err_msg_2[0]; return 2;};
+ /*проверяем что ф-я есть*/
+ strcpy(wc2,fid);
+ EXEC SQL SELECT count(*) INTO :wi FROM entities WHERE id = :wc2 and type='func'; if (sqlca.sqlcode!=0) YL_abort("a_i2f-2");
+ if (wi==0) {*msg=&err_msg_3[0]; return 3;};
+ /*добавляем инфикс*/ /*printf("\nDEBUG. wc1=(%s), wc2=(%s).\n",wc1,wc2);*/
+ EXEC SQL insert into infixes (v,ref_f) values (:wc1,:wc2); if (sqlca.sqlcode!=0) YL_abort("a_i2f-3");
+ commit(); 
+ return 0; /*ОК*/
+}
+int a_p_f(char* f, char* pl, char* val, int vt, char* err_e, char** err_msg) 
+/*f - id ф-и, pl - список параметров, val - значение ф-и, vt - вид значения (0 - УДАЛИТЬ, 1 - конст, 2 - число, 3 - строка).
+  err_e - сущее на котором произошла ошибка, т.е. ф-я, аргумент, значение ф-и.*/
+{char ref_arg[22]; char ref_r[22]; char* const_buf; /*нач позиция текущей константы*/
+ char pl_buf[257]=""; /*буфер обрамления значений аргументов ''. заполняется параллельно с проверками*/
+ char where_buf[257]=""; /*буфер where-';' внутренности для update/delete. заполняется параллельно с pl_buf*/
+ int i=0;/*счётчик номера текущего аргумента, когда их несколько. в конце содержит к-во аргументов*/
+ static char err_msg_1[]="There is no such prime function!";
+ static char err_msg_2[]="Unary function must have only one argument!";
+ static char err_msg_3[]="There is no such const!"; /*дважды*/
+ static char err_msg_4[]="Decl and fact sort of arg- differ!";
+ static char err_msg_5[]="Decl and fact sort differ OR There is no such form- par-!";
+ static char err_msg_6[]="Decl has more param-s!";
+ static char err_msg_7[]="Call error - vt value is unknown![a_p_f]";
+ static char err_msg_8[]="Decl and fact sort of val- differ!";/*3 раза*/
+ /*проверяем что f - ф-я и первичная.*/
+ strcpy(wc1,f); 
+ EXEC SQL SELECT ref_arg,ref_r INTO :wc,:wc2 FROM entities WHERE id = :wc1 and type='func' and prime=1;
+ if (sqlca.sqlcode==100) {*err_msg=&err_msg_1[0]; strcpy(err_e,wc1); return 1;}; /*Нет такой первичной ф-и*/
+ if (sqlca.sqlcode!=0) YL_abort("a_p_f-1");
+ strcpy(ref_arg,wc); strcpy(ref_r,wc2); 
+ /*Обстановка. для первичной ф-и имеем: ref_r - ссылка на сорт, ref_arg - ссылка на сорт (унарик) или цепь сортов*/
+ /*проверяем что каждый факт- параметр константа и сорт её равен сорту в декларации*/
+ if (ref_arg[0]!='#') {/*унарик. В ref_arg - сорт аргумента*/
+  if(strchr(pl,',')!=(strchr(pl,0)-1)) {*err_msg=&err_msg_2[0]; strcpy(err_e,f); return 2;}; /*у унарной ф-и должен быть один аргумент*/
+ /*проверяем что в pl константа и нужного сорта.*/
+ strcpy(wc1,pl); *(wc1+strlen(pl)-1) = 0; /*забиваем терминатор*/
+ /*заполняем буфера обрамления и where*/
+ strcat(pl_buf,"'"); strcat(pl_buf,wc1); strcat(pl_buf,"',"); 
+ strcat(where_buf,"arg1 = '"); strcat(where_buf,wc1); strcat(where_buf,"'"); 
+ /*ищем такую константу и берём ref_r*/
+ EXEC SQL SELECT ref_r INTO :wc2 FROM entities WHERE id = :wc1 and type='const';
+ if (sqlca.sqlcode==100) {*err_msg=&err_msg_3[0]; strcpy(err_e,wc1)/*константа*/; return 3;}; /*Нет такой константы*/
+ if (sqlca.sqlcode!=0) YL_abort("a_p_f-2");
+ /*в wc2 сорт факт- параметра*/
+ if (strcmp(ref_arg,wc2)!=0) {*err_msg=&err_msg_4[0]; strcpy(err_e,wc1); return 4;}; /*сорт факт- параметра не совпадает с нужным по декларации.*/
+ }
+ else /*аргументов несколько*//*шагаем по pl. в конце проверяем согласованность*/
+ {const_buf=pl;
+  while (*const_buf!=0){ i=i+1;
+   /*закатываем очередную константу в рабочую переменную и буфер обрамления*/
+   strncpy(wc1,const_buf,strchr(const_buf,',')-const_buf); wc1[strchr(const_buf,',')-const_buf]=0;
+   strcat(pl_buf,"'"); strcat(pl_buf,wc1); strcat(pl_buf,"',"); 
+   char wbf[22]; sprintf(wbf,"arg%i='",i); strcat(where_buf,wbf); strcat(where_buf,wc1); strcat(where_buf,"' and "); 
+   /*ищем такую константу и берём ref_r*/
+   EXEC SQL SELECT ref_r INTO :wc2 FROM entities WHERE id = :wc1 and type='const';
+   if (sqlca.sqlcode==100) {*err_msg=&err_msg_3[0]; strcpy(err_e,wc1); return 3;}; /*Нет такой константы*/
+   if (sqlca.sqlcode!=0) YL_abort("a_p_f-3");
+   /*в wc2 сорт константы*/
+   wi=i; strcpy(wc,ref_arg);
+   /*проверяем сорт аргумента в декларации*/
+   EXEC SQL SELECT 1 INTO :wi1 FROM arg_seq WHERE ref_in = :wc and seq_n=:wi and ref_si=:wc2;
+   if (sqlca.sqlcode!=0) {*err_msg=&err_msg_5[0]; strcpy(err_e,wc1); return 5;}; /*сорт факт- параметра не совпадает с нужным по декларации либо такого форм- параметра нет.*/
+   const_buf=const_buf+strlen(wc1)+1; /*шагаем за точку*/
+  };
+  /*у нас успешно кончился буфер факт- параметров. проверяем что нет i+1 в декларации;-)*/
+   wi=i+1; strcpy(wc,ref_arg);
+   /*проверяем наличие "лишнего" аргумента в декларации*/
+   EXEC SQL SELECT 1 INTO :wi1 FROM arg_seq WHERE ref_in = :wc and seq_n=:wi;
+   if (sqlca.sqlcode==0) {*err_msg=&err_msg_6[0]; strcpy(err_e,""); return 6;}; /*не хватает параметров по декларации.*/
+ };
+ /*обработка значения*/
+ if (vt==0) ; /*nothing to do*/
+ else if (vt==1) {/*проверяем что факт- значение в val - константа и сорт её равен сорту в декларации*/
+  strcpy(wc1,val); 
+  /*ищем такую константу и берём ref_r*/
+  EXEC SQL SELECT ref_r INTO :wc2 FROM entities WHERE id = :wc1 and type='const';
+  if (sqlca.sqlcode==100) {*err_msg=&err_msg_3[0]; strcpy(err_e,wc1); return 3;}; /*Нет такой константы*/
+  if (sqlca.sqlcode!=0) YL_abort("a_p_f-4");
+  /*в wc2 сорт факт- значения ф-и*/
+  if (strcmp(ref_r,wc2)!=0) {*err_msg=&err_msg_8[0]; strcpy(err_e,wc1); return 8;}; /*сорт факт- значения ф-и не совпадает с нужным по декларации.*/
+  }
+ else if ((vt==2)&&(strcmp(ref_r,"R")!=0)) {*err_msg=&err_msg_8[0]; strcpy(err_e,val); return 8;} /*проверяем что сорт значения в декларации - R*/
+ else if ((vt==3)&&(strcmp(ref_r,"S")!=0)) {*err_msg=&err_msg_8[0]; strcpy(err_e,val); return 8;} /*проверяем что сорт значения в декларации - S*/
+ else {*err_msg=&err_msg_7[0]; strcpy(err_e,""); return 7;};/*необрабатываемый вид значения*/
+ if (vt==0) {/*удаляем значение*/
+   sprintf(wc,"delete from \"%s_\" where %s;",f,where_buf);
+  printf("\nDEBUG.a_p_f: DELETE=(%s)\n",wc);
+  EXEC SQL EXECUTE IMMEDIATE :wc; if (sqlca.sqlcode!=0) YL_abort("a_p_f-8");
+  goto rtn;/*OK*/
+ };
+ /*"грузим"*/  /*если i=0, то к-во аргументов - 1, иначе - i*/
+ char buf[257]=""; int arg_n;  if (i==0) arg_n=1; else arg_n=i;
+ for (i=1;i<(arg_n+1);i++) {sprintf(wc,"arg%i,",i);strcat(buf,wc);};
+ char val_buf[257]="'"; strcat(val_buf,val); strcat(val_buf,"'"); 
+ sprintf(wc,"insert into \"%s_\" (%s res) values (%s %s);",f,buf,pl_buf,val_buf);
+ /*printf("\nDEBUG.a_p_f: INSERT=(%s)\n",wc);*/
+ EXEC SQL EXECUTE IMMEDIATE :wc; 
+ if (sqlca.sqlcode==-403) /*дубликат ПК = уже есть. делаем update*/{
+ /*заготовка для where в where_buf, но надо забить концевой " and "*/
+  if (commit()!=0) YL_abort("a_p_f-7");/*без commit транзакция "закрыта"*/
+  sprintf(wc,"update \"%s_\" set res = '%s' where %s;",f,val,where_buf);
+  printf("\nDEBUG.a_p_f: UPDATE=(%s)\n",wc);
+  EXEC SQL EXECUTE IMMEDIATE :wc; if (sqlca.sqlcode!=0) YL_abort("a_p_f-6");
+ }
+ else if (sqlca.sqlcode!=0) YL_abort("a_p_f-5");
+rtn:
+ commit(); return 0;
+}
+char* term_add_id(char* id, char* tid)/*эта ф-я если всё ОК возвращает пустую строку сообщения!
+										id - Id, tid - возвращаемое значение ид созданного элемента*/
+/*в момент обработки, локально, мы не знаем позиции Id в терме!*/						
+{int tn; /*term number*/
+ static char msg[256]="";
+ /*получаем свободный номер в wi*/
+ EXEC SQL SELECT ftn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("term_add_id-1");
+ EXEC SQL update system set ftn=ftn+1; if (sqlca.sqlcode!=0) YL_abort("term_add_id-2");
+ tn=wi;
+ char t[22]; /*тип id*/
+ if (e_exists_q(id,t)==0) {/*сущее уже есть - разбираемся*/ 
+  if (strcmp(t,"const")==0) {sprintf(wc,"ic%012i",tn); strcpy(wc1,id); 
+  /*получаем сорт константы и в v_t, а id в v*/
+   EXEC SQL SELECT ref_r INTO :wc2 FROM entities WHERE id = :wc1; if (sqlca.sqlcode!=0) YL_abort("term_add_id-3");
+   EXEC SQL insert into terms (tid,v_t,v) values (:wc,:wc2,:wc1); if (sqlca.sqlcode!=0) YL_abort("term_add_id-4");
+   commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];}
+  else if (strcmp(t,"func")==0) /*id в v_t*/{sprintf(wc,"if%012i",tn); strcpy(wc1,id);
+   EXEC SQL insert into terms (tid,v_t) values (:wc,:wc1); if (sqlca.sqlcode!=0) YL_abort("term_add_insert");
+   commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];}
+  else /*ошибка - задействовано недопустимое сущее!*/ {sprintf(msg,"%s can't be in term! It's a %s!",id,t); return &msg[0];};
+ }
+ else /*считаем что q-переменная. id в q_v*/ {sprintf(wc,"iv%012i",tn); strcpy(wc1,id); 
+   EXEC SQL insert into terms (tid,q_v) values (:wc,:wc1); if (sqlca.sqlcode!=0) YL_abort("term_add_id-6");
+   commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];};
+}
+char* term_add_li(char* lt, char* li, char* tid)/*эта ф-я если всё ОК возвращает пустую строку в сообщение!
+						lt - тип литерала (БД-шный!!!), li - значение литерала, tid - возвращаемое значение ид созданного элемента*/
+{int tn; /*term number*/
+ static char msg[256]="";
+ /*получаем свободный номер в wi*/
+ EXEC SQL SELECT ftn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("term_add_li-1");
+ EXEC SQL update system set ftn=ftn+1; if (sqlca.sqlcode!=0) YL_abort("term_add_li-2");
+ tn=wi;
+ char t[22]; /*тип типа*/
+ if (e_exists_q(lt,t)==0) {/*тип есть - разбираемся*/ 
+  if (strcmp(t,"sort")==0) {sprintf(wc,"li%012i",tn); strcpy(wc1,li);  strcpy(wc2,lt); 
+   EXEC SQL insert into terms (tid,v,v_t) values (:wc,:wc1,:wc2); if (sqlca.sqlcode!=0) YL_abort("term_add_li-3");
+   commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];}
+  else /*ошибка - задействовано недопустимое сущее!*/ {sprintf(msg,"INTERNAL CFG-error: %s is not a sort! It's a %s!",lt,t); return &msg[0];};
+ }
+ else /*ошибка - сущего нет*/ {sprintf(msg,"INTERNAL CFG-error: %s does not exist in DB!",lt); return &msg[0];};
+}
+void term_crt_tl(char* ftid, char* tid)/*эта ф-я если всё ОК возвращает пустую строку!
+										ftid - tid первого терма, tid - возвращаемое значение ид созданного элемента*/
+{int tn; /*term number*/
+ /*получаем свободный номер в wi*/
+ EXEC SQL SELECT ftn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("term_crt_tl-1");
+ EXEC SQL update system set ftn=ftn+1; if (sqlca.sqlcode!=0) YL_abort("term_crt_tl-2");
+ tn=wi;
+ sprintf(wc,"tl%012i",tn);
+ EXEC SQL insert into terms (tid) values (:wc); if (sqlca.sqlcode!=0) YL_abort("term_crt_tl-3");
+ strcpy(wc1,ftid); 
+ EXEC SQL insert into terms_l (ref_in,seq_n,ref_t) values (:wc,1,:wc1); if (sqlca.sqlcode!=0) YL_abort("term_crt_tl-4");
+ commit(); strcpy(tid,wc);
+}
+void term_push_tl(char* ftid, char* tid)/*эта ф-я если всё ОК возвращает пустую строку!
+										ftid - tid первого терма, tid - куда толкать*/
+{strcpy(wc,tid); 
+ EXEC SQL update terms_l set seq_n=seq_n+1 where ref_in=:wc; if (sqlca.sqlcode!=0) YL_abort("term_push_tl-1");
+ strcpy(wc1,ftid); 
+ EXEC SQL insert into terms_l (ref_in,seq_n,ref_t) values (:wc,1,:wc1); if (sqlca.sqlcode!=0) YL_abort("term_push_tl-2");
+ commit();
+}
+char* term_add_fu(char* infx, char* term, char* tli, char* tid)/*эта ф-я если всё ОК возвращает пустую строку сообщения!
+						infx - значение инфикса или "", term - tid терма функции, tli - tid списка арг-ов, tid - возвращаемое значение для терма*/
+/*добавляет элемент для терма - применения ф-и*/						
+{static char msg[256]=""; char fid[22]="" /*v_t ф-части: id функции, если он в ф-позиции...*/; 
+ /*ссылки на сущие рез-та и аргументов ф-части:*/ char ref_r[22]=""; char ref_arg[22]="";
+ /*допустимые термы в ф-позиции*/
+ if ((strncmp(term,"if",2)==0)||(strncmp(term,"fu",2)==0)) {/*в терме в ф-позиции - ид ф-и или сложный ф-терм*/
+  /*получаем v_t ф-части*/
+  strcpy(wc1,term);
+  EXEC SQL SELECT v_t INTO :wc2 FROM terms WHERE tid = :wc1; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-v_t-1");
+  strcpy(fid,wc2);
+  /*получаем ссылки на сущие результата и аргументов*/
+  EXEC SQL SELECT ref_r,ref_arg INTO :wc3,:wc FROM entities WHERE id = :wc2; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-v_t-2");
+  strcpy(ref_r,wc3); strcpy(ref_arg,wc);
+  /*закатываем ref_r в v_t (см. дальше;-)*/
+  /*локальные проверки. проверка согласования сигнатуры и факт- параметров*/
+  /*Получаем и проверяем количество параметров декларации и вызова*/
+  /*варианты значения ref_arg: ':' - один и функция, '#' - несколько, иначе - один и сорт. Подсчёт tli-цев всегда даст их к-во.*/
+  int dpn, cpn; /*:количество параметров в декларации и точке вызова*/
+  if (ref_arg[0]=='#') /*>1*/{
+   EXEC SQL SELECT count(*) INTO :wi FROM arg_seq WHERE ref_in = :wc; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-count_d");
+   dpn=wi;}
+  else dpn=1;/*не проверяем что 1!*/
+  strcpy(wc3,tli);
+  EXEC SQL SELECT count(*) INTO :wi FROM terms_l WHERE ref_in = :wc3; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-count_c");
+  cpn=wi;
+  if (dpn!=cpn) {sprintf(msg,"Term %s has wrong number of call parameters![term_add_fu]",term); return &msg[0];};
+  /*Проверка согласованности типов форм и факт параметров.*/
+ } else{sprintf(msg,"Term %s can't be in f-position![term_add_fu]",term); return &msg[0];};
+ /*терм в ф-позиции допустим*/
+ int tn; /*term number*/
+ /*получаем свободный номер в wi*/
+ EXEC SQL SELECT ftn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-1");
+ EXEC SQL update system set ftn=ftn+1; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-2");
+ tn=wi;
+ sprintf(wc,"fu%012i",tn); strcpy(wc1,term);  strcpy(wc2,tli); 
+ EXEC SQL insert into terms (tid,ref_f,ref_tl) values (:wc,:wc1,:wc2); if (sqlca.sqlcode!=0) YL_abort("term_add_fu-3");
+ if (*infx!=0) {strcpy(wc1,infx); EXEC SQL update terms set infix=:wc1 where tid=:wc;};
+ /*заполнение v_t - ссылка на сигнатуру значения терма*/
+ /*В ref_r либо сорт либо ссылка на sigf*/
+ strcpy(wc3,ref_r);
+ EXEC SQL update terms set v_t=:wc3 where tid=:wc; if (sqlca.sqlcode!=0) YL_abort("term_add_fu-v_t-5");
+ commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];
+}
+char* term_add_qu(int qn, char* qu, char* term, char* sid, char* vid, char* tid)/*эта ф-я если всё ОК возвращает пустую строку!
+			qn - кодовый номер квантора (1 - сущ, 2 - всеобщ), qu - значение квантора, term - терм формулы, sid - ид сорта, vid - ид переменной,
+			tid - возвращаемое значение ид созданного элемента*/
+{int tn/*term number*/; static char msg[256]="";
+ /*проверка: sid - сорт!!!*/
+ char t[22]; /*тип проверяемого сущего*/
+ if (e_exists_q(sid,t)!=0) {sprintf(msg,"There is no such an entity (%s)!",sid); return &msg[0];}; 
+ if (strcmp(t,"sort")!=0) {sprintf(msg,"Entity %s is not a sort but %s!",sid,t); return &msg[0];}; 
+ /*проверка: vid - переменная, т.е. не задействована!!!*/
+ if (e_exists_q(vid,t)==0) {sprintf(msg,"Id %s is already used as %s!",vid,t); return &msg[0];}; 
+ /*проверка: vid употреблён!!!*/
+ strcpy(wc5,vid); 
+ EXEC SQL SELECT count(*) INTO :wi FROM terms WHERE q_v=:wc5 and substr(tid,1,2)='iv' and ref_r is Null and ref_f is Null; if (sqlca.sqlcode!=0) YL_abort("term_add_qu-0"); 
+ if (wi==0) {sprintf(msg,"Id %s does not used!",vid); return &msg[0];} else printf("\n!!!term_add_qu wi=%i for %s!!!\n",wi,vid); 
+ /*+!!!проверка что тип результата терма - TV*/
+ /*ОК - добавляем в БД.*/
+ /*получаем свободный номер в wi*/
+ EXEC SQL SELECT ftn INTO :wi FROM system WHERE id = 'YL'; if (sqlca.sqlcode!=0) YL_abort("term_add_qu-1");
+ EXEC SQL update system set ftn=ftn+1; if (sqlca.sqlcode!=0) YL_abort("term_add_qu-2");
+ tn=wi;
+ if (qn==1) sprintf(wc,"qe%012i",tn);
+ else if (qn==2) sprintf(wc,"qa%012i",tn);
+ else {sprintf(msg,"term_add_qu (INTERNAL ERROR): Unknown q-number(%i)!",qn); return &msg[0];}; 
+ strcpy(wc1,qu);  strcpy(wc2,"TV"); strcpy(wc3,term);  strcpy(wc4,sid);
+ EXEC SQL insert into terms (tid,infix,v_t,ref_f,ref_tl,q_v) values (:wc,:wc1,:wc2,:wc3,:wc4,:wc5); if (sqlca.sqlcode!=0) YL_abort("term_add_qu-3");
+ /*связывание*/
+ EXEC SQL update terms set ref_f=:wc, v_t=:wc4 WHERE q_v=:wc5 and substr(tid,1,2)='iv' and ref_r is Null and ref_f is Null; if (sqlca.sqlcode!=0) YL_abort("term_add_qu-4");
+ commit(); strcpy(tid,wc); strcpy(msg,""); return &msg[0];
+}
+char* term_chk_inf(char* infx, int n, char* tid)/*IN: infx - инфикс, n - к-во аргументов,OUT: return - msg (0-OK), tid - созданный tid ф-и.*/
+/*после проверок создаётся терм базовой ф-и инфикса*/
+{static char msg[256]="";
+/*ищем по инфиксу первичку и получаем/проверяем её св-ва*/
+ strcpy(wc,infx);
+ EXEC SQL SELECT ref_f INTO :wc1 FROM infixes WHERE v = :wc;
+ if (sqlca.sqlcode==100) {sprintf(msg,"There is no such an infix (%s)!",infx); return &msg[0];}; 
+ if (sqlca.sqlcode!=0) YL_abort("term_chk_inf-1");
+ char fid[22]; strcpy(fid,wc1);  /*PoC:fid - Id*/
+ /*проверяем арность.*/
+ int arn;
+ EXEC SQL SELECT ref_arg INTO :wc2 FROM entities WHERE id = :wc1; if (sqlca.sqlcode!=0) YL_abort("term_chk_inf-2");
+ if (wc2[0]=='#') {/*подсчитываем к-во в цепи*/
+  EXEC SQL SELECT count(*) INTO :wi FROM arg_seq WHERE ref_in = :wc2; if (sqlca.sqlcode!=0) YL_abort("term_chk_inf-3");
+  arn=wi;}
+ else arn=1;
+ if (arn!=n) {sprintf(msg,"Arity of an infix (%s) must be %i!",infx,arn); return &msg[0];}; 
+ /*Всё ОК. создаём в terms запись ф-и (Id-func)...*/
+ term_add_id(fid,tid); strcpy(msg,""); return &msg[0];
+}

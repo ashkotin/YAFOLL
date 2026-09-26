@@ -1,0 +1,73 @@
+ "БД Проба DADA"
+ "сорта с равенством: публикация, образец, место на местности."
+ Declaration publication sort .
+ Declaration EQU_publication publication publication : TV prime fm_strcmp .  Add fix "=" to EQU_publication .
+ Declaration sample sort . 
+ Declaration EQU_sample sample sample : TV prime fm_strcmp . Add fix "=" to EQU_sample .
+ Declaration place sort .
+ Declaration EQU_place place place : TV prime fm_strcmp . Add fix "=" to EQU_place .
+ "АОР отмечены "!" на конце. см. отчёт https://sites.google.com/site/alex0shkotin/formalnaa-geologia/bd-proba-ontologia"
+ "атрибуты статьи: название!, журнальная отсылка!, год публикации/издания!, номер первой страницы, номер последней страницы."
+ Declaration title publication : String prime .
+ Declaration journal_reference publication : String prime .
+ Declaration year publication : Number prime .
+ Declaration first_page publication : Number prime .
+ Declaration last_page publication : Number prime .
+ "атрибуты образца: authorial_number: авторский/лабораторный номер!. reference: доп.ненормализованная инфа: [местность] [место]."
+ Declaration authorial_number sample : String prime .
+ Declaration reference sample : String prime .
+ "связи образца: в какой статье описан, в каком месте/местности собран."
+ Declaration described sample : publication prime .
+ Declaration gathering_place sample : place prime .
+ "атрибуты места: географические координаты."
+ Declaration latitude place : Number prime .
+ Declaration longitude place : Number prime .
+ "связи места: часть другого места."
+ Declaration part_of place place : TV prime .
+ 
+ "оператор весового процентного содержания вещества"
+ Declaration WPC ( sample : TV ) : ( sample : Number ) prime .
+ "аксиомы"
+ "GPfull: Каждый образец имеет место сбора."
+ Declaration GPfull :TV.  Definition def_GPfull GPfull ():( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) ) .
+ "Dfull: Каждый образец описан."
+ Declaration Dfull :TV. Definition def_Dfull Dfull ():( ∀ x : sample ( ∃ y : publication ( described ( x ) = y ) ) ) .
+ 
+  "географические названия"
+ Declaration Iceland :place prime.
+ Declaration Atlantic_Ocean :place prime.
+ Declaration Ascension :place prime.
+ Declaration Second_Aleutian_Arc :place prime.
+ Declaration Aleutian_Arc :place prime.
+ "горные породы"
+ Declaration rhyolite sample : TV prime .  
+ "аксиома full для rhyolite!!! после перехода к определениям это будет теорема!"
+ Declaration full_rhyolite  :TV. Definition def_full_rhyolite full_rhyolite():( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) ) .
+ Declaration basalt_and_olivine sample : TV prime .
+ Declaration trachydolerite sample : TV prime .
+ Declaration trachyte sample : TV prime .
+ Declaration obsidian sample : TV prime .
+ Declaration basalt sample : TV prime .
+ Declaration trachyandesite sample : TV prime .
+ Declaration andesite sample : TV prime .
+ "химические вещества, элементы, изотопы..."
+ Declaration SIO2 sample : TV prime .
+ Declaration AL2O3 sample : TV prime .
+ Declaration FE2O3 sample : TV prime .
+ Declaration MGO sample : TV prime .
+ Declaration CAO sample : TV prime .
+ Declaration NA2O sample : TV prime .
+ Declaration K2O sample : TV prime .
+ Declaration H2Op sample : TV prime .
+ Declaration TIO2 sample : TV prime .
+ Declaration FEO sample : TV prime .
+ Declaration MNO sample : TV prime .
+ Declaration P2O5 sample : TV prime .
+ Declaration CO2 sample : TV prime .
+ Declaration H2Om sample : TV prime .
+ Declaration rock ( sample : TV ) : TV prime .
+ Declaration harzburgite sample : TV .
+ "надо помнить что disjoint нужен;-)"
+ Declaration disjoint ( sample : TV ) ( sample : TV ) : TV .
+ Definition DEF_disjoint disjoint ( z y ) : ( ∀ x : sample ( ¬ ( z ( x ) ∧ y ( x ) ) ) ) .
+

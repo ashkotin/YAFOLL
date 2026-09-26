@@ -1,0 +1,66 @@
+﻿!0!
+
+--Сорта стрингологии и чисел
+
+Declaration S sort "[DQ][^DQ]*[DQ]". --  sort of strings without double quote (DQ). +?DQ - лишние?
+Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+
+--True values.
+
+Declaration TV sort. 
+Declaration True:TV constant. Declaration False:TV constant.
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT. Add infix "not" to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND. Add infix "and" to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR. Add infix "or" to OR.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition IMPL_d IMPLIES(x y): ((¬x)∨y).
+
+Definition BAD_1 IMPLIES(x y): ((((¬OR)∨y)∨True)+("two"*1)). -- при разборе проходит!
+Definition BAD_2 IMPLIES(x y): ((¬TV)∨y).
+
+Definition TEST_3 IMPLIES(x y): OR1 (OR2 OR3)(OR4 OR5 OR6).
+
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV. Add infix "eqv" to EQUIV. 
+Definition EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+
+--Равенство
+
+Declaration EQU S S:TV. Add infix "=" to EQU. -- Z:сортность аргументов не точна!
+--!Аксиомы равенства!
+Axiom EQU_M_6 (∀x:S (x=x)). -- Z:сорт не точен!
+Axiom EQU_M_7 (∀x:S(∀y:S(∀A:Formula((x=y)→(A(x x)→A(x y)))))). -- Z:СХЕМА АКСИОМ и условия замены довольно хитрые см. М.86!
+Declaration NEQ S S:TV. Add infix "≠" to NEQ. Add infix "neq" to NEQ. -- Z:сортность аргументов не точна!
+Definition  NEQ_d NEQ(x y): (¬(x=y)).
+
+
+--Объявления функций арифметики десятичных рациональных чисел
+
+Declaration LE R R:TV. Add infix "<" to LE. --S?
+Declaration GR R R:TV. Add infix ">" to GR. --S?
+Declaration LEQ R R:TV. Add infix "≤" to LEQ. --S? +Определение!
+Declaration GEQ R R:TV. Add infix "≥" to GEQ. --S? +Определение!
+Declaration PLUS R R:R. Add infix "+" to PLUS. --S?
+Declaration MINUS R R:R. Add infix "-" to MINUS. --S?
+Declaration MULTIPLY R R:R. Add infix "*" to MULTIPLY.
+Declaration DEVIDE R R:R. Add infix "/" to DEVIDE.
+
+--+Аксиомы поля!!!Их ведь никто не отменял;-)
+
+
+--Задание пропозициональных связок.
+
+!NOT(True):False! !NOT(False):True! 
+
+!AND(True True):True!
+!AND(False True):False!
+!AND(True False):False!
+!AND(False False):False!
+
+!OR(True True):True!
+!OR(False True):True!
+!OR(True False):True!
+!OR(False False):False!

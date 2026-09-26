@@ -1,0 +1,64 @@
+
+
+<Yp1 BEGIN st_id=0000000090>
+<st_store Tree=90 added=1>
+					 ? ( ∀ e1 : A ( ∀ e2 : A ( ( tov ( e1 ) = from ( e2 ) ) → ( ∃ e3 : A ( ( from ( e3 ) = from ( e1 ) ) ∧ ( tov ( e3 ) = tov ( e2 ) ) ) ) ) ) ) ?
+<infx_subst RESULT			 ? ( ∀ e1 : A ( ∀ e2 : A IMPLIES ( EQU_V ( tov ( e1 ) from ( e2 ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!defc_subst!DEBUG! begin tid=91
+!defc_subst!WARNING! Id e1 does not exist in entities!
+!defc_subst!WARNING! Id e2 does not exist in entities!
+!defc_subst!WARNING! Id e3 does not exist in entities!
+!defc_subst!WARNING! Id e1 does not exist in entities!
+!defc_subst!WARNING! Id e3 does not exist in entities!
+!defc_subst!WARNING! Id e2 does not exist in entities!
+(defc_subst: RESULT			 ? ( ∀ e1 : A ( ∀ e2 : A IMPLIES ( EQU_V ( tov ( e1 ) from ( e2 ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=91
+!deff_subst!DEBUG! loop! function with def found: cnid=107 Id=IMPLIES def_id=IMPL_d.
+(deff_subst: RESULT			 ? ( ∀ e1 : A ( ∀ e2 : A OR ( NOT ( EQU_V ( tov ( e1 ) from ( e2 ) ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!deff_subst!DEBUG! end RC=1
+!q_term(DEBUG)st_trans.rc=2.
+!trm_Val!DEBUG! IN rid=trma (tid=91,nid=83)
+!trm_Val.trma!DEBUG!first ce cce=68.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trma (tid=91,nid=76)
+!trm_Val.trma!DEBUG!first ce cce=68.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=91,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=522)
+!trm_Val!DEBUG!after sput_v v=<OR>
+!trm_Val!DEBUG! IN rid=trmf (tid=91,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=519)
+!trm_Val!DEBUG!after sput_v v=<NOT>
+!trm_Val!DEBUG! IN rid=trmf (tid=91,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=618)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=91,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=525)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=527)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=91,nid=530)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=91,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=533)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=91,nid=535)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=91,nid=538)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=91,nid=541)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< NOT ( False )> (tid=91,nid=156)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trme (tid=91,nid=665)
+!trm_Val.trme!DEBUG!first ce cce=68.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<> V=<a1>.<ABORT term_subst_qv-upd: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: 100
+sqlerrm.sqlerrml: 26
+sqlerrm.sqlerrmc: no data found on line 1753
+sqlerrd: 0 0 0 0 0 0
+sqlwarn: 0 0 0 0 0 0 0 0
+sqlstate: 02000
+===============

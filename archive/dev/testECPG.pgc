@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+void print_sqlca(){
+ /*далее копия из https://www.postgresql.org/docs/11/ecpg-errors.html  */
+    fprintf(stderr, "==== sqlca ====\n");
+    fprintf(stderr, "sqlcode: %ld\n", sqlca.sqlcode);
+    fprintf(stderr, "sqlerrm.sqlerrml: %d\n", sqlca.sqlerrm.sqlerrml);
+    fprintf(stderr, "sqlerrm.sqlerrmc: %s\n", sqlca.sqlerrm.sqlerrmc);
+    fprintf(stderr, "sqlerrd: %ld %ld %ld %ld %ld %ld\n", sqlca.sqlerrd[0],sqlca.sqlerrd[1],sqlca.sqlerrd[2],
+                                                          sqlca.sqlerrd[3],sqlca.sqlerrd[4],sqlca.sqlerrd[5]);
+    fprintf(stderr, "sqlwarn: %d %d %d %d %d %d %d %d\n", sqlca.sqlwarn[0], sqlca.sqlwarn[1], sqlca.sqlwarn[2],
+                                                          sqlca.sqlwarn[3], sqlca.sqlwarn[4], sqlca.sqlwarn[5],
+                                                          sqlca.sqlwarn[6], sqlca.sqlwarn[7]);
+    fprintf(stderr, "sqlstate: %5s\n", sqlca.sqlstate);
+    fprintf(stderr, "===============\n");
+}
+int main(){
+ int rc;
+ struct tm *newtime; time_t ltime;
+ EXEC SQL BEGIN DECLARE SECTION;
+   int ni,l;
+ EXEC SQL END DECLARE SECTION;
+ /*ECPGdebug(1,stderr);*/
+ EXEC SQL CONNECT TO YL; print_sqlca();
+ printf ("\nConnected. sqlcode:%ld.",sqlca.sqlcode);ltime=time(NULL);newtime=localtime(&ltime);printf("\nTime point: %s",asctime(newtime));
+ fprintf(stderr,"\nbegin:delete from dt");
+ EXEC SQL delete from dt;  print_sqlca();
+ fprintf(stderr,"\nend:delete from dt");
+ EXEC SQL DISCONNECT;  print_sqlca();
+ printf ("\nDisconnected. sqlcode:%ld.",sqlca.sqlcode);ltime=time(NULL);newtime=localtime(&ltime);printf("Time point: %s",asctime(newtime));
+}

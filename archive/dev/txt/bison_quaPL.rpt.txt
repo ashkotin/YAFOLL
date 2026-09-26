@@ -1,0 +1,2020 @@
+Terminals unused in grammar
+
+   NOT
+   AND
+   OR
+   IMPLIES
+   EQUIV
+   Neq
+   Leq
+   Geq
+   WS
+   eq
+   Plus
+   Minus
+   Multiply
+   function
+
+
+Грамматика
+
+    0 $accept: Statements $end
+
+    1 Statements: Statement
+    2           | Statements Statement
+
+    3 Statement: String
+    4          | Add infix String to Id Dot
+    5          | Declaration
+    6          | Definition
+    7          | Axiom Id term Dot
+    8          | Theorem Id term Dot
+    9          | Proof Id Id derived_formula Dot
+   10          | e_m Id Id e_m
+   11          | e_m Id e_m
+   12          | e_m term COLON e_m
+   13          | e_m term COLON term e_m
+   14          | q_m term q_m
+   15          | e_m Number e_m
+   16          | error Dot
+
+   17 Declaration: DECLARATION Id sort Dot
+   18            | DECLARATION Id sort String Dot
+   19            | DECLARATION Id COLON Id constant Dot
+   20            | DECLARATION Id sig_f PRIME Dot
+   21            | DECLARATION Id sig_f PRIME Id Dot
+   22            | DECLARATION Id sig_f Dot
+
+   23 Definition: DEFINITION Id Id constant term Dot
+   24           | DEFINITION Id Id Id_list_bch COLON term Dot
+
+   25 derived_formula: LA1 l_p term COMMA term r_p
+   26                | LA2 l_p term COMMA term COMMA term r_p
+   27                | LA3 l_p term COMMA term r_p
+   28                | LA4 l_p Id COMMA term COMMA term r_p
+   29                | LA5 l_p Id COMMA term COMMA term r_p
+   30                | MP l_p derived_formula COMMA derived_formula r_p
+   31                | Gen l_p Id COMMA derived_formula r_p
+   32                | Id
+
+   33 term: Id
+   34     | Number
+   35     | String
+   36     | l_p INFIX term r_p
+   37     | l_p term INFIX term r_p
+   38     | term l_p TermList r_p
+   39     | l_p EXISTS QuaPL term r_p
+   40     | l_p FOR_ANY QuaPL term r_p
+
+   41 QuaPL: Id COLON Id
+   42      | QuaPL Id COLON Id
+
+   43 TermList: term
+   44         | term TermList
+
+   45 Id_list: Id
+   46        | Id_list Id
+
+   47 Id_list_b: l_p Id_list r_p
+
+   48 Id_list_bch: Id_list_b
+   49            | Id_list_bch Id_list_b
+
+   50 sig_f: sig_arg COLON sig_e
+
+   51 sig_e: Id
+   52      | l_p sig_f r_p
+
+   53 sig_arg: sig_e
+   54        | sig_arg sig_e
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+error (256) 16
+INFIX (258) 36 37
+EXISTS (259) 39
+FOR_ANY (260) 40
+NOT (261)
+AND (262)
+OR (263)
+IMPLIES (264)
+EQUIV (265)
+Neq (266)
+Leq (267)
+Geq (268)
+WS (269)
+eq (270)
+Dot (271) 4 7 8 9 16 17 18 19 20 21 22 23 24
+COMMA (272) 25 26 27 28 29 30 31
+COLON (273) 12 13 19 24 41 42 50
+l_p (274) 25 26 27 28 29 30 31 36 37 38 39 40 47 52
+r_p (275) 25 26 27 28 29 30 31 36 37 38 39 40 47 52
+e_m (276) 10 11 12 13 15
+q_m (277) 14
+Plus (278)
+Minus (279)
+Multiply (280)
+DECLARATION (281) 17 18 19 20 21 22
+PRIME (282) 20 21
+infix (283) 4
+Add (284) 4
+to (285) 4
+sort (286) 17 18
+constant (287) 19 23
+function (288)
+Axiom (289) 7
+DEFINITION (290) 23 24
+LA1 (291) 25
+LA2 (292) 26
+LA3 (293) 27
+LA4 (294) 28
+LA5 (295) 29
+MP (296) 30
+Gen (297) 31
+Proof (298) 9
+Theorem (299) 8
+Id (300) 4 7 8 9 10 11 17 18 19 20 21 22 23 24 28 29 31 32 33 41 42
+    45 46 51
+Number (301) 15 34
+String (302) 3 4 18 35
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (48)
+    налево: 0
+Statements (49)
+    налево: 1 2, направо: 0 2
+Statement (50)
+    налево: 3 4 5 6 7 8 9 10 11 12 13 14 15 16, направо: 1 2
+Declaration (51)
+    налево: 17 18 19 20 21 22, направо: 5
+Definition (52)
+    налево: 23 24, направо: 6
+derived_formula (53)
+    налево: 25 26 27 28 29 30 31 32, направо: 9 30 31
+term (54)
+    налево: 33 34 35 36 37 38 39 40, направо: 7 8 12 13 14 23 24 25
+    26 27 28 29 36 37 38 39 40 43 44
+QuaPL (55)
+    налево: 41 42, направо: 39 40 42
+TermList (56)
+    налево: 43 44, направо: 38 44
+Id_list (57)
+    налево: 45 46, направо: 46 47
+Id_list_b (58)
+    налево: 47, направо: 48 49
+Id_list_bch (59)
+    налево: 48 49, направо: 24 49
+sig_f (60)
+    налево: 50, направо: 20 21 22 52
+sig_e (61)
+    налево: 51 52, направо: 50 53 54
+sig_arg (62)
+    налево: 53 54, направо: 50 54
+
+
+состояние 0
+
+    0 $accept: . Statements $end
+    1 Statements: . Statement
+    2           | . Statements Statement
+    3 Statement: . String
+    4          | . Add infix String to Id Dot
+    5          | . Declaration
+    6          | . Definition
+    7          | . Axiom Id term Dot
+    8          | . Theorem Id term Dot
+    9          | . Proof Id Id derived_formula Dot
+   10          | . e_m Id Id e_m
+   11          | . e_m Id e_m
+   12          | . e_m term COLON e_m
+   13          | . e_m term COLON term e_m
+   14          | . q_m term q_m
+   15          | . e_m Number e_m
+   16          | . error Dot
+   17 Declaration: . DECLARATION Id sort Dot
+   18            | . DECLARATION Id sort String Dot
+   19            | . DECLARATION Id COLON Id constant Dot
+   20            | . DECLARATION Id sig_f PRIME Dot
+   21            | . DECLARATION Id sig_f PRIME Id Dot
+   22            | . DECLARATION Id sig_f Dot
+   23 Definition: . DEFINITION Id Id constant term Dot
+   24           | . DEFINITION Id Id Id_list_bch COLON term Dot
+
+    error        сдвиг, и переход в состояние 1
+    e_m          сдвиг, и переход в состояние 2
+    q_m          сдвиг, и переход в состояние 3
+    DECLARATION  сдвиг, и переход в состояние 4
+    Add          сдвиг, и переход в состояние 5
+    Axiom        сдвиг, и переход в состояние 6
+    DEFINITION   сдвиг, и переход в состояние 7
+    Proof        сдвиг, и переход в состояние 8
+    Theorem      сдвиг, и переход в состояние 9
+    String       сдвиг, и переход в состояние 10
+
+    Statements   переход в состояние 11
+    Statement    переход в состояние 12
+    Declaration  переход в состояние 13
+    Definition   переход в состояние 14
+
+
+состояние 1
+
+   16 Statement: error . Dot
+
+    Dot  сдвиг, и переход в состояние 15
+
+
+состояние 2
+
+   10 Statement: e_m . Id Id e_m
+   11          | e_m . Id e_m
+   12          | e_m . term COLON e_m
+   13          | e_m . term COLON term e_m
+   15          | e_m . Number e_m
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 17
+    Number  сдвиг, и переход в состояние 18
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 20
+
+
+состояние 3
+
+   14 Statement: q_m . term q_m
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 23
+
+
+состояние 4
+
+   17 Declaration: DECLARATION . Id sort Dot
+   18            | DECLARATION . Id sort String Dot
+   19            | DECLARATION . Id COLON Id constant Dot
+   20            | DECLARATION . Id sig_f PRIME Dot
+   21            | DECLARATION . Id sig_f PRIME Id Dot
+   22            | DECLARATION . Id sig_f Dot
+
+    Id  сдвиг, и переход в состояние 24
+
+
+состояние 5
+
+    4 Statement: Add . infix String to Id Dot
+
+    infix  сдвиг, и переход в состояние 25
+
+
+состояние 6
+
+    7 Statement: Axiom . Id term Dot
+
+    Id  сдвиг, и переход в состояние 26
+
+
+состояние 7
+
+   23 Definition: DEFINITION . Id Id constant term Dot
+   24           | DEFINITION . Id Id Id_list_bch COLON term Dot
+
+    Id  сдвиг, и переход в состояние 27
+
+
+состояние 8
+
+    9 Statement: Proof . Id Id derived_formula Dot
+
+    Id  сдвиг, и переход в состояние 28
+
+
+состояние 9
+
+    8 Statement: Theorem . Id term Dot
+
+    Id  сдвиг, и переход в состояние 29
+
+
+состояние 10
+
+    3 Statement: String .
+
+    $default  вывод с использованием правила 3 (Statement)
+
+
+состояние 11
+
+    0 $accept: Statements . $end
+    2 Statements: Statements . Statement
+    3 Statement: . String
+    4          | . Add infix String to Id Dot
+    5          | . Declaration
+    6          | . Definition
+    7          | . Axiom Id term Dot
+    8          | . Theorem Id term Dot
+    9          | . Proof Id Id derived_formula Dot
+   10          | . e_m Id Id e_m
+   11          | . e_m Id e_m
+   12          | . e_m term COLON e_m
+   13          | . e_m term COLON term e_m
+   14          | . q_m term q_m
+   15          | . e_m Number e_m
+   16          | . error Dot
+   17 Declaration: . DECLARATION Id sort Dot
+   18            | . DECLARATION Id sort String Dot
+   19            | . DECLARATION Id COLON Id constant Dot
+   20            | . DECLARATION Id sig_f PRIME Dot
+   21            | . DECLARATION Id sig_f PRIME Id Dot
+   22            | . DECLARATION Id sig_f Dot
+   23 Definition: . DEFINITION Id Id constant term Dot
+   24           | . DEFINITION Id Id Id_list_bch COLON term Dot
+
+    $end         сдвиг, и переход в состояние 30
+    error        сдвиг, и переход в состояние 1
+    e_m          сдвиг, и переход в состояние 2
+    q_m          сдвиг, и переход в состояние 3
+    DECLARATION  сдвиг, и переход в состояние 4
+    Add          сдвиг, и переход в состояние 5
+    Axiom        сдвиг, и переход в состояние 6
+    DEFINITION   сдвиг, и переход в состояние 7
+    Proof        сдвиг, и переход в состояние 8
+    Theorem      сдвиг, и переход в состояние 9
+    String       сдвиг, и переход в состояние 10
+
+    Statement    переход в состояние 31
+    Declaration  переход в состояние 13
+    Definition   переход в состояние 14
+
+
+состояние 12
+
+    1 Statements: Statement .
+
+    $default  вывод с использованием правила 1 (Statements)
+
+
+состояние 13
+
+    5 Statement: Declaration .
+
+    $default  вывод с использованием правила 5 (Statement)
+
+
+состояние 14
+
+    6 Statement: Definition .
+
+    $default  вывод с использованием правила 6 (Statement)
+
+
+состояние 15
+
+   16 Statement: error Dot .
+
+    $default  вывод с использованием правила 16 (Statement)
+
+
+состояние 16
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   36     | l_p . INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   37     | l_p . term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   39     | l_p . EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   40     | l_p . FOR_ANY QuaPL term r_p
+
+    INFIX    сдвиг, и переход в состояние 32
+    EXISTS   сдвиг, и переход в состояние 33
+    FOR_ANY  сдвиг, и переход в состояние 34
+    l_p      сдвиг, и переход в состояние 16
+    Id       сдвиг, и переход в состояние 21
+    Number   сдвиг, и переход в состояние 22
+    String   сдвиг, и переход в состояние 19
+
+    term  переход в состояние 35
+
+
+состояние 17
+
+   10 Statement: e_m Id . Id e_m
+   11          | e_m Id . e_m
+   33 term: Id .  [COLON, l_p]
+
+    e_m  сдвиг, и переход в состояние 36
+    Id   сдвиг, и переход в состояние 37
+
+    $default  вывод с использованием правила 33 (term)
+
+
+состояние 18
+
+   15 Statement: e_m Number . e_m
+   34 term: Number .  [COLON, l_p]
+
+    e_m  сдвиг, и переход в состояние 38
+
+    $default  вывод с использованием правила 34 (term)
+
+
+состояние 19
+
+   35 term: String .
+
+    $default  вывод с использованием правила 35 (term)
+
+
+состояние 20
+
+   12 Statement: e_m term . COLON e_m
+   13          | e_m term . COLON term e_m
+   38 term: term . l_p TermList r_p
+
+    COLON  сдвиг, и переход в состояние 39
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 21
+
+   33 term: Id .
+
+    $default  вывод с использованием правила 33 (term)
+
+
+состояние 22
+
+   34 term: Number .
+
+    $default  вывод с использованием правила 34 (term)
+
+
+состояние 23
+
+   14 Statement: q_m term . q_m
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    q_m  сдвиг, и переход в состояние 41
+
+
+состояние 24
+
+   17 Declaration: DECLARATION Id . sort Dot
+   18            | DECLARATION Id . sort String Dot
+   19            | DECLARATION Id . COLON Id constant Dot
+   20            | DECLARATION Id . sig_f PRIME Dot
+   21            | DECLARATION Id . sig_f PRIME Id Dot
+   22            | DECLARATION Id . sig_f Dot
+   50 sig_f: . sig_arg COLON sig_e
+   51 sig_e: . Id
+   52      | . l_p sig_f r_p
+   53 sig_arg: . sig_e
+   54        | . sig_arg sig_e
+
+    COLON  сдвиг, и переход в состояние 42
+    l_p    сдвиг, и переход в состояние 43
+    sort   сдвиг, и переход в состояние 44
+    Id     сдвиг, и переход в состояние 45
+
+    sig_f    переход в состояние 46
+    sig_e    переход в состояние 47
+    sig_arg  переход в состояние 48
+
+
+состояние 25
+
+    4 Statement: Add infix . String to Id Dot
+
+    String  сдвиг, и переход в состояние 49
+
+
+состояние 26
+
+    7 Statement: Axiom Id . term Dot
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 50
+
+
+состояние 27
+
+   23 Definition: DEFINITION Id . Id constant term Dot
+   24           | DEFINITION Id . Id Id_list_bch COLON term Dot
+
+    Id  сдвиг, и переход в состояние 51
+
+
+состояние 28
+
+    9 Statement: Proof Id . Id derived_formula Dot
+
+    Id  сдвиг, и переход в состояние 52
+
+
+состояние 29
+
+    8 Statement: Theorem Id . term Dot
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 53
+
+
+состояние 30
+
+    0 $accept: Statements $end .
+
+    $default  accept
+
+
+состояние 31
+
+    2 Statements: Statements Statement .
+
+    $default  вывод с использованием правила 2 (Statements)
+
+
+состояние 32
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   36     | l_p INFIX . term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 54
+
+
+состояние 33
+
+   39 term: l_p EXISTS . QuaPL term r_p
+   41 QuaPL: . Id COLON Id
+   42      | . QuaPL Id COLON Id
+
+    Id  сдвиг, и переход в состояние 55
+
+    QuaPL  переход в состояние 56
+
+
+состояние 34
+
+   40 term: l_p FOR_ANY . QuaPL term r_p
+   41 QuaPL: . Id COLON Id
+   42      | . QuaPL Id COLON Id
+
+    Id  сдвиг, и переход в состояние 55
+
+    QuaPL  переход в состояние 57
+
+
+состояние 35
+
+   37 term: l_p term . INFIX term r_p
+   38     | term . l_p TermList r_p
+
+    INFIX  сдвиг, и переход в состояние 58
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 36
+
+   11 Statement: e_m Id e_m .
+
+    $default  вывод с использованием правила 11 (Statement)
+
+
+состояние 37
+
+   10 Statement: e_m Id Id . e_m
+
+    e_m  сдвиг, и переход в состояние 59
+
+
+состояние 38
+
+   15 Statement: e_m Number e_m .
+
+    $default  вывод с использованием правила 15 (Statement)
+
+
+состояние 39
+
+   12 Statement: e_m term COLON . e_m
+   13          | e_m term COLON . term e_m
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    e_m     сдвиг, и переход в состояние 60
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 61
+
+
+состояние 40
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   38     | term l_p . TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   43 TermList: . term
+   44         | . term TermList
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term      переход в состояние 62
+    TermList  переход в состояние 63
+
+
+состояние 41
+
+   14 Statement: q_m term q_m .
+
+    $default  вывод с использованием правила 14 (Statement)
+
+
+состояние 42
+
+   19 Declaration: DECLARATION Id COLON . Id constant Dot
+
+    Id  сдвиг, и переход в состояние 64
+
+
+состояние 43
+
+   50 sig_f: . sig_arg COLON sig_e
+   51 sig_e: . Id
+   52      | . l_p sig_f r_p
+   52      | l_p . sig_f r_p
+   53 sig_arg: . sig_e
+   54        | . sig_arg sig_e
+
+    l_p  сдвиг, и переход в состояние 43
+    Id   сдвиг, и переход в состояние 45
+
+    sig_f    переход в состояние 65
+    sig_e    переход в состояние 47
+    sig_arg  переход в состояние 48
+
+
+состояние 44
+
+   17 Declaration: DECLARATION Id sort . Dot
+   18            | DECLARATION Id sort . String Dot
+
+    Dot     сдвиг, и переход в состояние 66
+    String  сдвиг, и переход в состояние 67
+
+
+состояние 45
+
+   51 sig_e: Id .
+
+    $default  вывод с использованием правила 51 (sig_e)
+
+
+состояние 46
+
+   20 Declaration: DECLARATION Id sig_f . PRIME Dot
+   21            | DECLARATION Id sig_f . PRIME Id Dot
+   22            | DECLARATION Id sig_f . Dot
+
+    Dot    сдвиг, и переход в состояние 68
+    PRIME  сдвиг, и переход в состояние 69
+
+
+состояние 47
+
+   53 sig_arg: sig_e .
+
+    $default  вывод с использованием правила 53 (sig_arg)
+
+
+состояние 48
+
+   50 sig_f: sig_arg . COLON sig_e
+   51 sig_e: . Id
+   52      | . l_p sig_f r_p
+   54 sig_arg: sig_arg . sig_e
+
+    COLON  сдвиг, и переход в состояние 70
+    l_p    сдвиг, и переход в состояние 43
+    Id     сдвиг, и переход в состояние 45
+
+    sig_e  переход в состояние 71
+
+
+состояние 49
+
+    4 Statement: Add infix String . to Id Dot
+
+    to  сдвиг, и переход в состояние 72
+
+
+состояние 50
+
+    7 Statement: Axiom Id term . Dot
+   38 term: term . l_p TermList r_p
+
+    Dot  сдвиг, и переход в состояние 73
+    l_p  сдвиг, и переход в состояние 40
+
+
+состояние 51
+
+   23 Definition: DEFINITION Id Id . constant term Dot
+   24           | DEFINITION Id Id . Id_list_bch COLON term Dot
+   47 Id_list_b: . l_p Id_list r_p
+   48 Id_list_bch: . Id_list_b
+   49            | . Id_list_bch Id_list_b
+
+    l_p       сдвиг, и переход в состояние 74
+    constant  сдвиг, и переход в состояние 75
+
+    Id_list_b    переход в состояние 76
+    Id_list_bch  переход в состояние 77
+
+
+состояние 52
+
+    9 Statement: Proof Id Id . derived_formula Dot
+   25 derived_formula: . LA1 l_p term COMMA term r_p
+   26                | . LA2 l_p term COMMA term COMMA term r_p
+   27                | . LA3 l_p term COMMA term r_p
+   28                | . LA4 l_p Id COMMA term COMMA term r_p
+   29                | . LA5 l_p Id COMMA term COMMA term r_p
+   30                | . MP l_p derived_formula COMMA derived_formula r_p
+   31                | . Gen l_p Id COMMA derived_formula r_p
+   32                | . Id
+
+    LA1  сдвиг, и переход в состояние 78
+    LA2  сдвиг, и переход в состояние 79
+    LA3  сдвиг, и переход в состояние 80
+    LA4  сдвиг, и переход в состояние 81
+    LA5  сдвиг, и переход в состояние 82
+    MP   сдвиг, и переход в состояние 83
+    Gen  сдвиг, и переход в состояние 84
+    Id   сдвиг, и переход в состояние 85
+
+    derived_formula  переход в состояние 86
+
+
+состояние 53
+
+    8 Statement: Theorem Id term . Dot
+   38 term: term . l_p TermList r_p
+
+    Dot  сдвиг, и переход в состояние 87
+    l_p  сдвиг, и переход в состояние 40
+
+
+состояние 54
+
+   36 term: l_p INFIX term . r_p
+   38     | term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 88
+
+
+состояние 55
+
+   41 QuaPL: Id . COLON Id
+
+    COLON  сдвиг, и переход в состояние 89
+
+
+состояние 56
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   39     | l_p EXISTS QuaPL . term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   42 QuaPL: QuaPL . Id COLON Id
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 90
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 91
+
+
+состояние 57
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   40     | l_p FOR_ANY QuaPL . term r_p
+   42 QuaPL: QuaPL . Id COLON Id
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 90
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 92
+
+
+состояние 58
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   37     | l_p term INFIX . term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 93
+
+
+состояние 59
+
+   10 Statement: e_m Id Id e_m .
+
+    $default  вывод с использованием правила 10 (Statement)
+
+
+состояние 60
+
+   12 Statement: e_m term COLON e_m .
+
+    $default  вывод с использованием правила 12 (Statement)
+
+
+состояние 61
+
+   13 Statement: e_m term COLON term . e_m
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    e_m  сдвиг, и переход в состояние 94
+
+
+состояние 62
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   38     | term . l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   43 TermList: . term
+   43         | term .  [r_p]
+   44         | . term TermList
+   44         | term . TermList
+
+    l_p     сдвиг, и переход в состояние 95
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    $default  вывод с использованием правила 43 (TermList)
+
+    term      переход в состояние 62
+    TermList  переход в состояние 96
+
+
+состояние 63
+
+   38 term: term l_p TermList . r_p
+
+    r_p  сдвиг, и переход в состояние 97
+
+
+состояние 64
+
+   19 Declaration: DECLARATION Id COLON Id . constant Dot
+
+    constant  сдвиг, и переход в состояние 98
+
+
+состояние 65
+
+   52 sig_e: l_p sig_f . r_p
+
+    r_p  сдвиг, и переход в состояние 99
+
+
+состояние 66
+
+   17 Declaration: DECLARATION Id sort Dot .
+
+    $default  вывод с использованием правила 17 (Declaration)
+
+
+состояние 67
+
+   18 Declaration: DECLARATION Id sort String . Dot
+
+    Dot  сдвиг, и переход в состояние 100
+
+
+состояние 68
+
+   22 Declaration: DECLARATION Id sig_f Dot .
+
+    $default  вывод с использованием правила 22 (Declaration)
+
+
+состояние 69
+
+   20 Declaration: DECLARATION Id sig_f PRIME . Dot
+   21            | DECLARATION Id sig_f PRIME . Id Dot
+
+    Dot  сдвиг, и переход в состояние 101
+    Id   сдвиг, и переход в состояние 102
+
+
+состояние 70
+
+   50 sig_f: sig_arg COLON . sig_e
+   51 sig_e: . Id
+   52      | . l_p sig_f r_p
+
+    l_p  сдвиг, и переход в состояние 43
+    Id   сдвиг, и переход в состояние 45
+
+    sig_e  переход в состояние 103
+
+
+состояние 71
+
+   54 sig_arg: sig_arg sig_e .
+
+    $default  вывод с использованием правила 54 (sig_arg)
+
+
+состояние 72
+
+    4 Statement: Add infix String to . Id Dot
+
+    Id  сдвиг, и переход в состояние 104
+
+
+состояние 73
+
+    7 Statement: Axiom Id term Dot .
+
+    $default  вывод с использованием правила 7 (Statement)
+
+
+состояние 74
+
+   45 Id_list: . Id
+   46        | . Id_list Id
+   47 Id_list_b: l_p . Id_list r_p
+
+    Id  сдвиг, и переход в состояние 105
+
+    Id_list  переход в состояние 106
+
+
+состояние 75
+
+   23 Definition: DEFINITION Id Id constant . term Dot
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 107
+
+
+состояние 76
+
+   48 Id_list_bch: Id_list_b .
+
+    $default  вывод с использованием правила 48 (Id_list_bch)
+
+
+состояние 77
+
+   24 Definition: DEFINITION Id Id Id_list_bch . COLON term Dot
+   47 Id_list_b: . l_p Id_list r_p
+   49 Id_list_bch: Id_list_bch . Id_list_b
+
+    COLON  сдвиг, и переход в состояние 108
+    l_p    сдвиг, и переход в состояние 74
+
+    Id_list_b  переход в состояние 109
+
+
+состояние 78
+
+   25 derived_formula: LA1 . l_p term COMMA term r_p
+
+    l_p  сдвиг, и переход в состояние 110
+
+
+состояние 79
+
+   26 derived_formula: LA2 . l_p term COMMA term COMMA term r_p
+
+    l_p  сдвиг, и переход в состояние 111
+
+
+состояние 80
+
+   27 derived_formula: LA3 . l_p term COMMA term r_p
+
+    l_p  сдвиг, и переход в состояние 112
+
+
+состояние 81
+
+   28 derived_formula: LA4 . l_p Id COMMA term COMMA term r_p
+
+    l_p  сдвиг, и переход в состояние 113
+
+
+состояние 82
+
+   29 derived_formula: LA5 . l_p Id COMMA term COMMA term r_p
+
+    l_p  сдвиг, и переход в состояние 114
+
+
+состояние 83
+
+   30 derived_formula: MP . l_p derived_formula COMMA derived_formula r_p
+
+    l_p  сдвиг, и переход в состояние 115
+
+
+состояние 84
+
+   31 derived_formula: Gen . l_p Id COMMA derived_formula r_p
+
+    l_p  сдвиг, и переход в состояние 116
+
+
+состояние 85
+
+   32 derived_formula: Id .
+
+    $default  вывод с использованием правила 32 (derived_formula)
+
+
+состояние 86
+
+    9 Statement: Proof Id Id derived_formula . Dot
+
+    Dot  сдвиг, и переход в состояние 117
+
+
+состояние 87
+
+    8 Statement: Theorem Id term Dot .
+
+    $default  вывод с использованием правила 8 (Statement)
+
+
+состояние 88
+
+   36 term: l_p INFIX term r_p .
+
+    $default  вывод с использованием правила 36 (term)
+
+
+состояние 89
+
+   41 QuaPL: Id COLON . Id
+
+    Id  сдвиг, и переход в состояние 118
+
+
+состояние 90
+
+   33 term: Id .  [l_p, r_p]
+   42 QuaPL: QuaPL Id . COLON Id
+
+    COLON  сдвиг, и переход в состояние 119
+
+    $default  вывод с использованием правила 33 (term)
+
+
+состояние 91
+
+   38 term: term . l_p TermList r_p
+   39     | l_p EXISTS QuaPL term . r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 120
+
+
+состояние 92
+
+   38 term: term . l_p TermList r_p
+   40     | l_p FOR_ANY QuaPL term . r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 121
+
+
+состояние 93
+
+   37 term: l_p term INFIX term . r_p
+   38     | term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 122
+
+
+состояние 94
+
+   13 Statement: e_m term COLON term e_m .
+
+    $default  вывод с использованием правила 13 (Statement)
+
+
+состояние 95
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   36     | l_p . INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   37     | l_p . term INFIX term r_p
+   38     | . term l_p TermList r_p
+   38     | term l_p . TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   39     | l_p . EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   40     | l_p . FOR_ANY QuaPL term r_p
+   43 TermList: . term
+   44         | . term TermList
+
+    INFIX    сдвиг, и переход в состояние 32
+    EXISTS   сдвиг, и переход в состояние 33
+    FOR_ANY  сдвиг, и переход в состояние 34
+    l_p      сдвиг, и переход в состояние 16
+    Id       сдвиг, и переход в состояние 21
+    Number   сдвиг, и переход в состояние 22
+    String   сдвиг, и переход в состояние 19
+
+    term      переход в состояние 123
+    TermList  переход в состояние 63
+
+
+состояние 96
+
+   44 TermList: term TermList .
+
+    $default  вывод с использованием правила 44 (TermList)
+
+
+состояние 97
+
+   38 term: term l_p TermList r_p .
+
+    $default  вывод с использованием правила 38 (term)
+
+
+состояние 98
+
+   19 Declaration: DECLARATION Id COLON Id constant . Dot
+
+    Dot  сдвиг, и переход в состояние 124
+
+
+состояние 99
+
+   52 sig_e: l_p sig_f r_p .
+
+    $default  вывод с использованием правила 52 (sig_e)
+
+
+состояние 100
+
+   18 Declaration: DECLARATION Id sort String Dot .
+
+    $default  вывод с использованием правила 18 (Declaration)
+
+
+состояние 101
+
+   20 Declaration: DECLARATION Id sig_f PRIME Dot .
+
+    $default  вывод с использованием правила 20 (Declaration)
+
+
+состояние 102
+
+   21 Declaration: DECLARATION Id sig_f PRIME Id . Dot
+
+    Dot  сдвиг, и переход в состояние 125
+
+
+состояние 103
+
+   50 sig_f: sig_arg COLON sig_e .
+
+    $default  вывод с использованием правила 50 (sig_f)
+
+
+состояние 104
+
+    4 Statement: Add infix String to Id . Dot
+
+    Dot  сдвиг, и переход в состояние 126
+
+
+состояние 105
+
+   45 Id_list: Id .
+
+    $default  вывод с использованием правила 45 (Id_list)
+
+
+состояние 106
+
+   46 Id_list: Id_list . Id
+   47 Id_list_b: l_p Id_list . r_p
+
+    r_p  сдвиг, и переход в состояние 127
+    Id   сдвиг, и переход в состояние 128
+
+
+состояние 107
+
+   23 Definition: DEFINITION Id Id constant term . Dot
+   38 term: term . l_p TermList r_p
+
+    Dot  сдвиг, и переход в состояние 129
+    l_p  сдвиг, и переход в состояние 40
+
+
+состояние 108
+
+   24 Definition: DEFINITION Id Id Id_list_bch COLON . term Dot
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 130
+
+
+состояние 109
+
+   49 Id_list_bch: Id_list_bch Id_list_b .
+
+    $default  вывод с использованием правила 49 (Id_list_bch)
+
+
+состояние 110
+
+   25 derived_formula: LA1 l_p . term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 131
+
+
+состояние 111
+
+   26 derived_formula: LA2 l_p . term COMMA term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 132
+
+
+состояние 112
+
+   27 derived_formula: LA3 l_p . term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 133
+
+
+состояние 113
+
+   28 derived_formula: LA4 l_p . Id COMMA term COMMA term r_p
+
+    Id  сдвиг, и переход в состояние 134
+
+
+состояние 114
+
+   29 derived_formula: LA5 l_p . Id COMMA term COMMA term r_p
+
+    Id  сдвиг, и переход в состояние 135
+
+
+состояние 115
+
+   25 derived_formula: . LA1 l_p term COMMA term r_p
+   26                | . LA2 l_p term COMMA term COMMA term r_p
+   27                | . LA3 l_p term COMMA term r_p
+   28                | . LA4 l_p Id COMMA term COMMA term r_p
+   29                | . LA5 l_p Id COMMA term COMMA term r_p
+   30                | . MP l_p derived_formula COMMA derived_formula r_p
+   30                | MP l_p . derived_formula COMMA derived_formula r_p
+   31                | . Gen l_p Id COMMA derived_formula r_p
+   32                | . Id
+
+    LA1  сдвиг, и переход в состояние 78
+    LA2  сдвиг, и переход в состояние 79
+    LA3  сдвиг, и переход в состояние 80
+    LA4  сдвиг, и переход в состояние 81
+    LA5  сдвиг, и переход в состояние 82
+    MP   сдвиг, и переход в состояние 83
+    Gen  сдвиг, и переход в состояние 84
+    Id   сдвиг, и переход в состояние 85
+
+    derived_formula  переход в состояние 136
+
+
+состояние 116
+
+   31 derived_formula: Gen l_p . Id COMMA derived_formula r_p
+
+    Id  сдвиг, и переход в состояние 137
+
+
+состояние 117
+
+    9 Statement: Proof Id Id derived_formula Dot .
+
+    $default  вывод с использованием правила 9 (Statement)
+
+
+состояние 118
+
+   41 QuaPL: Id COLON Id .
+
+    $default  вывод с использованием правила 41 (QuaPL)
+
+
+состояние 119
+
+   42 QuaPL: QuaPL Id COLON . Id
+
+    Id  сдвиг, и переход в состояние 138
+
+
+состояние 120
+
+   39 term: l_p EXISTS QuaPL term r_p .
+
+    $default  вывод с использованием правила 39 (term)
+
+
+состояние 121
+
+   40 term: l_p FOR_ANY QuaPL term r_p .
+
+    $default  вывод с использованием правила 40 (term)
+
+
+состояние 122
+
+   37 term: l_p term INFIX term r_p .
+
+    $default  вывод с использованием правила 37 (term)
+
+
+состояние 123
+
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   37     | l_p term . INFIX term r_p
+   38     | . term l_p TermList r_p
+   38     | term . l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+   43 TermList: . term
+   43         | term .  [r_p]
+   44         | . term TermList
+   44         | term . TermList
+
+    INFIX   сдвиг, и переход в состояние 58
+    l_p     сдвиг, и переход в состояние 95
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    $default  вывод с использованием правила 43 (TermList)
+
+    term      переход в состояние 62
+    TermList  переход в состояние 96
+
+
+состояние 124
+
+   19 Declaration: DECLARATION Id COLON Id constant Dot .
+
+    $default  вывод с использованием правила 19 (Declaration)
+
+
+состояние 125
+
+   21 Declaration: DECLARATION Id sig_f PRIME Id Dot .
+
+    $default  вывод с использованием правила 21 (Declaration)
+
+
+состояние 126
+
+    4 Statement: Add infix String to Id Dot .
+
+    $default  вывод с использованием правила 4 (Statement)
+
+
+состояние 127
+
+   47 Id_list_b: l_p Id_list r_p .
+
+    $default  вывод с использованием правила 47 (Id_list_b)
+
+
+состояние 128
+
+   46 Id_list: Id_list Id .
+
+    $default  вывод с использованием правила 46 (Id_list)
+
+
+состояние 129
+
+   23 Definition: DEFINITION Id Id constant term Dot .
+
+    $default  вывод с использованием правила 23 (Definition)
+
+
+состояние 130
+
+   24 Definition: DEFINITION Id Id Id_list_bch COLON term . Dot
+   38 term: term . l_p TermList r_p
+
+    Dot  сдвиг, и переход в состояние 139
+    l_p  сдвиг, и переход в состояние 40
+
+
+состояние 131
+
+   25 derived_formula: LA1 l_p term . COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 140
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 132
+
+   26 derived_formula: LA2 l_p term . COMMA term COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 141
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 133
+
+   27 derived_formula: LA3 l_p term . COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 142
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 134
+
+   28 derived_formula: LA4 l_p Id . COMMA term COMMA term r_p
+
+    COMMA  сдвиг, и переход в состояние 143
+
+
+состояние 135
+
+   29 derived_formula: LA5 l_p Id . COMMA term COMMA term r_p
+
+    COMMA  сдвиг, и переход в состояние 144
+
+
+состояние 136
+
+   30 derived_formula: MP l_p derived_formula . COMMA derived_formula r_p
+
+    COMMA  сдвиг, и переход в состояние 145
+
+
+состояние 137
+
+   31 derived_formula: Gen l_p Id . COMMA derived_formula r_p
+
+    COMMA  сдвиг, и переход в состояние 146
+
+
+состояние 138
+
+   42 QuaPL: QuaPL Id COLON Id .
+
+    $default  вывод с использованием правила 42 (QuaPL)
+
+
+состояние 139
+
+   24 Definition: DEFINITION Id Id Id_list_bch COLON term Dot .
+
+    $default  вывод с использованием правила 24 (Definition)
+
+
+состояние 140
+
+   25 derived_formula: LA1 l_p term COMMA . term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 147
+
+
+состояние 141
+
+   26 derived_formula: LA2 l_p term COMMA . term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 148
+
+
+состояние 142
+
+   27 derived_formula: LA3 l_p term COMMA . term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 149
+
+
+состояние 143
+
+   28 derived_formula: LA4 l_p Id COMMA . term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 150
+
+
+состояние 144
+
+   29 derived_formula: LA5 l_p Id COMMA . term COMMA term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 151
+
+
+состояние 145
+
+   25 derived_formula: . LA1 l_p term COMMA term r_p
+   26                | . LA2 l_p term COMMA term COMMA term r_p
+   27                | . LA3 l_p term COMMA term r_p
+   28                | . LA4 l_p Id COMMA term COMMA term r_p
+   29                | . LA5 l_p Id COMMA term COMMA term r_p
+   30                | . MP l_p derived_formula COMMA derived_formula r_p
+   30                | MP l_p derived_formula COMMA . derived_formula r_p
+   31                | . Gen l_p Id COMMA derived_formula r_p
+   32                | . Id
+
+    LA1  сдвиг, и переход в состояние 78
+    LA2  сдвиг, и переход в состояние 79
+    LA3  сдвиг, и переход в состояние 80
+    LA4  сдвиг, и переход в состояние 81
+    LA5  сдвиг, и переход в состояние 82
+    MP   сдвиг, и переход в состояние 83
+    Gen  сдвиг, и переход в состояние 84
+    Id   сдвиг, и переход в состояние 85
+
+    derived_formula  переход в состояние 152
+
+
+состояние 146
+
+   25 derived_formula: . LA1 l_p term COMMA term r_p
+   26                | . LA2 l_p term COMMA term COMMA term r_p
+   27                | . LA3 l_p term COMMA term r_p
+   28                | . LA4 l_p Id COMMA term COMMA term r_p
+   29                | . LA5 l_p Id COMMA term COMMA term r_p
+   30                | . MP l_p derived_formula COMMA derived_formula r_p
+   31                | . Gen l_p Id COMMA derived_formula r_p
+   31                | Gen l_p Id COMMA . derived_formula r_p
+   32                | . Id
+
+    LA1  сдвиг, и переход в состояние 78
+    LA2  сдвиг, и переход в состояние 79
+    LA3  сдвиг, и переход в состояние 80
+    LA4  сдвиг, и переход в состояние 81
+    LA5  сдвиг, и переход в состояние 82
+    MP   сдвиг, и переход в состояние 83
+    Gen  сдвиг, и переход в состояние 84
+    Id   сдвиг, и переход в состояние 85
+
+    derived_formula  переход в состояние 153
+
+
+состояние 147
+
+   25 derived_formula: LA1 l_p term COMMA term . r_p
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 154
+
+
+состояние 148
+
+   26 derived_formula: LA2 l_p term COMMA term . COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 155
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 149
+
+   27 derived_formula: LA3 l_p term COMMA term . r_p
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 156
+
+
+состояние 150
+
+   28 derived_formula: LA4 l_p Id COMMA term . COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 157
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 151
+
+   29 derived_formula: LA5 l_p Id COMMA term . COMMA term r_p
+   38 term: term . l_p TermList r_p
+
+    COMMA  сдвиг, и переход в состояние 158
+    l_p    сдвиг, и переход в состояние 40
+
+
+состояние 152
+
+   30 derived_formula: MP l_p derived_formula COMMA derived_formula . r_p
+
+    r_p  сдвиг, и переход в состояние 159
+
+
+состояние 153
+
+   31 derived_formula: Gen l_p Id COMMA derived_formula . r_p
+
+    r_p  сдвиг, и переход в состояние 160
+
+
+состояние 154
+
+   25 derived_formula: LA1 l_p term COMMA term r_p .
+
+    $default  вывод с использованием правила 25 (derived_formula)
+
+
+состояние 155
+
+   26 derived_formula: LA2 l_p term COMMA term COMMA . term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 161
+
+
+состояние 156
+
+   27 derived_formula: LA3 l_p term COMMA term r_p .
+
+    $default  вывод с использованием правила 27 (derived_formula)
+
+
+состояние 157
+
+   28 derived_formula: LA4 l_p Id COMMA term COMMA . term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 162
+
+
+состояние 158
+
+   29 derived_formula: LA5 l_p Id COMMA term COMMA . term r_p
+   33 term: . Id
+   34     | . Number
+   35     | . String
+   36     | . l_p INFIX term r_p
+   37     | . l_p term INFIX term r_p
+   38     | . term l_p TermList r_p
+   39     | . l_p EXISTS QuaPL term r_p
+   40     | . l_p FOR_ANY QuaPL term r_p
+
+    l_p     сдвиг, и переход в состояние 16
+    Id      сдвиг, и переход в состояние 21
+    Number  сдвиг, и переход в состояние 22
+    String  сдвиг, и переход в состояние 19
+
+    term  переход в состояние 163
+
+
+состояние 159
+
+   30 derived_formula: MP l_p derived_formula COMMA derived_formula r_p .
+
+    $default  вывод с использованием правила 30 (derived_formula)
+
+
+состояние 160
+
+   31 derived_formula: Gen l_p Id COMMA derived_formula r_p .
+
+    $default  вывод с использованием правила 31 (derived_formula)
+
+
+состояние 161
+
+   26 derived_formula: LA2 l_p term COMMA term COMMA term . r_p
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 164
+
+
+состояние 162
+
+   28 derived_formula: LA4 l_p Id COMMA term COMMA term . r_p
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 165
+
+
+состояние 163
+
+   29 derived_formula: LA5 l_p Id COMMA term COMMA term . r_p
+   38 term: term . l_p TermList r_p
+
+    l_p  сдвиг, и переход в состояние 40
+    r_p  сдвиг, и переход в состояние 166
+
+
+состояние 164
+
+   26 derived_formula: LA2 l_p term COMMA term COMMA term r_p .
+
+    $default  вывод с использованием правила 26 (derived_formula)
+
+
+состояние 165
+
+   28 derived_formula: LA4 l_p Id COMMA term COMMA term r_p .
+
+    $default  вывод с использованием правила 28 (derived_formula)
+
+
+состояние 166
+
+   29 derived_formula: LA5 l_p Id COMMA term COMMA term r_p .
+
+    $default  вывод с использованием правила 29 (derived_formula)

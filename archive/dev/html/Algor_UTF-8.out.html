@@ -1,0 +1,83 @@
+﻿!0!
+
+"2"
+
+Declaration R sort "DIGIT}+({Dot}{DIGIT}+)?".
+<DECLARATION_s: Sort R added with REx (DIGIT}+({Dot}{DIGIT}+)?).>
+ --  an intrinsic sort of real numbers.
+Declaration TV sort.
+<DECLARATION_s: Sort TV added.>
+ Declaration True:TV constant.
+<DECLARATION-c: True added.>
+ Declaration False:TV constant.
+<DECLARATION-c: False added.>
+
+Declaration sb sort.
+<DECLARATION_s: Sort sb added.>
+ 
+
+
+"1"
+
+Declaration melilite sb:TV prime.
+<DECLARATION_fp: p func melilite added sig_arg sb, sig_res TV:-)>
+
+Declaration kalsilite sb:TV prime.
+<DECLARATION_fp: p func kalsilite added sig_arg sb, sig_res TV:-)>
+
+Declaration leucite sb:TV prime.
+<DECLARATION_fp: p func leucite added sig_arg sb, sig_res TV:-)>
+
+Declaration Ol sb:TV prime.
+<DECLARATION_fp: p func Ol added sig_arg sb, sig_res TV:-)>
+                	-- for olivine.
+Declaration Opx sb:TV.
+<DECLARATION_fnp: p func Opx added sig_arg sb, sig_res TV:-)>
+                      -- is not prime and we are looking forward for definition of orthopyroxene class of minerals.
+Declaration Cpx sb:TV.
+<DECLARATION_fnp: p func Cpx added sig_arg sb, sig_res TV:-)>
+                      -- is not prime and we are looking forward for definition of clinopyroxene class of minerals.
+Declaration hornblende sb:TV prime.
+<DECLARATION_fp: p func hornblende added sig_arg sb, sig_res TV:-)>
+
+Declaration garnet sb:TV prime.
+<DECLARATION_fp: p func garnet added sig_arg sb, sig_res TV:-)>
+
+Declaration spinel sb:TV prime.
+<DECLARATION_fp: p func spinel added sig_arg sb, sig_res TV:-)>
+
+Declaration biotite sb:TV prime.
+<DECLARATION_fp: p func biotite added sig_arg sb, sig_res TV:-)>
+
+
+"3"
+
+Declaration Q sb:TV.
+<DECLARATION_fnp: p func Q added sig_arg sb, sig_res TV:-)>
+ Declaration A sb:TV.
+<DECLARATION_fnp: p func A added sig_arg sb, sig_res TV:-)>
+ Declaration P sb:TV.
+<DECLARATION_fnp: p func P added sig_arg sb, sig_res TV:-)>
+ Declaration F sb:TV.
+<DECLARATION_fnp: p func F added sig_arg sb, sig_res TV:-)>
+ Declaration M sb:TV.
+<DECLARATION_fnp: p func M added sig_arg sb, sig_res TV:-)>
+
+
+"4"
+
+Declaration VPC (sb:TV):(sb:R).
+<DECLARATION_fnp: p func VPC added sig_arg :0000000001, sig_res :0000000002:-)>
+
+
+"5"
+
+Declaration Sample007:sb constant.
+<DECLARATION-c: Sample007 added.>
+
+
+"6"
+
+Axiom A_VPC_biotite_0 (∀x:sb (0 ≤ VPC(biotite)(x))).
+Axiom A_VPC_biotite_100 (∀x:sb (VPC(biotite)(x) ≤ 100)).
+

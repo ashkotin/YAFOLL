@@ -1,0 +1,13 @@
+"онто для неорграфов"
+"UDGs"
+ "INCLUDE TVs"
+ Declaration U sort. "...какое-то заполнение U"
+ Declaration = U U : TV prime fm_strcmp.
+ Declaration INC U U : TV prime. "...какое-то заполнение INC"
+
+"UDGt"
+ "INCLUDE TVt"
+ Declaration U sort. 
+ Declaration = U U : TV prime.
+ Declaration INC U U : TV prime. 
+ "+структурная аксиома полноты INC"

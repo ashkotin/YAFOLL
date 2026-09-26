@@ -1,0 +1,184 @@
+/*шаблон СА
+!Чтобы выделить по простому из шаблона КСГ Си-код обработки правил начинается с \t. 
+Пуск gawk: gawk "{if(substr($0,1,1)!=\"	\") print $0;}" SA_FOLsn.y >SA_FOLsn_woC.txt
+Потом забрать правила.
+*/
+%{
+#define YYSTYPE char* /*тип атрибута дерева - указатель на строку букв (НЕ ПРОХОДИТ: char [255])*/
+#define YYMAXDEPTH 500000 /* максимальная глубина стека. по умолчнанию - 10000.*/
+#define YYDEBUG 1 /*включение кода трассы*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+FILE *LAout; /*ЛА. файл выдачи. для выделения цепочек слов */
+int yylex (void); /*ЛА. объявление*/
+int yydebug; /*переменная управления трассой*/
+void yyerror (char const *);/*СА. объявление ф-и обработки синт- ошибки. см. её тело в конце.*/
+/*динамический (кучный;-) буфер значения атрибута-строки*/
+YYSTYPE to_buff(char* in) {char* str_buff=malloc(256); strcpy(str_buff,in); return (str_buff);}
+#include "YL_db.c"
+%}
+/*%define lr.type "ielr" /*для 2.5 тип генерируемых таблиц ielr canonical-lr*/
+%glr-parser	/*без него тоже неплохо;-)*/
+/*каждая строка token соответствую строке РВ, а %token нескольким!*/
+%token INFIX
+%token EXISTS
+%token FOR_ANY
+%token NOT
+%token AND
+%token OR
+%token IMPLIES
+%token EQUIV
+%token Neq
+%token Leq
+%token Geq
+%token WS
+%token eq
+%token Dot
+%token COMMA
+%token COLON
+%token l_p
+%token r_p
+%token e_m
+%token q_m
+%token Plus
+%token Minus
+%token Multiply
+/*%token EXISTS
+%token FOR_ANY
+%token NOT
+%token AND
+%token OR
+%token IMPLIES
+%token EQUIV
+%token Neq*/
+%token DECLARATION
+%token PRIME
+%token infix
+%token Add
+%token to
+%token sort
+%token constant
+%token function
+%token Axiom
+%token DEFINITION
+%token LA1
+%token LA2
+%token LA3
+%token LA4
+%token LA5
+%token MP
+%token Gen
+%token Proof
+%token Theorem
+%token Id
+%token Number
+%token String
+/*%token WS*/
+/*%token Comm*/
+
+%start Statements
+
+%%
+/*<EBNF>Statements:Statement+.*/
+Statements :  Statement
+   | Statements Statement
+;
+Statement : String /*Хранимый комментарий:-)*/
+   | Add infix String to Id Dot 
+   | Declaration
+   | Definition
+   | Axiom Id term Dot 
+   | Theorem Id term Dot 
+   | Proof Id Id derived_formula Dot 
+   | e_m Id Id e_m 	/*КМАС. Добавление эл-та Id-1 в основу Id-2.*/
+   | e_m Id e_m 	/*КМАС. Удаление эл-та Id из основы.*/
+   | e_m term COLON e_m 	/*КМАС. Удаление значения терма.*/
+   | e_m term COLON term e_m   /*КМАС. Задание значения терма-1 равным term-2.*/
+   | q_m term q_m 	/*КМАС. Запрос на значение замкнутого терма.*/
+   | e_m Number e_m   
+   | error Dot	{printf("\n<SA BAD_Statement='%s'>\n",$1);}
+;
+
+/*Объявления*/	  
+Declaration :	DECLARATION Id sort Dot 	/*Вводится новый сорт Id.*/
+   | DECLARATION Id sort String Dot			/*Вводится новый сорт Id.*/
+   | DECLARATION Id COLON Id constant Dot	/*Вводится новая константа Id-1 сорта Id-2.*/
+   | DECLARATION Id sig_f PRIME Dot			/*Вводится новая первичная функция Id */
+   | DECLARATION Id sig_f Dot				/*Вводится новая вторичная функция Id */			
+;
+
+/***Определения***/
+Definition : DEFINITION Id Id constant term Dot 
+   | DEFINITION Id Id Id_list_bch COLON term Dot 		/*Функция термом с формальными параметрами из Id_list.*/
+;
+
+/***Выведенная формула***/
+derived_formula : LA1 l_p term COMMA term r_p 	/*М.65.*/
+   | LA2 l_p term COMMA term COMMA term r_p 	/*М.65.*/
+   | LA3 l_p term COMMA term r_p 			/*М.66.*/
+    | LA4 l_p Id COMMA term COMMA term r_p 			/*М.66.*/
+    | LA5 l_p Id COMMA term COMMA term r_p 		/*М.66.*/
+    | MP l_p derived_formula COMMA derived_formula r_p 		/*М.66.*/
+    | Gen l_p Id COMMA derived_formula r_p 			/*М.66.*/
+    | Id 
+;
+term : Id 
+   | Number
+   | String
+   | l_p INFIX term r_p 	/*префикс*/
+   | l_p term INFIX term r_p	/*инфикс*/
+   | term l_p TermList r_p
+   | l_p EXISTS  Id COLON Id term r_p
+   | l_p FOR_ANY Id COLON Id term r_p
+;
+/*<EBNF>(#trml)	TermList : term+*/
+TermList : term
+   | term TermList 
+; 
+
+/*Для форм- параметров определений и задания КМАС.*/
+/*<EBNF> Id_list : Id+ */
+Id_list : Id 
+ | Id_list Id  
+;
+Id_list_b : l_p Id_list r_p 
+;								
+/*<EBNF> Id_list_bch : Id_list_b+*/
+Id_list_bch : Id_list_b 
+ | Id_list_bch Id_list_b 
+;
+/*Синтаксис сигнатур*/
+sig_f : sig_arg COLON sig_e 
+;
+sig_e : Id
+   | l_p sig_f r_p 
+;
+/*<EBNF> sig_arg : sig_e+*/
+sig_arg : sig_e 
+   |sig_arg  sig_e 
+;
+
+%%
+/*ЛА. вставка его Си кода*/
+#include "LA_FOLsn.c"
+int main (void) 
+{yydebug = 0; int rc;
+ if (connect()!=0) goto bad; /*printf ("Connected.\n");*/
+ /*вызов парсера*/
+ yyparse ();/*было return */
+/* if (commit()!=0) goto bad;*/
+ rc = EXIT_SUCCESS;
+
+badr:
+ disconnect(); /*printf ("Disconnected.\n");*/
+ exit(rc);
+
+bad:
+ printf("Unexpected respond from DBMS! Check it!\n");
+ printf("sqlca.sqlcode=%i, sqlca.sqlstate=%s.\n",sqlca.sqlcode,sqlca.sqlstate);
+ printf("sqlca.sqlerrm.sqlerrmc=%s.\n",sqlca.sqlerrm.sqlerrmc);
+ rc = EXIT_FAILURE;
+goto badr;
+}
+void yyerror (char const *s) {printf ("<--SA>");}

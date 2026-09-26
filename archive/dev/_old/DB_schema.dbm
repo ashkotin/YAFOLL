@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="YL" fill-color="#e1e1e1">
+</schema>
+
+<database name="YL">
+</database>
+
+<table name="sorts" oids="true">
+	<schema name="public"/>
+	<position x="102" y="85"/>
+	<column name="Id" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+</table>
+
+</dbmodel>

@@ -1,0 +1,29 @@
+﻿Declaration o sort. Declaration r sort. 
+
+Declaration Neq predicate  o,o. 
+Definition Neq Neq(x1,x2) predicate ¬(x1=x2).
+Axiom Neq ∀x:o,y:o((x≠y) ≡ Neq(x,y)).
+
+Declaration  Plus:r  function r,r. Axiom  Plus ∀x:r,y:r ((x+y) = Plus(x,y)).
+Declaration  Minus:r  function r,r. Axiom  Minus ∀x:r,y:r ((x-y) = Minus(x,y)).
+Declaration  Multiply:r  function r,r. Axiom  Multiply ∀x:r,y:r ((x*y) = Multiply(x,y)).
+//комментарий!
+
+Declaration  Opx predicate o. Declaration  Cpx predicate o. 
+Axiom Opx_Cpx DisjointClasses(Opx,Cpx).
+Declaration  Px predicate o. Definition D_Px Px(x) predicate ObjectUnionOf(Opx,Cpx)(x).
+Declaration Q predicate o. Declaration A predicate o. Declaration P predicate o. Declaration F predicate o.
+Declaration VPC:(o:r) functor (o). 
+
+//!Эта функция не нужна! Но конечно может быть определена:-) Надо смотреть в отчёте где она используется!
+Declaration  VPC_Px:r  function o.
+Definition VPC_Px VPC_Px(sb1) function (VPC(Opx)(sb1)+VPC(Cpx)(sb1)).
+
+Theorem Px_1 ∀x:o (VPC(Px)(x) = (VPC(Opx)(x)+VPC(Cpx)(x))).
+
+Definition D_VPC_OOC VPC_OOC(sb1) function (VPC(Ol)(sb1)+(VPC(Opx)(sb1)+VPC(Cpx)(sb1))).
+Definition D_VPC_OPH VPC_OPH(sb1) function (VPC(Ol)(sb1)+(VPC(Px)(sb1)+VPC(hornblende)(sb1))).
+Definition D_VPC_M VPC_M(sb1) function (100 - (VPC(Q)(sb1)+(VPC(A)(sb1)+(VPC(P)(sb1)+VPC(F)(sb1))))).
+
+
+

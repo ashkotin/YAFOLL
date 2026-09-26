@@ -1,0 +1,16 @@
+"Number DAD. Числа"
+ Declaration R sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?" .
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration R_EQ R R : TV prime fm_req. Add infix "=" to R_EQ .
+ Declaration R_LT R R : TV prime fm_rlt. Add infix "<" to R_LT .
+ Declaration R_GT R R : TV. Add infix ">" to R_GT .
+ Definition R_GT_d R_GT(x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration R_LE R R : TV. Add infix "≤" to R_LE.
+ Definition R_LE_d R_LE(x y) : ((x=y)∨(x<y)).
+ Declaration R_GE R R : TV. Add infix "≥" to R_GE.
+ Definition R_GE_d R_GE(x y) : ((x=y)∨(x>y)).
+ Declaration R_PLUS R R : R prime fm_radd. Add infix "+" to R_PLUS .
+ Declaration R_MINUS R R : R prime fm_rminus. Add infix "-" to R_MINUS .
+ Declaration R_MULTIPLY R R : R prime fm_rmult. Add infix "*" to R_MULTIPLY .
+ Declaration R_DEVIDE R R : R prime fm_rdev. Add infix "/" to R_DEVIDE .
+ "+подумать над аксиоматикой и порядка и операций и точностью вычислений!!!"

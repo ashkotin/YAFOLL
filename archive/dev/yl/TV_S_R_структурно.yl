@@ -1,0 +1,143 @@
+--
+!0!
+
+"IdeS"
+ Declaration Ide sort "{US}{Id}".
+ "Declaration = Ide Ide : Ide 	prime fm_strcmp. "
+
+"IdeT !!!п.п не нужна!!!"
+ "Declaration TV sort."
+ "Declaration Ide sort."
+ "Declaration = Ide Ide : TV 	prime."
+
+"TVs"
+ "INCLUDE IdeS"
+ Declaration TV sort. 							!_False TV! !_True TV!
+ Declaration = TV TV : TV 	prime. 				! = ( _False _False ):_True! ! = ( _False _True ):_False! ! = ( _True _False ):_False! ! = ( _True _True ):_True!  
+ Declaration not TV : TV prime. 				! not ( _False ):_True! ! not ( _True ):_False!   
+ Declaration and TV TV : TV prime. 				! and ( _False _False ):_False! ! and ( _False _True ):_False! ! and ( _True _False ):_False! ! and ( _True _True ):_True!  
+ Declaration or TV TV : TV prime. 				! or ( _False _False ):_False! ! or ( _False _True ):_True! ! or ( _True _False ):_True! ! or ( _True _True ):_True!
+
+"TVt" 
+ Declaration TV sort.
+ Declaration = TV TV : TV 	prime.
+ Declaration not TV : TV prime.
+ Declaration and TV TV : TV prime. 
+ Declaration or TV TV : TV prime.
+ "лексические определения для первичек"
+	Declaration ¬ TV : TV definition  ( x ) : not (x) .
+	Declaration ∧ TV TV : TV definition  ( x y ): and( x y ).	
+	Declaration ∨ TV TV : TV definition  ( x y ): or ( x y ).
+ "TVtC:классическая теория связок. определения - причём 2 лексических"
+    "(+У:а зачем собственно impl и Ко? - ведь у нас →... ид!)"
+ Declaration impl TV TV : TV definition  ( x z ) : ( ( ¬ x ) ∨ z ).
+    Declaration → TV TV : TV		definition  ( x z ) : impl(x z).
+ Declaration eqv TV TV : TV definition  ( x y ) : ( ( x → y ) ∧ ( y → x ) ).
+    Declaration ≡ TV TV : TV definition  ( x y ) : eqv(x y).
+ "итого: обеспечена вычислимость проп-связок, что даёт возможность в других теориях ВЫЧИСЛЯТЬ ПРЕДИКАТЫ!"
+ "TVtF:структурные свойства/АКСИОМЫ классических истинностных значений."
+ "+У:ещё должно быть _True>_False! !!!особенность этих формул: в них =!!!"
+ "КРЯ:пусть f1 - унарная ф-я. f1 полна над TV означает для каждого x в TV существует z в TV такой f1(x)=z."
+ Declaration FULL1TV (TV:TV):TV	definition  (f1):(∀x:TV (∃z:TV ((f1 x)=z) )).
+ "КРЯ:пусть f2 - бинарная ф-я."
+ "f2 полна над TV означает для каждого x в TV, для каждого y в TV существует z в TV такой f2(x y)=z."
+ Declaration FULL2TV (TV TV:TV):TV	definition  (f2):(∀x:TV(∀y:TV (∃z:TV ((x f2 y)=z) ))).
+ "КРЯ:пусть f1 - унарная ф-я. f1 накрывальна над TV означает для каждого z в TV существует x в TV такой f1(x)=z."
+ Declaration ON1TV (TV:TV):TV	definition  (f1):(∀z:TV (∃x:TV ((f1 x)=z) )).
+ "КРЯ:пусть f2 - бинарная ф-я." 
+ "f2 накрывальна над TV означает для каждого z в TV существует x в TV, существует y в TV такие что f2(x y)=z."
+ Declaration ON2TV (TV TV:TV):TV	definition  (f2):(∀z:TV(∃x:TV (∃y:TV ((x f2 y)=z) ))).
+ "КРЯ:пусть p2 - бинарное отношение на TV. p2 рефлексивно на TV означает что для каждого x из TV x p2 x."
+ Declaration REFL_TV (TV TV:TV):TV	definition  (p2):(∀x:TV(x p2 x)).
+ "КРЯ:пусть p2 - бинарное отношение на TV." 
+ "p2 симметрично/коммутативно на TV означает что для каждых x,y из TV: x p2 y тождественно y p2 x."
+ Declaration COMM_TV (TV TV:TV):TV	definition  (p2):(∀x:TV(∀y:TV ((x p2 y)=(y p2 x)) )).
+
+ "СВОЙСТВА конкретных ф-й"
+ "Declaration EQ_full :TV	definition  ():FULL2TV(=)."
+ Declaration EQ_full :TV	definition  ():(∀x:TV(∀y:TV (∃z:TV ((x = y)=z) ))).
+ "Declaration EQ_on :TV	definition  ():ON2TV(=)."
+ Declaration EQ_on :TV	definition  ():(∀z:TV(∃x:TV (∃y:TV ((x = y)=z) ))).
+ "Declaration EQ_refl :TV	definition  ():REFL_TV(=)."
+ Declaration EQ_refl :TV	definition  ():(∀x:TV(x = x)).
+ "Declaration EQ_comm :TV	definition  ():COMM_TV(=)."
+ Declaration EQ_comm :TV	definition  ():(∀x:TV(∀y:TV ((x = y)=(y = x)) )).
+ 
+ Declaration AND_full :TV	definition  ():FULL2TV(∧).
+ Declaration OR_full :TV	definition  ():FULL2TV(∨).
+ Declaration NOT_full :TV 	definition  ():FULL1TV(¬).
+ Declaration AND_on :TV	definition  ():ON2TV(∧).
+ Declaration OR_on :TV	definition  ():ON2TV(∨).
+ Declaration NOT_on :TV	definition  ():ON1TV(¬).
+
+"Ss"
+ "strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ "INCLUDE TVs"
+ Declaration String sort "[^DQ]*".
+ Declaration = String String : TV prime fm_strcmp. 
+
+"St"
+ "INCLUDE TVt"
+ Declaration String sort.
+ Declaration = String String : TV prime. 
+ 
+"Ns Числа"
+ "INCLUDE TVs"
+ Declaration Number sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?".
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration + Number Number : Number prime fm_radd. 
+ Declaration - Number Number : Number prime fm_rminus. 
+ Declaration * Number Number : Number prime fm_rmult. 
+ Declaration / Number Number : Number prime fm_rdev. 
+ "арифм-оотношения"
+ Declaration = Number Number : TV prime fm_req. 
+ Declaration < Number Number : TV prime fm_rlt.
+
+"Nt"
+ "INCLUDE TVt"
+ Declaration Number sort.
+ Declaration = Number Number : TV prime. 
+ Declaration < Number Number : TV prime.
+ Declaration + Number Number : Number prime. 
+ Declaration - Number Number : Number prime. 
+ Declaration * Number Number : Number prime. 
+ Declaration / Number Number : Number prime. 
+ Declaration > Number Number : TV definition (x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration ≤ Number Number : TV definition (x y) : ((x=y)∨(x<y)).
+ Declaration ≥ Number Number : TV definition (x y) : ((x=y)∨(x>y)).
+
+"YearS structure"
+ "INCLUDE TVs"
+ Declaration Year sort "{NN}{DQ}y{DQ}".
+ Declaration = Year Year : TV prime fm_req. 
+ Declaration ltY Year Year : TV prime fm_rlt.
+
+"YearT АТ" 
+ "INCLUDE TVt"
+ Declaration Year sort.
+ Declaration = Year Year : TV prime. 
+ Declaration ltY Year Year : TV prime.
+
+"UDGs"
+ "INCLUDE TVs"
+ Declaration U sort. "...какое-то заполнение U"
+ Declaration = U U : TV prime fm_strcmp.
+ Declaration INC U U : TV prime. "...какое-то заполнение INC"
+ 
+"UDGt"
+ "INCLUDE TVt"
+ Declaration U sort. 
+ Declaration = U U : TV prime.
+ Declaration INC U U : TV prime. 
+ "+структурная аксиома полноты INC"
+
+
+
+
+
+
+
+
+
+
+

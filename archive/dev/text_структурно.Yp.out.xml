@@ -1,0 +1,112 @@
+ ? EQ_full   ()?
+ ? AND_full   ()?
+ ? OR_full   ()?
+ ? NOT_full   ()?
+ ? EQ_on   ()?
+ ? AND_on   ()?
+ ? OR_on   ()?
+ ? NOT_on   ()?
+
+ ? EQ_refl   ()?
+ ? EQ_comm   ()?
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000007' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='78' msg='added'>
+ ? EQ_full (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV = ( = ( x z ) y ) ) ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000017' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='80' msg='added'>
+ ? AND_full (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV = ( and ( x z ) y ) ) ) ) ?
+</deff_subst>
+!type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! term (81,729) has 5 unprocessed nodes!'!<term tid='81' nid='729' up='17' rid='trma' v='' irn='2' ref='13' type='51' flg='3' flg2='0'><l_p tid='81' nid='730' up='729' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='81' nid='731' up='729' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='732' up='729' rid='' v='x' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='81' nid='733' up='729' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='734' up='729' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='81' nid='722' up='729' rid='trma' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='81' nid='723' up='722' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='81' nid='724' up='722' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='725' up='722' rid='' v='z' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='81' nid='726' up='722' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='727' up='722' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='81' nid='715' up='722' rid='trme' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='81' nid='716' up='715' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='81' nid='717' up='715' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='718' up='715' rid='' v='y' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='81' nid='719' up='715' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='81' nid='720' up='715' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='81' nid='711' up='715' rid='trmf' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><term tid='81' nid='1144' up='711' rid='trmi' v='' irn='1' ref='13' type='52' flg='3' flg2='0'><Id tid='81' nid='1145' up='1144' rid='' v='=' irn='1' ref='13' type='52' flg='2' flg2='0'/></term><l_p tid='81' nid='712' up='711' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='81' nid='1146' up='711' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='81' nid='1154' up='1146' rid='trmf' v='' irn='-2' ref='23' type='171' flg='2' flg2='0'><term tid='81' nid='1147' up='1154' rid='trmi' v='' irn='1' ref='23' type='172' flg='2' flg2='0'><Id tid='81' nid='1148' up='1147' rid='' v='and' irn='1' ref='23' type='172' flg='2' flg2='0'/></term><l_p tid='81' nid='1155' up='1154' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='81' nid='1153' up='1154' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='81' nid='1157' up='1153' rid='trmi' v='' irn='-2' ref='81' type='734' flg='2' flg2='0'><Id tid='81' nid='1158' up='1157' rid='' v='x' irn='1' ref='0' type='729' flg='2' flg2='0'/></term><term tid='81' nid='1159' up='1153' rid='trmi' v='' irn='-1' ref='81' type='727' flg='2' flg2='0'><Id tid='81' nid='1160' up='1159' rid='' v='z' irn='1' ref='0' type='722' flg='2' flg2='0'/></term></TermList><r_p tid='81' nid='1156' up='1154' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='81' nid='709' up='1146' rid='trmi' v='' irn='-1' ref='81' type='720' flg='2' flg2='0'><Id tid='81' nid='710' up='709' rid='' v='y' irn='1' ref='0' type='715' flg='2' flg2='0'/></term></TermList><r_p tid='81' nid='714' up='711' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='81' nid='721' up='715' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='81' nid='728' up='722' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='81' nid='735' up='729' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000026' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='82' msg='added'>
+ ? OR_full (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV = ( or ( x z ) y ) ) ) ) ?
+</deff_subst>
+!type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! term (83,781) has 5 unprocessed nodes!'!<term tid='83' nid='781' up='26' rid='trma' v='' irn='2' ref='13' type='51' flg='3' flg2='0'><l_p tid='83' nid='782' up='781' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='83' nid='783' up='781' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='784' up='781' rid='' v='x' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='83' nid='785' up='781' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='786' up='781' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='83' nid='774' up='781' rid='trma' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='83' nid='775' up='774' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='83' nid='776' up='774' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='777' up='774' rid='' v='z' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='83' nid='778' up='774' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='779' up='774' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='83' nid='767' up='774' rid='trme' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='83' nid='768' up='767' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='83' nid='769' up='767' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='770' up='767' rid='' v='y' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='83' nid='771' up='767' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='83' nid='772' up='767' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='83' nid='763' up='767' rid='trmf' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><term tid='83' nid='1150' up='763' rid='trmi' v='' irn='1' ref='13' type='52' flg='3' flg2='0'><Id tid='83' nid='1151' up='1150' rid='' v='=' irn='1' ref='13' type='52' flg='2' flg2='0'/></term><l_p tid='83' nid='764' up='763' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='83' nid='1152' up='763' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='83' nid='1160' up='1152' rid='trmf' v='' irn='-2' ref='29' type='250' flg='2' flg2='0'><term tid='83' nid='1153' up='1160' rid='trmi' v='' irn='1' ref='29' type='251' flg='2' flg2='0'><Id tid='83' nid='1154' up='1153' rid='' v='or' irn='1' ref='29' type='251' flg='2' flg2='0'/></term><l_p tid='83' nid='1161' up='1160' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='83' nid='1159' up='1160' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='83' nid='1163' up='1159' rid='trmi' v='' irn='-2' ref='83' type='786' flg='2' flg2='0'><Id tid='83' nid='1164' up='1163' rid='' v='x' irn='1' ref='0' type='781' flg='2' flg2='0'/></term><term tid='83' nid='1165' up='1159' rid='trmi' v='' irn='-1' ref='83' type='779' flg='2' flg2='0'><Id tid='83' nid='1166' up='1165' rid='' v='z' irn='1' ref='0' type='774' flg='2' flg2='0'/></term></TermList><r_p tid='83' nid='1162' up='1160' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='83' nid='761' up='1152' rid='trmi' v='' irn='-1' ref='83' type='772' flg='2' flg2='0'><Id tid='83' nid='762' up='761' rid='' v='y' irn='1' ref='0' type='767' flg='2' flg2='0'/></term></TermList><r_p tid='83' nid='766' up='763' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='83' nid='773' up='767' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='83' nid='780' up='774' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='83' nid='787' up='781' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000035' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='84' msg='added'>
+ ? NOT_full (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV = ( not ( x ) y ) ) ) ?
+</deff_subst>
+!type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! term (85,824) has 4 unprocessed nodes!'!<term tid='85' nid='824' up='35' rid='trma' v='' irn='2' ref='13' type='51' flg='3' flg2='0'><l_p tid='85' nid='825' up='824' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='85' nid='826' up='824' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='85' nid='827' up='824' rid='' v='x' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='85' nid='828' up='824' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='85' nid='829' up='824' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='85' nid='817' up='824' rid='trme' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='85' nid='818' up='817' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='85' nid='819' up='817' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='85' nid='820' up='817' rid='' v='y' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='85' nid='821' up='817' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='85' nid='822' up='817' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='85' nid='813' up='817' rid='trmf' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><term tid='85' nid='1156' up='813' rid='trmi' v='' irn='1' ref='13' type='52' flg='3' flg2='0'><Id tid='85' nid='1157' up='1156' rid='' v='=' irn='1' ref='13' type='52' flg='2' flg2='0'/></term><l_p tid='85' nid='814' up='813' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='85' nid='1158' up='813' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='85' nid='1164' up='1158' rid='trmf' v='' irn='-2' ref='19' type='128' flg='2' flg2='0'><term tid='85' nid='1159' up='1164' rid='trmi' v='' irn='1' ref='19' type='129' flg='2' flg2='0'><Id tid='85' nid='1160' up='1159' rid='' v='not' irn='1' ref='19' type='129' flg='2' flg2='0'/></term><l_p tid='85' nid='1165' up='1164' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='85' nid='1163' up='1164' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='85' nid='1167' up='1163' rid='trmi' v='' irn='-1' ref='85' type='829' flg='2' flg2='0'><Id tid='85' nid='1168' up='1167' rid='' v='x' irn='1' ref='0' type='824' flg='2' flg2='0'/></term></TermList><r_p tid='85' nid='1166' up='1164' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='85' nid='811' up='1158' rid='trmi' v='' irn='-1' ref='85' type='822' flg='2' flg2='0'><Id tid='85' nid='812' up='811' rid='' v='y' irn='1' ref='0' type='817' flg='2' flg2='0'/></term></TermList><r_p tid='85' nid='816' up='813' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='85' nid='823' up='817' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='85' nid='830' up='824' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000044' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='86' msg='added'>
+ ? EQ_on (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV ( ∃ z : TV = ( = ( y z ) x ) ) ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000053' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='88' msg='added'>
+ ? AND_on (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV ( ∃ z : TV = ( and ( y z ) x ) ) ) ) ?
+</deff_subst>
+!type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! term (89,928) has 5 unprocessed nodes!'!<term tid='89' nid='928' up='53' rid='trma' v='' irn='2' ref='13' type='51' flg='3' flg2='0'><l_p tid='89' nid='929' up='928' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='89' nid='930' up='928' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='931' up='928' rid='' v='x' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='89' nid='932' up='928' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='933' up='928' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='89' nid='921' up='928' rid='trme' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='89' nid='922' up='921' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='89' nid='923' up='921' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='924' up='921' rid='' v='y' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='89' nid='925' up='921' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='926' up='921' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='89' nid='914' up='921' rid='trme' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><l_p tid='89' nid='915' up='914' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='89' nid='916' up='914' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='917' up='914' rid='' v='z' irn='3' ref='0' type='0' flg='1' flg2='0'/><COLON tid='89' nid='918' up='914' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='89' nid='919' up='914' rid='' v='TV' irn='5' ref='0' type='0' flg='1' flg2='0'/><term tid='89' nid='910' up='914' rid='trmf' v='' irn='6' ref='13' type='51' flg='3' flg2='0'><term tid='89' nid='1168' up='910' rid='trmi' v='' irn='1' ref='13' type='52' flg='3' flg2='0'><Id tid='89' nid='1169' up='1168' rid='' v='=' irn='1' ref='13' type='52' flg='2' flg2='0'/></term><l_p tid='89' nid='911' up='910' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='89' nid='1170' up='910' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='89' nid='1178' up='1170' rid='trmf' v='' irn='-2' ref='23' type='171' flg='2' flg2='0'><term tid='89' nid='1171' up='1178' rid='trmi' v='' irn='1' ref='23' type='172' flg='2' flg2='0'><Id tid='89' nid='1172' up='1171' rid='' v='and' irn='1' ref='23' type='172' flg='2' flg2='0'/></term><l_p tid='89' nid='1179' up='1178' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='89' nid='1177' up='1178' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='89' nid='1181' up='1177' rid='trmi' v='' irn='-2' ref='89' type='926' flg='2' flg2='0'><Id tid='89' nid='1182' up='1181' rid='' v='y' irn='1' ref='0' type='921' flg='2' flg2='0'/></term><term tid='89' nid='1183' up='1177' rid='trmi' v='' irn='-1' ref='89' type='919' flg='2' flg2='0'><Id tid='89' nid='1184' up='1183' rid='' v='z' irn='1' ref='0' type='914' flg='2' flg2='0'/></term></TermList><r_p tid='89' nid='1180' up='1178' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='89' nid='908' up='1170' rid='trmi' v='' irn='-1' ref='89' type='933' flg='2' flg2='0'><Id tid='89' nid='909' up='908' rid='' v='x' irn='1' ref='0' type='928' flg='2' flg2='0'/></term></TermList><r_p tid='89' nid='913' up='910' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='89' nid='920' up='914' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='89' nid='927' up='921' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='89' nid='934' up='928' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000062' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='90' msg='added'>
+ ? OR_on (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ y : TV ( ∃ z : TV = ( or ( y z ) x ) ) ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000071' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='92' msg='added'>
+ ? NOT_on (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∃ z : TV = ( not ( z ) x ) ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000080' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='94' msg='added'>
+ ? EQ_refl (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV = ( x x ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<Yp1s st_id='0000000089' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='96' msg='added'>
+ ? EQ_comm (  ) ?
+</st_store>
+<deff_subst msg='RESULT'> ? ( ∀ x : TV ( ∀ z : TV or ( not ( = ( x z ) ) = ( z x ) ) ) ) ?
+</deff_subst></q_term>
+<return msg='The value is _True.' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>
+
+

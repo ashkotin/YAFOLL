@@ -1,0 +1,51 @@
+/*This is an additional final step to assign level to "cherry" - nodes lost by get_circles.pgc.
+We assign to cherry -l-1, where l is min (negative) source level of cherry in-nodes.
+First version. 19.07.2011. Alex Shkotin. alex.shkotin@gmail.com
+*/
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+int main()
+{int rc;
+struct tm *newtime; time_t ltime;
+EXEC SQL BEGIN DECLARE SECTION;
+   int ni,l;
+EXEC SQL END DECLARE SECTION;
+EXEC SQL DECLARE ch_c cursor for select min(f.level), n.node_id 
+ from wiki_nodes_stats_all n, wiki_arcs_all a, wiki_nodes_stats_all f
+ where n.node_id=a.cat_to and f.node_id=a.cat_from and n.level is null group by n.node_id;
+/*ECPGdebug(1,stderr);*/
+EXEC SQL CONNECT TO CA;
+if (sqlca.sqlcode!=0) goto bad;
+printf ("Connected. ");ltime=time(NULL);newtime=localtime(&ltime);printf("Time point: %s",asctime(newtime));
+EXEC SQL OPEN ch_c;
+if (sqlca.sqlcode!=0) goto bad;
+printf("node_id,level\n");
+
+next_ch:
+EXEC SQL FETCH next from ch_c into :l,:ni;
+if (sqlca.sqlcode==ECPG_NOT_FOUND) goto end_chs; 
+if (sqlca.sqlcode!=0) goto bad;
+EXEC SQL UPDATE wiki_nodes_stats_all SET level = :l-1 WHERE node_id = :ni;
+if (sqlca.sqlcode!=0) goto bad;
+printf("%i,%i\n",ni,l-1);
+goto next_ch;
+
+end_chs:
+EXEC SQL close ch_c;
+if (sqlca.sqlcode!=0) goto bad;
+EXEC SQL COMMIT;
+if (sqlca.sqlcode!=0) goto bad;
+rc = EXIT_SUCCESS;
+badr:
+EXEC SQL DISCONNECT;
+printf ("Disconnected. ");ltime=time(NULL);newtime=localtime(&ltime);printf("Time point: %s",asctime(newtime));
+exit(rc);
+
+bad:
+printf("Unexpected respond from DBMS! Check it!\n");
+printf("sqlca.sqlcode=%i, sqlca.sqlstate=%s.\n",sqlca.sqlcode,sqlca.sqlstate);
+printf("sqlca.sqlerrm.sqlerrmc=%s.\n",sqlca.sqlerrm.sqlerrmc);
+rc = EXIT_FAILURE;
+goto badr;
+}

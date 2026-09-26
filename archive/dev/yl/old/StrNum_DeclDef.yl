@@ -1,0 +1,15 @@
+﻿--Сорта стрингологии и чисел
+
+Declaration S sort "[^DQ]*". --  sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)
+Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+--Объявления функций арифметики десятичных рациональных чисел
+
+Declaration LE R R:TV. Add infix "<" to LE. --S?
+Declaration GR R R:TV. Add infix ">" to GR. --S?
+Declaration LEQ R R:TV. Add infix "≤" to LEQ. --S? +Определение!
+Declaration GEQ R R:TV. Add infix "≥" to GEQ. --S? +Определение!
+Declaration PLUS R R:R. Add infix "+" to PLUS. --S?
+Declaration MINUS R R:R. Add infix "-" to MINUS. --S?
+Declaration MULTIPLY R R:R. Add infix "*" to MULTIPLY.
+Declaration DEVIDE R R:R. Add infix "/" to DEVIDE.

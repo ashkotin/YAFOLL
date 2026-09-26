@@ -1,0 +1,60 @@
+﻿Declaration o sort. 
+--РАВЕНСТВО ДЛЯ o
+Declaration EQ_o o o:TV prime fm_strcmp. Add fix "=" to EQ_o. 
+-- +аксиомы равенства
+--НЕРАВЕНСТВО ДЛЯ o
+Declaration Neq_o o o:TV. Add fix "≠" to Neq_o. 
+Definition D_Neq_o Neq_o(x1 x2) : (¬(x1=x2)).
+--Theorem 
+Declaration Neq_th :TV.
+Definition D_Neq_th Neq_th :(∀x:o(∀y:o((x≠y) ≡ Neq_o(x y)))). 
+--Док-во: устранив инфикс "≠" (вместе со скобками;-) получим ∀x:o,y:o(Neq_o(x y) ≡ Neq_o(x y))
+--Замечание. Это какая то спец теорема, т.к. настоящие теоремы не употребляют сокращений;-)
+--?Neq_th()? -- в любом случае гонять эту теорему мало;-)
+
+Declaration ObjectInverseOf (o o:TV):(o o:TV).
+Definition T1_1 ObjectInverseOf(OP)(x y) : OP(y x).
+
+Declaration SubClassOf  (o:TV)(o:TV):TV.
+Definition T5_1 SubClassOf(C1 C2) : (∀z:o (C1(z) → C2(z))).
+
+ Declaration disjoint ( o : TV ) ( o : TV ) : TV .
+ Definition DEF_disjoint disjoint ( z y ) : ( ∀ x : o ( ¬ ( z ( x ) ∧ y ( x ) ) ) ) .
+ 
+--тестирование глубокого определеия
+Declaration ObjectInverseOf2(o o:TV):((o o:TV):(o o:TV)).
+Definition T1_1_2 ObjectInverseOf2(OP1)(OP2)(x y) : (OP1(y x) and OP2(x y)).
+
+Declaration ObjectInverseOf3 (o o:TV):(o o:TV).
+Declaration qf (o o:TV):(o o:TV) prime.
+Definition T1_3 ObjectInverseOf3(OP) : qf(OP).
+
+ 
+--ПРЕДИКАТЫ
+--бинарики
+Declaration p1b o o:TV prime.
+Declaration p2b o o:TV prime.
+Declaration p2u o:TV prime.
+Declaration p3u o:TV prime.
+--КС 
+!_o1 o! !_o2 o!
+!p1b(_o1 _o2):_True! !p1b(_o2 _o1):_False! !p1b(_o1 _o1):_True! !p1b(_o2 _o2):_False!
+!p2b(_o1 _o2):_True! !p2b(_o2 _o1):_False! !p2b(_o1 _o1):_True! !p2b(_o2 _o2):_False!
+!p2u(_o1):_True! !p2u(_o2):_True!
+!p3u(_o1):_True! !p3u(_o2):_False!
+
+!qf(p1b):p2b!
+
+
+--ЗАПРОСЫ
+?ObjectInverseOf(p1b)(_o1 _o2)? --надо _False
+?SubClassOf(p3u p2u)? --надо _True
+?disjoint(p3u p2u)? --надо _False
+?ObjectInverseOf2(p1b)(p2b)(_o1 _o2)? --надо _False
+
+--СООБЩЕНИЯ ОБ ОШИБКАХ
+
+--проверки WFC функций
+--Declaration EQ_o2 o2 True:TV. --должно быть 2 сообщения!
+--Declaration SubClassOf2  (o:TV):(o:TV) prime. --должно быть 1 сообщение! 
+

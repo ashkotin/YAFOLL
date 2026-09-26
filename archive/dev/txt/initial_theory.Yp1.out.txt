@@ -1,0 +1,311 @@
+﻿
+
+<Yp1 BEGIN st_id=0000000001>
+<exN_proc! st_id=0000000001>
+<Yp1 END st_id=0000000001>
+
+<Yp1 BEGIN st_id=0000000011>
+<st_store Tree=1 added=1>
+					 Declaration TV sort .
+<dcl_proc: st_id=0000000011>
+<Yp1 END st_id=0000000011>
+
+<Yp1 BEGIN st_id=0000000026>
+<st_store Tree=2 added=1>
+					 Declaration EQU_TV TV TV : TV prime .
+<dcl_proc: st_id=0000000026>
+<Yp1 END st_id=0000000026>
+
+<Yp1 BEGIN st_id=0000000027>
+<st_store Tree=3 added=1>
+					 Add infix "=" to EQU_TV .
+<Yp1 st_id=0000000027 st-4>
+<Yp1 END st_id=0000000027>
+
+<Yp1 BEGIN st_id=0000000046>
+<st_store Tree=4 added=1>
+					 Declaration NOT TV : TV prime .
+<dcl_proc: st_id=0000000046>
+<Yp1 END st_id=0000000046>
+
+<Yp1 BEGIN st_id=0000000047>
+<st_store Tree=5 added=1>
+					 Add infix "¬" to NOT .
+<Yp1 st_id=0000000047 st-4>
+<Yp1 END st_id=0000000047>
+
+<Yp1 BEGIN st_id=0000000054>
+<st_store Tree=6 added=1>
+					 Add infix "not" to NOT .
+<Yp1 st_id=0000000054 st-4>
+<Yp1 END st_id=0000000054>
+
+<Yp1 BEGIN st_id=0000000075>
+<st_store Tree=7 added=1>
+					 Declaration AND TV TV : TV prime .
+<dcl_proc: st_id=0000000075>
+<Yp1 END st_id=0000000075>
+
+<Yp1 BEGIN st_id=0000000076>
+<st_store Tree=8 added=1>
+					 Add infix "∧" to AND .
+<Yp1 st_id=0000000076 st-4>
+<Yp1 END st_id=0000000076>
+
+<Yp1 BEGIN st_id=0000000083>
+<st_store Tree=9 added=1>
+					 Add infix "and" to AND .
+<Yp1 st_id=0000000083 st-4>
+<Yp1 END st_id=0000000083>
+
+<Yp1 BEGIN st_id=0000000104>
+<st_store Tree=10 added=1>
+					 Declaration OR TV TV : TV prime .
+<dcl_proc: st_id=0000000104>
+<Yp1 END st_id=0000000104>
+
+<Yp1 BEGIN st_id=0000000105>
+<st_store Tree=11 added=1>
+					 Add infix "∨" to OR .
+<Yp1 st_id=0000000105 st-4>
+<Yp1 END st_id=0000000105>
+
+<Yp1 BEGIN st_id=0000000112>
+<st_store Tree=12 added=1>
+					 Add infix "or" to OR .
+<Yp1 st_id=0000000112 st-4>
+<Yp1 END st_id=0000000112>
+
+<Yp1 BEGIN st_id=0000000132>
+<st_store Tree=13 added=1>
+					 Declaration IMPLIES TV TV : TV .
+<dcl_proc: st_id=0000000132>
+<Yp1 END st_id=0000000132>
+
+<Yp1 BEGIN st_id=0000000133>
+<st_store Tree=14 added=1>
+					 Add infix "→" to IMPLIES .
+<Yp1 st_id=0000000133 st-4>
+<Yp1 END st_id=0000000133>
+
+<Yp1 BEGIN st_id=0000000140>
+<st_store Tree=15 added=1>
+					 Add infix "impl" to IMPLIES .
+<Yp1 st_id=0000000140 st-4>
+<Yp1 END st_id=0000000140>
+
+<Yp1 BEGIN st_id=0000000172>
+<st_store Tree=16 added=1>
+					 Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=16 Ilbch=153) (sigf_t=13 sigf=126)
+<infx_subst RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!defc_subst!DEBUG! begin tid=17
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id z does not exist in entities!
+(defc_subst: RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=17
+(deff_subst: RESULT			 Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=1.
+<def_proc! st_id=0000000172>
+<Yp1 END st_id=0000000172>
+
+<Yp1 BEGIN st_id=0000000186>
+<st_store Tree=18 added=1>
+					 Declaration EQUIV TV TV : TV .
+<dcl_proc: st_id=0000000186>
+<Yp1 END st_id=0000000186>
+
+<Yp1 BEGIN st_id=0000000187>
+<st_store Tree=19 added=1>
+					 Add infix "≡" to EQUIV .
+<Yp1 st_id=0000000187 st-4>
+<Yp1 END st_id=0000000187>
+
+<Yp1 BEGIN st_id=0000000194>
+<st_store Tree=20 added=1>
+					 Add infix "eqv" to EQUIV .
+<Yp1 st_id=0000000194 st-4>
+<Yp1 END st_id=0000000194>
+
+<Yp1 BEGIN st_id=0000000234>
+<st_store Tree=21 added=1>
+					 Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=21 Ilbch=207) (sigf_t=18 sigf=180)
+<infx_subst RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+!defc_subst!DEBUG! begin tid=22
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+!defc_subst!WARNING! Id x does not exist in entities!
+(defc_subst: RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=22
+!deff_subst!DEBUG! loop! function with def found: cnid=526 Id=IMPLIES def_id=IMPL_d.
+!deff_subst!DEBUG! loop! function with def found: cnid=529 Id=IMPLIES def_id=IMPL_d.
+(deff_subst: RESULT			 Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+!deff_subst!DEBUG! end RC=2
+func_add_d(DEBUG)st_trans.rc=3.
+<def_proc! st_id=0000000234>
+<Yp1 END st_id=0000000234>
+
+<Yp1 BEGIN st_id=0000000248>
+<st_store Tree=23 added=1>
+					 Declaration NEQ_TV TV TV : TV .
+<dcl_proc: st_id=0000000248>
+<Yp1 END st_id=0000000248>
+
+<Yp1 BEGIN st_id=0000000249>
+<st_store Tree=24 added=1>
+					 Add infix "≠" to NEQ_TV .
+<Yp1 st_id=0000000249 st-4>
+<Yp1 END st_id=0000000249>
+
+<Yp1 BEGIN st_id=0000000256>
+<st_store Tree=25 added=1>
+					 Add infix "neq" to NEQ_TV .
+<Yp1 st_id=0000000256 st-4>
+<Yp1 END st_id=0000000256>
+
+<Yp1 BEGIN st_id=0000000288>
+<st_store Tree=26 added=1>
+					 Definition NEQ_TV_d NEQ_TV ( x y ) : ( ¬ ( x = y ) ) .
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=26 Ilbch=269) (sigf_t=23 sigf=242)
+<infx_subst RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!defc_subst!DEBUG! begin tid=27
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id y does not exist in entities!
+(defc_subst: RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=27
+(deff_subst: RESULT			 Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+!deff_subst!DEBUG! end RC=0
+func_add_d(DEBUG)st_trans.rc=1.
+<def_proc! st_id=0000000288>
+<Yp1 END st_id=0000000288>
+
+<Yp1 BEGIN st_id=0000000289>
+<st_store Tree=28 added=1>
+					 ! True TV !
+<Yp1 st_id=0000000289 fmca>
+<Yp1 END st_id=0000000289>
+
+<Yp1 BEGIN st_id=0000000294>
+<st_store Tree=29 added=1>
+					 ! False TV !
+<Yp1 st_id=0000000294 fmca>
+<Yp1 END st_id=0000000294>
+
+<Yp1 BEGIN st_id=0000000311>
+<st_store Tree=30 added=1>
+					 ! EQU_TV ( True True ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < EQU_TV ( True True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000311 fmta>
+<Yp1 END st_id=0000000311>
+
+<Yp1 BEGIN st_id=0000000327>
+<st_store Tree=31 added=1>
+					 ! EQU_TV ( False False ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < EQU_TV ( False False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000327 fmta>
+<Yp1 END st_id=0000000327>
+
+<Yp1 BEGIN st_id=0000000343>
+<st_store Tree=32 added=1>
+					 ! EQU_TV ( True False ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < EQU_TV ( True False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000343 fmta>
+<Yp1 END st_id=0000000343>
+
+<Yp1 BEGIN st_id=0000000359>
+<st_store Tree=33 added=1>
+					 ! EQU_TV ( False True ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < EQU_TV ( False True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000359 fmta>
+<Yp1 END st_id=0000000359>
+
+<Yp1 BEGIN st_id=0000000373>
+<st_store Tree=34 added=1>
+					 ! NOT ( True ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < NOT ( True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000373 fmta>
+<Yp1 END st_id=0000000373>
+
+<Yp1 BEGIN st_id=0000000387>
+<st_store Tree=35 added=1>
+					 ! NOT ( False ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < NOT ( False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000387 fmta>
+<Yp1 END st_id=0000000387>
+
+<Yp1 BEGIN st_id=0000000403>
+<st_store Tree=36 added=1>
+					 ! AND ( True True ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < AND ( True True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000403 fmta>
+<Yp1 END st_id=0000000403>
+
+<Yp1 BEGIN st_id=0000000419>
+<st_store Tree=37 added=1>
+					 ! AND ( False True ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < AND ( False True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000419 fmta>
+<Yp1 END st_id=0000000419>
+
+<Yp1 BEGIN st_id=0000000435>
+<st_store Tree=38 added=1>
+					 ! AND ( True False ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < AND ( True False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000435 fmta>
+<Yp1 END st_id=0000000435>
+
+<Yp1 BEGIN st_id=0000000451>
+<st_store Tree=39 added=1>
+					 ! AND ( False False ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < AND ( False False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000451 fmta>
+<Yp1 END st_id=0000000451>
+
+<Yp1 BEGIN st_id=0000000467>
+<st_store Tree=40 added=1>
+					 ! OR ( True True ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < OR ( True True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000467 fmta>
+<Yp1 END st_id=0000000467>
+
+<Yp1 BEGIN st_id=0000000483>
+<st_store Tree=41 added=1>
+					 ! OR ( False True ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < OR ( False True )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000483 fmta>
+<Yp1 END st_id=0000000483>
+
+<Yp1 BEGIN st_id=0000000499>
+<st_store Tree=42 added=1>
+					 ! OR ( True False ) : True !
+!fmta_proc!DEBUG! term-1 serialized: < OR ( True False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000499 fmta>
+<Yp1 END st_id=0000000499>
+
+<Yp1 BEGIN st_id=0000000515>
+<st_store Tree=43 added=1>
+					 ! OR ( False False ) : False !
+!fmta_proc!DEBUG! term-1 serialized: < OR ( False False )>
+!fmta_proc!DEBUG! end!
+<Yp1 st_id=0000000515 fmta>
+<Yp1 END st_id=0000000515>
+<:-)End of Statement nodes in dt. Stop.>

@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000011' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='143' msg='added'> ? = ( 2 3 ) ?</st_store>
+!type_trmi!WARNING! = is a polymorphic func!
+!type_tt!DEBUG!node begin. tid=143, tnid=1, rid='trmi'!
+!Sget_poly!WARNING!Polymorha is allowd only for '='
+!Sget_poly!DEBUG!return ref=38, type=497!
+!type_tt!DEBUG!'trmi' before sget_sid. tid=143, pid=8!
+!type_tt!DEBUG! tree after trmi:<term tid='143' nid='8' up='11' rid='trmf' v='' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='143' nid='1' up='8' rid='trmi' v='' irn='1' ref='0' type='0' flg='2' flg2='-2147483648'><Id tid='143' nid='2' up='1' rid='' v='=' irn='1' ref='0' type='0' flg='2' flg2='-2147483648'/></term><l_p tid='143' nid='9' up='8' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='143' nid='7' up='8' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='143' nid='3' up='7' rid='_trmRE' v='' irn='-2' ref='35' type='481' flg='2' flg2='-2147483648'><Number tid='143' nid='4' up='3' rid='' v='2' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='143' nid='5' up='7' rid='_trmRE' v='' irn='-1' ref='35' type='481' flg='2' flg2='-2147483648'><Number tid='143' nid='6' up='5' rid='' v='3' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/></term></TermList><r_p tid='143' nid='10' up='8' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term>
+!type_tt!DEBUG!node begin. tid=143, tnid=8, rid='trmf'!
+!type_tt!DEBUG! tree for trmf:<term tid='143' nid='8' up='11' rid='trmf' v='' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='143' nid='1' up='8' rid='trmi' v='' irn='1' ref='0' type='0' flg='2' flg2='-2147483648'><Id tid='143' nid='2' up='1' rid='' v='=' irn='1' ref='0' type='0' flg='2' flg2='-2147483648'/></term><l_p tid='143' nid='9' up='8' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='143' nid='7' up='8' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='143' nid='3' up='7' rid='_trmRE' v='' irn='-2' ref='35' type='481' flg='2' flg2='-2147483648'><Number tid='143' nid='4' up='3' rid='' v='2' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='143' nid='5' up='7' rid='_trmRE' v='' irn='-1' ref='35' type='481' flg='2' flg2='-2147483648'><Number tid='143' nid='6' up='5' rid='' v='3' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/></term></TermList><r_p tid='143' nid='10' up='8' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term>
+!WFC_trmf!DEBUG!begin tidd=0, sig_f=0, tidc=143, TermList=7.
+<ABORT> sget_attr-sid: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: 100
+sqlerrm.sqlerrml: 25
+sqlerrm.sqlerrmc: no data found on line 304
+sqlerrd: 0 0 0 0 0 0
+sqlwarn: 0 0 0 0 0 0 0 0
+sqlstate: 02000
+===============
+</ABORT>
+</q_term>
+</Yp1s>
+</DT>

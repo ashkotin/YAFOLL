@@ -1,0 +1,83 @@
+Declaration o sort.
+<:-(Can't add! o is already used as sort!DECLARATION_s>
+ Declaration r sort.
+<:-(Can't add! r is already used as sort!DECLARATION_s>
+ 
+
+Declaration Neq predicate<--SA>  o,o.
+<SA BAD_Statement='Neq'>
+ 
+Definition Neq Neq(x1,<--SA>x2) predicate not(x1=x2).
+<SA BAD_Statement='x1'>
+
+Axiom Neq Any<--SA> x:o,y:o((x neq y) eqv Neq(x,y)).
+<SA BAD_Statement='Any'>
+
+
+Declaration  Plus:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Plus Any<--SA> x:r,y:r ((x+y) = Plus(x,y)).
+<SA BAD_Statement='Any'>
+
+Declaration  Minus:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Minus Any<--SA> x:r,y:r ((x-y) = Minus(x,y)).
+<SA BAD_Statement='Any'>
+
+Declaration  Multiply:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Multiply Any<--SA> x:r,y:r ((x*y) = Multiply(x,y)).
+<SA BAD_Statement='Any'>
+
+--комментарий!
+
+Declaration  Opx predicate<--SA> o.
+<SA BAD_Statement='Opx'>
+ Declaration  Cpx predicate<--SA> o.
+<SA BAD_Statement='Cpx'>
+ 
+Axiom Opx_Cpx DisjointClasses(Opx,<--SA>Cpx).
+<SA BAD_Statement='Opx'>
+
+Declaration  Px predicate<--SA> o.
+<SA BAD_Statement='Px'>
+ Definition D_Px Px(x) predicate<--SA> ObjectUnionOf(Opx,Cpx)(x).
+<SA BAD_Statement='x'>
+
+Declaration Q predicate<--SA> o.
+<SA BAD_Statement='Q'>
+ Declaration A predicate<--SA> o.
+<SA BAD_Statement='A'>
+ Declaration P predicate<--SA> o.
+<SA BAD_Statement='P'>
+ Declaration F predicate<--SA> o.
+<SA BAD_Statement='F'>
+
+Declaration VPC:(<--SA>o:r) functor (o).
+<SA BAD_Statement='VPC'>
+ 
+
+--!Эта функция не нужна! Но конечно может быть определена:-) Надо смотреть в отчёте где она используется!
+Declaration  VPC_Px:r  function<--SA> o.
+<SA BAD_Statement='r'>
+
+Definition VPC_Px VPC_Px(sb1) function<--SA> (VPC(Opx)(sb1)+VPC(Cpx)(sb1)).
+<SA BAD_Statement='sb1'>
+
+
+Theorem Px_1 Any<--SA> x:o (VPC(Px)(x) = (VPC(Opx)(x)+VPC(Cpx)(x))).
+<SA BAD_Statement='Any'>
+
+
+Definition D_VPC_OOC VPC_OOC(sb1) function<--SA> (VPC(Ol)(sb1)+(VPC(Opx)(sb1)+VPC(Cpx)(sb1))).
+<SA BAD_Statement='sb1'>
+
+Definition D_VPC_OPH VPC_OPH(sb1) function<--SA> (VPC(Ol)(sb1)+(VPC(Px)(sb1)+VPC(hornblende)(sb1))).
+<SA BAD_Statement='sb1'>
+
+Definition D_VPC_M VPC_M(sb1) function<--SA> (100 - (VPC(Q)(sb1)+(VPC(A)(sb1)+(VPC(P)(sb1)+VPC(F)(sb1))))).
+<SA BAD_Statement='sb1'>
+
+
+
+

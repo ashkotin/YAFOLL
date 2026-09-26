@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000009' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='79' msg='added'> ? ( _True ≠ _True ) ?</st_store>
+!sget_if!ERROR!: fix '≠' of this kind is used but not assigned.</q_term>
+<return msg='q_term.term_proc:(!term_proc: term (79,5) has an error:-10!).WFC(st-11-1)' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

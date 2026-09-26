@@ -1,0 +1,1 @@
+select tid||nid||' [label="'||sid||' '||COALESCE(v,'')||'\n'||COALESCE(rid,'')||'"];' from dts order by tid,nid;

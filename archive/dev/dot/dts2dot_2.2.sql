@@ -1,0 +1,1 @@
+select CAST(tid as varchar)||CAST(nid as varchar)||' -> '||CAST(tid as varchar)||CAST(up as varchar)||' [label="'||COALESCE(irn,0)||'", fontsize=10];' from dts where tid=29 order by tid,nid;

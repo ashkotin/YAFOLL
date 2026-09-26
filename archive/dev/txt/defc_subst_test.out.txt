@@ -1,0 +1,20 @@
+﻿!0!
+--=================Обязательное начало
+
+--=================Обяз закончен
+﻿--тестирование работы Сиф defc_subst - подстановки определения константы.
+Declaration o sort. 
+
+Declaration  Socrates:o constant. 
+Declaration  Xanthippe:o constant.
+
+--бинарик. первое - отец, второе - мать.
+Declaration first_son o o:o prime.
+
+Declaration  Lamprocles:o constant. 
+Definition Socratic_d Lamprocles constant first_son(Socrates Xanthippe). 
+
+-- добавляем в модель эо:
+!Somebody_1 o!
+-- проверка-1: должно быть две подстановки.
+!first_son(Lamprocles Lamprocles):Somebody_1!

@@ -1,0 +1,39 @@
+"Рац числа"
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration + (R R R) fm_radd. 
+ Declaration - (R R R) fm_rminus. 
+ Declaration * (R R R) fm_rmult. 
+ Declaration / (R R R) fm_rdev. 
+ "арифм-отношения"
+ Declaration = (TV R R) fm_Req. 
+ Declaration < (TV R R) fm_rlt.
+
+ "эо-отношения"
+ Declaration = (TV Ide Ide) fm_Ueq. --U означает Юникодное сравнение!
+ Declaration < (TV Ide Ide) fm_Ult. --U означает Юникодное сравнение!
+
+ "Str-отношения"
+ Declaration = (TV Str Str) fm_Ueq. --U означает Юникодное сравнение!
+ Declaration < (TV Str Str) fm_Ult. --U означает Юникодное сравнение!
+
+ "TV-отношения"
+ Declaration = (TV TV TV) fm_Ueq. --U означает Юникодное сравнение!
+ Declaration < (TV TV TV) fm_Ult. --U означает Юникодное сравнение!
+"!!!лексикографически ⊥[>]⊤"
+"мы имеем ИСТИНА < ЛОЖЬ говоря мнемонически что истина это иголка в стоге сена лжи…"
+
+
+"Нат числа"
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration + (Nat Nat Nat) fm_Nadd. 
+ Declaration - (Nat Nat Nat) fm_Nminus. 
+ Declaration * (Nat Nat Nat) fm_Nmult. 
+ Declaration / (Nat Nat Nat) fm_Ndev. 
+ "арифм-отношения"
+ Declaration = (TV Nat Nat) fm_Neq. 
+ Declaration < (TV Nat Nat) fm_Nlt.
+
+"скос"
+ Declaration = (TV Fseq Fseq) fm_Seq.
+ Declaration < (TV Fseq Fseq) fm_Slt.
+ Declaration lng(N Fseq) fm_Slng.

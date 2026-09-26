@@ -1,0 +1,4 @@
+"String DAD"
+ "sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ Declaration S sort "[^DQ]*".
+ Declaration S_EQ S S : TV prime fm_strcmp. Add infix "=" to S_EQ.

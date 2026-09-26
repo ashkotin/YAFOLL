@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+0001  "TV DAD"
+0002  Declaration TV sort .
+0003  "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"
+0004  Declaration EQ_TV TV TV : TV prime fm_strcmp .
+0005  Add infix "=" to EQ_TV .
+0006  Declaration NOT TV : TV prime .
+0007  Add infix "¬" to NOT .
+0008  Add infix "not" to NOT .
+0009  Declaration AND TV TV : TV prime .
+0010  Add infix "∧" to AND .
+0011  Add infix "and" to AND .
+0012  Declaration OR TV TV : TV prime .
+0013  Add infix "∨" to OR .
+0014  Add infix "or" to OR .
+0015  Declaration IMPLIES TV TV : TV .
+0016  Add infix "→" to IMPLIES .
+0017  Add infix "impl" to IMPLIES .
+0018  Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+0019  Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+0020  Declaration EQUIV TV TV : TV .
+0021  Add infix "≡" to EQUIV .
+0022  Add infix "eqv" to EQUIV .
+0023  Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+0024  Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+0025  ! True TV !
+0026  ! False TV !
+0027  "String DAD"
+0028  "sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+0029  Declaration S sort "[^DQ]*" .
+0030  Declaration S_EQ S S : TV prime fm_strcmp .
+0031  Add infix "=" to S_EQ .
+0032  "Number DAD"
+0033  "Числа"
+0034  Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?" .
+0035  "Объявления функций арифметики десятичных рациональных чисел"
+0036  "--первичные"
+0037  Declaration R_EQ R R : TV prime fm_req .
+0038  Add infix "=" to R_EQ .
+0039  Declaration R_LT R R : TV prime fm_rlt .
+0040  Add infix "<" to R_LT .
+0041  Declaration R_PLUS R R : R prime fm_radd .
+0042  Add infix "+" to R_PLUS .
+0043  Declaration R_MINUS R R : R prime fm_rminus .
+0044  Add infix "-" to R_MINUS .
+0045  Declaration R_MULTIPLY R R : R prime fm_rmult .
+0046  Add infix "*" to R_MULTIPLY .
+0047  Declaration R_DEVIDE R R : R prime fm_rdev .
+0048  Add infix "/" to R_DEVIDE .
+0049  "--могли бы иметь определения"
+0050  Declaration R_GT R R : TV prime fm_rgt .
+0051  Add infix ">" to R_GT .
+0052  Declaration R_LE R R : TV prime fm_rle .
+0053  Add infix "≤" to R_LE .
+0054  Declaration R_GE R R : TV prime fm_rge .
+0055  Add infix "≥" to R_GE .
+0056  ""
+0057  "БД Проба DAD"
+0058  "сорта с равенством"
+0059  Declaration publication sort .
+0060  Declaration EQU_publication publication publication : TV prime fm_strcmp .
+0061  Add infix "=" to EQU_publication .
+0062  Declaration sample sort .
+0063  Declaration EQU_sample sample sample : TV prime fm_strcmp .
+0064  Add infix "=" to EQU_sample .
+0065  Declaration place sort .
+0066  Declaration EQU_place place place : TV prime fm_strcmp .
+0067  Add infix "=" to EQU_place .
+0068  "атрибуты статьи"
+0069  Declaration title publication : S prime .
+0070  Declaration journal_reference publication : S prime .
+0071  Declaration year publication : R prime .
+0072  Declaration first_page publication : R prime .
+0073  Declaration last_page publication : R prime .
+0074  "атрибуты образца"
+0075  Declaration authorial_number sample : S prime .
+0076  Declaration reference sample : S prime .
+0077  "связи образца"
+0078  Declaration described sample : publication prime .
+0079  Declaration gathering_place sample : place prime .
+0080  "атрибуты места"
+0081  Declaration latitude place : R prime .
+0082  Declaration longitude place : R prime .
+0083  "связи места"
+0084  Declaration part_of place place : TV prime .
+0085  "оператор весового процентного содержания вещества"
+0086  Declaration WPC ( sample : TV ) : ( sample : R ) prime .
+0087  "аксиомы"
+0088  "GPfull: Каждый образец имеет место сбора."
+0089  Axiom GPfull ( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) ) .
+0090  Axiom GPfull ( ∀ x : sample ( ∃ y : place EQU_place ( gathering_place ( x ) y ) ) ) .
+0091  "Dfull: Каждый образец описан."
+0092  Theorem Dfull ( ∀ x : sample ( ∃ y : publication ( described ( x ) = y ) ) ) .
+0093  Theorem Dfull ( ∀ x : sample ( ∃ y : publication EQU_publication ( described ( x ) y ) ) ) .
+0094  "горные породы"
+0095  Declaration rhyolite sample : TV prime .
+0096  Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) ) .
+0097  Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV EQ_TV ( rhyolite ( x ) y ) ) ) .
+0098  Declaration basalt_and_olivine sample : TV prime .
+0099  Declaration trachydolerite sample : TV prime .
+0100  Declaration trachyte sample : TV prime .
+0101  Declaration obsidian sample : TV prime .
+0102  Declaration basalt sample : TV prime .
+0103  Declaration trachyandesite sample : TV prime .
+0104  Declaration andesite sample : TV prime .
+0105  "химические вещества, элементы, изотопы..."
+0106  Declaration SIO2 sample : TV prime .
+0107  Declaration AL2O3 sample : TV prime .
+0108  Declaration FE2O3 sample : TV prime .
+0109  Declaration MGO sample : TV prime .
+0110  Declaration CAO sample : TV prime .
+0111  Declaration NA2O sample : TV prime .
+0112  Declaration K2O sample : TV prime .
+0113  Declaration H2Op sample : TV prime .
+0114  Declaration TIO2 sample : TV prime .
+0115  Declaration FEO sample : TV prime .
+0116  Declaration MNO sample : TV prime .
+0117  Declaration P2O5 sample : TV prime .
+0118  Declaration CO2 sample : TV prime .
+0119  Declaration H2Om sample : TV prime .
+0120  "географические названия"
+0121  ! Iceland place !
+0122  ! Atlantic_Ocean place !
+0123  ! Ascension place !
+0124  ! Second_Aleutian_Arc place !
+0125  ! Aleutian_Arc place !
+0126  "постатейная часть"
+0127  ! PUB5633 publication !
+0128  ! PLC1809 place !
+0129  ! SAM32994 sample !
+0130  ! SAM32995 sample !
+0131  ! SAM32996 sample !
+0132  ! PUB5918 publication !
+0133  ! SAM30681 sample !
+0134  ! PLC1555 place !
+0135  ! SAM30683 sample !
+0136  ! SAM30684 sample !
+0137  ! SAM30685 sample !
+0138  ! SAM30686 sample !
+0139  ! SAM30687 sample !
+0140  ! SAM30688 sample !
+0141  ! SAM30689 sample !
+0142  ! SAM30690 sample !
+0143  ! SAM30691 sample !
+0144  ! SAM30692 sample !
+0145  ! SAM30693 sample !
+0146  ! SAM30696 sample !
+0147  ! SAM30697 sample !
+0148  ! SAM30682 sample !
+0149  ! SAM30695 sample !
+0150  ! SAM30694 sample !
+0151  ! PUB4061 publication !
+0152  ! SAM56195 sample !
+0153  ! PLC2318 place !
+0154  ! SAM56196 sample !
+0486  Declaration disjoint ( sample : TV ) ( sample : TV ) : TV .
+0488  ! s1_ sample !
+0489  ! s2_ sample !
+0490  ! a1 sample !
+0491  Declaration rock ( sample : TV ) : TV prime .
+0494  Declaration disjoint_sample ( sample : TV ) ( sample : TV ) : TV .
+0495  Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample ( ¬ ( z ( x ) ∧ y ( x ) ) ) ) .
+0496  Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample NOT ( AND ( z ( x ) y ( x ) ) ) ) .
+0499  "the end"
+0500  "相机就绪"
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

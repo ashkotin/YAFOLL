@@ -1,0 +1,136 @@
+﻿"Это Y!L часть отчёта проекта Algor"
+"заголовки взяты из отчёта и соответствуют местам вхождения Y!L-предложений."
+"Введение"
+
+Declaration body sort. 
+
+Declaration VPC (body:TV):(body:Number).
+"Definition def_VPC VPC(x)(y):((Volume_in(x y)/Volume(y))*100)."
+
+"Фундаментальные отношения"
+
+Declaration part_of body body:TV prime.
+
+"Объёмное процентное содержание минералов"
+
+Declaration melilite body:TV prime.
+Declaration kalsilite body:TV prime.
+Declaration leucite body:TV prime.
+"Ol for olivine."
+Declaration Ol body:TV prime.      
+"Opx is not prime and we are looking forward for definition of orthopyroxene class of minerals."          	
+Declaration Opx body:TV.                      
+"Cpx is not prime and we are looking forward for definition of clinopyroxene class of minerals."          	
+Declaration Cpx body:TV. 
+Declaration hornblende body:TV prime.
+Declaration garnet body:TV prime.
+Declaration spinel body:TV prime.
+Declaration biotite body:TV prime.
+
+"минералы в определениях пород"
+Declaration calcite body:TV prime.
+Declaration dolomite body:TV prime.
+Declaration magnesite body:TV prime.
+Declaration siderite body:TV prime.
+Declaration ankerite body:TV prime.
+Declaration aragonite body:TV prime.
+Declaration vaterite body:TV prime.
+Declaration strontianite body:TV prime.
+
+
+Declaration Q body:TV. Declaration A body:TV. Declaration P body:TV. Declaration F body:TV. Declaration M body:TV.
+
+"Требования к VPC значениям (VPC-range)"
+
+Declaration A_VPC_biotite_0 :TV.
+Definition def_A_VPC_biotite_0 A_VPC_biotite_0(): (∀x:body (0 ≤ VPC(biotite)(x))).
+Declaration A_VPC_biotite_100 :TV.
+Definition def_A_VPC_biotite_100 A_VPC_biotite_100(): (∀x:body (VPC(biotite)(x) ≤ 100)).
+"Используя квантор по предикату можно записать единую аксиому формулой второго порядка:"
+"(∀p:(body:TV)∀x:body Substance(p) → (0 ≤ VPC(p)(x) ≤ 100))."
+
+"Качественные характеристики образца"
+
+Declaration pyroclastic body:TV prime.
+Declaration kimberlite body:TV prime.
+Declaration lamproite body:TV prime.
+Declaration lamprophyre body:TV prime.
+Declaration charnockite body:TV prime.
+Declaration plutonic body:TV prime.
+Declaration volcanic body:TV prime.
+Declaration clast body:TV prime.
+Declaration clastic body:TV prime.
+"+длина Id - 21 поэтому volcanic_eruption_result сокращён!"
+Declaration volcanic_eruption_rs_ body:TV prime.
+
+"Px - предикат пироксенов"
+Declaration Px body:TV.
+Definition def_Px Px(x) : (Opx(x) or Cpx(x)).
+
+"OOC, OPH - группировки минералов для диаграмм"
+
+Declaration OOC body:TV. Declaration OPH body:TV.
+Definition def_OOC OOC(sb1) : (Ol(sb1) or (Opx(sb1) or Cpx(sb1))).
+Definition def_OPH OPH(sb1) : (Ol(sb1) or (Px(sb1) or hornblende(sb1))).
+
+"M - показатель мафичности M"
+Definition def_M M(sb1) : (not(Q(sb1) or (A(sb1) or (P(sb1) or F(sb1))))).
+Declaration Th_M100 :TV.
+Definition def_Th_M100 Th_M100 ():(∀sb1:body (VPC(M)(sb1) = (100 - (VPC(Q)(sb1)+(VPC(A)(sb1)+(VPC(P)(sb1)+VPC(F)(sb1))))))).
+
+"Группировка carbonates и их модальное содержание"
+
+Declaration carbonates body:TV.
+Definition def_car carbonates(sb1) :
+ (calcite(sb1) or (dolomite(sb1) or (magnesite(sb1) or (siderite(sb1) or (ankerite(sb1) or (aragonite(sb1) or (vaterite(sb1)
+ or strontianite(sb1)))))))).
+
+Declaration Th_carbo1 :TV.
+Definition def_Th_carbo1 Th_carbo1 ():(∀sb1:body (VPC(carbonates)(sb1) = 
+ (VPC(calcite)(sb1) + (VPC(dolomite)(sb1) + (VPC(magnesite)(sb1) + (VPC(siderite)(sb1) + (VPC(ankerite)(sb1) + (VPC(aragonite)(sb1)
+ + (VPC(vaterite)(sb1) + VPC(strontianite)(sb1)))))))))).
+ 
+"pyroclastic rocks"
+
+Definition def_pyroclastic pyroclastic(x) : (clastic(x) and (∀ y:body ((clast(y) and part_of(y x)) → volcanic_eruption_rs_(y)))).
+
+"pyroclast"
+
+Declaration pyroclast body:TV.
+Definition def_pyroclast pyroclast(x) : (clast(x) and volcanic_eruption_rs_(x)).
+
+"not_first_9. вспомогательный предикат"
+
+Declaration nf9 body:TV.
+Definition def_nf9 nf9(sb1) :
+((not (pyroclastic(sb1) or (kimberlite(sb1) or (lamproite(sb1) or (lamprophyre(sb1) or charnockite(sb1))))))
+and ((VPC(carbonates)(sb1)≤50) and ((VPC(melilite)(sb1)≤10) and ((VPC(kalsilite)(sb1)=0) and (VPC(leucite)(sb1)=0))))
+).
+
+"harzburgite"
+
+Declaration harzburgite body:TV.
+Definition def_harzburgite harzburgite(sb1) :
+(plutonic(sb1) 
+and 
+ ((not (pyroclastic(sb1) or (kimberlite(sb1) or (lamproite(sb1) or (lamprophyre(sb1) or charnockite(sb1))))))
+ and 
+  (((VPC(carbonates)(sb1)≤50) and ((VPC(melilite)(sb1)≤10) and ((VPC(M)(sb1) ≥ 90)and ((VPC(kalsilite)(sb1)=0) and (VPC(leucite)(sb1)=0)))))
+  and ((VPC(hornblende)(sb1)=0) and (((0.4*VPC(OOC)(sb1))≤VPC(Ol)(sb1)) and ((VPC(Ol)(sb1)≤(0.9*VPC(OOC)(sb1))) and (VPC(Cpx)(sb1)<(0.05*VPC(OOC)(sb1))))))
+  )
+ )
+).
+
+"dunite"
+
+Declaration dunite body:TV.
+Definition def_dunite dunite(sb1) :
+(((nf9(sb1) and (plutonic(sb1) and ((VPC(M)(sb1) ≥ 90) and ((VPC(hornblende)(sb1)=0) and ((0.9*VPC(OOC)(sb1)) < VPC(Ol)(sb1))))))
+ and ((0 ≤ VPC(Opx)(sb1)) and (0 ≤ VPC(Cpx)(sb1)))
+ )
+or
+ ((nf9(sb1) and (plutonic(sb1) and ((VPC(M)(sb1) ≥ 90) and ((VPC(hornblende)(sb1)>0) and ((0.9*VPC(OPH)(sb1)) < VPC(Ol)(sb1))))))
+ and ((0 ≤ VPC(Px)(sb1)) and (0 ≤ VPC(hornblende)(sb1)))
+ )
+).
+

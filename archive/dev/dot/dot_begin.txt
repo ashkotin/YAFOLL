@@ -1,0 +1,4 @@
+digraph D { graph [rankdir=BT, nodesep=0];
+
+ node [shape=plaintext, fontsize=10, height=0 ];
+/*похоже такого нет! edge [fontsize=10];*/

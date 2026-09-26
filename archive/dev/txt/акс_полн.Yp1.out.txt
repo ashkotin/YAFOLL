@@ -1,0 +1,240 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s msg='BEGIN' st_id='0000000029' st_rid='st-11'>
+<st_store Tree='184' added='1' />
+					 ? ( ∀ e : A ( ∃ v : V ( from ( e ) = v ) ) ) ?
+<infx_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</infx_subst><defc_subst msg='!WARNING! Id e does not exist in entities!'/><defc_subst msg='!WARNING! Id v does not exist in entities!'/>
+<defc_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</defc_subst>
+<deff_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+</deff_subst>
+<st_trans msg='RESULT'><Statement tid='184' nid='29' up='0' rid='st-11' v='' irn='-2147483648' ref='185' type='0' flg='0' flg2='-2147483648'><q_m tid='184' nid='30' up='29' rid='' v='?' irn='1' ref='0' type='0' flg='0' flg2='-2147483648'/><term tid='184' nid='22' up='29' rid='trma' v='' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='184' nid='23' up='22' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='184' nid='24' up='22' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='184' nid='25' up='22' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='184' nid='26' up='22' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='184' nid='27' up='22' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='184' nid='15' up='22' rid='trme' v='' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='184' nid='16' up='15' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='184' nid='17' up='15' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='184' nid='18' up='15' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='184' nid='19' up='15' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='184' nid='20' up='15' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='184' nid='11' up='15' rid='trmin' v='' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='184' nid='12' up='11' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='184' nid='6' up='11' rid='trmf' v='' irn='2' ref='60' type='170' flg='2' flg2='-2147483648'><term tid='184' nid='1' up='6' rid='trmi' v='' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'><Id tid='184' nid='2' up='1' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'/></term><l_p tid='184' nid='7' up='6' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='184' nid='5' up='6' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='184' nid='3' up='5' rid='trmi' v='' irn='-1' ref='184' type='27' flg='2' flg2='-2147483648'><Id tid='184' nid='4' up='3' rid='' v='e' irn='1' ref='0' type='22' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='184' nid='8' up='6' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='184' nid='13' up='11' rid='' v='=' irn='3' ref='45' type='15' flg='2' flg2='-2147483648'/><term tid='184' nid='9' up='11' rid='trmi' v='' irn='4' ref='184' type='20' flg='2' flg2='-2147483648'><Id tid='184' nid='10' up='9' rid='' v='v' irn='1' ref='0' type='15' flg='2' flg2='-2147483648'/></term><r_p tid='184' nid='14' up='11' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='184' nid='21' up='15' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='184' nid='28' up='22' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><q_m tid='184' nid='31' up='29' rid='' v='?' irn='3' ref='0' type='0' flg='0' flg2='-2147483648'/></Statement>
+</st_trans>
+!trm_Val!DEBUG! IN rid=trma (tid=185,nid=22)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trme (tid=185,nid=15)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trme (tid=185,nid=15)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trme (tid=185,nid=15)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trme (tid=185,nid=15)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=11)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=64) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=185,nid=6)
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=1) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=3) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='185' nid='6' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=185,nid=9) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='185' nid='11' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+<q_term msg='after trm_Val'><term tid='185' nid='22' up='29' rid='trma' v='True' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='185' nid='23' up='22' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='185' nid='24' up='22' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='185' nid='25' up='22' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='185' nid='26' up='22' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='185' nid='27' up='22' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='185' nid='15' up='22' rid='trme' v='True' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='185' nid='16' up='15' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='185' nid='17' up='15' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='185' nid='18' up='15' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='185' nid='19' up='15' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='185' nid='20' up='15' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='185' nid='11' up='15' rid='trmf' v='True' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><term tid='185' nid='64' up='11' rid='trmi' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='-2147483648'><Id tid='185' nid='65' up='64' rid='' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='-2147483648'/></term><l_p tid='185' nid='12' up='11' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='185' nid='66' up='11' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='185' nid='6' up='66' rid='trmf' v='v2' irn='-2' ref='60' type='170' flg='2' flg2='-2147483648'><term tid='185' nid='1' up='6' rid='trmi' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'><Id tid='185' nid='2' up='1' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'/></term><l_p tid='185' nid='7' up='6' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='185' nid='5' up='6' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='185' nid='3' up='5' rid='trmi' v='a4' irn='-1' ref='185' type='27' flg='2' flg2='-2147483648'><Id tid='185' nid='4' up='3' rid='' v='a4' irn='1' ref='0' type='22' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='185' nid='8' up='6' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='185' nid='9' up='66' rid='trmi' v='v2' irn='-1' ref='185' type='20' flg='2' flg2='-2147483648'><Id tid='185' nid='10' up='9' rid='' v='v2' irn='1' ref='0' type='15' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='185' nid='14' up='11' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='185' nid='21' up='15' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='185' nid='28' up='22' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term></q_term>
+<answer msg='True' />
+</Yp1s>
+<Yp1s msg='BEGIN' st_id='0000000061' st_rid='st-11'>
+<st_store Tree='186' added='1' />
+					 ? ( ∀ e : A ( ∃ v : V ( tov ( e ) = v ) ) ) ?
+<infx_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</infx_subst><defc_subst msg='!WARNING! Id e does not exist in entities!'/><defc_subst msg='!WARNING! Id v does not exist in entities!'/>
+<defc_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</defc_subst>
+<deff_subst msg='RESULT'> ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+</deff_subst>
+<st_trans msg='RESULT'><Statement tid='186' nid='61' up='0' rid='st-11' v='' irn='-2147483648' ref='187' type='0' flg='0' flg2='-2147483648'><q_m tid='186' nid='62' up='61' rid='' v='?' irn='1' ref='0' type='0' flg='0' flg2='-2147483648'/><term tid='186' nid='54' up='61' rid='trma' v='' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='186' nid='55' up='54' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='186' nid='56' up='54' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='186' nid='57' up='54' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='186' nid='58' up='54' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='186' nid='59' up='54' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='186' nid='47' up='54' rid='trme' v='' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='186' nid='48' up='47' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='186' nid='49' up='47' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='186' nid='50' up='47' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='186' nid='51' up='47' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='186' nid='52' up='47' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='186' nid='43' up='47' rid='trmin' v='' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='186' nid='44' up='43' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='186' nid='38' up='43' rid='trmf' v='' irn='2' ref='61' type='183' flg='2' flg2='-2147483648'><term tid='186' nid='33' up='38' rid='trmi' v='' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'><Id tid='186' nid='34' up='33' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'/></term><l_p tid='186' nid='39' up='38' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='186' nid='37' up='38' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='186' nid='35' up='37' rid='trmi' v='' irn='-1' ref='186' type='59' flg='2' flg2='-2147483648'><Id tid='186' nid='36' up='35' rid='' v='e' irn='1' ref='0' type='54' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='186' nid='40' up='38' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='186' nid='45' up='43' rid='' v='=' irn='3' ref='45' type='15' flg='2' flg2='-2147483648'/><term tid='186' nid='41' up='43' rid='trmi' v='' irn='4' ref='186' type='52' flg='2' flg2='-2147483648'><Id tid='186' nid='42' up='41' rid='' v='v' irn='1' ref='0' type='47' flg='2' flg2='-2147483648'/></term><r_p tid='186' nid='46' up='43' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='186' nid='53' up='47' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='186' nid='60' up='54' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><q_m tid='186' nid='63' up='61' rid='' v='?' irn='3' ref='0' type='0' flg='0' flg2='-2147483648'/></Statement>
+</st_trans>
+!trm_Val!DEBUG! IN rid=trma (tid=187,nid=54)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trme (tid=187,nid=47)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trme (tid=187,nid=47)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trme (tid=187,nid=47)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trme (tid=187,nid=47)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='62'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='v1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v1'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=63.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='v2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=43)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=67) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=187,nid=38)
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=33) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=35) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='187' nid='38' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmi (tid=187,nid=41) !trm_Val!DEBUG!OUT v='v2'<ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='187' nid='43' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme>
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+<q_term msg='after trm_Val'><term tid='187' nid='54' up='61' rid='trma' v='True' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='187' nid='55' up='54' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='187' nid='56' up='54' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='187' nid='57' up='54' rid='' v='e' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='187' nid='58' up='54' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='187' nid='59' up='54' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='187' nid='47' up='54' rid='trme' v='True' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='187' nid='48' up='47' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='187' nid='49' up='47' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='187' nid='50' up='47' rid='' v='v' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='187' nid='51' up='47' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='187' nid='52' up='47' rid='' v='V' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='187' nid='43' up='47' rid='trmf' v='True' irn='6' ref='45' type='14' flg='2' flg2='-2147483648'><term tid='187' nid='67' up='43' rid='trmi' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='-2147483648'><Id tid='187' nid='68' up='67' rid='' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='-2147483648'/></term><l_p tid='187' nid='44' up='43' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='187' nid='69' up='43' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='187' nid='38' up='69' rid='trmf' v='v2' irn='-2' ref='61' type='183' flg='2' flg2='-2147483648'><term tid='187' nid='33' up='38' rid='trmi' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'><Id tid='187' nid='34' up='33' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'/></term><l_p tid='187' nid='39' up='38' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='187' nid='37' up='38' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='187' nid='35' up='37' rid='trmi' v='a4' irn='-1' ref='187' type='59' flg='2' flg2='-2147483648'><Id tid='187' nid='36' up='35' rid='' v='a4' irn='1' ref='0' type='54' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='187' nid='40' up='38' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><term tid='187' nid='41' up='69' rid='trmi' v='v2' irn='-1' ref='187' type='52' flg='2' flg2='-2147483648'><Id tid='187' nid='42' up='41' rid='' v='v2' irn='1' ref='0' type='47' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='187' nid='46' up='43' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='187' nid='53' up='47' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='187' nid='60' up='54' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term></q_term>
+<answer msg='True' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

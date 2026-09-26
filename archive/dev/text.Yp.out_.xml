@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000013' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='99' msg='added'>
+ ? ( no _True ) ( _True ) ?
+</st_store>
+<infx_subst msg='RESULT'> ? no ( _True ) ( _True ) ?
+</infx_subst>
+<deff_subst msg='RESULT'> ? no ( _True ) ( _True ) ?
+</deff_subst><ApplyTL msg='!DEBUG!' ser-val=' no ( _True )' tid='100' nid='3' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='not' RC='0' />
+!ApplyTL:FMv type is '':-)<ApplyTL msg='!DEBUG!' ser-val=' no ( _True ) ( _True )' tid='100' nid='10' />
+!fm_tGetv!WARNING! FM-term ' no ( _True ) ( _True )' is absent!<ApplyTL msg='!DEBUG!after fm_tGetv' v='' RC='1' />
+!ApplyTL:FMv type is 'TV':-)</q_term>
+<return msg='There is no value.' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+<DTS msg='dump begin'>
+0001  Declaration TV sort .
+0002  Declaration NOT TV : TV prime .
+0003  Add infix "¬" to NOT .
+0004  Add infix "not" to NOT .
+0005  Declaration AND TV TV : TV prime .
+0006  Add infix "∧" to AND .
+0007  Add infix "and" to AND .
+0008  Declaration OR TV TV : TV prime .
+0009  Add infix "∨" to OR .
+0010  Add infix "or" to OR .
+0011  Declaration IMPLIES TV TV : TV .
+0012  Add infix "→" to IMPLIES .
+0013  Add infix "impl" to IMPLIES .
+0014  Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+0015  Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+0016  Declaration EQUIV TV TV : TV .
+0017  Add infix "≡" to EQUIV .
+0018  Add infix "eqv" to EQUIV .
+0019  Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+0020  Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+0021  ! True TV !
+0022  ! False TV !
+0033  Declaration V sort .
+0034  Declaration EQU_V V V : TV prime fm_strcmp .
+0035  Add infix "=" to EQU_V .
+0036  Declaration NEQ_V V V : TV .
+0037  Add infix "≠" to NEQ_V .
+0038  Add infix "neq" to NEQ_V .
+0039  Definition NEQ_V_d NEQ_V ( x y ) : ( ¬ ( x = y ) ) .
+0040  Definition NEQ_V_d NEQ_V ( x y ) : NOT ( EQU_V ( x y ) ) .
+0041  Declaration A sort .
+0042  Declaration EQU_A A A : TV prime fm_strcmp .
+0043  Add infix "=" to EQU_A .
+0044  Declaration NEQ_A A A : TV .
+0045  Add infix "≠" to NEQ_A .
+0046  Add infix "neq" to NEQ_A .
+0047  Definition NEQ_A_d NEQ_A ( x y ) : ( ¬ ( x = y ) ) .
+0048  Definition NEQ_A_d NEQ_A ( x y ) : NOT ( EQU_A ( x y ) ) .
+0049  Declaration from A : V prime .
+0050  Declaration tov A : V prime .
+0051  Declaration source V : TV .
+0052  Definition source_d source ( x ) : ( ∀ e : A ( tov ( e ) ≠ x ) ) .
+0053  Definition source_d source ( x ) : ( ∀ e : A NOT ( EQU_V ( tov ( e ) x ) ) ) .
+0074  ! v1 V !
+0075  ! v2 V !
+0076  ! a1 A !
+0077  ! a2 A !
+0082  ! a3 A !
+0083  ! a4 A !
+0092  Declaration publication sort .
+0093  Declaration sample sort .
+0094  Declaration place sort .
+0096  Declaration gathering_place sample : place prime .
+0097  Declaration part_of place place : TV prime .
+0098  Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?" .
+0099  Declaration S sort "[^DQ]*" .
+0100  Declaration year publication : R prime .
+0101  Declaration title publication : S prime .
+0102  Declaration journal_reference publication : S prime .
+0103  Declaration first_page publication : R prime .
+0104  Declaration last_page publication : R prime .
+0105  Declaration authorial_number sample : S prime .
+0106  Declaration latitude place : R prime .
+0107  Declaration longitude place : R prime .
+0109  Declaration WPC ( sample : TV ) : ( sample : R ) prime .
+0127  Declaration rhyolite sample : TV prime .
+0217  Declaration SIO2 sample : TV prime .
+0218  Declaration AL2O3 sample : TV prime .
+0219  Declaration FE2O3 sample : TV prime .
+0220  Declaration MGO sample : TV prime .
+0221  Declaration CAO sample : TV prime .
+0222  Declaration NA2O sample : TV prime .
+0223  Declaration K2O sample : TV prime .
+0224  Declaration H2Op sample : TV prime .
+0282  Declaration EQU_place place place : TV prime fm_strcmp .
+0283  Add infix "=" to EQU_place .
+0286  ! PUB5633 publication !
+0292  ! SAM32994 sample !
+0296  ! PLC1809 place !
+0303  ! SAM32995 sample !
+0313  ! SAM32996 sample !
+0347  Declaration reference sample : S prime .
+0348  ! Iceland place !
+0349  ! Atlantic_Ocean place !
+0359  Declaration described sample : publication prime .
+0364  Declaration EQU_publication publication publication : TV prime fm_strcmp .
+0365  Add infix "=" to EQU_publication .
+0371  Declaration EQU_sample sample sample : TV prime fm_strcmp .
+0372  Add infix "=" to EQU_sample .
+0381  ! SAM_ sample !
+</DTS>
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

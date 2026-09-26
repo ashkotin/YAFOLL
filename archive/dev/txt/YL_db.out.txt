@@ -1,0 +1,11 @@
+Connected.
+Сорт TV уже есть!
+==== sqlca ====
+sqlcode: -400
+sqlerrm.sqlerrml: 58
+sqlerrm.sqlerrmc: РєРѕР»РѕРЅРєР° "sort" РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ on line 39
+sqlerrd: 0 0 0 0 0 0
+sqlwarn: 0 0 0 0 0 0 0 0
+sqlstate: 42703
+===============
+Disconnected.

@@ -1,0 +1,51 @@
+﻿!0!
+
+--Объявления стрингологии
+
+Declaration S sort "{DQ}.*{DQ}". --  sort of strings. +DQ - лишние!
+
+--True values.
+
+Declaration TV sort. 
+Declaration True:TV constant. Declaration False:TV constant.
+
+--Равенство
+
+Declaration EQU S S:TV  infix "=". -- +сортность аргументов не верна!
+Declaration NEQ S S:TV 	infix "≠|neq". -- +сортность аргументов не верна! +Дать определение!
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime 	infix "¬|not".	
+Declaration AND TV TV:TV 	prime 	infix "∧|and".
+Declaration OR TV TV:TV 	prime 	infix "∨|or".
+Declaration IMPLIES TV TV:TV 		infix "→|impl". --Дать определение!
+Declaration EQUIV TV TV:TV 			infix "≡|eqv". --Дать определение!
+
+--Объявления арифметики
+
+Declaration R sort "DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+Declaration LEQ R R:TV infix "≤". --S?
+Declaration GEQ R R:TV infix "≥". --S?
+Declaration LE R R:TV infix "<". --S?
+Declaration GR R R:TV infix ">". --S?
+Declaration PLUS R R:R infix "+". --S?
+Declaration MINUS R R:R infix "-". --S?
+Declaration MULTIPLY R R:R infix "*".
+Declaration DEVIDE R R:R infix "/".
+
+
+--Задание пропозициональных связок.
+
+!NOT(True):False! !NOT(False):True! 
+
+!AND(True True):True!
+!AND(False True):False!
+!AND(True False):False!
+!AND(False False):False!
+
+!OR(True True):True!
+!OR(False True):True!
+!OR(True False):True!
+!OR(False False):False!

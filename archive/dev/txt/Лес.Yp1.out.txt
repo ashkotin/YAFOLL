@@ -1,0 +1,62 @@
+﻿
+
+<Yp1 BEGIN st_id=0000000001>
+--DTS dump begin.
+ Declaration TV sort .
+ Declaration EQU_TV TV TV : TV prime .
+ Add infix "=" to EQU_TV .
+ Declaration NOT TV : TV prime .
+ Add infix "¬" to NOT .
+ Add infix "not" to NOT .
+ Declaration AND TV TV : TV prime .
+ Add infix "∧" to AND .
+ Add infix "and" to AND .
+ Declaration OR TV TV : TV prime .
+ Add infix "∨" to OR .
+ Add infix "or" to OR .
+ Declaration IMPLIES TV TV : TV .
+ Add infix "→" to IMPLIES .
+ Add infix "impl" to IMPLIES .
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+ Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+ Declaration EQUIV TV TV : TV .
+ Add infix "≡" to EQUIV .
+ Add infix "eqv" to EQUIV .
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+ Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+ Declaration NEQ_TV TV TV : TV .
+ Add infix "≠" to NEQ_TV .
+ Add infix "neq" to NEQ_TV .
+ Definition NEQ_TV_d NEQ_TV ( x y ) : ( ¬ ( x = y ) ) .
+ Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+ ! True TV !
+ ! False TV !
+ Declaration V sort .
+ Declaration EQU_V V V : TV prime .
+ Add infix "=" to EQU_V .
+ Declaration NEQ_V V V : TV .
+ Add infix "≠" to NEQ_V .
+ Add infix "neq" to NEQ_V .
+ Definition NEQ_V_d NEQ_V ( x y ) : ( ¬ ( x = y ) ) .
+ Definition NEQ_V_d NEQ_V ( x y ) : NOT ( EQU_V ( x y ) ) .
+ Declaration A sort .
+ Declaration EQU_A A A : TV prime .
+ Add infix "=" to EQU_A .
+ Declaration NEQ_A A A : TV .
+ Add infix "≠" to NEQ_A .
+ Add infix "neq" to NEQ_A .
+ Definition NEQ_A_d NEQ_A ( x y ) : ( ¬ ( x = y ) ) .
+ Definition NEQ_A_d NEQ_A ( x y ) : NOT ( EQU_A ( x y ) ) .
+ Declaration from A : V prime .
+ Declaration tov A : V prime .
+ ! v1 V !
+ ! v2 V !
+ ! a1 A !
+ ! a2 A !
+ Declaration source V : TV .
+ Definition source_d source ( x ) : ( ∀ e : A ( tov ( e ) ≠ x ) ) .
+ Definition source_d source ( x ) : ( ∀ e : A NOT ( EQU_V ( tov ( e ) x ) ) ) .
+--DTS dump end.
+<exN_proc! st_id=0000000001>
+<Yp1 END st_id=0000000001>
+<:-)End of Statement nodes in dt. Stop.>

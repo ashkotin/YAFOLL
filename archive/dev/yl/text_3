@@ -1,0 +1,40 @@
+﻿--?1?
+--?"1"?
+--Declaration f1 Number:Number prime.
+--Declaration f2 String:String prime.
+--!f1(1):2! --OK
+--!f2("3"):"4"! --OK
+--?f1(1)? --OK
+--?f2("3")? --$$$KO: !fm_tGetv!WARNING! FM-term ' f2 ( 3 )' is absent!
+--?f1("3")? --$$$ругань правильная но абстрактная: надо выдавать значение типов в том числе сериализацию сигнатуры!
+--?f1(-1.1)?
+--Declaration Year sort "{RN}{DQ}y{DQ}".
+--Declaration fy Year:Number prime.
+--!fy(1991y):12!
+--?fy(1991y)?
+--!fy(1991.1y):1! --!WFC_trmi: ERROR! Id 'y'(119,6) is not a function in constant term! WFC(trmi-2)
+--Declaration Ide sort "{US}{Id}".
+--?NOT(_True)?
+--Declaration fce Ide:Ide prime.
+--!fce(_True):_True! --ругается на форм-факт пар = КО!!!
+--!fce(_e):_True! --пропускает = ОК
+--?fce(_True)?
+--!fce(_T):_Tr!
+--?fce(_T)?
+--Declaration fbad :TV.
+--Definition def_fbad fbad :NOT(_True).
+--Declaration EQ_Ide Ide Ide : TV 	prime fm_strcmp. 	Add fix "=" to EQ_Ide.
+--?(_True=_True)?
+--?(_s=_s)?
+--?(_True∧_True)? --ОК
+--?(¬_True)?
+--Declaration EQ_Ide2 Ide Ide : TV 	prime fm_strcmp. 	
+--Add fix "=" to EQ_Ide2. --проверяется совпадение сигов - ОК
+--? NOT(_a)? --=NV
+--? NOT(fce(_T))? --экс: контроль типов должен пройти из-за релакс, а рез-т - NV = YES
+--? NOT(fce(_True))?
+--?R_EQ(_T 1)?
+--Declaration Thing sort "".
+--Declaration fTh Thing:Thing prime.
+--!fTh(1):_True! -- =никакого сцец-использования нет!!! +?а надо?
+

@@ -1,0 +1,15 @@
+(sig_iT)	type : STRING|RATIONAL|NATURAL|TV|ELEMENT|FSEQ 
+(Dcl_Cf)	Statement : DECLARATION Id l_p type+ r_p Id Dot 
+(fseqRl)	fseq : l_p (Ide | N | R | S | T | fseq)* r_p --см. ОЯ "скос – скобочная структура"
+(ptermR)	pterm : R | S | Ide | N | T | fseq
+(Dcl_ptrm)	Statement : DECLARATION Id pterm [MAP] Dot --приписывание ид пра-элу или скосу!
+(fmcaddN)	Statement : e_m Id pterm N e_m --добавление за члена в скос по номеру.
+(fmcaddL)	Statement : e_m Id pterm e_m    	-- за последним членом в скос Id.v добавляется новый член – pterm. 
+(fmcdel)	Statement : e_m N Id e_m                    	--из скос Id удаляется член номер i.
+(trmptrm)	term : pterm --это правило разрешает быть в вычислительном терме: скос (как значению!) и пра-элементам.
+(trm_id)	term : Id          
+(trmfun)	term : term l_p term* r_p –каноническая запись вызова функции: особенности применения значения term-1 см тутже.
+(st-11s)	Statement : q_m term q_m     	
+(trmQDf)	fterm : l_p QD Id COLON (type|term) [l_cb term r_cb] (term|fterm) r_p --fterm-1 для многоаргументных ф-й.
+(trmQua)	term : QUANT fterm
+(Dcl-5s)	Statement : DECLARATION Id fterm Dot --декларация определения ф-и - см. тут

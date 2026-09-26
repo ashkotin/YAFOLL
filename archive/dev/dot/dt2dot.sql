@@ -1,0 +1,1 @@
+select '"'||ch.sid||'('||COALESCE(ch.rid,'')||')'||ch.irn||'_'||COALESCE(ch.v,'')||'_'||ch.id||'"'||' -> '||'"'||p.sid||'('||COALESCE(p.rid,'')||')'||COALESCE(p.irn,0)||'_'||COALESCE(p.v,'')||'_'||ch.up||'"'||';' as txt from dt ch, dt p where ch.up=p.id order by ch.id;

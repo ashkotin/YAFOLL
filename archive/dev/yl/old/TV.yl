@@ -1,0 +1,26 @@
+"TV DADA"
+ Declaration TV sort. !_True TV! !_False TV!
+ "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"
+ Declaration EQ_TV TV TV : TV 	prime fm_strcmp. 	Add infix "=" to EQ_TV.
+ Declaration NOT TV : TV 		prime. 				Add infix "¬" to NOT. 		Add infix "not" to NOT.
+ Declaration AND TV TV : TV 	prime. 				Add infix "∧" to AND. 		Add infix "and" to AND.
+ Declaration OR TV TV : TV 		prime. 				Add infix "∨" to OR. 		Add infix "or" to OR.
+ Declaration IMPLIES TV TV : TV. 					Add infix "→" to IMPLIES.	Add infix "impl" to IMPLIES.
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ).
+ Declaration EQUIV TV TV : TV. 						Add infix "≡" to EQUIV.		Add infix "eqv" to EQUIV.
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ).
+
+! NOT ( _False ):_True!
+! NOT ( _True ):_False!
+! AND ( _False _False ):_False!
+! AND ( _False _True ):_False!
+! AND ( _True _False ):_False!
+! AND ( _True _True ):_True!
+! OR ( _False _False ):_False!
+! OR ( _False _True ):_True!
+! OR ( _True _False ):_True!
+! OR ( _True _True ):_True!
+
+Axiom NOT_full ( ∀ x : TV ( ∃ y : TV ( ( ¬x ) = y ) ) ) .
+Axiom AND_full (∀x:TV(∀z:TV (∃ y : TV ((x∧z)=y)))).
+Axiom OR_full (∀x:TV(∀z:TV (∃y:TV ((x∨z)=y) ))).

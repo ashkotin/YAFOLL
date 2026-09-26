@@ -1,0 +1,71 @@
+--
+!0!
+
+"TV DADA"
+
+ Declaration TV sort. 
+ "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"
+ Declaration EQ_TV TV TV : TV 	prime fm_strcmp. 	Add fix "=" to EQ_TV.
+ 
+ Declaration NOT TV : TV 		prime. 				Add fix "¬" to NOT. 		Add fix "not" to NOT.
+ Declaration AND TV TV : TV 	prime. 				Add fix "∧" to AND. 		Add fix "and" to AND.
+ Declaration OR TV TV : TV 		prime. 				Add fix "∨" to OR. 		Add fix "or" to OR.
+ Declaration IMPLIES TV TV : TV. 					Add fix "→" to IMPLIES.	Add fix "impl" to IMPLIES.
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ).
+ Declaration EQUIV TV TV : TV. 						Add fix "≡" to EQUIV.		Add fix "eqv" to EQUIV.
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ).
+"Axioms"
+Declaration NOT_full :TV.
+Definition def_NOT_full NOT_full ():( ∀ x : TV ( ∃ y : TV ( ( ¬x ) = y ) ) ) .
+Declaration AND_full :TV.
+Definition def_AND_full AND_full ():(∀x:TV(∀z:TV (∃ y : TV ((x∧z)=y)))).
+Declaration OR_full :TV.
+Definition def_OR_full OR_full ():(∀x:TV(∀z:TV (∃y:TV ((x∨z)=y) ))).
+
+"Ide DADA"
+
+"Ide должен быть после TV, чтобы можно было задать EQ_Ide, т.е. =!" 
+Declaration Ide sort "{US}{Id}".
+Declaration EQ_Ide Ide Ide : TV 	prime fm_strcmp. 	Add fix "=" to EQ_Ide.
+
+"String DADA"
+
+ "strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ Declaration String sort "[^DQ]*".
+ Declaration S_EQ String String : TV prime fm_strcmp. Add fix "=" to S_EQ.
+ 
+"Number DADA. Числа"
+
+ Declaration Number sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?" .
+ "Объявления функций арифметики десятичных рациональных чисел"
+ "+добавить определение для <>"
+ Declaration R_EQ Number Number : TV prime fm_req. Add fix "=" to R_EQ .
+ Declaration R_LT Number Number : TV prime fm_rlt. Add fix "<" to R_LT .
+ Declaration R_GT Number Number : TV. Add fix ">" to R_GT. Definition R_GT_d R_GT(x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration R_LE Number Number : TV. Add fix "≤" to R_LE. Definition R_LE_d R_LE(x y) : ((x=y)∨(x<y)).
+ Declaration R_GE Number Number : TV. Add fix "≥" to R_GE. Definition R_GE_d R_GE(x y) : ((x=y)∨(x>y)).
+ 
+ Declaration R_PLUS Number Number : Number prime fm_radd. Add fix "+" to R_PLUS .
+ Declaration R_MINUS Number Number : Number prime fm_rminus. Add fix "-" to R_MINUS .
+ Declaration R_MULTIPLY Number Number : Number prime fm_rmult. Add fix "*" to R_MULTIPLY .
+ Declaration R_DEVIDE Number Number : Number prime fm_rdev. Add fix "/" to R_DEVIDE .
+ "+подумать над аксиоматикой порядка и операций и точностью вычислений!!!"
+
+"Year DADA. Числа с единицами измерения"
+
+Declaration Year sort "{NN}{DQ}y{DQ}".
+"это отрезок временной оси [01.01.NN..31.12.NN] где NN - нат-число."
+
+"Начальная КС. это заполнение должно быть после DADA TV и Ide"
+!_False TV! !_True TV!
+! NOT ( _False ):_True!
+! NOT ( _True ):_False!
+! AND ( _False _False ):_False!
+! AND ( _False _True ):_False!
+! AND ( _True _False ):_False!
+! AND ( _True _True ):_True!
+! OR ( _False _False ):_False!
+! OR ( _False _True ):_True!
+! OR ( _True _False ):_True!
+! OR ( _True _True ):_True!
+

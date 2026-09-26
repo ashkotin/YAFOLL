@@ -1,0 +1,123 @@
+﻿!0!
+--=================Обязательное начало
+
+--Сорта стрингологии и чисел
+
+Declaration S sort "[^DQ]*". --  sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)
+Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+
+--True values.
+
+Declaration TV sort. Declaration True:TV constant. Declaration False:TV constant.
+----Равенство для TV!!!!!!!!!!!!!!!!!!
+Declaration EQU_TV TV TV:TV. Add infix "=" to EQU_TV. 
+--!Аксиомы равенства!
+-- +?перейти к аксиомам симметричности и транзитивности?
+Axiom EQU_TV_6 (∀x:TV (x=x)). -- M_6_p86
+--ЭТО НЕ АКСИОМА А ДЕРЖАЛКА: Axiom EQU_TV_7 (∀x:TV(∀y:TV(∀A:Formula((x=y)→(A(x x)→A(x y)))))). -- Z:СХЕМА АКСИОМ и условия замены довольно хитрые см. M_7_p86! 
+
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT.     Add infix "not"  to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND.     Add infix "and"  to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR.      Add infix "or"   to OR.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition  IMPL_d IMPLIES(x z): ((¬x)∨z).
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV.   Add infix "eqv"  to EQUIV. 
+Definition  EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+--!!!НЕРАВЕНСТВО
+Declaration NEQ_TV TV TV:TV. Add infix "≠" to NEQ_TV. Add infix "neq" to NEQ_TV.
+Definition  NEQ_TV_d NEQ_TV(x y): (¬(x=y)).
+
+--Задание пропозициональных связок.
+!NOT(True):False! !NOT(False):True! 
+
+!AND(True True):True!
+!AND(False True):False!
+!AND(True False):False!
+!AND(False False):False!
+
+!OR(True True):True!
+!OR(False True):True!
+!OR(True False):True!
+!OR(False False):False!
+
+
+
+--Объявления функций арифметики десятичных рациональных чисел
+
+Declaration LE R R:TV. Add infix "<" to LE. --S?
+Declaration GR R R:TV. Add infix ">" to GR. --S?
+Declaration LEQ R R:TV. Add infix "≤" to LEQ. --S? +Определение!
+Declaration GEQ R R:TV. Add infix "≥" to GEQ. --S? +Определение!
+Declaration PLUS R R:R. Add infix "+" to PLUS. --S?
+Declaration MINUS R R:R. Add infix "-" to MINUS. --S?
+Declaration MULTIPLY R R:R. Add infix "*" to MULTIPLY.
+Declaration DEVIDE R R:R. Add infix "/" to DEVIDE.
+
+--=================Обяз закончен
+﻿--!0!
+Declaration o sort. 
+--РАВЕНСТВО ДЛЯ o
+Declaration EQ_o o o:TV. Add infix "=" to EQ_o. 
+-- +аксиомы равенства
+--НЕРАВЕНСТВО ДЛЯ o
+Declaration Neq_o o o:TV. Add infix "≠" to Neq_o. 
+Definition D_Neq_o Neq_o(x1 x2) : (¬(x1=x2)).
+Theorem Neq_th (∀x:o(∀y:o((x≠y) ≡ Neq_o(x y)))). 
+--Док-во: устранив инфикс "≠" (вместе со скобками;-) получим ∀x:o,y:o(Neq_o(x y) ≡ Neq_o(x y))
+--Замечание. Это какая то спец теорема, т.к. настоящие теоремы не употребляют сокращений;-)
+
+Declaration ObjectInverseOf (o o:TV):(o o:TV).
+Definition T1_1 ObjectInverseOf(OP)(x y) : OP(y x).
+
+Declaration SubClassOf  (o:TV)(o:TV):TV.
+Definition T5_1 SubClassOf(C1 C2) : (∀z:o (C1(z) → C2(z))).
+
+-- попал в БД!!!
+"хранимый комментарий на русском;-)"
+"--stored comment--"
+Declaration  Socrates:o constant. 
+--!!!на first_son должна быть ругань, т.к. не объявлено!!!
+Declaration  Socratic:o constant. Definition Socratic_d Socratic constant first_son(Socrates). 
+-- добавляем в модель эо:
+!Somebody_1 o!
+!first_son(Somebody_1):Socrates!
+!Neq_o(Somebody_1 Socrates):True!
+?Neq_o(Somebody_1 Socrates)?
+!Somebody_1! --Эта попытка удаления из основы должна быть отвергнута!
+--удаление из модели
+!Somebody_2 o!
+!Somebody_2!
+
+?first_son(Somebody_1)? --ну это просто:-)
+--!!!!ЭТО ДАЕТ SA ?(3+2)? --А это?
+?(3*2)?
+?("А"+"Б")? --???
+"!!!тестирование выполнения запроса с инфиксами (теорема Neq_th с отрицанием)!!!"
+?(∀x:o(∀y:o((¬(x=y)) ≡ Neq_o(x y))))?
+
+Declaration being o:TV.  Declaration mortal o:TV. 
+Axiom Phil_1 being(Socrates).
+Axiom GWFG_1 SubClassOf(being mortal).
+Theorem GWFG_2 mortal(Socrates).
+Proof Proo1 GWFG_2 GWFG_3.
+
+--СООБЩЕНИЯ ОБ ОШИБКАХ
+
+--проверки WFC функций
+Declaration EQ_o2 o2 True:TV. --должно быть 2 сообщения!
+Declaration SubClassOf2  (o:TV):(o:TV) prime. --должно быть 1 сообщение! 
+
+--запрет эт в терме
+Axiom Phil_1bad being(Socratic_d).
+
+--не эо в запросе
+?first_son(Somebody_2)?
+
+--не употребляется ква-пер x
+Theorem Neq_th_B (∀x:o(∀y:o((y≠y) ≡ Neq_o(y y)))). 
+
+

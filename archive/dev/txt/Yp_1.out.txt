@@ -1,0 +1,56 @@
+
+
+<Yp1 BEGIN st_id=0000000001>
+--DTS dump begin.
+ Declaration TV sort .
+ Declaration EQU_TV TV TV : TV .
+ Add infix = to EQU_TV .
+ ! True TV !
+ Declaration NOT TV : TV prime .
+ Add infix ¬ to NOT .
+ Add infix not to NOT .
+ Declaration AND TV TV : TV prime .
+ Add infix ∧ to AND .
+ Add infix and to AND .
+ Declaration OR TV TV : TV prime .
+ Add infix ∨ to OR .
+ Add infix or to OR .
+ Declaration IMPLIES TV TV : TV .
+ Add infix → to IMPLIES .
+ Add infix impl to IMPLIES .
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+ Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+ Declaration EQUIV TV TV : TV .
+ Add infix ≡ to EQUIV .
+ Add infix eqv to EQUIV .
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+ Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+ Declaration NEQ_TV TV TV : TV .
+ Add infix ≠ to NEQ_TV .
+ Add infix neq to NEQ_TV .
+ Definition NEQ_TV_d NEQ_TV ( x y ) : ( ¬ ( x = y ) ) .
+ Definition NEQ_TV_d NEQ_TV ( x y ) : NOT ( EQU_TV ( x y ) ) .
+ Declaration o sort .
+ Declaration ObjectInverseOf ( o o : TV ) : ( o o : TV ) .
+ Definition T1_1 ObjectInverseOf ( OP ) ( x y ) : OP ( y x ) .
+ Definition T1_1 ObjectInverseOf ( OP ) ( x y ) : OP ( y x ) .
+ Declaration part_of o o : TV prime .
+ ! Somebody_1 o !
+ ! Somebody_2 o !
+ ! ObjectInverseOf ( part_of ) ( Somebody_1 Somebody_2 ) : True !
+ ! part_of ( Somebody_2 Somebody_1 ) : True !
+ Declaration man o : TV .
+ Declaration woman o : TV .
+ Declaration human_being o : TV .
+ Declaration SubClassOf ( o : TV ) ( o : TV ) : TV .
+ Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o ( C1 ( z ) → C2 ( z ) ) ) .
+ Definition T5_1 SubClassOf ( C1 C2 ) : ( ∀ z : o OR ( NOT ( C1 ( z ) ) C2 ( z ) ) ) .
+ Theorem HB_1 SubClassOf ( man human_being ) .
+ Theorem HB_1 ( ∀ z : o OR ( NOT ( man ( z ) ) human_being ( z ) ) ) .
+ Declaration ObID ( o o : TV ) : ( o o : TV ) .
+ Definition T1_0 ObID ( OP ) : OP .
+ Definition T1_0 ObID ( OP ) : OP .
+--DTS dump end.
+<exN_proc! st_id=0000000001>
+<Yp1 END st_id=0000000001>
+<:-)End of Statement nodes in dt. Stop.>

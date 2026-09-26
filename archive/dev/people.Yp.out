@@ -1,0 +1,160 @@
+﻿--это онтология исключительно начать да попробовать
+"+У:по хорошему мы оказываемся в ситуации онтологии людей и следует действовать соответственно!"
+Declaration o sort.
+Declaration  Socrates :o prime. 
+--!!!на first_son должна быть ругань, т.к. не объявлено!!!
+Declaration  Socratic :o. Definition Socratic_d Socratic ():first_son(Socrates). 
+-- добавляем в модель эо:
+!Somebody_1 o<SA_yyerror msg='syntax error before this element!'>!
+<SA STOP_e_m_Statement_token='o'>
+!up_node!SERROR!from node not found: from=!, to=0000000003, irn=6!
+!first_son(Somebody_1):Socrates!
+!Neq_o(Somebody_1 Socrates):True!
+?Neq_o(Somebody_1 Socrates)?
+!Somebody_1!<SA_yyerror msg='syntax error before this element!'>
+<SA STOP_e_m_Statement_token='!'>
+!up_node!SERROR!from node not found: from=!, to=0000000003, irn=9! --Эта попытка удаления из основы должна быть отвергнута!
+--удаление из модели
+!Somebody_2 o<SA_yyerror msg='syntax error before this element!'>!
+<SA STOP_e_m_Statement_token='o'>
+!up_node!SERROR!from node not found: from=!, to=0000000003, irn=9! --76-ое дерево
+!Somebody_2!<SA_yyerror msg='syntax error before this element!'>
+<SA STOP_e_m_Statement_token='!'>
+!up_node!SERROR!from node not found: from=!, to=0000000003, irn=9! --это в лес не попадает!
+
+?first_son(Somebody_1)? --ну это просто:-) 77-ое дерево
+--!!!!ЭТО ДАЕТ SA: ?(3+2)?
+?(3*2)? --78-ое дерево
+?("А"+"Б")? --ошибка - + для строк не задан;-)
+"!!!тестирование выполнения запроса с инфиксами (теорема Neq_th с отрицанием)!!!"
+?(∀x:o(∀y:o((¬(x=y)) ≡ Neq_o(x y))))? --81-ое
+
+Declaration being o:TV.  Declaration mortal o:TV. 
+Axiom<SA_yyerror msg='syntax error before this element!'> Phil_1 being(Socrates).
+<SA STOP_Dot_Statement_token='Axiom'>
+!up_node!SERROR!from node not found: from=Axiom, to=0000000003, irn=16!
+Axiom GWFG_1 SubClassOf(being mortal).
+<SA STOP_Dot_Statement_token='Axiom'>
+!up_node!SERROR!from node not found: from=Axiom, to=0000000003, irn=16!
+Theorem GWFG_2 mortal(Socrates).
+<SA STOP_Dot_Statement_token='Theorem'>
+!up_node!SERROR!from node not found: from=Theorem, to=0000000003, irn=16!
+Proof Proo1 GWFG_2 GWFG_3.
+
+--запрет эт в терме
+Axiom<SA_yyerror msg='syntax error before this element!'> Phil_1bad being(Socratic_d).
+<SA STOP_Dot_Statement_token='Axiom'>
+!up_node!SERROR!from node not found: from=Axiom, to=0000000003, irn=17!
+
+--не эо в запросе
+?first_son(Somebody_2)?
+
+--не употребляется ква-пер x
+Theorem<SA_yyerror msg='syntax error before this element!'> Neq_th_B (∀x:o(∀y:o((y≠y) ≡ Neq_o(y y)))).
+<SA STOP_Dot_Statement_token='Theorem'>
+!up_node!SERROR!from node not found: from=Theorem, to=0000000003, irn=18! 
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-3'>
+<st_store Tree='89' msg='added'> "+У:по хорошему мы оказываемся в ситуации онтологии людей и следует действовать соответственно!"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000009' st_rid='st-1'>
+<st_store Tree='90' msg='added'> Declaration o sort .</st_store>
+</Yp1s>
+<Yp1s st_id='0000000020' st_rid='st-1'>
+<st_store Tree='91' msg='added'> Declaration Socrates  : o prime .</st_store>
+</Yp1s>
+<Yp1s st_id='0000000030' st_rid='st-1'>
+<st_store Tree='92' msg='added'> Declaration Socratic  : o .</st_store>
+</Yp1s>
+<Yp1s st_id='0000000050' st_rid='st-2'>
+<st_store Tree='93' msg='added'> Definition Socratic_d Socratic (  ) : first_son ( Socrates ) .</st_store>
+!type_trmi!WARNING! first_son is a free var!
+!fp_proc: ERROR! Free var 'first_son'(93,37) is not a form-par in definition term! WFC(trmi-3)
+!func_add_d>term_proc.msg(!term_proc: term (93,41) has an error:0!).
+<def_proc st_id='0000000050'/>
+</Yp1s>
+<Yp1s st_id='0000000063' st_rid='fmta'>
+<st_store Tree='94' msg='added'> ! first_son ( Somebody_1 ) : Socrates !</st_store>
+!WFC_trmi: ERROR! Id 'first_son'(94,54) is not a function in FM term! WFC(trmi-2)
+!WFC_trmi: ERROR! Id 'Somebody_1'(94,56) is not a function in FM term! WFC(trmi-2)
+!fmta_proc!ERROR! msg got='!term_proc: term (94,58) has an error:-2!'!
+!fmta_proc:number of bad terms is 1!
+</Yp1s>
+<Yp1s st_id='0000000079' st_rid='fmta'>
+<st_store Tree='95' msg='added'> ! Neq_o ( Somebody_1 Socrates ) : True !</st_store>
+!WFC_trmi: ERROR! Id 'Neq_o'(95,68) is not a function in FM term! WFC(trmi-2)
+!WFC_trmi: ERROR! Id 'Somebody_1'(95,70) is not a function in FM term! WFC(trmi-2)
+!fmta_proc!ERROR! msg got='!term_proc: term (95,74) has an error:-2!'!
+!WFC_trmi: ERROR! Id 'True'(95,78) is not a function in FM term! WFC(trmi-2)
+!fmta_proc!ERROR! msg got='!term_proc: term (95,77) has an error:-1!'!
+!fmta_proc:number of bad terms is 2!
+</Yp1s>
+<Yp1s st_id='0000000093' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='96' msg='added'> ? Neq_o ( Somebody_1 Socrates ) ?</st_store>
+!type_trmi!WARNING! Neq_o is a free var!
+!type_trmi!WARNING! Somebody_1 is a free var!
+!term_proc:ERROR! Free var forbidden in term mode=5 but we have 2! WFC(trmi-4)
+!q_term.term_proc:(!term_proc: term (96,90) has an error:0!).WFC(st-11-1)</q_term>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000110' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='97' msg='added'> ? first_son ( Somebody_1 ) ?</st_store>
+!type_trmi!WARNING! first_son is a free var!
+!type_trmi!WARNING! Somebody_1 is a free var!
+!term_proc:ERROR! Free var forbidden in term mode=5 but we have 2! WFC(trmi-4)
+!q_term.term_proc:(!term_proc: term (97,107) has an error:0!).WFC(st-11-1)</q_term>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000121' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='98' msg='added'> ? ( 3 * 2 ) ?</st_store>
+<infx_subst msg='RESULT'> ? R_MULTIPLY ( 3 2 ) ?
+</infx_subst>
+<deff_subst msg='RESULT'> ? R_MULTIPLY ( 3 2 ) ?
+</deff_subst>
+<ApplyTL msg='!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!! Add this C-func fm_rmult to Yp!(SERR-1)'/></q_term>
+<return msg='NO VALUE' />
+</Yp1s>
+<Yp1s st_id='0000000132' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='100' msg='added'> ? ( "А" + "Б" ) ?</st_store>
+!type_tt: ERROR! There is no binary function for infix '+' with these arg_types!WFC(trmin-2)
+!type_tt:arg-1 type: String
+!type_tt:arg-2 type: String
+!q_term.term_proc:(!term_proc: term (100,128) has an error:-10!).WFC(st-11-1)</q_term>
+<return msg='NO VALUE' />
+</Yp1s>
+<Yp1s st_id='0000000135' st_rid='st-3'>
+<st_store Tree='101' msg='added'> "!!!тестирование выполнения запроса с инфиксами (теорема Neq_th с отрицанием)!!!"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000177' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='102' msg='added'> ? ( ∀ x : o ( ∀ y : o ( ( ¬ ( x = y ) ) ≡ Neq_o ( x y ) ) ) ) ?</st_store>
+!type_trmi!WARNING! Neq_o is a free var!
+!term_proc:ERROR! Free var forbidden in term mode=5 but we have 1! WFC(trmi-4)
+!q_term.term_proc:(!term_proc: term (102,170) has an error:0!).WFC(st-11-1)</q_term>
+<return msg='NO VALUE' />
+</Yp1s>
+<Yp1s st_id='0000000191' st_rid='st-1'>
+<st_store Tree='103' msg='added'> Declaration being o : TV .</st_store>
+</Yp1s>
+<Yp1s st_id='0000000203' st_rid='st-1'>
+<st_store Tree='104' msg='added'> Declaration mortal o : TV .</st_store>
+</Yp1s>
+<Yp1s st_id='0000000206' st_rid='st-12'>
+!prf_add: Theorem GWFG_2 is missing! WFC(st-12-1)
+</Yp1s>
+<Yp1s st_id='0000000219' st_rid='st-11'>
+<q_term msg='begin'>
+<st_store Tree='105' msg='added'> ? first_son ( Somebody_2 ) ?</st_store>
+!type_trmi!WARNING! first_son is a free var!
+!type_trmi!WARNING! Somebody_2 is a free var!
+!term_proc:ERROR! Free var forbidden in term mode=5 but we have 2! WFC(trmi-4)
+!q_term.term_proc:(!term_proc: term (105,216) has an error:0!).WFC(st-11-1)</q_term>
+<return msg='NO VALUE' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

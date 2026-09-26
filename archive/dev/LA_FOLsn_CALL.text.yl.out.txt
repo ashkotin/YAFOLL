@@ -1,0 +1,53 @@
+﻿	
+--comment
+"string"[Token="string", lng=8, type=278]
+
+1.2%[Token=1.2%, lng=4, type=277]
+
+12[Token=12, lng=2, type=279]
+
+<LA BAD_BYTE BYTE.lng=1, BYTE.HEX=25, BYTE.s=%>
+∀[Token=∀, lng=3, type=258]
+∃[Token=∃, lng=3, type=258]
+#[Token=#, lng=1, type=258]
+Σ[Token=Σ, lng=2, type=258]
+↓[Token=↓, lng=3, type=258]
+
+.[Token=., lng=1, type=259]
+,[Token=,, lng=1, type=260]
+:[Token=:, lng=1, type=261]
+([Token=(, lng=1, type=262]
+)[Token=), lng=1, type=263]
+{[Token={, lng=1, type=264]
+}[Token=}, lng=1, type=265]
+![Token=!, lng=1, type=266]
+?[Token=?, lng=1, type=267]
+
+Declaration[Token=Declaration, lng=11, type=268]
+ fset[Token=fset, lng=4, type=271]
+ fseq[Token=fseq, lng=4, type=272]
+ func[Token=func, lng=4, type=273]
+ definition[Token=definition, lng=10, type=270]
+ prime[Token=prime, lng=5, type=269]
+
+String[Token=String, lng=6, type=274]
+ Number[Token=Number, lng=6, type=274]
+ Natural[Token=Natural, lng=7, type=274]
+ Ide[Token=Ide, lng=3, type=274]
+
+I_d1[Token=I_d1, lng=4, type=275]
+¬[Token=¬, lng=2, type=275]
+∧[Token=∧, lng=3, type=275]
+∨[Token=∨, lng=3, type=275]
+→[Token=→, lng=3, type=275]
+≡[Token=≡, lng=3, type=275]
+≠[Token=≠, lng=3, type=275]
+≤[Token=≤, lng=3, type=275]
+≥[Token=≥, lng=3, type=275]
+=[Token==, lng=1, type=275]
+<[Token=<, lng=1, type=275]
+>[Token=>, lng=1, type=275]
+*[Token=*, lng=1, type=275]
+/[Token=/, lng=1, type=275]
+
+_I_de2[Token=_I_de2, lng=6, type=276]

@@ -1,0 +1,53 @@
+--
+!0!
+
+"TV DADA"
+"сорт истинностных значений"
+ Declaration TV sort. 
+ "Равенство на TV нужно лишь(!) для проверки аксиом полноты!"
+ Declaration = TV TV : TV 	prime fm_strcmp. 	
+ Declaration not TV : TV prime.    Declaration and TV TV : TV prime.   	Declaration or TV TV : TV prime. 
+ Declaration ¬ TV : TV definition  ( x ) : not (x) .  Declaration ∧ TV TV : TV definition  ( x y ): and( x y ). Declaration ∨ TV TV : TV definition  ( x y ): or ( x y ).
+ Declaration → TV TV : TV definition  ( x z ) : ( ( ¬ x ) ∨ z ).  Declaration impl TV TV : TV		definition  ( x z ) : ( ( ¬ x ) ∨ z ).
+ Declaration ≡ TV TV : TV 			definition  ( x y ) : ( ( x → y ) ∧ ( y → x ) ). Declaration eqv TV TV : TV			definition  ( x y ) : ( ( x → y ) ∧ ( y → x ) ).
+"Axioms"
+Declaration NOT_full :TV 	definition  ():( ∀ x : TV ( ∃ y : TV ( ( ¬x ) = y ) ) ) .
+Declaration AND_full :TV	definition  ():(∀x:TV(∀z:TV (∃ y : TV ((x∧z)=y)))).
+Declaration OR_full :TV		definition  ():(∀x:TV(∀z:TV (∃y:TV ((x∨z)=y) ))).
+
+"Ide DADA"
+"пред-сорт для наполнения абстрактных сортов"
+"Ide должен быть после TV, чтобы можно было задать =!" 
+Declaration Ide sort "{US}{Id}".
+Declaration = Ide Ide : TV 	prime fm_strcmp. 
+
+"String DADA"
+ "strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ Declaration String sort "[^DQ]*".
+ Declaration = String String : TV prime fm_strcmp. 
+ 
+"Number DADA. Числа"
+ Declaration Number sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?" .
+ "Объявления функций арифметики десятичных рациональных чисел"
+ "+добавить определение для <>"
+ Declaration = Number Number : TV prime fm_req. Declaration < Number Number : TV prime fm_rlt.
+ Declaration > Number Number : TV definition (x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration ≤ Number Number : TV definition (x y) : ((x=y)∨(x<y)).
+ Declaration ≥ Number Number : TV definition (x y) : ((x=y)∨(x>y)).
+ 
+ Declaration + Number Number : Number prime fm_radd. Declaration - Number Number : Number prime fm_rminus. Declaration * Number Number : Number prime fm_rmult. 
+ Declaration / Number Number : Number prime fm_rdev. 
+ "+подумать над аксиоматикой порядка и операций и точностью вычислений!!!"
+
+"Year DADA. Пример числа с единицей измерения"
+ Declaration Year sort "{NN}{DQ}y{DQ}".
+ "это отрезок временной оси [01.01.NN..31.12.NN] где NN - нат-число."
+ Declaration = Year Year : TV prime fm_req. Declaration ltY Year Year : TV prime fm_rlt.
+
+
+"Начальная КСТ. это заполнение должно быть после DADA TV и Ide"
+!_False TV! !_True TV!
+! not ( _False ):_True! ! not ( _True ):_False!
+! and ( _False _False ):_False! ! and ( _False _True ):_False! ! and ( _True _False ):_False! ! and ( _True _True ):_True!
+! or ( _False _False ):_False! ! or ( _False _True ):_True! ! or ( _True _False ):_True! ! or ( _True _True ):_True!
+

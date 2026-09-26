@@ -1,0 +1,24 @@
+﻿
+--True values.
+
+Declaration TV sort. 
+Declaration True:TV constant. 
+Declaration False:TV constant.
+
+--Объявление пропозициональных связок.
+Declaration NOT TV:TV prime.
+Declaration AND TV TV:TV prime.
+Declaration OR TV TV:TV prime.
+
+--Задание пропозициональных связок.
+!NOT(True)=<--SA>False! !NOT(False)=True! 
+
+!AND(True True)=True!
+!AND(False True)=False!
+!AND(True False)=False!
+!AND(False False)=False!
+
+!OR(True True)=True!
+!OR(False True)=True!
+!OR(True False)=True!
+!OR(False False)=False!

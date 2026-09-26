@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+</Yp1s>
+<Yp1s st_id='0000000006' st_rid='st-3'>
+<st_store Tree='1' msg='added'> "TV DADA"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000013' st_rid='st-1'>
+<st_store Tree='2' msg='added'> Declaration TV sort .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000014' st_rid='st-3'>
+<st_store Tree='3' msg='added'> "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000031' st_rid='st-1'>
+<st_store Tree='4' msg='added'> Declaration EQ_TV TV TV : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000032' st_rid='st-4'>
+<st_store Tree='5' msg='added'> Add infix "=" to EQ_TV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000051' st_rid='st-1'>
+<st_store Tree='6' msg='added'> Declaration NOT TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000052' st_rid='st-4'>
+<st_store Tree='7' msg='added'> Add infix "¬" to NOT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000059' st_rid='st-4'>
+<st_store Tree='8' msg='added'> Add infix "not" to NOT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000080' st_rid='st-1'>
+<st_store Tree='9' msg='added'> Declaration AND TV TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000081' st_rid='st-4'>
+<st_store Tree='10' msg='added'> Add infix "∧" to AND .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000088' st_rid='st-4'>
+<st_store Tree='11' msg='added'> Add infix "and" to AND .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000109' st_rid='st-1'>
+<st_store Tree='12' msg='added'> Declaration OR TV TV : TV prime .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000110' st_rid='st-4'>
+<st_store Tree='13' msg='added'> Add infix "∨" to OR .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000117' st_rid='st-4'>
+<st_store Tree='14' msg='added'> Add infix "or" to OR .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000137' st_rid='st-1'>
+<st_store Tree='15' msg='added'> Declaration IMPLIES TV TV : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000138' st_rid='st-4'>
+<st_store Tree='16' msg='added'> Add infix "→" to IMPLIES .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000145' st_rid='st-4'>
+<st_store Tree='17' msg='added'> Add infix "impl" to IMPLIES .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000177' st_rid='st-2'>
+<st_store Tree='18' msg='added'> Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=18 Ilbch=158) (sigf_t=15 sigf=131)
+<infx_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id z does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition IMPL_d IMPLIES ( x z ) : OR ( NOT ( x ) z ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=1.
+<return msg='' />
+<def_proc st_id='0000000177'/>
+</Yp1s>
+<Yp1s st_id='0000000191' st_rid='st-1'>
+<st_store Tree='20' msg='added'> Declaration EQUIV TV TV : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000192' st_rid='st-4'>
+<st_store Tree='21' msg='added'> Add infix "≡" to EQUIV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000199' st_rid='st-4'>
+<st_store Tree='22' msg='added'> Add infix "eqv" to EQUIV .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000239' st_rid='st-2'>
+<st_store Tree='23' msg='added'> Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=23 Ilbch=212) (sigf_t=20 sigf=185)
+<infx_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( IMPLIES ( x y ) IMPLIES ( y x ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition EQV_d EQUIV ( x y ) : AND ( OR ( NOT ( x ) y ) OR ( NOT ( y ) x ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=3.
+<return msg='' />
+<def_proc st_id='0000000239'/>
+</Yp1s>
+<Yp1s st_id='0000000240' st_rid='fmca'>
+<st_store Tree='25' msg='added'> ! _True TV !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000245' st_rid='fmca'>
+<st_store Tree='26' msg='added'> ! _False TV !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000260' st_rid='fmta'>
+<st_store Tree='27' msg='added'> ! NOT ( _False ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000274' st_rid='fmta'>
+<st_store Tree='28' msg='added'> ! NOT ( _True ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000290' st_rid='fmta'>
+<st_store Tree='29' msg='added'> ! AND ( _False _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000306' st_rid='fmta'>
+<st_store Tree='30' msg='added'> ! AND ( _False _True ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000322' st_rid='fmta'>
+<st_store Tree='31' msg='added'> ! AND ( _True _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000338' st_rid='fmta'>
+<st_store Tree='32' msg='added'> ! AND ( _True _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000354' st_rid='fmta'>
+<st_store Tree='33' msg='added'> ! OR ( _False _False ) : _False !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000370' st_rid='fmta'>
+<st_store Tree='34' msg='added'> ! OR ( _False _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000386' st_rid='fmta'>
+<st_store Tree='35' msg='added'> ! OR ( _True _False ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000402' st_rid='fmta'>
+<st_store Tree='36' msg='added'> ! OR ( _True _True ) : _True !</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000432' st_rid='st-5'>
+<st_store Tree='37' msg='added'> Axiom NOT_full ( ∀ x : TV ( ∃ y : TV ( ( ¬ x ) = y ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Axiom NOT_full ( ∀ x : TV ( ∃ y : TV EQ_TV ( NOT ( x ) y ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Axiom NOT_full ( ∀ x : TV ( ∃ y : TV EQ_TV ( NOT ( x ) y ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Axiom NOT_full ( ∀ x : TV ( ∃ y : TV EQ_TV ( NOT ( x ) y ) ) ) .
+</deff_subst>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000471' st_rid='st-5'>
+<st_store Tree='39' msg='added'> Axiom AND_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV ( ( x ∧ z ) = y ) ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Axiom AND_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( AND ( x z ) y ) ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id z does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Axiom AND_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( AND ( x z ) y ) ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Axiom AND_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( AND ( x z ) y ) ) ) ) .
+</deff_subst>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000510' st_rid='st-5'>
+<st_store Tree='41' msg='added'> Axiom OR_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV ( ( x ∨ z ) = y ) ) ) ) .</st_store>
+<infx_subst msg='RESULT'> Axiom OR_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( OR ( x z ) y ) ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id z does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Axiom OR_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( OR ( x z ) y ) ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Axiom OR_full ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV EQ_TV ( OR ( x z ) y ) ) ) ) .
+</deff_subst>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000514' st_rid='st-3'>
+<st_store Tree='43' msg='added'> "String DADA"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000516' st_rid='st-3'>
+<st_store Tree='44' msg='added'> "strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000524' st_rid='st-1'>
+<st_store Tree='45' msg='added'> Declaration S sort "[^DQ]*" .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000540' st_rid='st-1'>
+<st_store Tree='46' msg='added'> Declaration S_EQ S S : TV prime fm_strcmp .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000541' st_rid='st-4'>
+<st_store Tree='47' msg='added'> Add infix "=" to S_EQ .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000548' st_rid='st-3'>
+<st_store Tree='48' msg='added'> "Number DADA. Числа"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000556' st_rid='st-1'>
+<st_store Tree='49' msg='added'> Declaration R sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?" .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000557' st_rid='st-3'>
+<st_store Tree='50' msg='added'> "Объявления функций арифметики десятичных рациональных чисел"</st_store>
+</Yp1s>
+<Yp1s st_id='0000000574' st_rid='st-1'>
+<st_store Tree='51' msg='added'> Declaration R_EQ R R : TV prime fm_req .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000575' st_rid='st-4'>
+<st_store Tree='52' msg='added'> Add infix "=" to R_EQ .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000597' st_rid='st-1'>
+<st_store Tree='53' msg='added'> Declaration R_LT R R : TV prime fm_rlt .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000598' st_rid='st-4'>
+<st_store Tree='54' msg='added'> Add infix "<" to R_LT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000618' st_rid='st-1'>
+<st_store Tree='55' msg='added'> Declaration R_GT R R : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000619' st_rid='st-4'>
+<st_store Tree='56' msg='added'> Add infix ">" to R_GT .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000667' st_rid='st-2'>
+<st_store Tree='57' msg='added'> Definition R_GT_d R_GT ( x y ) : ( ( ¬ ( x = y ) ) ∧ ( ¬ ( x < y ) ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=57 Ilbch=632) (sigf_t=55 sigf=612)
+<infx_subst msg='RESULT'> Definition R_GT_d R_GT ( x y ) : AND ( NOT ( R_EQ ( x y ) ) NOT ( R_LT ( x y ) ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition R_GT_d R_GT ( x y ) : AND ( NOT ( R_EQ ( x y ) ) NOT ( R_LT ( x y ) ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition R_GT_d R_GT ( x y ) : AND ( NOT ( R_EQ ( x y ) ) NOT ( R_LT ( x y ) ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=1.
+<return msg='' />
+<def_proc st_id='0000000667'/>
+</Yp1s>
+<Yp1s st_id='0000000681' st_rid='st-1'>
+<st_store Tree='59' msg='added'> Declaration R_LE R R : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000682' st_rid='st-4'>
+<st_store Tree='60' msg='added'> Add infix "≤" to R_LE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000722' st_rid='st-2'>
+<st_store Tree='61' msg='added'> Definition R_LE_d R_LE ( x y ) : ( ( x = y ) ∨ ( x < y ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=61 Ilbch=695) (sigf_t=59 sigf=675)
+<infx_subst msg='RESULT'> Definition R_LE_d R_LE ( x y ) : OR ( R_EQ ( x y ) R_LT ( x y ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition R_LE_d R_LE ( x y ) : OR ( R_EQ ( x y ) R_LT ( x y ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition R_LE_d R_LE ( x y ) : OR ( R_EQ ( x y ) R_LT ( x y ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=1.
+<return msg='' />
+<def_proc st_id='0000000722'/>
+</Yp1s>
+<Yp1s st_id='0000000736' st_rid='st-1'>
+<st_store Tree='63' msg='added'> Declaration R_GE R R : TV .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000737' st_rid='st-4'>
+<st_store Tree='64' msg='added'> Add infix "≥" to R_GE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000777' st_rid='st-2'>
+<st_store Tree='65' msg='added'> Definition R_GE_d R_GE ( x y ) : ( ( x = y ) ∨ ( x > y ) ) .</st_store>
+!type_fps!DEBUG! loop-in (IlbN=1): Ilbi=1 (tid=65 Ilbch=750) (sigf_t=63 sigf=730)
+<infx_subst msg='RESULT'> Definition R_GE_d R_GE ( x y ) : OR ( R_EQ ( x y ) R_GT ( x y ) ) .
+</infx_subst><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/><defc_subst msg='!WARNING! Id x does not exist in entities!'/><defc_subst msg='!WARNING! Id y does not exist in entities!'/>
+<defc_subst msg='RESULT'> Definition R_GE_d R_GE ( x y ) : OR ( R_EQ ( x y ) R_GT ( x y ) ) .
+</defc_subst>
+<deff_subst msg='RESULT'> Definition R_GE_d R_GE ( x y ) : OR ( R_EQ ( x y ) AND ( NOT ( R_EQ ( x y ) ) NOT ( R_LT ( x y ) ) ) ) .
+</deff_subst>
+func_add_d(DEBUG)st_trans.rc=2.
+<return msg='' />
+<def_proc st_id='0000000777'/>
+</Yp1s>
+<Yp1s st_id='0000000793' st_rid='st-1'>
+<st_store Tree='67' msg='added'> Declaration R_PLUS R R : R prime fm_radd .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000794' st_rid='st-4'>
+<st_store Tree='68' msg='added'> Add infix "+" to R_PLUS .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000816' st_rid='st-1'>
+<st_store Tree='69' msg='added'> Declaration R_MINUS R R : R prime fm_rminus .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000817' st_rid='st-4'>
+<st_store Tree='70' msg='added'> Add infix "-" to R_MINUS .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000839' st_rid='st-1'>
+<st_store Tree='71' msg='added'> Declaration R_MULTIPLY R R : R prime fm_rmult .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000840' st_rid='st-4'>
+<st_store Tree='72' msg='added'> Add infix "*" to R_MULTIPLY .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000862' st_rid='st-1'>
+<st_store Tree='73' msg='added'> Declaration R_DEVIDE R R : R prime fm_rdev .</st_store>
+<return msg=''/>
+</Yp1s>
+<Yp1s st_id='0000000863' st_rid='st-4'>
+<st_store Tree='74' msg='added'> Add infix "/" to R_DEVIDE .</st_store>
+<return msg='' />
+</Yp1s>
+<Yp1s st_id='0000000870' st_rid='st-3'>
+<st_store Tree='75' msg='added'> "+подумать над аксиоматикой и порядка и операций и точностью вычислений!!!"</st_store>
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

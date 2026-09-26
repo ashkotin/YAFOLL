@@ -1,0 +1,86 @@
+!0!
+
+"TVs"
+ "INCLUDE IdeS"
+ Declaration TV fset(Ide) prime.                                                   !_False TV! !_True TV!
+ "Declaration = TV TV : TV prime." "! = ( _False _False ):_True! ! = ( _False _True ):_False!" "! = ( _True _False ):_False! ! = ( _True _True ):_True!  "
+ Declaration not TV : TV prime.                                 ! not ( _False ):_True! ! not ( _True ):_False!   
+ Declaration and TV TV : TV prime.                              ! and ( _False _False ):_False! ! and ( _False _True ):_False! ! and ( _True _False ):_False! ! and ( _True _True ):_True!  
+ Declaration or TV TV : TV prime.                               ! or ( _False _False ):_False! ! or ( _False _True ):_True! ! or ( _True _False ):_True! ! or ( _True _True ):_True!
+
+"TVt" 
+ "лексические определения для первичек"
+        Declaration ¬ TV : TV definition  ( x ) : not (x) .
+        Declaration ∧ TV TV : TV definition  ( x y ): and( x y ).       
+        Declaration ∨ TV TV : TV definition  ( x y ): or ( x y ).
+ "TVtC:классическая теория связок. определения - причём 2 лексических"
+ Declaration impl TV TV : TV definition  ( x z ) : ( ( ¬ x ) ∨ z ).
+		Declaration → TV TV : TV            definition  ( x z ) : impl(x z).
+ Declaration eqv TV TV : TV definition  ( x y ) : ( ( x → y ) ∧ ( y → x ) ).
+		Declaration ≡ TV TV : TV definition  ( x y ) : eqv(x y).
+ "итого: обеспечена вычислимость проп-связок, что даёт возможность в других теориях ВЫЧИСЛЯТЬ ПРЕДИКАТЫ!"
+ "TVtF:структурные свойства/АКСИОМЫ классических истинностных значений."
+ "КРЯ:пусть f1 - унарная ф-я. f1 полна на TV означает для каждого x в TV существует z в TV такой f1(x)=z."
+ Declaration FULL1TV (TV:TV):TV definition  (f1):(∀x:TV (∃z:TV ((f1 x)=z) )).
+ "КРЯ:пусть f2 - бинарная ф-я."
+ "f2 полна над TV означает для каждого x в TV и для каждого y в TV существует z в TV такой f2(x y)=z."
+ Declaration FULL2TV (TV TV:TV):TV      definition  (f2):(∀x:TV(∀y:TV (∃z:TV ((x f2 y)=z) ))).
+ "КРЯ:пусть f1 - унарная ф-я. f1 накрывает TV означает что для каждого z в TV существует x в TV такой f1(x)=z."
+ Declaration ON1TV (TV:TV):TV   definition  (f1):(∀z:TV (∃x:TV ((f1 x)=z) )).
+ "КРЯ:пусть f2 - бинарная ф-я." 
+ "f2 накрывает TV означает что для каждого z в TV существует x в TV и существует y в TV такие что f2(x y)=z."
+ Declaration ON2TV (TV TV:TV):TV        definition  (f2):(∀z:TV(∃x:TV (∃y:TV ((x f2 y)=z) ))).
+ "КРЯ:пусть p2 - бинарный предикат на TV. p2 рефлексивен на TV означает что для каждого x из TV (x p2 x)."
+ Declaration REFL_TV (TV TV:TV):TV      definition  (p2):(∀x:TV(x p2 x)).
+ "p2 симметричен/коммутативен на TV означает что для каждых x,y из TV: (x p2 y) тождественно (y p2 x)."
+ Declaration COMM_TV (TV TV:TV):TV      definition  (p2):(∀x:TV(∀y:TV ((x p2 y)=(y p2 x)) )).
+
+ "СВОЙСТВА равенства"
+ "Declaration EQ_full :TV       definition  ():FULL2TV(=)."  Declaration EQ_full :TV        definition  ():(∀x:TV(∀y:TV (∃z:TV ((x = y)=z) ))).
+ "Declaration EQ_on :TV definition  ():ON2TV(=)." 			 Declaration EQ_on :TV  definition  ():(∀z:TV(∃x:TV (∃y:TV ((x = y)=z) ))).
+ "Declaration EQ_refl :TV       definition  ():REFL_TV(=)."  Declaration EQ_refl :TV        definition  ():(∀x:TV(x = x)).
+ "Declaration EQ_comm :TV       definition  ():COMM_TV(=)."  Declaration EQ_comm :TV        definition  ():(∀x:TV(∀y:TV ((x = y)=(y = x)) )).
+ "Declaration EQTV_trans :TV	definition  ():TRANS_TV(=)." Declaration EQTV_trans :TV	definition  ():(∀x:TV (∀y:TV (∀z:TV ((x=y) and (y=z)) → (x=z)))).
+
+ "СВОЙСТВА остальных ф-й"
+ Declaration NOT_full :TV       definition  ():FULL1TV(¬).
+ Declaration NOT_on :TV definition  ():ON1TV(¬).
+ Declaration AND_full :TV       definition  ():FULL2TV(∧).
+ Declaration AND_on :TV definition  ():ON2TV(∧).
+ Declaration OR_full :TV        definition  ():FULL2TV(∨).
+ Declaration OR_on :TV  definition  ():ON2TV(∨).
+
+"Рац числа"
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration + Number Number : Number prime fm_radd. 
+ Declaration - Number Number : Number prime fm_rminus. 
+ Declaration * Number Number : Number prime fm_rmult. 
+ Declaration / Number Number : Number prime fm_rdev. 
+ "арифм-оотношения"
+ Declaration = Number Number : TV prime fm_req. 
+ Declaration < Number Number : TV prime fm_rlt.
+ Declaration > Number Number : TV definition (x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration ≤ Number Number : TV definition (x y) : ((x=y)∨(x<y)).
+ Declaration ≥ Number Number : TV definition (x y) : ((x=y)∨(x>y)).
+
+"Нат числа"
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration + Natural Natural : Natural prime fm_Nadd. 
+ Declaration - Natural Natural : Natural prime fm_Nminus. 
+ Declaration * Natural Natural : Natural prime fm_Nmult. 
+ Declaration / Natural Natural : Natural prime fm_Ndev. 
+ "арифм-оотношения"
+ Declaration = Natural Natural : TV prime fm_Neq. 
+ Declaration < Natural Natural : TV prime fm_Nlt.
+ Declaration > Natural Natural : TV definition (x y) : ((¬(x=y))∧(¬(x<y))).
+ Declaration ≤ Natural Natural : TV definition (x y) : ((x=y)∨(x<y)).
+ Declaration ≥ Natural Natural : TV definition (x y) : ((x=y)∨(x>y)).
+
+
+
+
+
+
+
+
+

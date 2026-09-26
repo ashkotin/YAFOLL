@@ -1,0 +1,47 @@
+﻿!0!
+
+-- TV - True values.
+
+--DeclDef
+
+Declaration TV sort. 
+----Равенство для TV (первично)
+Declaration EQU_TV TV TV:TV prime. Add infix "=" to EQU_TV.
+
+-- первичные пропозициональные связки.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT.     Add infix "not"  to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND.     Add infix "and"  to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR.      Add infix "or"   to OR.
+
+--определяемые пропозициональные связки.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition  IMPL_d IMPLIES(x z): ((¬x)∨z).
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV.   Add infix "eqv"  to EQUIV. 
+Definition  EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+--НЕРАВЕНСТВО
+Declaration NEQ_TV TV TV:TV. Add infix "≠" to NEQ_TV. Add infix "neq" to NEQ_TV.
+Definition  NEQ_TV_d NEQ_TV(x y): (¬(x=y)).
+
+--FM
+
+--наполняем TV
+!True TV! !False TV! 
+--РУЧНОЕ задание EQU_TV:
+!EQU_TV(True True):True!
+!EQU_TV(False False):True!
+!EQU_TV(True False):False!
+!EQU_TV(False True):False!
+
+--Задание пропозициональных связок.
+!NOT(True):False! !NOT(False):True! 
+
+!AND(True True):True!
+!AND(False True):False!
+!AND(True False):False!
+!AND(False False):False!
+
+!OR(True True):True!
+!OR(False True):True!
+!OR(True False):True!
+!OR(False False):False!

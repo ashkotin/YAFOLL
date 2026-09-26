@@ -1,0 +1,92 @@
+/*<EBNF>Statements:Statement+.*/
+Statements :  Statement
+   | Statements Statement
+;
+Statement : String /*Хранимый комментарий:-)*/
+   | Add fix String to Id Dot 
+   | Declaration
+   | Definition
+   | Proof Id Id derived_formula Dot 
+   | e_m Ide Id e_m 	/*КМАС. Добавление эл-та Ide в основу Id.*/
+   | e_m Ide e_m 	/*КМАС. Удаление эл-та Ide из основы.*/
+   | e_m term COLON e_m 	/*КМАС. Удаление значения терма.*/
+   | e_m term COLON term e_m   /*КМАС. Задание значения терма-1 равным term-2.*/
+   | q_m term q_m 	/*КМАС. Запрос на значение замкнутого терма.*/
+   | e_m Number e_m   
+   | e_m error e_m	{printf("\n<SA STOP_e_m_Statement_token='%s'>",$2);/*error содержит лексему преткновения!!!*/}
+   | error Dot	{printf("\n<SA STOP_Dot_Statement_token='%s'>",$1);}
+;
+
+/*Объявления*/	  
+Declaration :	DECLARATION Id sort Dot 	/*Вводится новый сорт Id.*/
+   | DECLARATION Id sort String Dot			/*Вводится новый сорт Id.*/
+   | DECLARATION Id sig_f PRIME Dot			/*Вводится новая первичная функция Id */
+   | DECLARATION Id sig_f PRIME Id Dot			/*Вводится новая первичная функция Id с приписанной ей Сиф (Id-2)*/
+   | DECLARATION Id sig_f Dot				/*Вводится новая вторичная функция Id */			
+;
+
+/***Определение***/
+Definition : DEFINITION Id Id Id_list_bch COLON term Dot 		/*Функция термом с формальными параметрами из Id_list.*/
+;
+
+/***Выведенная формула***/
+derived_formula : LA1 l_p term COMMA term r_p 	/*М.65.*/
+   | LA2 l_p term COMMA term COMMA term r_p 	/*М.65.*/
+   | LA3 l_p term COMMA term r_p 			/*М.66.*/
+   | LA4 l_p Id COMMA term COMMA term r_p 			/*М.66.*/
+   | LA5 l_p Id COMMA term COMMA term r_p 		/*М.66.*/
+   | MP l_p derived_formula COMMA derived_formula r_p 		/*М.66.*/
+   | Gen l_p Id COMMA derived_formula r_p 			/*М.66.*/
+   | Id 
+;
+term : Id 
+   /*(_trmRE) term:Ide|Number|String|Year. при обработке терма может встретиться правило _trmRE, 
+    единственный ребё которого - нт - обычно лнт!*/
+   | Ide 
+   | Number
+   | String
+   | Year
+   | l_p FIX term r_p 	/*префикс*/
+   | l_p term FIX term r_p	/*инфикс*/
+   | term l_p TermList r_p
+   | l_p EXISTS  Id COLON Id term r_p
+   | l_p FOR_ANY Id COLON Id term r_p
+;
+/*<EBNF>(#trml)	TermList : term**/
+TermList : 
+   | TermList_p 
+; 
+/*<EBNF>(#trml)	TermList_p : term+*/
+TermList_p : term
+   | term TermList_p 
+; 
+
+/*Для форм- параметров определений.*/
+/*<EBNF> Id_list : Id* */
+Id_list :  
+ | Id_listp  
+;
+/*<EBNF> Id_listp : Id+ */
+Id_listp : Id 
+ | Id_listp Id  
+;
+Id_list_b : l_p Id_list r_p 
+;								
+/*<EBNF> Id_list_bch : Id_list_b+*/
+Id_list_bch : Id_list_b 
+ | Id_list_bch Id_list_b 
+;
+/*Синтаксис сигнатур*/
+sig_f : sig_arg COLON sig_e 
+;
+sig_e : Id
+   | l_p sig_f r_p 
+;
+/*<EBNF> sig_arg : sig_e* */
+sig_arg :  
+   |  sig_ep 
+;
+/*<EBNF> sig_ep : sig_e+ *//*!!!будучи нацелена на sig_arg* эта группа правил снабжена соответствующими действиями построения частей *-дерева!!!*/
+sig_ep : sig_e 
+   |sig_ep  sig_e
+;

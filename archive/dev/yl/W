@@ -1,0 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+declaration graph func(TV finset(U)) (g) ≝ ∀e:edge(g) (∃v:vertex(U) (e inc v)) → g(v).
+
+declaration graph func(TV finset(U)) (g) ≝ ∀e:g edge(e) → ((∃v:U vertex(v) & (e inc v)) → g(v)).

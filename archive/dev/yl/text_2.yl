@@ -1,0 +1,84 @@
+﻿--? WPC ( MGO ) ( _SAM30685 )? 
+--?1?
+--Add fix "or" to WPC. --нет такой ф-и. ОК
+--?(""<"")? --падает
+--?(∀x:TV(∀z:TV (∃y:TV ((x or z)=y) )))? --_True при полноте
+--?("1"+"2")?
+--Add fix "=" to NOT.
+--Add fix "ы" to NOT. --ОК первый раз.
+--Add fix "=" to AND. --WFC ругается т.к. такого типа аргу уже есть
+--?(_True and _True)? --ОК
+--?(_True ≠ _True)? -- не приписан. ОК.
+--?(not _True)? --ОК
+--?(not 1)? --проверка типов. ОК
+--!(not _True):_True! --запрещено. ОК
+--?(_True = _True)? --ОК
+--?(1 and 1)? --ОК хотя идентификация абстрактна
+--?1(1)? --ОК но ругань абстрактна!
+--?AND(1)? --ОК но ругань абстрактна!
+--?AND(1 2)? --ОК но ругань абстрактна!
+--?AND(_True _True)? --ОК
+--?AND(AND AND)? --ругань
+--?( ∀ x : TV ( ∃ y : TV ( ( ¬x ) = y ) ) )? --ОК
+--?( ∀ x : TV ( ∃ z : TV ( ( ¬x ) = y ) ) )? --ква-пер на используется И есть свопер: ругань на свопер.
+--?( ∀ x : TV ( ∃ y : TV ( ( ¬x ) = x ) ) )? --ква-пер на используется: ОК
+--?( ∀ x : TV ( ∃ TV : TV ( ( ¬x ) = y ) ) )? --ругань правильная
+--Definition EQV_d2 EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ). --тут надо поработать: func_add_d:!ERROR! Function EQUIV has definition EQV_d already!
+--проверяем контроль использованности фп: это довольно просто: все Id/trmi привязаны!!! = НЕ КОНТРОЛИРУЕТСЯ +?а так ли уж это важно?;-)
+--Declaration EQUIV2 TV TV : TV.
+--Definition EQV_d2 EQUIV2 ( x y ) : ( ( x → z ) ∧ ( x → x ) ). --свопер z не фп. а фп y не употребляется. = ERROR
+--Definition EQV_d2 EQUIV2 ( x y ) : ( ( x → x ) ∧ ( x → x ) ). --фп y не употребляется.  = ОК а нужно ERROR
+--Definition EQV_d2 EQUIV2 ( x y ) : ( ( x → y ) ∧ ( y → x ) ). --хорошее.   = АБОРТ
+--Definition EQV_d2 EQUIV2 ( x ) : (  ¬x ) . --неправильное к-во параметров. = ловится НО нет ссылки WFC: !type_fps: ERROR! Number 2 of args in decl (tid=155, nid=3) <> number 1 of fp in def (tid=161, nid=1)!
+--Definition EQV_d2 EQUIV2 ( x y ) : (x=y). --ОК
+--?EQUIV2(_True _False)?
+--ПРОВЕРКА КВА КАК МИНИМАКС
+-- Declaration TV2 sort. 
+-- Declaration NOT2 TV2 : TV2 		prime.
+--!_True2 TV2! !_False2 TV2!
+--! NOT2 ( _False2 ):_True2!
+--! NOT2 ( _True2 ):_False2!
+--!_Fuu TV2!
+--?(∀x:TV2 NOT2(x))? --_False2
+--?(∃x:TV2 NOT2(x))? --
+--а теперь РВ
+--Declaration NOT3 TV2 : R 		prime.
+--! NOT3 ( _False2 ):1!
+--! NOT3 ( _True2 ):2!
+--! NOT3 ( _Fuu ):3!
+--?(∀x:TV2 NOT3(x))? --
+--?(∃x:TV2 NOT3(x))? --
+--?(∀x:TV2 1)? --
+--ПРОВЕРКА trmQ-4 делаем тип значения под-ква терма сигнатурным
+--Declaration NOT2out TV2:(TV2:TV2) 		prime.
+--?(∀x:TV2 NOT2out(x))?
+--?(∀x:TV2 x)?
+--ПРОВЕРКА приписанная Сиф не существует в Yp
+--?(10=20)?
+--ПРОВЕРКА 0-функций
+--Declaration C1 :TV prime.
+--!C1():_True! 
+--!C1():1! --проверяем 0-ф на типизацию = ругань правильная но не причёсанная
+--?C1()? --ОК
+--Declaration C1d :TV. 
+--Definition C1d_d C1d : (¬ C1()).
+--?C1d()? --ОК
+--Declaration C2d :TV.
+--Definition C2d_d C2d : NOT(C1()).
+--?NOT(C2d)? --здесь правильная ругань на несоответствие типов;-)
+--?NOT(C2d())?  --ОК
+--ПРИМЕРЫ ОПРЕДЕЛЕНИЙ ИЗ ОЯ
+--Declaration o sort.
+--Declaration ObjectInverseOf (o o:TV):(o o:TV).
+--Definition T1_1 ObjectInverseOf(OP)(x y) : OP(y x).
+--Declaration SubClassOf  (o:TV)(o:TV):TV.
+--Definition T5_1 SubClassOf(C1 C2) : (∀z:o (C1(z) → C2(z))).
+--Declaration sb sort.
+--Declaration VPC (sb:TV):(sb:R). --поменять в ОЯ!!!
+--Declaration Volume_in (sb:TV) sb: R prime.
+--Declaration Volume sb: R prime.
+--Definition VPC_D1 VPC (x) (y) : ((100*Volume_in(x y))/Volume(y)). --поменять в ОЯ!
+--Declaration Volume_ sb: R.
+--!_SAM1 sb!
+!Volume_(_SAM1):1!
+?Volume_(_SAM1)?

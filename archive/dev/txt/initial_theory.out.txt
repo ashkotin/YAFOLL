@@ -1,0 +1,92 @@
+﻿!0!
+--=================Обязательное начало
+
+--Сорта стрингологии и чисел
+
+Declaration S sort "[^DQ]*". --  sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)
+Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+
+--True values.
+
+Declaration TV sort. Declaration True:TV constant. Declaration False:TV constant.
+----Равенство для TV!!!!!!!!!!!!!!!!!!
+Declaration EQU_TV TV TV:TV. Add infix "=" to EQU_TV. 
+--!Аксиомы равенства!
+-- +?перейти к аксиомам симметричности и транзитивности?
+Axiom EQU_TV_6 (∀x:TV (x=x)). -- M_6_p86
+--ЭТО НЕ АКСИОМА А ДЕРЖАЛКА!!! Axiom EQU_TV_7 (∀x:TV(∀y:TV(∀A:Formula((x=y)→(A(x x)→A(x y)))))). -- Z:СХЕМА АКСИОМ и условия замены довольно хитрые см. M_7_p86! 
+
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT.     Add infix "not"  to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND.     Add infix "and"  to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR.      Add infix "or"   to OR.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition  IMPL_d IMPLIES(x y): ((¬x)∨y).
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV.   Add infix "eqv"  to EQUIV. 
+Definition  EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+--!!!НЕРАВЕНСТВО
+Declaration NEQ_TV TV TV:TV. Add infix "≠" to NEQ_TV. Add infix "neq" to NEQ_TV.
+Definition  NEQ_TV_d NEQ_TV(x y): (¬(x=y)).
+
+
+--Объявления функций арифметики десятичных рациональных чисел
+
+Declaration LE R R:TV. Add infix "<" to LE. --S?
+Declaration GR R R:TV. Add infix ">" to GR. --S?
+Declaration LEQ R R:TV. Add infix "≤" to LEQ. --S? +Определение!
+Declaration GEQ R R:TV. Add infix "≥" to GEQ. --S? +Определение!
+Declaration PLUS R R:R. Add infix "+" to PLUS. --S?
+Declaration MINUS R R:R. Add infix "-" to MINUS. --S?
+Declaration MULTIPLY R R:R. Add infix "*" to MULTIPLY.
+Declaration DEVIDE R R:R. Add infix "/" to DEVIDE.
+
+--=================Обяз закончен
+﻿!0!
+--=================Обязательное начало
+
+--Сорта стрингологии и чисел
+
+Declaration S sort "[^DQ]*". --  sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)
+Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+
+
+--True values.
+
+Declaration TV sort. Declaration True:TV constant. Declaration False:TV constant.
+----Равенство для TV!!!!!!!!!!!!!!!!!!
+Declaration EQU_TV TV TV:TV. Add infix "=" to EQU_TV. 
+--!Аксиомы равенства!
+-- +?перейти к аксиомам симметричности и транзитивности?
+Axiom EQU_TV_6 (∀x:TV (x=x)). -- M_6_p86
+--ЭТО НЕ АКСИОМА А ДЕРЖАЛКА!!! Axiom EQU_TV_7 (∀x:TV(∀y:TV(∀A:Formula((x=y)→(A(x x)→A(x y)))))). -- Z:СХЕМА АКСИОМ и условия замены довольно хитрые см. M_7_p86! 
+
+
+--Объявление пропозициональных связок.
+
+Declaration NOT TV:TV 		prime. Add infix "¬" to NOT.     Add infix "not"  to NOT.
+Declaration AND TV TV:TV 	prime. Add infix "∧" to AND.     Add infix "and"  to AND.
+Declaration OR TV TV:TV 	prime. Add infix "∨" to OR.      Add infix "or"   to OR.
+Declaration IMPLIES TV TV:TV. 	   Add infix "→" to IMPLIES. Add infix "impl" to IMPLIES.
+Definition  IMPL_d IMPLIES(x y): ((¬x)∨y).
+Declaration EQUIV TV TV:TV. 	   Add infix "≡" to EQUIV.   Add infix "eqv"  to EQUIV. 
+Definition  EQV_d EQUIV(x y): ((x→y)∧(y→x)).
+--!!!НЕРАВЕНСТВО
+Declaration NEQ_TV TV TV:TV. Add infix "≠" to NEQ_TV. Add infix "neq" to NEQ_TV.
+Definition  NEQ_TV_d NEQ_TV(x y): (¬(x=y)).
+
+
+--Объявления функций арифметики десятичных рациональных чисел
+
+Declaration LE R R:TV. Add infix "<" to LE. --S?
+Declaration GR R R:TV. Add infix ">" to GR. --S?
+Declaration LEQ R R:TV. Add infix "≤" to LEQ. --S? +Определение!
+Declaration GEQ R R:TV. Add infix "≥" to GEQ. --S? +Определение!
+Declaration PLUS R R:R. Add infix "+" to PLUS. --S?
+Declaration MINUS R R:R. Add infix "-" to MINUS. --S?
+Declaration MULTIPLY R R:R. Add infix "*" to MULTIPLY.
+Declaration DEVIDE R R:R. Add infix "/" to DEVIDE.
+
+--=================Обяз закончен

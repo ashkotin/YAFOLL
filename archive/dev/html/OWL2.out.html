@@ -1,0 +1,62 @@
+﻿Declaration o sort.
+<:-(Can't add! o is already used as sort!DECLARATION_s>
+ 
+Declaration r sort.
+<:-(Can't add! r is already used as sort!DECLARATION_s>
+ 
+
+Declaration Neq predicate<--SA>  o,o.
+<SA BAD_Statement='Neq'>
+ 
+Definition Neq Neq(x1,<--SA>x2) predicate ¬(x1=x2).
+<SA BAD_Statement='x1'>
+
+Axiom Neq ∀<--SA>x:o,y:o((x≠y) ≡ Neq(x,y)).
+<SA BAD_Statement='∀'>
+
+
+Declaration  Plus:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Plus ∀<--SA>x:r,y:r ((x+y) = Plus(x,y)).
+<SA BAD_Statement='∀'>
+
+Declaration  Minus:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Minus ∀<--SA>x:r,y:r ((x-y) = Minus(x,y)).
+<SA BAD_Statement='∀'>
+
+Declaration  Multiply:r  function<--SA> r,r.
+<SA BAD_Statement='r'>
+ Axiom  Multiply ∀<--SA>x:r,y:r ((x*y) = Multiply(x,y)).
+<SA BAD_Statement='∀'>
+
+
+
+Declaration ObjectInverseOf:(<--SA>o,o) functor (o,o).
+<SA BAD_Statement='ObjectInverseOf'>
+
+Definition T1_1 ObjectInverseOf(OP)(x,<--SA>y) functor OP(y,x).
+<SA BAD_Statement='x'>
+
+
+Declaration SubClassOf predicator<--SA> (o),(o).
+<SA BAD_Statement='SubClassOf'>
+
+Definition T5_1 SubClassOf(C1,<--SA>C2) predicator ∀z:o (C1(z) → C2(z)).
+<SA BAD_Statement='C1'>
+
+
+
+Declaration  Socrates:o constant. 
+Declaration being predicate<--SA>  o.
+<SA BAD_Statement='being'>
+  Declaration mortal predicate<--SA>  o.
+<SA BAD_Statement='mortal'>
+ 
+Fact  Phil_1 being(Socrates).
+<SA BAD_Statement='Fact'>
+
+Axiom GWFG_1 SubClassOf(being,<--SA>mortal).
+<SA BAD_Statement='being'>
+
+Theorem GWFG_2 mortal(Socrates).

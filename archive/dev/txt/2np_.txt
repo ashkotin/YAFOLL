@@ -1,0 +1,100 @@
+/*Группа функций работы с БД YL. 
+First version. Begin. 27.06.2013. Alex Shkotin. alex.shkotin@gmail.com
+*/
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+/*глобальные переменные*/
+EXEC SQL BEGIN DECLARE SECTION;
+EXEC SQL END DECLARE SECTION;
+/*отладка*/
+void print_sqlca(){
+/*наши функции*/
+int connect() /*порт сервера обычно 5432. Но 26.03.14 у нас там 64-сервер, а 32- на 5433*/{
+int commit(){
+int disconnect(){
+void YL_abort(char *msg){
+/***YAFOLL***/
+/*ЛИСТИКИ Y!L*/
+int e_exists_q(char *s, char *t/*out - type*/)/*СЕМТ. s - проверяемое на занятость имя элемента теории или инфикса*/{
+int fill_array(char* pth,int pthI[21])/*ОП. возвращает массив номеров по строке номеров.*/{
+/*ДРВ*/
+void node_put_v(char* id, char* v) /*ДРВ. закатывает узлу v*/{
+char* node_get_v(char* id)/*ДРВ. возвращает указатель на значение v данного узла (id).*/{
+void get_attr(int ac,char* id,char* pth,char* val)/*ДРВ. Возвращает атрибут номер ac узла найденного вниз от id по пути pth*/{
+char* crt_node(char* sid,char* rid,char* v)/*ДРВ. возвращает указатель на id созданного узла ДРВ.*/{
+void up_node(char* from, char* to, int irn)/*ДРВ. меняет в из-узле поля up, irn.*/{
+int get_chn(char* id)/*ДРВ. возвращает К1 - количество “детей” данного узла (id).*/{
+void get_min_id(char* sid,char* id)/*ДРВ. Возвращает в id минимальный ид узлов с заданным sid, если таких нет - abort*/{
+void get_chld_id(int chn,char* pid,char* id)/*ДРВ. Возвращает в id ид узла ребёнка номер chn, для родителя с ид - pid, если такого нет - id=""*/{
+void get_nodes(char* r_id/*in*/)/*ДРВ. собирает узлы поддерева с корнем r_id в таблицу _w (ТН)*/{
+int get_sig_P(char* sig_f)/*ДРВ. подсчитывает к-во rid=sig_eF узлов в поддереве под sig_f.*/{
+/*Сем обработчики*/
+char* def_chk_fp(char* nid)/*ДРВ. все формальные параметры должны быть различны и не должны совпадать с именами элементов теории. (deff-4)*/{
+int check_sig_eI(char* sig_f)/*ДРВ. проверяет WFC(sig_eI).*/{
+/*ЛЕС*/
+int scrt_node(int tid,char* sid,char* rid,char* v)/*Лес. возвращает указатель на id созданного узла дерева tid.*/{
+void st_del(int tid)/*ЛЕС. удаляет дерево из леса*/{
+void sget_attr(int ac,int tid,int id,char* pth,char* val)/*Лес. Возвращает атрибут номер ac узла дерева tid найденного вниз от id по пути pth*/{
+int sget_up(int tid,int nid)/*Лес. возвращает nid папы. 0 - нет*/{
+int sget_irn(int tid,int nid)/*Лес. возвращает irn узла*/{
+int sget_flg(int tid,int nid,char* pth)/*Лес. Возвращает атрибут flg узла дерева tid найденного вниз от nid по пути pth*/{
+int sget_ref(int tid,int nid,char* pth)/*Лес. Возвращает атрибут ref(NULL->0) узла дерева tid найденного вниз от nid по пути pth*/{
+int sget_type(int tid,int nid,char* pth)/*Лес. Возвращает атрибут type узла дерева tid найденного вниз от nid по пути pth*/{
+int sget_sid(int tid,int nid,char* pth)/*Лес. Возвращает атрибут sid узла дерева tid найденного вниз от nid по пути pth*/{
+void flag_subtree(int tid,int nid)/*Лес. выделяет в дереве в лесу поддерево узла nid помечая его узлы 1 а остальные узлы дерева - 0*/{
+void flag2_subtree(int tid,int nid) /*Лес. выделяет в дереве в лесу поддерево узла nid помечая его узлы flg2=1 а остальные узлы дерева - flg2=0*/{
+void infix_ideb(int tid)/*Лес. обработка инфиксов терма в лесу: идентификация, связывание, типизация.*/{
+int get_qua(int tid, int rnid, int snid, char *iv)/*Лес. возвращает nid фразы квантора либо 0 - не нашёл*/{
+int sget_fp(int tid, int nid) /*Лес. возвращает ид узла форм-пар в заголовке или 0 - не найден, -n - найдено n>1*/{
+void flag2_fps(int tid)/*Лес. в предложении tid дерево фп выделяется флагом flg2*/{
+int get_pcm(char* iv)/*Лес. pcm - pure carrier member. Ищет в модельных предложениях не является ли iv элементом основы (пока - сорта).*/{
+int sget_strt(int tid)/*Лес. возвращает nid корня дерева по его tid*/{
+void sput_rid(int tid,int nid,char* v)/*Лес. назначает узлу rid*/{
+void sput_ref(int tid,int nid,int ref)/*Лес. назначает узлу ref*/{
+void sput_irn(int tid,int nid,int v)/*Лес. назначает узлу irn*/{
+void sput_type(int tid,int nid,int type)/*Лес. назначает узлу type*/{
+void sput_up(int tid,int nid,int v)/*Лес. назначает узлу up*/{
+void sput_flg(int tid,int nid,int flg)/*Лес. назначает узлу flg*/{
+void sput_p_type(int tid,int nid,int ref,int type)/*Лес. делает up и назначает ref, type родителю*/{
+void trmi_ideb(int tid, int nid, int mod)/*Лес. обработка Id/trmi и trmi узлов в лесу: идентификация, связывание, типизация*/{
+void trmQ_5(int tid) /*Лес. (trma, trme)\5 - проверяет что Id сорта именно сорт и предметный*/{
+void trmQ_3(int tid) /*Лес. (trma, trme)\3 - проверяет что Id ква-пер при ква не есть эт и что он употреблён!*/{
+void type_trmn(int tid)/*Лес. типизация узлов правила trmn в рамках выделенного терма дерева tid*/{
+void type_trms(int tid)/*Лес. типизация узлов правила trms в рамках выделенного терма дерева tid*/{
+void trmi_deflag(int tid)/*Лес. снимает флаг у trmi узлов*/{
+int sget_Mflg(int tid,int nid)/*Лес. выдаёт максимальное значение flg у детей узла (tid,nid)*/{
+int sget_chn(int tid, int id)/*Лес. возвращает количество детей данного узла (id) в данном дереве (tid).*/{
+int sget_chi(tid,nid,i)/*Лес. выдаёт ид i-ого ребё учитывая изврат TermList*/{
+int scmp_trs(int tid1,int nid1,int tid2,int nid2,int ln)/*Лес. сравнение двух поддеревьев: строение и соотв значений sid, v*/{
+int sget_fpt(int tid,int nid,int i)/*Лес. выдаёт ид узла типа элемента сигнатуры под i-ым sig_e*/{
+void sprt_chs(int tid, int nid)/*Лес. печатает (sid,v) детей заданного узла в порядке irn*/{
+void sprt_subtreeL(int tid, int nid)/*Лес. печатает (v) листьев заданного узла в порядке irn*/{
+int st_store(char* st_id/*in*/) /*ДРВ2ЛЕС. копирует поддерево (корень - st_id) в хранилище деревом (возвращает номер tr_id)*/{
+int check_prfx_call(int tidd,int sig_arg,int ref,int type)/*Лес. проверяет согласованность декларации и точки вызова для префикса*/{
+int check_infx_call(int tidd,int sig_arg,int tidc1,int term1,int tidc2,int term2)/*Лес. проверяет согласованность декларации и точки вызова для инфикса*/{
+char* check_call(int tidd,int sig_arg,int tidc,int TermList)/*Лес. проверяет согласованность декларации и точки вызова*/{
+int sget_pf(char* prfx,int ref,int type)/*Лес. по префиксу возвращает его ф-ю (tid её декларации)*/{
+int sget_if(char* infx,int ref1,int type1,int ref2,int type2)/*Лес. по инфиксу возвращает его ф-ю (tid её декларации)*/{
+void type_tt(int tid)/*Лес. обработка до типизации term-узлов у которых справа в правиле term*/{
+int st_has_err(int tid)/*Лес. есть ли ошибки зафиксированные в ref?*/{
+char* term_proc(int tid, int nid, int mod)/*Лес. полная обработка в лесу корневого терма:идентификация, связывание, типизация значащих узлов*/{
+void type_fpl(int tid,int Ilr,int sigf_t,int sa,int n)/*Лес. типизирует фоп одного конкретного ()-списка*/{
+char* type_fps(int tid)/*Лес. типизирует фп заголовка определения ф-и связывая их с элементами сигнатуры декларации*/{ 
+/*ОБРАБОТЧИКИ ПРЕДЛОЖЕНИЙ*/
+int sort_add(char *st_id, char *re) /*st_id - ид узла предложения, re - флаг наличия РВ (если не x00)*/{
+int const_add(char *st_id, char *t) /*st_id - ид узла предложения, t - тип если уже есть*/{
+int f_add(char* st_id, int prime, char** msg)/*декларация ф-и.*/{
+char* const_add_d(char *st_id)/*"Def-1" Definition : DEFINITION Id Id constant term Dot*/{
+char* func_add_d(char *st_id) /*"Def-2"	| DEFINITION Id Id Id_list_bch COLON term Dot*/{
+char* a_i2f(char* st_id)/*Add infix String to Id Dot*/{
+char* axm_add(char *st_id) /*Axiom Id term Dot*/{
+int doc(char *cc/*номер команды*/)/*обработка команд YL*/{
+char* fmca_proc(char *st_id)/*e_m Id Id e_m*/{
+char* fmcd_proc(char *st_id)/*e_m Id e_m*/{
+char* fmtd_proc(char *st_id)/*обработка предложения fmtd ведения значений термов модели*/{
+char* fmta_proc(char *st_id)/*обработка предложения fmta ведения значений термов модели*/{
+int infx_subst(int tid)/*подстановка всех INFIX в заданном предложении*/{
+char* q_term(char *st_id)/*ответ на запрос*/{
+char* prf_add(char *st_id)/*Proof Id Id derived_formula Dot*/{
+char* theo_add(char *st_id) /*Axiom Id term Dot*/{

@@ -1,0 +1,531 @@
+﻿
+
+<Yp1 BEGIN st_id=0000000106>
+<st_store Tree=92 added=1>
+					 ? ( ∀ e1 : A ( ∀ e2 : A OR ( NOT ( EQU_V ( tov ( e1 ) from ( e2 ) ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!defc_subst!DEBUG! begin tid=93
+!defc_subst!WARNING! Id e1 does not exist in entities!
+!defc_subst!WARNING! Id e2 does not exist in entities!
+!defc_subst!WARNING! Id e3 does not exist in entities!
+!defc_subst!WARNING! Id e1 does not exist in entities!
+!defc_subst!WARNING! Id e3 does not exist in entities!
+!defc_subst!WARNING! Id e2 does not exist in entities!
+(defc_subst: RESULT			 ? ( ∀ e1 : A ( ∀ e2 : A OR ( NOT ( EQU_V ( tov ( e1 ) from ( e2 ) ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=93
+(deff_subst: RESULT			 ? ( ∀ e1 : A ( ∀ e2 : A OR ( NOT ( EQU_V ( tov ( e1 ) from ( e2 ) ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+!deff_subst!DEBUG! end RC=0
+!q_term(DEBUG)st_trans.rc=0.
+!trm_Val!DEBUG! IN rid=trma (tid=93,nid=99)
+!trm_Val.trma!DEBUG!first ce cce=68.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trma (tid=93,nid=92)
+!trm_Val.trma!DEBUG!first ce cce=68.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=89)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=1)
+!trm_Val!DEBUG!after sput_v v=<OR>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=28)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=3)
+!trm_Val!DEBUG!after sput_v v=<NOT>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=24)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=5)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=12)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=7)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=9)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=12)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=20)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=15)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=17)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=20)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=93,nid=24)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< NOT ( False )> (tid=93,nid=28)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trme (tid=93,nid=81)
+!trm_Val.trme!DEBUG!first ce cce=68.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v1 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v2 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( True True )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=69.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<True> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v2 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( False False )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=0.
+!trm_Val.trme!DEBUG!final value Rv=<True>.
+!ApplyTL!DEBUG! ser-val=< OR ( True True )> (tid=93,nid=89)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val.trma!DEBUG!next ce cce=69.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<True> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=89)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=1)
+!trm_Val!DEBUG!after sput_v v=<OR>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=28)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=3)
+!trm_Val!DEBUG!after sput_v v=<NOT>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=24)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=5)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=12)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=7)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=9)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=12)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=20)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=15)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=17)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=20)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v2 )> (tid=93,nid=24)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< NOT ( True )> (tid=93,nid=28)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trme (tid=93,nid=81)
+!trm_Val.trme!DEBUG!first ce cce=68.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v1 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( True False )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=69.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<False> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v1 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( False True )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=0.
+!trm_Val.trme!DEBUG!final value Rv=<False>.
+!ApplyTL!DEBUG! ser-val=< OR ( False False )> (tid=93,nid=89)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trma!DEBUG!next ce cce=0.
+!trm_Val.trma!DEBUG!final value Rv=<False>.
+!trm_Val.trma!DEBUG!next ce cce=69.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<False> V=<a2>.
+!trm_Val!DEBUG! IN rid=trma (tid=93,nid=92)
+!trm_Val.trma!DEBUG!first ce cce=68.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=89)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=1)
+!trm_Val!DEBUG!after sput_v v=<OR>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=28)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=3)
+!trm_Val!DEBUG!after sput_v v=<NOT>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=24)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=5)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=12)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=7)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=9)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=12)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=20)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=15)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=17)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=20)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v1 )> (tid=93,nid=24)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< NOT ( True )> (tid=93,nid=28)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trme (tid=93,nid=81)
+!trm_Val.trme!DEBUG!first ce cce=68.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v2 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v2 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( False True )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=69.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<False> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v2 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v2 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( True False )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=0.
+!trm_Val.trme!DEBUG!final value Rv=<False>.
+!ApplyTL!DEBUG! ser-val=< OR ( False False )> (tid=93,nid=89)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trma!DEBUG!next ce cce=69.
+!trm_Val.trma!DEBUG!Record and cur-ce value Rv=<False> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=89)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=1)
+!trm_Val!DEBUG!after sput_v v=<OR>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=28)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=3)
+!trm_Val!DEBUG!after sput_v v=<NOT>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=24)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=5)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=12)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=7)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=9)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=12)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=20)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=15)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=17)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=20)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v2 )> (tid=93,nid=24)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< NOT ( False )> (tid=93,nid=28)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trme (tid=93,nid=81)
+!trm_Val.trme!DEBUG!first ce cce=68.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<> V=<a1>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< from ( a1 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v2 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a1>
+!ApplyTL!DEBUG! ser-val=< tov ( a1 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v1 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( False False )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<False>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=69.
+!trm_Val.trme!DEBUG!Record and cur-ce value Rv=<False> V=<a2>.
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=78)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=31)
+!trm_Val!DEBUG!after sput_v v=<AND>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=52)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=33)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=40)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=35)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=37)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=40)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=48)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=43)
+!trm_Val!DEBUG!after sput_v v=<from>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=45)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< from ( a2 )> (tid=93,nid=48)
+!ApplyTL!DEBUG!after fm_tGetv v=<v2>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v2 v2 )> (tid=93,nid=52)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=74)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=55)
+!trm_Val!DEBUG!after sput_v v=<EQU_V>
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=62)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=57)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=59)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=62)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!trm_Val!DEBUG! IN rid=trmf (tid=93,nid=70)
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=65)
+!trm_Val!DEBUG!after sput_v v=<tov>
+!trm_Val!DEBUG! IN rid=trmi (tid=93,nid=67)
+!trm_Val!DEBUG!after sput_v v=<a2>
+!ApplyTL!DEBUG! ser-val=< tov ( a2 )> (tid=93,nid=70)
+!ApplyTL!DEBUG!after fm_tGetv v=<v1>, RC=0
+!ApplyTL!DEBUG! ser-val=< EQU_V ( v1 v1 )> (tid=93,nid=74)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!ApplyTL!DEBUG! ser-val=< AND ( True True )> (tid=93,nid=78)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val.trme!DEBUG!next ce cce=0.
+!trm_Val.trme!DEBUG!final value Rv=<True>.
+!ApplyTL!DEBUG! ser-val=< OR ( True True )> (tid=93,nid=89)
+!ApplyTL!DEBUG!after fm_tGetv v=<True>, RC=0
+!trm_Val.trma!DEBUG!next ce cce=0.
+!trm_Val.trma!DEBUG!final value Rv=<False>.
+!trm_Val.trma!DEBUG!next ce cce=0.
+!trm_Val.trma!DEBUG!final value Rv=<False>.
+!Yp1>(<False>)!
+<Yp1 st_id=0000000106 st-11>
+<Yp1 END st_id=0000000106>
+<:-)End of Statement nodes in dt. Stop.>

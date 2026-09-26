@@ -1,0 +1,34 @@
+﻿"узлы (vertex, vertices)."
+Declaration V sort. 
+"Равенство для V"
+Declaration EQU_V V V:TV prime fm_strcmp. Add fix "=" to EQU_V.
+Declaration NEQ_V V V:TV. Add fix "≠" to NEQ_V. Add fix "neq" to NEQ_V.
+Definition  NEQ_V_d NEQ_V(x y): (¬(x=y)).
+
+"стрелы (arcs), дуги... мы оставляем E для рёбер."
+Declaration A sort. 
+"Равенство для A"
+Declaration EQU_A A A:TV prime fm_strcmp. Add fix "=" to EQU_A.
+Declaration NEQ_A A A:TV. Add fix "≠" to NEQ_A. Add fix "neq" to NEQ_A.
+Definition  NEQ_A_d NEQ_A(x y): (¬(x=y)).
+
+"первичные ф-и"
+Declaration from A:V prime.
+"!Z!to - ключевое слово Y!L:-( для КРЯ это не важно:-)"
+Declaration tov   A:V prime. 
+
+"Аксиомы. полноты"
+Declaration full_from :TV.
+Definition def_full_from full_from():(∀e:A (∃v:V (from(e)=v))).
+Declaration full_tov :TV.
+Definition def_full_tov full_tov():(∀e:A (∃v:V (tov  (e)=v))).
+
+"Определения"
+"узел есть источник: нет входящей в него стрелки."
+Declaration source V:TV.
+Definition def_source source(x):(∀e:A (tov(e)≠x)).
+"Граф транзитивно замкнут"
+Declaration trans_closed :TV.
+Definition def_trans_closed trans_closed() :
+(∀e1:A (∀e2:A ((tov(e1)=from(e2))→(∃e3:A ((from(e3)=from(e1)) ∧ (tov(e3)=tov(e2))))))).
+"Теорема. всякая петля транзитивна сама себе."

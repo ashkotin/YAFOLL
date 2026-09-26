@@ -1,0 +1,11 @@
+
+<ABORT> Yp_1. connection failed.: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: -402
+sqlerrm.sqlerrml: 45
+sqlerrm.sqlerrmc: could not connect to database "YL" on line 40
+sqlerrd: 0 0 0 0 0 0
+sqlwarn: 0 0 0 0 0 0 0 0
+sqlstate: 08001
+===============
+</ABORT>

@@ -1,0 +1,40 @@
+﻿!0!
+
+"2"
+
+Declaration R sort "DIGIT}+({Dot}{DIGIT}+)?". --  an intrinsic sort of real numbers.
+Declaration TV sort. Declaration True:TV constant. Declaration False:TV constant.
+Declaration sb sort. 
+
+
+"1"
+
+Declaration melilite sb:TV prime.
+Declaration kalsilite sb:TV prime.
+Declaration leucite sb:TV prime.
+Declaration Ol sb:TV prime.                	-- for olivine.
+Declaration Opx sb:TV.                      -- is not prime and we are looking forward for definition of orthopyroxene class of minerals.
+Declaration Cpx sb:TV.                      -- is not prime and we are looking forward for definition of clinopyroxene class of minerals.
+Declaration hornblende sb:TV prime.
+Declaration garnet sb:TV prime.
+Declaration spinel sb:TV prime.
+Declaration biotite sb:TV prime.
+
+"3"
+
+Declaration Q sb:TV. Declaration A sb:TV. Declaration P sb:TV. Declaration F sb:TV. Declaration M sb:TV.
+
+"4"
+
+Declaration VPC (sb:TV):(sb:R).
+Definition D_DVC_1 VPC(x)(y):((Volume_in(x,y)/Volume(y))*100).
+
+"5"
+
+Declaration Sample007:sb constant.
+
+"6"
+
+Axiom A_VPC_biotite_0 (∀x:sb (0 ≤ VPC(biotite)(x))).
+Axiom A_VPC_biotite_100 (∀x:sb (VPC(biotite)(x) ≤ 100)).
+

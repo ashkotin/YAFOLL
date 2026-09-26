@@ -1,0 +1,36 @@
+﻿
+
+<Yp1 BEGIN st_id=0000000029>
+<st_store Tree=72 added=1>
+					 ? ( ∀ e : A ( ∃ v : V ( from ( e ) = v ) ) ) ?
+<infx_subst RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+!defc_subst!DEBUG! begin tid=73
+!defc_subst!WARNING! Id e does not exist in entities!
+!defc_subst!WARNING! Id v does not exist in entities!
+(defc_subst: RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=73
+(deff_subst: RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( from ( e ) v ) ) ) ?
+!deff_subst!DEBUG! end RC=0
+!q_term(DEBUG)st_trans.rc=1.
+!Yp1>(q_term.st_trans.rc=1.)!
+<Yp1 st_id=0000000029 st-11>
+<Yp1 END st_id=0000000029>
+
+<Yp1 BEGIN st_id=0000000061>
+<st_store Tree=74 added=1>
+					 ? ( ∀ e : A ( ∃ v : V ( tov ( e ) = v ) ) ) ?
+<infx_subst RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+!defc_subst!DEBUG! begin tid=75
+!defc_subst!WARNING! Id e does not exist in entities!
+!defc_subst!WARNING! Id v does not exist in entities!
+(defc_subst: RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=75
+(deff_subst: RESULT			 ? ( ∀ e : A ( ∃ v : V EQU_V ( tov ( e ) v ) ) ) ?
+!deff_subst!DEBUG! end RC=0
+!q_term(DEBUG)st_trans.rc=1.
+!Yp1>(q_term.st_trans.rc=1.)!
+<Yp1 st_id=0000000061 st-11>
+<Yp1 END st_id=0000000061>
+<:-)End of Statement nodes in dt. Stop.>

@@ -1,0 +1,1 @@
+select id||' -> '||up||' [label="'||COALESCE(irn,0)||'", fontsize=10];' from dt order by id;

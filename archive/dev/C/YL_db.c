@@ -1,0 +1,3310 @@
+/* Processed by ecpg (4.9.0) */
+/* These include files are added by the preprocessor */
+#include <ecpglib.h>
+#include <ecpgerrno.h>
+#include <sqlca.h>
+/* End of automatic include section */
+
+#line 1 "YL_db.pgc"
+/*Группа функций работы с БД YL. 
+First version. Begin. 27.06.2013. Alex Shkotin. alex.shkotin@gmail.com
+*/
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+/*глобальные переменные*/
+/* exec sql begin declare section */
+       
+    /*Это буфер для всех строк БД*/
+    /*Это буфер для малых строк БД*/
+    /*Это буфер для малых строк БД*/
+    /*Это буфер для малых строк БД*/
+    /*Это буфер для малых строк БД*/
+    /*Это буфер для малых строк БД*/
+
+#line 9 "YL_db.pgc"
+ int wi , wi1 , wi2 , wi3 ;
+ 
+#line 10 "YL_db.pgc"
+ char wc [ 1024 ] ;
+ 
+#line 11 "YL_db.pgc"
+ char wc1 [ 220 ] ;
+ 
+#line 12 "YL_db.pgc"
+ char wc2 [ 220 ] ;
+ 
+#line 13 "YL_db.pgc"
+ char wc3 [ 220 ] ;
+ 
+#line 14 "YL_db.pgc"
+ char wc4 [ 220 ] ;
+ 
+#line 15 "YL_db.pgc"
+ char wc5 [ 220 ] ;
+/* exec sql end declare section */
+#line 16 "YL_db.pgc"
+
+/*немного констант*/
+#define YL_NODE_OD 0 /*зачение flg - узел не надо обрабатывать*/
+#define YL_NODE_DO 1 /*зачение flg - узел надо обработать*/
+#define YL_NODE_DONE 2 /*зачение flg - узел обработан*/
+#define YL_NODE_POSTPONED 3 /*зачение flg - обработка узла отложена*/
+#define YL_STRING_BUF_LEN 1024 /*размер буфера строки*/
+/*отладка*/
+void print_sqlca(){
+    printf("==== sqlca ====\n");
+    printf("sqlcode: %ld\n", sqlca.sqlcode);
+    printf("sqlerrm.sqlerrml: %d\n", sqlca.sqlerrm.sqlerrml);
+    printf("sqlerrm.sqlerrmc: %s\n", sqlca.sqlerrm.sqlerrmc);
+    printf("sqlerrd: %ld %ld %ld %ld %ld %ld\n", sqlca.sqlerrd[0],sqlca.sqlerrd[1],sqlca.sqlerrd[2], sqlca.sqlerrd[3],sqlca.sqlerrd[4],sqlca.sqlerrd[5]);
+    printf("sqlwarn: %d %d %d %d %d %d %d %d\n", sqlca.sqlwarn[0], sqlca.sqlwarn[1], sqlca.sqlwarn[2], sqlca.sqlwarn[3], sqlca.sqlwarn[4], sqlca.sqlwarn[5], sqlca.sqlwarn[6], sqlca.sqlwarn[7]);
+    printf("sqlstate: %5s\n", sqlca.sqlstate);
+    printf("===============\n");
+}
+/*наши функции*/
+int connect() /*порт сервера обычно 5432. Но 26.03.14 у нас там 64-сервер, а 32- на 5433*/{
+ { ECPGconnect(__LINE__, 0, "YL@127.0.0.1:5433" , "postgres" , "postgres" , NULL, 0); }
+#line 36 "YL_db.pgc"
+ 
+ return sqlca.sqlcode;
+}
+int commit(){
+ { ECPGtrans(__LINE__, NULL, "commit");}
+#line 40 "YL_db.pgc"
+ 
+ return sqlca.sqlcode;
+}
+int disconnect(){
+ { ECPGdisconnect(__LINE__, "CURRENT");}
+#line 44 "YL_db.pgc"
+ 
+ return sqlca.sqlcode;
+}
+void YL_abort(char *msg){
+ printf("\n<ABORT> %s: UNEXPECTED sqlcode!\n",msg); print_sqlca();printf("</ABORT>"); exit(EXIT_FAILURE);
+}
+/***YAFOLL***/
+/*ЛИСТИКИ Y!L*/
+int fill_array(char* pth,int pthI[21])/*ОП. возвращает массив номеров по строке номеров.*/{
+ /*Нулевой элемент массива - реальное к-во элементов! управление - RC*/
+ /*проще считать "." терминатором, а условие конца массива целых - 00 после него.*/
+  /*выделив очередное целое на него надо натравить а 0-терминирован уже pth!*/
+  char* c_p=pth/*указатель на обрабатываемую букву*/; char* t_p/*указатель на терминатор*/;
+  /*int wi;*/ int i=1; /*DEBUG printf("\nfill_array begins with pth=(%s)",pth);*/
+  /*шаг обработки*/
+ loop:
+  t_p=strchr(c_p,'.');
+  if (t_p==0) /*нет терминатора*/ return 1; if (t_p==c_p) /*терминатор в первой позиции - нет числа*/ return 2;
+  pthI[i]=atoi(c_p);/*съест до терминатора*/ /*DEBUG printf("\n pthI[%i]=%i",i,pthI[i]);*/
+  c_p=t_p+1;
+  if(*c_p==0) {pthI[0]=i; /*DEBUG printf("\n pthI[0]=%i\nfill_array ends.",pthI[0]);*/ return 0;} else {i=i+1; goto loop;};
+}
+/*семантические таблицы. возможно все кроме dt, dts*/
+int e_exists_q(char *s, char *t/*out - type*/)/*СТ. поиск s среди эт и фиксов. RC - 0 - нашли, 1 - нет в фиксах.*/{
+ strcpy(wc,s); 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select type from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 69 "YL_db.pgc"
+ if (sqlca.sqlcode==0) {strcpy(t,wc1); return 0;} /*Да*/
+ if (sqlca.sqlcode!=100) YL_abort("(e_exists_q)s_e");
+ /*Нет в элементах*//*проверяем в инфиксах*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from infixes where v = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 72 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("(e_exists_q)s_i");
+ if (wi==0) {/*strcpy(t,wc1);*/ return 1;}/*Нет в инфиксах*/
+ strcpy(t,"infx"); 
+ return 0;/*Да*/
+}
+int Sget_did(char *id, char *did)/*СТ. возвращает для сущего значение атрибута def_id(Null->"") RC=0 - сущее есть.*/{
+ strcpy(wc,id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( def_id , '' ) from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 79 "YL_db.pgc"
+ if (sqlca.sqlcode==100) return 1; if (sqlca.sqlcode!=0) YL_abort("Sget_did-select");
+ strcpy(did,wc1);
+ return 0;
+}
+int Sget_cf(char *id, char *cf)/*СТ. возвращает для сущего значение атрибута cf(Null->"") RC=0 - сущее есть.*/{
+ strcpy(wc,id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( cf , '' ) from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 85 "YL_db.pgc"
+ if (sqlca.sqlcode==100) return 1; if (sqlca.sqlcode!=0) YL_abort("Sget_cf-select");
+ strcpy(cf,wc1);
+ return 0;
+}
+/*ДРВ*/
+void dt_reset(int mod){/*зачищает ДРВ-часть БД. mod = 1 - чистить, иначе - нет.*/
+ if(mod!=1) return;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from dt", ECPGt_EOIT, ECPGt_EORT);}
+#line 92 "YL_db.pgc"
+ if ((sqlca.sqlcode!=0) && (sqlca.sqlcode!=100)) YL_abort("dt_reset-del");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fnn = 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 93 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("dt_reset-upd");
+ /*printf("\n!dt_reset!DEBUG! reset done!");*/
+ commit(); return;
+}
+void node_put_v(char* id, char* v) /*ДРВ. закатывает узлу v*/{
+ /*id - id из-узла (где v)*/
+ strcpy(wc1,id); strcpy(wc,v);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dt set v = $1  where id = $2 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 100 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("node_put_v-update");
+ commit(); return;
+}
+char* node_get_v(char* id)/*ДРВ. возвращает указатель на значение v данного узла (id).*/{
+ strcpy(wc1,id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from dt where id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 105 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("node_get_v-sel_v");
+ return &wc[0];
+}
+void get_attr(int ac,char* id,char* pth,char* val)/*ДРВ. Возвращает атрибут номер ac узла найденного вниз от id по пути pth*/{
+ /*ЛИБО abort - такого узла на конце пути нет. Если нет узла с id, abort!*/
+ /*ac: 1 - rid, 2 - v, 3 - id*/
+ char cid[22] /*ид текущего узла от которого шагаем*/; strcpy(cid,id); /*DEBUG printf("\n get_attr begins with ac=(%i) id=(%s) pth=(%s)\n",ac,id,pth);*/
+ int pth_l/*длина пути*/; int pthI[21]/*путь массивом*/; int rc=fill_array(pth,pthI); 
+ if (rc!=0) {printf("\n<:-(get_attr: fill_array returns rc=%i. Abort!>",rc);exit(EXIT_FAILURE);};
+ pth_l=pthI[0];
+ if (pth_l==1 && pthI[1]==0) {strcpy(wc,id); goto get;};
+ int i; for (i=1;i<pth_l+1;i++) {/*шагнуть*/
+ strcpy(wc1,cid); wi=pthI[i];
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select id from dt where up = $1  and irn = $2 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 118 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) /*дитя есть*/ strcpy(cid,wc); else /*дитя нет*/ {printf("\n!get_attr: Child #%i from nid %s in path %s is absent!\n",i,id,pth); YL_abort("get_attr-id");};
+ };/*в wc id целевого дитя*/
+ get: 
+ if (ac==1) {
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select rid from dt where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 123 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) strcpy(val,wc1); else /*дитя нет*/ YL_abort("get_attr-rid");}
+ else
+ if (ac==2) {
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from dt where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 127 "YL_db.pgc"
+ 
+ if (sqlca.sqlcode==0) strcpy(val,wc1); else /*дитя нет*/ YL_abort("get_attr-v");}
+ else /*3...:-) возвращаем id*/ strcpy(val,wc);
+ /*DEBUG printf("\n get_attr ends with v=(%s)\n",val);*/
+ return;
+}
+char* crt_node(char* sid,char* rid,char* v)/*ДРВ. возвращает указатель на id созданного узла ДРВ.*/{
+ /*для узла левой части правила нужны sid,rid, а для лнт в правой sid,v.*/
+ int dbg=0/*управление отладочными сообщениями*/;
+ if (dbg==1) printf("\n!crt_node!DEBUG!begin sid=%s, rid=%s, v=%s!",sid,rid,v);
+ /*получаем свободный номер в wi*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fnn from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 138 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("crt_node-fnn_select");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fnn = fnn + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 139 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("crt_node-fnn_update");
+ sprintf(wc1,"%010i",wi); /*формируем ид- узла*/
+ strcpy(wc2,sid); strcpy(wc3,rid); strcpy(wc4,v);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into dt ( id , sid , rid , v ) values ( $1  , $2  , $3  , $4  )", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc3),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc4),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 142 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("crt_node-insert");
+ commit(); if (dbg==1) printf(" !crt_node!DEBUG!end nid=%s!",wc1);
+ return &wc1[0];
+}
+void up_node(char* from, char* to, int irn)/*ДРВ. меняет в из-узле поля up, irn.*/{
+ /*from - id из-узла (где up), to - id в-узла - значение up, irn - номер в правиле/цепи.*/
+ int dbg=0/*управление отладочными сообщениями*/;
+ if (dbg==1) printf("\n!up_node!DEBUG!begin from=%s, to=%s, irn=%i!",from,to,irn);
+ strcpy(wc1,from); strcpy(wc2,to); wi=irn;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dt set up = $1  , irn = $2  where id = $3 ", 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 151 "YL_db.pgc"
+ if (sqlca.sqlcode==100) {printf("\n!up_node!SERROR!from node not found: from=%s, to=%s, irn=%i!",from,to,irn);return;};
+ if (sqlca.sqlcode!=0) YL_abort("up_node-update");
+ commit(); return;
+}
+int get_chn(char* id)/*ДРВ. возвращает К1 - количество “детей” данного узла (id).*/{
+ /*Для узла держателя нт+ К1(+/-)1 будет irn добавляемого.*/
+ strcpy(wc1,id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dt where up = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 158 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("get_chn-sel_count");
+ return wi;
+}
+void get_min_id(char* sid,char* id)/*ДРВ. Возвращает в id минимальный ид узлов с заданным sid, если таких нет - abort*/{
+ strcpy(wc1,sid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( id ) from dt where sid = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 163 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("get_min_id-select_id");
+ strcpy(id,wc); return;
+}
+void get_chld_id(int chn,char* pid,char* id)/*ДРВ. Возвращает в id ид узла ребёнка номер chn, для родителя с ид - pid, если такого нет - id=""*/{
+ strcpy(wc1,pid); wi=chn;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select id from dt where up = $1  and irn = $2 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 168 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) {strcpy(id,wc); return;} /*дитя есть*/
+ if (sqlca.sqlcode==100) {strcpy(id,""); return;} /*дитя нет*/
+ YL_abort("get_chld_id");
+}
+void get_nodes(char* r_id/*in*/)/*ДРВ. собирает узлы поддерева с корнем r_id в таблицу _w (ТН)*/{
+ /*1.1. почистить ТН и поместить в ТН корень с флажком "не обработан".*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from _w", ECPGt_EOIT, ECPGt_EORT);}
+#line 175 "YL_db.pgc"
+ if (sqlca.sqlcode!=0 && sqlca.sqlcode!=100) YL_abort("get_nodes-del");
+ wi=atoi(r_id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into _w ( nid , flg ) values ( $1  , 0 )", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 177 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("get_nodes-ins");
+ /*1.2. если необработанных узлов нет то СТОП.*/
+ loop: 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from _w where flg = 0", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 180 "YL_db.pgc"
+ if (wi==0) return; /*Нет*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from _w where flg = 0", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 181 "YL_db.pgc"
+ /*ЭТО: НЕ РАБОТАЕТ!!!: if (sqlca.sqlcode==100) return; = min возвращает -2147483648!!!*/
+ /*1.3. для не обработанного узла: добавить на него ссылающихся с флажком не_обр, а его пометить обработанным. Идти на 1.2.*/
+ /*printf("\n!get_nodes!loop!wi=%i",wi);*/
+ sprintf(wc,"%010i",wi); /*формируем ид- узла*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into _w ( nid ) select cast ( id as integer ) from dt where up = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 185 "YL_db.pgc"
+ if (sqlca.sqlcode!=0 && sqlca.sqlcode!=100) YL_abort("get_nodes-ins-2");
+ /*printf("\n!get_nodes!update!wi=%i",wi);*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update _w set flg = 1 where nid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 187 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("get_nodes-update");
+ goto loop;
+ }
+int get_sig_P(char* sig_f)/*ДРВ. подсчитывает к-во rid=sig_eF узлов в поддереве под sig_f.*/{
+ /*sig_f - предполагается ид узла sig_f из объявления. Возвращает количество правил sig_eF в поддереве: 0 - ОК для WFC*/
+ /*0. собираем узлы поддерва в _w.*/
+ get_nodes(sig_f);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dt t , _w w where cast ( t . id as integer ) = w . nid and t . rid = 'sig_eF'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 194 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("get_sig_P-sel-cou");
+ return wi;
+}
+/*Сем обработчики*/
+char* def_chk_fp(char* nid)/*ДРВ. все фп должны быть различны и не должны совпадать с именами элементов теории. (deff-4)*/{
+ /*nid - id узла ДРВ с Id_list_bch.*/
+ /*Проверяет подсчётом, что все фп различны и не должны совпадать с именем элемента теории. Возвращает указатель на сообщение об ошибке или на ''*/
+ static char msg_0[]="";
+ static char msg_1[]="ERROR: Some formal parameters are the same!WFC(deff-4)";
+ static char msg_2[]="ERROR: Some formal parameters have elements of theory names!WFC(deff-4)";
+ strcpy(wc1,nid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dt id , dt idl , dt b , dt bch where id . up = idl . id and idl . up = b . id and b . up = bch . id and bch . id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 205 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("def_chk_fp-sel1");
+ int fn=wi;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( distinct ( id . v ) ) from dt id , dt idl , dt b , dt bch where id . up = idl . id and idl . up = b . id and b . up = bch . id and bch . id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 207 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("def_chk_fp-sel2");
+ if (fn!=wi) return &msg_1[0];
+ /*подсчитываем к-во пересечений с именами элементов теории*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dt id , dt idl , dt b , dt bch , entities en where id . up = idl . id and idl . up = b . id and b . up = bch . id and id . v = en . id and bch . id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 210 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("def_chk_fp-sel3");
+ if (wi!=0) return &msg_2[0]; else return &msg_0[0];
+}
+int check_sig_eI(char* sig_f)/*ДРВ. проверяет WFC(sig_eI).*/{
+ /*sig_f - ид узла sig_f объявления. Возвращает RC: 0 - ОК*/
+ /*0. собираем узлы поддерва в _w. flg у всех будет 1.*/
+ get_nodes(sig_f);
+ /*1. выставляем флаг в 0 у тех у кого sid='Id'*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update _w set flg = 0 from dt t where cast ( t . id as integer ) = nid and t . sid = 'Id'", ECPGt_EOIT, ECPGt_EORT);}
+#line 218 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("check_sig_eI-update");
+ /*2. перебираем и v каждого смотрим через e_exists_q*/
+ char t[22]/*тип проверяемого сущего*/; char msg[122]; int cnid /*номер текущего узла*/; char cv[22]/*v текущего узла*/;
+ int err_flg=0;/*фиксирует наличие ошибок при проверке в цикле*/
+ loop: 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from _w where flg = 0", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 223 "YL_db.pgc"
+ if (wi==0) goto end; /*Нет*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from _w where flg = 0", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 224 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("check_sig_eI-min");
+ cnid=wi;
+ /*получаем v.*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select t . v from dt t , _w w where cast ( t . id as integer ) = w . nid and w . nid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 227 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("check_sig_eI-sel");
+ strcpy(cv,wc);
+ /*проверяем*/
+ if (e_exists_q(cv,t)!=0) {sprintf(msg,"\ncheck_sig_eI:!ERROR! There is no such an entity (%s)!",cv); printf("%s",msg); err_flg=1; goto next;}; 
+ if (strcmp(t,"sort")!=0) {sprintf(msg,"\ncheck_sig_eI:!ERROR! %s is not a sort but %s!",cv,t); printf("%s",msg); err_flg=1;}; 
+ next: 
+ wi=cnid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from _w where nid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 234 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("check_sig_eI-delete");
+ goto loop;
+ end: return err_flg;
+}
+/*ЛЕС*/
+int scrt_node(int tid,char* sid,char* rid,char* v)/*Лес. возвращает указатель на id созданного узла дерева tid.*/{
+ /*для узла левой части правила нужны sid,rid, а для лнт в правой sid,v.*/
+ /*получаем свободный номер в wi*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fnn from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 242 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("scrt_node-fnn_select");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fnn = fnn + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 243 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("scrt_node-fnn_update");
+ wi1=tid;
+ strcpy(wc2,sid); strcpy(wc3,rid); strcpy(wc4,v);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into dts ( tid , nid , sid , rid , v ) values ( $1  , $2  , $3  , $4  , $5  )", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc3),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc4),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 246 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("scrt_node-insert");
+ commit(); return wi;
+}
+void st_del(int tid)/*ЛЕС. удаляет дерево из леса*/{
+ int dbg=0;
+ wi=tid; /*printf("\n-st_del.DEBUG.in.tid=%i.",tid);*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from dts where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 252 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_del-delete");
+ commit(); if(dbg!=0) printf("\n<st_del msg='.DEBUG.after commit' tid='%i'/>",tid);
+ return;
+}
+void sget_attr(int ac,int tid,int id,char* pth,char* val)/*Лес. Возвращает атрибут номер ac узла дерева tid найденного вниз от id по пути pth*/{
+ /*ЛИБО abort - такого узла на конце пути нет. Если нет узла с id, abort!*/
+ /*ac: 1 - rid, 2 - v (возвращаются в val), 3 - id(возвращается в val как строка), 4 - sid*/
+ int cid /*ид текущего узла от которого шагаем*/; cid=id; 
+ /*printf("\n!DEBUG! sget_attr begins with ac=(%i) tid=(%i) id=(%i) pth=(%s).",ac,tid,id,pth);*/
+ int pth_l/*длина пути*/; int pthI[21]/*путь массивом*/; int rc=fill_array(pth,pthI); 
+ if (rc!=0) {printf("\n!sget_attr: fill_array returns rc=%i. Abort!",rc);exit(EXIT_FAILURE);};
+ pth_l=pthI[0];
+ wi3=tid;
+ if (pth_l==1 && pthI[1]==0) {wi1=id; goto get;};/*wc->wi1*/
+ int i; for (i=1;i<pth_l+1;i++) {/*шагнуть*/
+ wi2=cid; wi=pthI[i];/*wc1->wi2*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select nid from dts where tid = $1  and up = $2  and irn = $3 ", 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 268 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) /*дитя есть*/ cid=wi1; else /*дитя нет*/ {printf("\n!sget_attr: Child #%i from tid=%i, nid=%i in path %s is absent!\n",i,tid,id,pth); YL_abort("sget_attr-id");};
+ };/*в cid id целевого дитя*/
+ get: 
+ if (ac==1) {
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select rid from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 273 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) strcpy(val,wc1); else /*дитя нет*/ YL_abort("sget_attr-rid");}
+ else
+ if (ac==4) {
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select sid from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 277 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) strcpy(val,wc1); else /*дитя нет*/ YL_abort("sget_attr-sid");}
+ else
+ if (ac==2) {
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 281 "YL_db.pgc"
+ 
+ if (sqlca.sqlcode==0) strcpy(val,wc1); else /*дитя нет*/ YL_abort("sget_attr-v");}
+ else /*3...:-) возвращаем id*/ sprintf(val,"%i",cid);/*грубовато, но ведь приведение к String;-)*/
+ /*printf("\n!DEBUG! sget_attr ends with val=(%s)",val);*/
+ return;
+}
+int sget_up(int tid,int nid)/*Лес. возвращает nid папы. 0 - нет (up=Null)*/{
+ /*printf("\n!DEBUG! sget_up begins with tid=(%i) nid=(%i).",tid,nid);*/
+  wi=tid; wi1=nid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( up , 0 ) from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 290 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_up-select-up");
+ return wi2;
+}
+int sget_irn(int tid,int nid)/*Лес. возвращает irn узла*/{
+ wi=tid; wi1=nid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select irn from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 295 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_irn-select");
+ return wi2;
+}
+int sget_flg(int tid,int nid,char* pth)/*Лес. Возвращает атрибут flg узла дерева tid найденного вниз от nid по пути pth*/{
+ char cw[123]/*рабочая*/;
+ /*получаем nid целевого*/sget_attr(3,tid,nid,pth,cw); int cnid=atoi(cw);
+ wi=tid; wi1=cnid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select flg from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 302 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) /*дитя нет*/ YL_abort("sget_flg-select");
+ return wi2;
+}
+int sget_flg2(int tid,int nid,char* pth)/*Лес. Возвращает атрибут flg2 узла дерева tid найденного вниз от nid по пути pth*/{
+ char cw[123]/*рабочая*/;
+ /*получаем nid целевого*/sget_attr(3,tid,nid,pth,cw); int cnid=atoi(cw);
+ wi=tid; wi1=cnid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select flg2 from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 309 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) /*дитя нет*/ YL_abort("sget_flg2-select");
+ return wi2;
+}
+int sget_ref(int tid,int nid,char* pth)/*Лес. Возвращает атрибут ref(NULL->0) узла дерева tid найденного вниз от nid по пути pth*/{
+ char cw[123]/*рабочая*/;
+ /*printf("\n!sget_ref!DEBUG! in tid=%i nid=%i pth='%s'.",tid,nid,pth);*/
+ /*получаем nid целевого*/sget_attr(3,tid,nid,pth,cw); int cnid=atoi(cw);
+ wi=tid; wi1=cnid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( ref , 0 ) from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 317 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) /*дитя нет*/ YL_abort("sget_ref-select");
+ return wi2;
+}
+int sget_type(int tid,int nid,char* pth)/*Лес. Возвращает атрибут type узла дерева tid найденного вниз от nid по пути pth*/{
+ char cw[123]/*рабочая*/;
+ /*получаем nid целевого*/sget_attr(3,tid,nid,pth,cw); int cnid=atoi(cw);
+ wi=tid; wi1=cnid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( type , 0 ) from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 324 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) /*дитя нет*/ YL_abort("sget_type-select");
+ return wi2;
+}
+int sget_sid(int tid,int nid,char* pth)/*Лес. Возвращает атрибут sid узла дерева tid найденного вниз от nid по пути pth*/{
+ char cw[123]/*рабочая*/;
+ /*получаем nid целевого*/sget_attr(3,tid,nid,pth,cw); int cnid=atoi(cw);
+ wi=tid; wi1=cnid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select sid from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 331 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) /*дитя нет*/ YL_abort("sget_sid-select");
+ return wi2;
+}
+void flag_subtree(int tid,int nid)/*Лес. выделяет в дереве поддерево узла nid помечая его узлы 1 а остальные узлы дерева - 0*/{
+ /*printf("\n!DEBUG! flag_subtree begins with tid=(%i) nid=(%i).",tid,nid);*/
+ /*tid - id дерева, nid - id узла корня поддерева*/
+ /*установить в tid flg=0.*/
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 339 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag_subtree-update-flg-0");
+ int cnid=nid;/*текущий обрабатываемый узел*/
+ loop:
+ /*установить cnid.flg=1.*/
+ wi=tid; wi1=cnid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 1 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 344 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag_subtree-update-flg-1-root");
+ /*найти в дереве узел (У1) с flg=0 ссылающийся на узел с flg=1.*/
+ /*если такого нет return.*/
+ wi=tid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . tid = $1  and ch . flg = 0 and p . flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 348 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag_subtree-select-count");
+ if (wi1==0) return;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( ch . nid ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . tid = $1  and ch . flg = 0 and p . flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 350 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag_subtree-select-min");
+ /*назначить У1 cnid.*/
+ cnid=wi1;
+ goto loop;
+}
+void flag2_subtree(int tid,int nid) /*Лес. выделяет в дереве поддерево узла nid помечая его узлы flg2=1 а остальные узлы дерева - flg2=0*/{
+ /*tid - id дерева, nid - id узла корня поддерева*/
+ /*установить в tid flg2=0.*/
+ /*printf("\n!flag2_subtree: DEBUG. tid=%i, nid=%i.",tid,nid);*/
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg2 = 0 where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 360 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag2_subtree-update-flg-0");
+ int cnid=nid;/*текущий обрабатываемый узел*/
+ loop:
+ /*установить cnid.flg=1.*/
+ wi=tid; wi1=cnid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg2 = 1 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 365 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag2_subtree-update-flg-1-root");
+ /*найти в дереве узел (У1) с flg2=0 ссылающийся на узел с flg2=1.*/
+ /*если такого нет return.*/
+ wi=tid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . tid = $1  and ch . flg2 = 0 and p . flg2 = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 369 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag2_subtree-select-count");
+ if (wi1==0) return;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( ch . nid ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . tid = $1  and ch . flg2 = 0 and p . flg2 = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 371 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag2_subtree-select-min");
+ /*назначить У1 cnid.*/
+ cnid=wi1;
+ goto loop;
+}
+int infix_ideb(int tid)/*Лес. обработка инфиксов с флагом терма в лесу: идентификация, связывание, типизация. Возвращает к-во фиксов.*/{
+ /*tid - ид дерева предложения содержащего терм где возможны инфиксы.*/
+ /*обычный инфикс получит в ref tid декларации его ф-и, а в type - nid узла sig_f. спец инфикс останется с ref,type=Null*/
+ /*узлы терма которые надо проверить имеют flg=1. у обработанного flg будет 2, даже если привязки не будет (спец-инфикс!).*/
+ char iv[220]/*рабочая*/;
+ int cnid/*текущий обрабатываемый узел*/; int dtid/*tid декларации*/;int type; int count=0/*счётчик обработанных фиксов*/;
+ loop:
+ wi=tid; /*strcpy(wc,"INFIX");*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where flg = 1 and tid = $1  and sid = 'INFIX'", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 384 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-select-count");
+ if (wi1==0) goto end;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where flg = 1 and tid = $1  and sid = 'INFIX'", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 386 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-select-min");
+ cnid=wi1; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 388 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-select-v");
+ /*обработка очередного узла*/count=count+1;
+ /*проверяем наличие инфикса в спец-таблице*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select 1 from sinfixes where v = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 391 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) goto next; /*если инфикс спец - пропустить --!!!Вот пример отложенной не только типизации но и привязки!*/
+ if (sqlca.sqlcode!=100) YL_abort("infix_ideb-select-sinf");
+ /*обычный инфикс*/
+ /*получаем ref_f*//*здесь АВОРТ будет если обыч-инфикс не один раз!*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select ref_f from infixes where v = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 396 "YL_db.pgc"
+ 
+ if (sqlca.sqlcode==100) /*фикс не приписан*/{printf("\n<infix_ideb: !BAD! infix '%s' is not assigned!",wc1); dtid=-1/*это будет ref с кодом ошибки*/; goto skip;};
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-select-ref_f");
+ /*получаем tid декларации из entities!!!*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 400 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-select-entities");
+ dtid=wi2;
+ /*получаем sig_f: "1.3."...*/
+ int drnid=sget_strt(dtid); sget_attr(3,dtid,drnid,"1.3.",iv); type=atoi(iv);
+ skip:
+ wi=tid; wi1=cnid; wi2=dtid; wi3=type;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  where tid = $3  and nid = $4 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 406 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-update-ref,type");
+ next:
+ /*выставляем флаг - обработан*/
+ wi=tid; wi1=cnid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 2 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 410 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("infix_ideb-update-flg-2");
+ goto loop;
+ end:
+ commit();
+ return count;
+}
+int get_qua(int tid, int rnid, int snid, char *iv)/*Лес. возвращает nid фразы квантора либо 0 - не нашёл*/{
+ /*tid - ид дерева предложения, rnid - ид корня (это предел), snid - стартовый узел Id - не эт, iv - его значение (его и ищем)*/
+ /*printf("\n!get_qua: DEBUG! start tid=%i, rnid=%i, snid=%i, iv='%s'.",tid,rnid,snid,iv);*/
+ int cnid/*текущий узел на пути вверх*/=snid; char qid[22]/*значение Id при кванторе*/; char crid[22]/*значение текущего rid*/;
+ loop:
+ /*Шаг вверх.*/
+ /*printf("\n!get_qua: DEBUG! step up tid=%i, cnid=%i.",tid,cnid);*/
+ cnid=sget_up(tid,cnid);
+ /*обработка текущего узла*/
+ /*получаем rid*/
+ sget_attr(1,tid,cnid,"0.",crid);
+ /*если узел ква*/
+ if (strcmp(crid,"trma")==0 || strcmp(crid,"trme")==0) {
+  /*узел - ква*/
+  /*сравниваем с его переменной - #3v.*/
+  sget_attr(2,tid,cnid,"3.",qid);
+  /*printf("\n!get_qua: DEBUG! sget_attr gives qid='%s'.",qid);*/
+  /*совпадают - обработка и возврат ОК.*/
+  if(strcmp(iv,qid)==0) goto end;
+  /*не совпадают - идём на next*/
+  goto next;
+ }
+ else /*узел не ква*/ goto next;
+ next:
+ if (cnid==rnid)/*дошли до корня и не нашли*/ {cnid=0; goto end;} else goto loop;
+ end: 
+ /*printf("\n!get_qua: DEBUG! return cnid=%i.",cnid);*/
+ return cnid;
+}
+int sget_fp(int tid, int nid) /*Лес. возвращает ид узла форм-пар в заголовке или 0 - не найден, -n - найдено n>1*/{
+ /*tid - ид дерева определения, nid ид узла Id/trmi - предполагаемого вхождения фп*/
+ /*!!!Предполагается что дерево фп выделено флагом flg2=1!!!*/
+ int Ilb/*как заглушка*/; char iv[22] /*значение Id*/;
+ sget_attr(2,tid,nid,"0.",iv);
+ wi=tid; strcpy(wc,iv);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and flg2 = 1 and sid = 'Id' and v = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 451 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_fp-select-count");
+ if (wi1>1 || wi1==0) return -wi1;/*таких фп много или нет*/
+ /*нашли ровно один. получаем nid*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select nid from dts where tid = $1  and flg2 = 1 and sid = 'Id' and v = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 454 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_fp-select-nid");
+ return wi1;
+}
+void flag2_fps(int tid)/*Лес. в предложении tid дерево фп выделяется флагом flg2*/{
+ /*получить корень списка фп. Идём от корня предложения (у него up is Null) путь="1.4." и мы в Id_list_bch*/
+ int Ilb/*nid Id_list_bch*/; char iv[22] /*как буфер*/;
+ /*получаем ид узла предложения*/
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select nid from dts where tid = $1  and up is null", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 462 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flag2_fps-select-st-root");
+ int st_nid=wi1;
+ /*получаем nid Id_list_bch*/
+ sget_attr(3,tid,st_nid,"1.4.",iv); Ilb=atoi(iv);
+ /*Выделяем флагом-2 поддерево от Id_list_bch.*/
+ flag2_subtree(tid,Ilb);
+ return;
+}
+int get_pcm(char* iv)/*Лес. pcm - pure carrier member. Ищет в модельных предложениях не является ли iv элементом основы (пока - сорта).*/{
+ /*iv - значение Id проверяемого на эо*/
+ /*Возвращает tid предложения введения эо либо 0*/
+ /*ищем в лесу среди st.rid='fmca', "2.".v=iv*/
+ /*ослабление: ищем в лесу rid='fmca', ребёнок - v=iv*/
+ strcpy(wc,iv);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select s . tid from dts s , dts c where c . tid = s . tid and c . up = s . nid and s . rid = 'fmca' and c . v = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 476 "YL_db.pgc"
+
+ if (sqlca.sqlcode==0) return wi1;
+ if (sqlca.sqlcode==100) return 0;
+ YL_abort("get_pcm-select");
+}
+int sget_strt(int tid)/*Лес. возвращает nid корня дерева по его tid*/{
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select nid from dts where tid = $1  and up is null", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 483 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("sget_strt-nid");
+ return wi1;
+}
+void sput_rid(int tid,int nid,char* v)/*Лес. назначает узлу rid*/{
+ wi=tid; wi1=nid; strcpy(wc,v);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set rid = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 488 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_rid-update");
+}
+void sput_v(int tid,int nid,char* v)/*Лес. назначает узлу v*/{
+ wi=tid; wi1=nid; strcpy(wc,v);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set v = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 492 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_v-update");
+}
+void sput_ref(int tid,int nid,int ref)/*Лес. назначает узлу ref*/{
+ wi=tid; wi1=nid; wi2=ref;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 496 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_ref-update");
+}
+void sput_irn(int tid,int nid,int v)/*Лес. назначает узлу irn*/{
+ wi=tid; wi1=nid; wi2=v;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set irn = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 500 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_irn-update");
+}
+void sput_type(int tid,int nid,int type)/*Лес. назначает узлу type*/{
+ wi=tid; wi1=nid; wi2=type;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set type = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 504 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_type-update");
+}
+void sput_up(int tid,int nid,int v)/*Лес. назначает узлу up*/{
+ wi=tid; wi1=nid; wi2=v;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set up = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 508 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_up-update");
+}
+void sput_flg(int tid,int nid,int flg)/*Лес. назначает узлу flg*/{
+ wi=tid; wi1=nid; wi2=flg;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = $1  where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 512 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_flg-update");
+}
+void sput_p_type(int tid,int nid,int ref,int type)/*Лес. делает up и назначает ref, type родителю*/{
+ int pid=sget_up(tid,nid)/*получаем папу*/;
+ wi=tid; wi1=pid; wi2=ref; wi3=type;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  where tid = $3  and nid = $4 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 517 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sput_p_type-update");
+}
+void trmi_ideb(int tid, int nid, int mod){/*Лес. обработка Id/trmi и trmi узлов с flg=1: идентификация, связывание, типизация*/
+ /*tid - ид дерева предложения, nid - ид корня терма, mod - мода обработки см. term_proc. после обработки узла flg всегда в 2*/
+ /*возврат: Cообщение об ошибке выдаётся в протокол. недопустимому узлу приписывается ref<0.*/
+ /*Обработка см. таблицу ТермТиО в ОЯ: у Id заполняется ref и почти всегда type, у trmi ref(?)+type заполняются как длинная ссылка на тип.*/
+ char iv[220]/*значение Id...*/;char wv[220]/*рабочая*/;char t[22]/*тип обнаруженного эт*/; int refv/*значение ref узла либо код ошибки (<0)*/; int typev=0/*nid узла типа (сорта или сига)*/;
+ int cnid/*текущий обрабатываемый Id-узел*/;int typep/*тип родителя*/;int refp/*ref родителя*/;
+ /*если мы в определении ф-и, то выделяем поддерево форм-пар (через flg2).*/
+ if (mod==2) flag2_fps(tid);
+ loop:
+ wi=tid; /*strcpy(wc,"Id"); strcpy(wc1,"trmi");*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . flg = 1 and ch . tid = $1  and ch . sid = 'Id' and p . rid = 'trmi'", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 529 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-select-count");
+ if (wi1==0) goto end;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( ch . nid ) from dts ch , dts p where ch . tid = p . tid and ch . up = p . nid and ch . flg = 1 and ch . tid = $1  and ch . sid = 'Id' and p . rid = 'trmi'", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 531 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-select-min");
+ cnid=wi1; 
+ /*получаем v.Id*/sget_attr(2,tid,cnid,"0.",iv);
+ /*обработка очередного узла*/
+ /*WFC(trmi-1). проверяем наличие значения Id среди элементов теории*/
+ if (e_exists_q(iv,t)==0)/*есть в эт!*/ {
+  if (strcmp(t,"func")!=0 && strcmp(t,"const")!=0) {printf("\n!trmi_ideb: ERROR! Id '%s' is already used for '%s' and can not be in term! WFC(trmi-1)",iv,t); refv=-1;goto fin;};
+  /*Id допустим. привязываем*/
+  /*получаем tid декларации из entities!!!*/
+  strcpy(wc,iv);
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 541 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-select-entities");
+  refv=wi2;
+  /*получаем type для func или const*/
+  /*получаем nid корня дерева предл*/
+  int r_nid=sget_strt(refv); char path[11]/*путь к узлу*/;
+  if (strcmp(t,"func")==0) strcpy(path,"1.3."); else strcpy(path,"1.4.");
+  sget_attr(3,refv,r_nid,path,wv); typev=atoi(wv);
+  /*назначаем тип родителю*/  sput_p_type(tid,cnid,refv,typev);
+  /*для КСт и КСз проверяем на первичность*/
+  if(mod==4 || mod==6) {/*получаем ид определения или ""*/Sget_did(iv,wv);
+   if(wv[0]!=0) {printf("\n!trmi_ideb: ERROR! Id '%s' has definition '%s' and can not be in FM-term! WFC(trmi_ideb-6)",iv,wv); refv=-6;goto fin;};
+  };
+  goto fin;
+ };
+ /*не элемент теории*/
+ /*если мы в конст-терме то узел - ошибка!!!*/
+ if(mod==1) {printf("\n!trmi_ideb: ERROR! Id '%s'(%i,%i) is not constant or function in constant term!",iv,tid,cnid); refv=-2; goto fin;};
+ /*в опр-терм нэт может быть ква-пер либо форм-пар; иначе ошибка -3*/
+ if(mod==2) {int qnid=get_qua(tid,nid,cnid,iv);
+  if(qnid!=0)/*квантор нашёлся*/{typev=qnid; /*получаем nid сорта (5-ый)*/ sget_attr(3,tid,typev,"5.",iv); typep=atoi(iv);
+   /*назначаем тип родителю*/ sput_p_type(tid,cnid,tid,typep); refv=0;
+  goto fin;};
+  /*это форм-пар?*/
+  int fpnid=sget_fp(tid,cnid); if(fpnid>0)/*фп нашёлся*/{refv=fpnid; /*получем ref,type из головы*/ wi=tid; wi1=fpnid;
+   { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select ref , type from dts where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 565 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-select-ref-type");
+   refp=wi2; typep=wi3;
+   /*назначаем тип родителю*/ sput_p_type(tid,cnid,refp,typep); typev=0;  
+  goto fin;};
+  printf("\n!trmi_ideb: ERROR! Id '%s'(%i,%i) is not qua-var or form-par in definition term! WFC(trmi-3)",iv,tid,cnid); refv=-3; goto fin;
+ };
+ /*если мы в замкнутой формуле, то ква-пер, либо ошибка -4*/
+ if(mod==3) {int qnid=get_qua(tid,nid,cnid,iv); 
+  if(qnid!=0)/*квантор нашёлся*/{typev=qnid; /*получаем nid сорта (5-ый)*/ sget_attr(3,tid,typev,"5.",iv); typep=atoi(iv);
+   /*назначаем тип родителю*/ sput_p_type(tid,cnid,tid,typep); refv=0;
+  goto fin;};
+  printf("\n!trmi_ideb: ERROR! Id '%s'(%i,%i) is not a qua-var in closed term! WFC(trmi-4)",iv,tid,cnid); refv=-4; goto fin;
+ };
+ /*если мы в модельном терме, то либо эо, либо ошибка -5*/
+ if(mod==4 || mod==6) {int mtid=get_pcm(iv);
+  if(mtid!=0)/*эо нашёлся*/{refv=mtid; /*получаем nid корня предл*/ int r_nid=sget_strt(mtid);
+  /*получаем nid сорта (3-ый)*/ sget_attr(3,mtid,r_nid,"3.",iv); typep=atoi(iv);/*получаем nid эо (2-ый)*/ sget_attr(3,mtid,r_nid,"2.",iv); typev=atoi(iv);
+  /*назначаем тип родителю*/ sput_p_type(tid,cnid,mtid,typep); 
+ goto fin;};
+ printf("\n!trmi_ideb: ERROR! Id '%s'(%i,%i) is not a pure carrier member or undeclared! WFC(trmi-5)",iv,tid,cnid); refv=-5; goto fin;
+ };
+ /*если мы в запросном терме, то либо ква-пер, либо эо, либо ошибка -5*/
+ if(mod==5) {int qnid=get_qua(tid,nid,cnid,iv);
+  if(qnid!=0)/*квантор нашёлся*/{typev=qnid; /*получаем nid сорта (5-ый)*/ sget_attr(3,tid,typev,"5.",iv); typep=atoi(iv);
+   /*назначаем тип родителю*/ sput_p_type(tid,cnid,tid,typep); refv=0;
+  goto fin;};
+  int mtid=get_pcm(iv); if(mtid!=0)/*эо нашёлся*/{refv=mtid;/*получаем nid корня предл*/int r_nid=sget_strt(mtid);
+   /*получаем nid сорта (3-ый)*/sget_attr(3,mtid,r_nid,"3.",iv); typep=atoi(iv);/*получаем nid эо (2-ый)*/ sget_attr(3,mtid,r_nid,"2.",iv); typev=atoi(iv);
+   /*назначаем тип родителю*/sput_p_type(tid,cnid,mtid,typep);
+  goto fin;};
+  printf("\n!trmi_ideb: ERROR! Id '%s'(%i,%i) is not a qua-var or pure carrier member or undeclared! WFC(trmi-5)",iv,tid,cnid); refv=-5; goto fin;
+ };
+ /*!!!попадание сюда означет необрабатываемую моду!*/
+ printf("\n!trmi_ideb: Unknown mode=%i. Abort!",mod);exit(EXIT_FAILURE);
+ fin:
+ /*заносим ref. !Z-----------------Считаем что нет случая отложенного ref, т.е. ref назначен-------------------*/
+ wi=tid; wi1=cnid; wi2=refv;/*если Id плохой (недопустим), то в ref код ошибки*/wi3=typev;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  where tid = $3  and nid = $4 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 602 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-update-ref,type");
+ /*выставляем флаг - обработан*/
+ wi=tid; wi1=cnid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 2 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 605 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmi_ideb-update-flg-2");
+ goto loop;
+ end:
+ return;
+}
+void trmQ_5(int tid) /*Лес. (trma, trme)\5 - под флагом проверяет что Id сорта именно сорт и предметный*/{
+ char iv[220]/*значение Id*/;char t[22]/*тип обнаруженного эт*/; int refv/*0 либо код ошибки (<0)*/;
+ int cnid/*текущий обрабатываемый узел*/;
+ loop:
+ /*критерий отбора под флагом терма: sid='Id', irn=5!*/
+ wi=tid; strcpy(wc,"Id"); wi2=5;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch where ch . flg = 1 and ch . tid = $1  and ch . sid = $2  and ch . irn = $3 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 616 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_5-select-count");
+ if (wi1==0) goto end;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( ch . nid ) from dts ch where ch . flg = 1 and ch . tid = $1  and ch . sid = $2  and ch . irn = $3 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 618 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_5-select-min");
+ cnid=wi1; 
+ /*получаем v - значение Id*/sget_attr(2,tid,cnid,"0.",iv);
+ /*обработка очередного узла*/
+ /*проверяем наличие значения Id среди элементов теории*/
+ if (e_exists_q(iv,t)==0)/*есть в эт!*/ {
+  if (strcmp(t,"sort")!=0) {printf("\n!trmQ_5: ERROR! Id %s is already used for %s and not for sort! WFC(trmQ-1)",iv,t); refv=-6;goto fin;};
+  /*Id допустим. проверяем что сорт предметный*/
+  /*получаем РВ или пустую строку вместо Null из entities!!!*/
+  strcpy(wc,iv);
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select coalesce ( expr , '' ) from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 628 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_5-select-entities");
+  if (wc1[0]!=0)/*сорт РВ*/{printf("\n!trmQ_5: ERROR! Id '%s' is RE-sort re=(%s) - forbidden! WFC(trmQ-1)",iv,wc1); refv=-7;goto fin;};
+  refv=0; goto fin;
+ };
+ /*не элемент теории*/printf("\n!trmQ_5: ERROR! Id '%s' is not a sort! WFC(trmQ-1)",iv); refv=-8;
+ fin:/*заносим ref.*//*выставляем флаг - обработан*/
+ wi=tid; wi1=cnid; wi2=refv;/*если Id плохой (не допустим), то в ref код ошибки*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , flg = 2 where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 635 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_5-update");
+ goto loop;
+ end:
+ return;
+}
+void trmQ_3(int tid){/*Лес. (trma, trme)\3 - под флагом проверяет что Id ква-пер при ква не есть эт и что он УПОТРЕБЛЁН! RC заносится в ref!*/
+ char iv[220]/*значение Id*/;char t[22]/*тип обнаруженного эт*/; int refv/*0 либо код ошибки (<0)*/;
+ int cnid/*текущий обрабатываемый узел*/;int pid/*папа текущего*/;
+ loop:
+ /*Цикл по при-ква-пер: критерий отбора под флагом терма: sid='Id', irn=3!*/
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch where ch . flg = 1 and ch . tid = $1  and ch . sid = 'Id' and ch . irn = 3", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 646 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_3-select-count");
+ if (wi1==0) goto end;/*кончились или не начинались*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( ch . nid ) from dts ch where ch . flg = 1 and ch . tid = $1  and ch . sid = 'Id' and ch . irn = 3", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 648 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_3-select-min");
+ cnid=wi1; 
+ /*получаем v Id*/sget_attr(2,tid,cnid,"0.",iv);
+ /*обработка очередного узла*/
+ /*проверяем наличие значения Id среди элементов теории*/
+ if (e_exists_q(iv,t)==0)/*есть в эт!*/ {printf("\n!trmQ_3: ERROR! Id '%s' is already used for %s - forbidden! WFC(trmQ-2)",iv,t); refv=-10;goto fin;}
+ /*проверяем что у него есть УПОТРЕБЛЕНИЯ. !!!Считается что ссылка во вхождения уже занесена и занесена в type!!!*/
+ pid=sget_up(tid,cnid)/*получаем папу*/;
+ wi=tid; wi2=pid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts ch where ch . tid = $1  and ch . sid = 'Id' and ch . type = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 657 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_3-select-count-2");
+ if (wi1==0) /*никто не ссылается!*/{printf("\n!trmQ_3: ERROR! Id '%s' has no usage! WFC(trmQ-3)",iv); refv=-9;goto fin;};
+ refv=0;
+ fin:
+ /*заносим в ref код обработки и выставляем флаг - обработан.*/
+ wi=tid; wi1=cnid; wi2=refv;/*если Id плохой (не допустим), то в ref код ошибки*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , flg = 2 where tid = $2  and nid = $3 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 663 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("trmQ_3-update-flg-3");
+ goto loop;
+ end:
+ return;
+}
+void type_trmn(int tid)/*Лес. типизация узлов правила trmn в рамках выделенного (flg=1) терма дерева tid*/{
+ /*проверяем что trmn есть. нет - возврат. есть - ищем в entities сорт R: нет - в ref -1, есть - берём его tid и nid узла с Id сорта R
+  и закатываем их в ref,type всем флажковым trmn дерева, выставляя оный в 2*/
+ char cw[12]/*рабочая*/;int stid=-1/*дерево декларации сорта или код ошибки отсутствия сорта R*/;int type=0/*nid Id сорта R*/;
+ wi=tid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and rid = 'trmn' and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 673 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_trmn-select-count");
+ if(wi1==0) goto end/*нечего обрабатывать*/;
+ strcpy(wc,"R");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where Id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 676 "YL_db.pgc"
+ if (sqlca.sqlcode==100) {printf("\n!type_trmn!can not work with numbers: sort R is absent!WFC(trmL-1)!");goto cont;}; if (sqlca.sqlcode!=0) YL_abort("type_trmn-select-R");
+ stid=wi1/*дерево декларации сорта*/;
+ int snid=sget_strt(stid)/*его корень*/;
+ /*получить в type - nid Id сорта*/sget_attr(3,stid,snid,"1.2.",cw); type=atoi(cw);
+ /*заносим ref,type и выставляем флаг - обработан.*/
+ cont:wi=tid; wi1=stid; wi2=type;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  , flg = 2 where tid = $3  and rid = 'trmn' and flg = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 682 "YL_db.pgc"
+ if (sqlca.sqlcode!=0 && sqlca.sqlcode!=100) YL_abort("type_trmn-update");
+ end:;
+}
+void type_trms(int tid)/*Лес. типизация узлов правила trms в рамках выделенного терма дерева tid*/{
+ /*проверяем что trms есть. нет - возврат. есть - ищем в entities сорт S: нет - в ref -1, есть - берём его tid и nid узла с Id сорта S
+  и закатываем их в ref,type всем флажковым trms дерева, снимая оный*/
+ char cw[12]/*рабочая*/;int stid=-1/*дерево декларации сорта или код ошибки отсутствия сорта S*/;int type=0/*nid Id сорта S*/;
+ wi=tid; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and rid = 'trms' and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 690 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_trms-select-count");
+ if(wi1==0) goto end/*нечего обрабатывать*/;
+ strcpy(wc,"S");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where Id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 693 "YL_db.pgc"
+ if (sqlca.sqlcode==100) {printf("\n!type_trms!can not work with strings: sort S is absent!WFC(trmL-1)!");goto cont;}; if (sqlca.sqlcode!=0) YL_abort("type_trms-select-S");
+ stid=wi1/*дерево сорта*/;
+ int snid=sget_strt(stid)/*корень*/;
+ sget_attr(3,stid,snid,"1.2.",cw); type=atoi(cw);
+ /*заносим ref,type и выставляем флаг - обработан.*/
+ cont:wi=tid; wi1=stid; wi2=type;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  , flg = 2 where tid = $3  and rid = 'trms' and flg = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 699 "YL_db.pgc"
+ if (sqlca.sqlcode!=0 && sqlca.sqlcode!=100) YL_abort("type_trms-update");
+ end:;
+}
+void trmi_deflag(int tid)/*Лес. устанавливает флаг у не обработанных trmi узлов в обработан*/{
+ wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 2 where tid = $1  and rid = 'trmi' and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 704 "YL_db.pgc"
+ if (sqlca.sqlcode!=0 && sqlca.sqlcode!=100) YL_abort("trmi_deflag-update");
+}
+int flg_all_done_q(int tid,int nid)/*Лес. выдаёт ответ на вопрос: у детей узла (tid,nid) значение flg у всех YL_NODE_DONE? 0 - нет, 1 - да*/{
+ /*получаем к-во детей*/
+ wi=tid; wi1=nid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and up = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 709 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flg_all_done_q-select-1");
+ int chn=wi3;
+ /*получаем к-во YL_NODE_DONE детей*/
+ wi=tid; wi1=nid; wi2=YL_NODE_DONE;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and up = $2  and flg = $3 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 713 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("flg_all_done_q-select-2");
+ int chn_=wi3;
+ /*printf("\n!flg_all_done_q!DEBUG!before return. tid=%i, nid=%i, chn=%i.",tid,nid,chn);*/
+ if (chn==chn_) return 1; else return 0;
+}
+int sget_chn(int tid, int id)/*Лес. возвращает количество детей данного узла (id) в данном дереве (tid).*/{
+ wi=tid; wi1=id;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where up = $1  and tid = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 720 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("sget_chn-sel_count");
+ /*DEBUG*//*printf("\n(sget_chn)before return. tid=%i, nid=%i, chn=%i.",tid,id,wi2);*/
+ return wi2;
+}
+int sget_chi(tid,nid,i)/*Лес. выдаёт ид i-ого ребё учитывая изврат TermList*/{
+ char sid[22];char cw[25]/*рабочая*/; int chi/*номер ребё в irn*/;
+ /*получить sid*/sget_attr(4,tid,nid,"0.",sid); 
+ if(strcmp(sid,"TermList")==0) {/*получить к-во дет*/int chn=sget_chn(tid,nid); chi=i-1-chn;} else chi=i;
+ sprintf(cw,"%i.",chi)/*путь к ребё*/;sget_attr(3,tid,nid,cw,cw);
+ return(atoi(cw));
+}
+int scmp_trs(int tid1,int nid1,int tid2,int nid2,int ln)/*Лес. сравнение двух поддеревьев: строение и равенство значений sid, v*/{
+ /*возвращает RC: 0 - OK*//*ln - номер уровня вызова - задавать - 1. для отладки.*/
+ /*сравнить атрибуты У1 У2 если не равны return 1.*/
+ /*printf("\n!scmp_trs!DEBUG!in. ln=%i! tid1=%i, nid1=%i, tid2=%i, nid2=%i.",ln,tid1,nid1,tid2,nid2);*/
+ char v1[128];char v2[128]; sget_attr(2,tid1,nid1,"0.",v1); sget_attr(2,tid2,nid2,"0.",v2); if(strcmp(v1,v2)!=0) return 11;
+ char sid1[28]; char sid2[28];sget_attr(4,tid1,nid1,"0.",sid1); sget_attr(4,tid2,nid2,"0.",sid2); if(strcmp(sid1,sid2)!=0) return 12;
+ /*кп1=get_chn(У1). кп2=get_chn(У2). если кп1<>кп2 return 2.*/int cn1=sget_chn(tid1,nid1); int cn2=sget_chn(tid2,nid2); if(cn1!=cn2) return 2;
+ /*если кп1=0 return 0.*/ if(cn1==0) return 0;
+ int ch1i; int ch2i; int RC;
+ int i;for(i=1;i<cn1+1;i++){
+  ch1i=sget_chi(tid1,nid1,i); ch2i=sget_chi(tid2,nid2,i);
+  RC=scmp_trs(tid1,ch1i,tid2,ch2i,ln+1); if(RC!=0) return RC;
+ };
+ return 0;
+}
+int sget_fpt(int tid,int nid,int i)/*Лес. выдаёт ид узла типа элемента сигнатуры под i-ым sig_e*/{
+  char cw[25]/*рабочая*/; 
+  /*получаем rid*/sprintf(cw,"%i.",i)/*путь к ребё*/;sget_attr(1,tid,nid,cw,cw)/*rid*/;
+  if(strcmp(cw,"sig_eF")==0) {sprintf(cw,"%i.2.",i)/*путь к типу*/;sget_attr(3,tid,nid,cw,cw); return(atoi(cw));}
+  else if(strcmp(cw,"sig_eI")==0) {sprintf(cw,"%i.1.",i)/*путь к типу*/;sget_attr(3,tid,nid,cw,cw); return(atoi(cw));}
+  else/*!!!попадание сюда означет необрабатываемый rid!*/{printf("\n!sget_fpt: Unknown rid='%s'. Abort!",cw);exit(EXIT_FAILURE);};
+}
+void sprt_chs(int tid, int nid)/*Лес. печатает (sid,v) детей заданного узла в порядке irn <12.01.14 - не используется!>*/{
+ int chi/*nid i-ого ребё*/;char sid[22]; char v[256];
+ int chn=sget_chn(tid,nid); if(chn==0) return;
+ /*printf("\n");*/
+ int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/
+  chi=sget_chi(tid,nid,i);sget_attr(4,tid,chi,"0.",sid);sget_attr(2,tid,chi,"0.",v); if(v[0]==0) printf(" <%s>",sid);else printf(" %s",v);
+ };
+}
+void sprt_subtreeL(int tid, int nid)/*Лес. выдаёт исходный текст под-дерева: печатает (v) листьев заданного узла в порядке irn. строка обрамляется*/{
+ int chi/*nid i-ого ребё*/; char v[256]; char sid[22];
+ int chn=sget_chn(tid,nid); 
+ if(chn==0) {sget_attr(2,tid,nid,"0.",v); sget_attr(4,tid,nid,"0.",sid); 
+  if(strcmp(sid,"String")==0) printf(" \"%s\"",v); else printf(" %s",v);return;
+ };
+ /*есть дети*/
+ int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/
+  chi=sget_chi(tid,nid,i); sprt_subtreeL(tid,chi);
+ };
+}
+void sprt_subtreeLD(int tid, int nid){/*Лес. выдаёт дамп под-дерева: xml-элемент (sid) со всей атрибутикой узла*/
+ int chi/*nid i-ого ребё*/; char sid[22]; int up; char rid[22]; char v[256]; int irn; int ref; int flg; int flg2; int type;
+  sget_attr(4,tid,nid,"0.",sid); up=sget_up(tid,nid); sget_attr(1,tid,nid,"0.",rid); sget_attr(2,tid,nid,"0.",v); irn=sget_irn(tid,nid); 
+  ref=sget_ref(tid,nid,"0."); flg=sget_flg(tid,nid,"0."); flg2=sget_flg2(tid,nid,"0."); type=sget_type(tid,nid,"0.");
+ int chn=sget_chn(tid,nid); 
+ /*запев*/printf("<%s tid='%i' nid='%i' up='%i' rid='%s' v='%s' irn='%i' ref='%i' type='%i' flg='%i' flg2='%i'",sid,tid,nid,up,rid,v,irn,ref,type,flg,flg2);
+ if(chn==0) {printf("/>"); return;} else printf(">");
+ /*есть дети*/
+ int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/
+  chi=sget_chi(tid,nid,i); sprt_subtreeLD(tid,chi);
+ };printf("</%s>",sid);return;
+}
+void fm_strcmp(char* arg1, char* arg2, char* res){/*сравнивает две строки и возвращает True|False*/
+ if(strcmp(arg1,arg2)==0) strcpy(res,"True"); else strcpy(res,"False");
+ return;
+}
+void fm_t2s(int tid, int nid, char* s)/*Лес. сериализует в строку s (v) листьев заданного узла в порядке irn. строчные значения обрамляются*/{
+ int chi/*nid i-ого ребё*/; char v[256]; char sid[22]; char V[256]/*накопитель текущей строки*/;
+ int chn=sget_chn(tid,nid); /*printf("\n!fm_t2s!DEBUG!tid=%i, nid=%i, s=<%s>.",tid,nid,s);*/
+ if(chn==0) {sget_attr(2,tid,nid,"0.",v); sget_attr(4,tid,nid,"0.",sid); 
+  if(strcmp(sid,"String")==0) sprintf(V," \"%s\"",v); else sprintf(V," %s",v); strcat(s,V); return;
+ };
+ /*есть дети*/
+ int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/
+  chi=sget_chi(tid,nid,i); fm_t2s(tid,chi,s);
+ };
+}
+void trm_t2s(int tid, int nid, char* s){/*Лес. trmf-узел. в строку s сериализует v ближайших узлов вниз от заданного узла в порядке irn. строчные значения не обрамляются*/
+ /*алгоритм:
+  -если значение в v есть выдаём значение с пробелом не обрамляя строку! 
+  <значения нет>
+  -если узел trmf, то выдаём trm_t2s(<его терм-1>) + trm_t2s(<его терм-лист>) --!!!как вызов ф-и
+  -ошибка - падаем.
+*/
+ int chi/*nid i-ого ребё*/; char v[256]; char wv[256]; char rid[22]; char V[256]/*накопитель текущей строки*/;
+ sget_attr(1,tid,nid,"0.",rid); sget_attr(2,tid,nid,"0.",v)/*!!!предполагаем что отсутствие значения даст ""*/;
+ if(v[0]!=0) {sprintf(V," %s",v); strcat(s,V); return;};
+ /*значения нет*/
+ if(strcmp(rid,"trmf")==0) {/*term l_p TermList r_p*/
+  int t1_id/*id вершины терма-1*/; /*получаем корень терма-1*/ sget_attr(3,tid,nid,"1.",wv); t1_id=atoi(wv);
+   trm_t2s(tid,t1_id,s); strcat(s," (");
+   int TL_id/*id вершины TermList*/; /*получаем корень TermList*/ sget_attr(3,tid,nid,"3.",wv); TL_id=atoi(wv);
+   int chn=sget_chn(tid,TL_id)/*количество детей*/;
+   int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/ chi=sget_chi(tid,TL_id,i); trm_t2s(tid,chi,s);};
+   strcat(s," )"); return;
+ };
+ /*узел не trmf*/printf("\n!trm_t2s:node tid=%i, nid=%i, rid=%s has NO VALUE. Abort!",tid,nid,rid);exit(EXIT_FAILURE);
+}
+void trm_cl_trmf_v(int tid, int nid){/*Лес. узел терма. назначает v="" у всех trmf узлов вниз от заданного узла.*/
+ /*алгоритм: обходим поддерево. если узел trmf назначаем v в "".*/
+ int chi/*nid i-ого ребё*/; char v0[1]=""/*назначаемое значение*/; char rid[22];
+ int chn=sget_chn(tid,nid)/*количество детей*/; if(chn==0) return;
+ sget_attr(1,tid,nid,"0.",rid);
+ if(strcmp(rid,"trmf")==0) sput_v(tid,nid,v0);
+ /*обработать детей*/
+ int i; for (i=1;i<chn+1;i++){/*обработать i-ого*/ chi=sget_chi(tid,nid,i); trm_cl_trmf_v(tid,chi);};
+ return;
+}
+int sys_get_ntn(){/*возвращает номер для нового дерева в лесу и накручивает счётчик.*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select ftrn from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 831 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sys_get_ntn-sel");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set ftrn = ftrn + 1 where id = 'YL'", ECPGt_EOIT, ECPGt_EORT);}
+#line 832 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sys_get_ntn-upd");
+ int ntn=wi1;
+ return ntn/*номер нового дерева в хранилище*/;
+} 
+int st_clone(int tid){/*делает копию дерева в лесу и возвращает его tid*/
+ wi1=sys_get_ntn()/*получаем номер нового дерева*/; wi2=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into dts ( tid , nid , up , sid , rid , v , irn , ref , type ) select $1  , nid , up , sid , rid , v , irn , ref , type from dts where tid = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 838 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_clone-ins");
+ return wi1;/*возвращаем номер клона*/
+}
+int cpin_subtree(int tid1,int nid1,int tid2,int flg){/*алес(Z). копирует поддерево (пд1) в дерево д2, устанавливая flg в flg. возвращет новый nid корня пд. up корня смысла не имеет!*/
+ /*Замечание-2. В Р-реализации у нас 4 фундаментальных колонки поддерживающих всё строение (Лес упор-дер): tid, nid, up, irn. 
+   Но реализация такова, что состав остальных атрибутов Р-модели задействован! Поэтому (Z)!
+ */
+ /*выделить пд1 флагом flg2 but flg*/flag2_subtree(tid1,nid1);
+ /*а)Скопировать пд1 в д2.*/
+ /*а1)Получить DELTA. Если макс(д2.nid) < мин(пд1.nid), то DELTA - 0; иначе DELTA = макс(д2) - мин(пд1)+1.
+   Получая при копировании к nid +DELTA каждый узел из пд1 не пересечётся с узлами д2.*/
+ /*Получить макс(д2.nid)*/wi1=tid2;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select max ( nid ) from dts where tid = $1 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 850 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("cpin_subtree-s-max");
+ int M2=wi;
+ /*Получить мин(пд1.nid)*/wi1=tid1;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and flg2 = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 853 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("cpin_subtree-s-min");
+ int m1=wi; int DELTA;
+ if(M2<m1) DELTA=0; else DELTA=M2-m1+1;
+ /*(а1*/
+ /*копируем выставляя flg*/wi=DELTA; wi1=tid1; wi2=tid2;wi3=flg;/*DELTA идёт в nid и up сохраняя строение в-себе-дерева. Конечно up корня смысла не имеет*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into dts ( tid , nid , up , sid , rid , v , irn , ref , type , flg ) select $1  , nid + $2  , up + $3  , sid , rid , v , irn , ref , type , $4  from dts where tid = $5  and flg2 = 1", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 858 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("cpin_subtree-ins-sel");
+ /*(а*/
+ return nid1+DELTA;
+}
+void del_subtree(int tid,int nid){/*удаляет поддерево помечая его flg2*/
+ /*выделить пд флагом flg2*/flag2_subtree(tid,nid);
+ wi1=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from dts where tid = $1  and flg2 = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 865 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("del_subtree-delete"); 
+ return;
+}
+void subst_stree(int tid1,int nid1,int tid2,int nid2, int flg){/*подставляет поддерево (пд1) с flg на место поддерева (пд2).*/
+ /*Замечание-1. Мы работаем с упорядоченными деревьями. На графах можно считать что упорядочены стрелки и тем самым переподключения стрелки достаточно для сохранения структуры упор-дер. 
+   Замечание-2. В Р-реализации у нас 4 фундаментальных колонки поддерживающих всё строение (Лес упор-дер): tid, nid, up, irn. 
+   Но реализация такова, что состав остальных атрибутов Р-модели задействован! Поэтому (Z)!
+ */
+ /*Скопировать пд1 в д2.*/int nnid1=cpin_subtree(tid1,nid1,tid2,flg);
+ /*Переставить нач стрелки из корня пд2 к корню копии пд1. Здесь лишь дублируем - удаление довершит.*/
+ int st2up=sget_up(tid2,nid2); int st2irn=sget_irn(tid2,nid2); sput_up(tid2,nnid1,st2up);  sput_irn(tid2,nnid1,st2irn);
+ /*Удалить пд2.*/del_subtree(tid2,nid2);
+ return;
+}
+int defc_subst(int tid){/*подставляет определения констант в термах (без фиксов) заданного предложения.*/
+ /*возвращает количество подстановок, 0 - не было.*/
+ /*!Мы в терме без фиксов! Это важно, т.к. мы ищем аргумент только в TermList! Реализ. Перебор флагом flg.*/
+ /*см. документацию.*/
+ int RC=0; int cnid/*текущий Ид1 - ид узла*/; int cnid_up/*его ап*/; int pid/*ид папы*/; int gpid/*ид деда*/; char ww[255]=""/*рабочая*/; char t[22]/*тип проверяемого*/; 
+ char Idv[22]/*значение Id*/; char def_id[22]/*значение Id определения*/; int stid/*ид исходника определения*/; int ttid/*ид странс определения*/; int tnid/*ид терма определения*/;
+ int dbg=0; if(dbg==1) printf("\n<defc_subst msg='!DEBUG! begin' tid='%i'>",tid);/**/
+ /*снимаем flg в предложении и выставляем по критерию sid='Id'*/wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 887 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("defc_subst-upd-flg-0");
+ strcpy(wc,"Id");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 1 where tid = $1  and sid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 889 "YL_db.pgc"
+ if(sqlca.sqlcode==100) goto end; if(sqlca.sqlcode!=0) YL_abort("defc_subst-upd-flg-1");
+ /*!!!Z:код ниже сделан на for цикле после подсчёта к-ва нужных узлов. +?А зачем ведь flg всё равно нужен? Возможно чтобы не делать count в цикле!?*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 891 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("defc_subst-sel_count");
+ int N=wi1;/*к-во Id-узлов*/
+ int i; for(i=1;i<N+1;i++){
+  wi=tid;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 895 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("defc_subst-sel-min"); 
+  cnid=wi1; 
+  /*а) Поиск узла (Пусть Ид1) Id на месте аргумента, являющегося константой-с-опред. Идея: Этот Ид1 будучи аргументом находится в TermList.
+  Критерий в дереве (КвД1) выбора Id для обработки: У1 - ид-аргумент: У1(.sid='Id' and .up.rid='trmi' and .up.up.rid='#trml')
+  Справочно. Для константы (см. док) мы получим "ref - tid декларации. type - ид узла сорта в декларации."
+  Критерий что Id наш: для константы в entities в def_id будет имя определения или Null. Пусть этот наш узел - ИдОп1.*/
+  /*получаем id родителя*/pid=sget_up(tid,cnid); /*получаем его rid*/ sget_attr(1,tid,pid,"0.",ww); if(strcmp(ww,"trmi")!=0) goto next;
+  /*получаем id деда*/gpid=sget_up(tid,pid); /*получаем его rid*/ sget_attr(1,tid,gpid,"0.",ww); if(strcmp(ww,"#trml")!=0) goto next;
+  /*КвД1 выполнено!*/ 
+  /*проверяем что наш*/
+  /*получаем значение Id*/sget_attr(2,tid,cnid,"0.",Idv);
+  if (e_exists_q(Idv,t)!=0) {printf("<defc_subst msg='!WARNING! Id %s does not exist in entities!'/>",Idv); goto next;}; /*странно - сущего нет!*/
+  if (strcmp(t,"const")!=0) {printf("<defc_subst msg='!WARNING! Id %s is not a constant!'/>",Idv); goto next;};/*странно - сущее есть, но не константа!*/
+  /*проверяем что определение есть*/
+  strcpy(wc,Idv); strcpy(wc1,"");
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select def_id from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 910 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("defc_subst-SD");
+  if (wc1[0]==0) goto next;/*определения нет!*/
+  strcpy(def_id,wc1)/*ИдОп1*/;
+  RC=RC+1; if(dbg==1) printf("\n!defc_subst!DEBUG! loop! const with def found: cnid=%i Id=%s def_id=%s.",cnid,Idv,def_id);
+  /*б) Получение указателя на терм определения в странс-предложении.
+   б1) Ищем в сущих определение с ИдОп1 и получаем tid исходника и nid терма.*/
+  strcpy(wc,def_id); 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid , expr from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 917 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("defc_subst-sel-t-e");
+  stid=wi; tnid=atoi(wc1);
+  /*б2)По tid исходника получаем tid странса.*/ttid=sget_strt(stid)/*это пока корень stid*/; ttid=sget_ref(stid,ttid,"0.");
+  /*в) Подстановка копии терма определения (КТО1) с flg=0 на место терма отца Ид1. Имеем: tid,pid - корень заменяемого терма, ttid,tnid - корень подставляемого терма.*/
+  subst_stree(ttid,tnid,tid,pid,0);
+  goto nextd;
+ next: 
+  /*снимаем флаг*/wi=tid; wi1=cnid;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 925 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("defc_subst-upd-flg-0");
+ nextd:;
+ };
+ /*кончились.*/
+ commit(); printf("\n<defc_subst msg='RESULT'>"); int srt=sget_strt(tid); sprt_subtreeL(tid,srt); printf("\n</defc_subst>");
+ end:
+ if(dbg==1) {printf("<defc_subst msg='!DEBUG! end' RC='%i'/>",RC);printf("</defc_subst>");};/**/
+ return RC;
+}
+int deff_subst(int tid){/*подставляет определения ф-й в термах (без фиксов) заданного предложения.*/
+ /*возвращает к-во приведений определений, 0 - не было.*/
+ /*!Мы в терме без фиксов! Это важно, т.к. мы ищем аргумент только в TermList! 
+ Реализ. Флажкование в принимающем дереве (tid): flg=1 - перебираемые Id для поиска подстановки, flg=2 - КТО (копия терма определения).*/
+ int RC=0; int cnid/*текущий у-н-о - ид узла*/; int cnid_up/*значение его ап*/; int pid/*ид папы*/; int gpid/*ид деда*/;
+ char ww[255]=""/*рабочая*/; char t[22]/*тип проверяемого*/; 
+ char Idv[22]/*значение Id ф-и*/; char def_id[22]/*значение Id определения*/;
+ /*printf("\n!deff_subst!DEBUG! begin tid=%i",tid);*/
+ /*Выделяем флагом все Id в предложении. Замечание. Все Id это много (в т.ч. это за пределами термов, но они отсекутся критерием).*/
+ /*flg=0 на всём дереве*/wi=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 944 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("deff_subst-upd-flg-0");
+ strcpy(wc,"Id");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 1 where tid = $1  and sid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 946 "YL_db.pgc"
+ 
+ if(sqlca.sqlcode==100) return 0/*могут быть термы без Id*/; if(sqlca.sqlcode!=0) YL_abort("deff_subst-upd-flg-1");
+ int stid/*ид исходника определения*/; int tnid/*ид терма определения*/; int Ilbch_nid/*nid Id_list_bch*/; int ttid/*ид странс определения*/;
+ int subnid /*корень заменяемого терма*/; int fpgn/*количество групп фп*/; int defstc/*корень копии поддерева определения в дереве подстановки*/;
+ /*цикл*/
+ loopcnid: wi1=tid;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 952 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("deff_subst-select-count-1");
+ if(wi==0) goto end;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 954 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("deff_subst-sel-min"); 
+  cnid=wi; 
+  /*(КУНО) Критерий узла начала обработки (у-н-о). у-н-о это Id узел: .v есть ф-я с определением и .up.rid='trmi' и .up.up.rid='trmf'.
+  Получаем для у-н-о: Idv, ttid - дерево странс определения, tnid - корень терма определения.*/
+  /*получаем id родителя*/pid=sget_up(tid,cnid); /*получаем его rid*/ sget_attr(1,tid,pid,"0.",ww); if(strcmp(ww,"trmi")!=0) goto next;
+  /*получаем id деда*/gpid=sget_up(tid,pid); /*получаем его rid*/ sget_attr(1,tid,gpid,"0.",ww); if(strcmp(ww,"trmf")!=0) goto next;
+  /*КУНО выполнено!*/ 
+  /*проверяем что наш*/
+  /*получаем значение Id*/sget_attr(2,tid,cnid,"0.",Idv);
+  if (e_exists_q(Idv,t)!=0) {printf("\n!deff_subst!WARNING! Id %s does not exist in entities!",Idv); goto next;}; /*странно - сущего нет!*/
+  if (strcmp(t,"func")!=0) {printf("\n!deff_subst!WARNING! Id %s is not a function!",Idv); goto next;};/*странно - сущее есть, но не функция!*/
+  /*проверяем что определение есть*/
+  strcpy(wc,Idv); strcpy(wc1,"");
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select def_id from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 967 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("deff_subst-SD");
+  if (wc1[0]==0) goto next;/*определения нет!*/
+  strcpy(def_id,wc1);
+  RC=RC+1; /*printf("\n!deff_subst!DEBUG! loop! function with def found: cnid=%i Id=%s def_id=%s.",cnid,Idv,def_id);*/
+  /*б) Получение указателя на терм определения в странс-предложении.
+   б1) Ищем в сущих определение с def_id и получаем stid, tnid, Ilbch_nid.*/
+  strcpy(wc,def_id); 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid , expr , fp_id from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 974 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("deff_subst-sel-t-e");
+  stid=wi; tnid=atoi(wc1); Ilbch_nid=wi1;
+  /*б2)По tid исходника получаем tid странса.*/ttid=sget_strt(stid)/*это пока корень stid*/; ttid=sget_ref(stid,ttid,"0.");
+  /*Определение. Узел подстановки (subnid) - корень заменяемого терма. 
+  Усмотрение. Пусть fpgn - количество групп фп (к-во детей узла Id_list_bch). Место узла подстановки (subnid): subnid на fpgn+1 выше у-н-о. 
+  Док-во. Один ап - до term(trmi) дальше столько апов по term(trmf) сколько групп фп в определении.
+  Вычисляем fpgn и получаем subnid.*/
+  fpgn=sget_chn(ttid,Ilbch_nid); subnid=cnid; int j;for(j=1;j<fpgn+2;j++) subnid=sget_up(tid,subnid);
+  /*Копируем терм определения в tid.*/defstc=cpin_subtree(ttid,tnid,tid,2)/*это КОРЕНЬ КОПИИ ТЕРМА ОПРЕДЕЛЕНИЯ (КТО) - и 2 его flg!*/;
+  /*Подключаем его корень к дереву так же как subnid.*/
+  int st2up=sget_up(tid,subnid); int st2irn=sget_irn(tid,subnid); sput_up(tid,defstc,st2up);  sput_irn(tid,defstc,st2irn);
+  /*Для каждого фп в Id_list_bch (пусть текущий - fpnid) Реал: два счётчика: группа, в группе. 
+  {Находим для fpnid в tid корень подставляемого терма (strnid) и подставляем(!) его на место _каждого_ вхождения фп в defstc.}*/
+  /*реал. первый счётчик - по группам фп, второй - внутри фп.*/
+  /*ид текущего trmf*/int cfnid=gpid/*nid первой группы - ид деда*/;
+  for(j=1;j<fpgn+1;j++){/*j - номер группы фп*/
+   /*получаем ид j-того Id_list*/int cIl_nid=sget_chi(ttid,Ilbch_nid,j)/*это пока Id_list_b*/; sget_attr(3,ttid,cIl_nid,"2.",ww); cIl_nid=atoi(ww);
+   /*получаем к-во фп в группе*/int cgfpn=sget_chn(ttid,cIl_nid);
+   int k;for(k=1;k<cgfpn+1;k++){/*k - номер фп в группе*/
+    /*получаем ИД K-ТОГО ФП*/int cfp_nid=sget_chi(ttid,cIl_nid,k);
+	/*находим терм подстановки (ФАКТИЧЕСКИЙ ПАРАМЕТР - factnid). мы в j-ой группе (её trmf в cfnid) и параметр k-ый.*/
+	sget_attr(3,tid,cfnid,"3.",ww); int factnid=atoi(ww)/*это пока #trml*/; factnid=sget_chi(tid,factnid,k);
+   loopfp:/*ищем в копии терма определения ссылку на текущий фп(type=0)*/wi1=tid; wi2=cfp_nid;
+    { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and ref = $2  and flg = 2 and type = 0", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 997 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("deff_subst-select-count-2");
+	if(wi==0) goto nextfp;
+    { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and ref = $2  and flg = 2 and type = 0", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 999 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("deff_subst-select-fpp");
+    int fpp=wi/*узел Id фп*/;fpp=sget_up(tid,fpp)/*теперь это его терм*/;
+	/*подставляем факт вместо фп*/subst_stree(tid,factnid,tid,fpp,0);
+	goto loopfp;
+    nextfp:;
+   };
+   /*сдвигаем текущий trmf*/cfnid=sget_up(tid,cfnid);
+  };
+  /*Удаляем терм subnid.*/del_subtree(tid,subnid);
+  goto loopcnid;
+ next: 
+  /*снимаем флаг*/wi=tid; wi1=cnid;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1011 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("deff_subst-upd-flg-0");
+ goto loopcnid;
+ /*кончились.*/
+ end:
+ commit(); printf("\n<deff_subst msg='RESULT'>"); int srt=sget_strt(tid); sprt_subtreeL(tid,srt); printf("\n</deff_subst>");
+ /*printf("\n!deff_subst!DEBUG! end RC=%i",RC);*/
+ return RC;
+}
+int st_trans(int tid){/*монитор. делает клон заданного предложения и приведение термов клона.*/
+ /*возвращает сумму RC 3х приведений (фиксов и 2х определений), 0 - приведений не было.*/
+ /*клонируется заданное предложение.*/int cn=st_clone(tid);
+ /*В ref корней размещаются ссылки.*/int rt=sget_strt(tid); sput_ref(tid,rt,cn); rt=sget_strt(cn); sput_ref(cn,rt,tid);
+ /*в клоне подставляются фиксы и определения.*/
+ int RC1=infx_subst(cn); int RC2=defc_subst(cn); int RC3=deff_subst(cn);
+ /*printf("\n<st_trans msg='RESULT!DEBUG!'>");sprt_subtreeLD(tid,rt); printf("\n</st_trans>");*/
+ return RC1+RC2+RC3;
+}
+int st_store(char* st_id/*in*/) /*ДРВ2ЛЕС. копирует поддерево (корень - st_id) в хранилище деревом (возвращает номер tr_id)*/{
+ int tr_id/*out*/;
+ /*1. Вызвать Получить узлы поддерева (вход:узел корня предложения, выход: ТН (_w)). */
+ get_nodes(st_id);/*в _w узлы поддерева*/
+ /*2. Поместить поддерево в хранилище: получить номер дерева.*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select ftrn from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1033 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-sel");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set ftrn = ftrn + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1034 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-upd");
+ tr_id=wi1/*номер дерева в хранилище*/;
+ loop: /*кроме корня остальное и остальные перекачиваются без изменений.*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from _w", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1037 "YL_db.pgc"
+ if (wi==0) goto end; /*Нет*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from _w", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1038 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-min");
+ /*записи дрв ТН узлов закатать в хранилище. --Это должно быть правильное дерево само-по-себе!*/
+ sprintf(wc,"%010i",wi); /*формируем ид- узла*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into dts ( tid , nid , up , sid , rid , v , irn ) select $1  , $2  , cast ( up as integer ) , sid , rid , v , irn from dt where id = $3 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1041 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-ins-dts");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from _w where nid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1042 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-delete");
+ goto loop;
+ end: /*Обработка нового корня: up, irn = Null.*/
+ wi=atoi(st_id);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set up = default , irn = default where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1046 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_store-update");
+ commit();
+ printf("\n<st_store Tree='%i' msg='added'>",tr_id); sprt_subtreeL(tr_id,wi);printf("</st_store>");
+ /*sprt_chs(tr_id,wi);*/
+ return tr_id;  
+}
+int check_prfx_call(int tidd,int sig_arg,int ref,int type)/*Лес. проверяет согласованность декларации и точки вызова для префикса*/{
+ /*(tidd,sig_arg) - узел sig_arg вызываемой ф-и, (ref,type) - узел типа фактического параметра*/
+ /*возвращает RC т.к. для спец преф возможны варианты: 0 - ОК, 1 - к-во фп ф-и не 1, 2 - типы не совпадают.*/
+ int cfpt/*узел типа текущего фп*/;
+ /*получаем к-во фп параметров*/int fpn=sget_chn(tidd,sig_arg);
+ if(fpn!=1) return 1;
+ /*сравниваем типы детей*/
+ cfpt=sget_fpt(tidd,sig_arg,1)/*получаем узел типа фп*/;
+ /*сравниваем деревья типов*/int RC=scmp_trs(tidd,cfpt,ref,type,1); if(RC!=0) return 2;
+ return 0;
+}
+int check_infx_call(int tidd,int sig_arg,int tidc1,int term1,int tidc2,int term2)/*Лес. проверяет согласованность декларации и точки вызова для инфикса*/{
+ /*(tidd,sig_arg) - узел sig_arg вызываемой ф-и, (tidc1,term1) (tidc2,term2) - узлы  типа фактических параметров*/
+ /*возвращает RC т.к. для спец инфикса возможны варианты: 0 - ОК, 1 - к-во фп ф-и не 2, 2 - тип первого не совпадает, 3 - тип второго не совпадает.*/
+ int cfpt/*узел типа текущего фп*/;
+ /*получаем к-во фп параметров*/int fpn=sget_chn(tidd,sig_arg);
+ if(fpn!=2) return 1;
+ /*сравниваем типы детей*/
+ /*получаем nid детей и длинные ссылки на их типы*/
+ cfpt=sget_fpt(tidd,sig_arg,1)/*получаем узел типа фп №1*/;
+ /*сравниваем деревья типов первой пары*/int RC=scmp_trs(tidd,cfpt,tidc1,term1,1); if(RC!=0) return 2;
+ cfpt=sget_fpt(tidd,sig_arg,2)/*получаем узел типа фп №2*/;
+ /*сравниваем деревья типов второй пары*/RC=scmp_trs(tidd,cfpt,tidc2,term2,1); if(RC!=0) return 3;
+ return 0;
+}
+char* check_call(int tidd,int sig_arg,int tidc,int TermList)/*Лес. проверяет согласованность декларации и точки вызова*/{
+ /*возвращает сообщение об ошибке либо ""*/
+ /*!!!Согласованность типов структурная и по Id, кроме случая когда фп имеет РВ тип с пустым ("") РВ. Такой фп совместив с любым фактическим параметром!*/
+ char cw[25]/*рабочая*/;
+ static char msg[128];int cfpt/*узел типа текущего фп*/; int ccvref/*дерево типа текущего факт пар*/; int ccvtype/*узел типа текущего факт пар*/;
+ int RC;
+ /*получаем и сравниваем к-во параметров*/int fpn=sget_chn(tidd,sig_arg); int cpn=sget_chn(tidc,TermList);
+ if(fpn!=cpn) {sprintf(msg,"!check_call:Number of fact and formal parameters must be the same but fpn=%i, cpn=%i, WFC(trmf-2-1)!",fpn,cpn); return &msg[0];};
+ /*сравниваем типы детей*/
+ int i; for (i=1;i<fpn+1;i++){/*обработать i-ых*/
+  /*получаем nid очередных детей и длинные ссылки на их типы*//*У sig_arg ребё всегда sig="sig_e", а если его rid="sig_eF", то sig_f в 2., а если rid="sig_eI", то Id в 1.*/
+  cfpt=sget_fpt(tidd,sig_arg,i)/*получаем узел типа фп*/;
+  /*получаем длинную ссылку типа факт пар*/
+  sprintf(cw,"%i.",i-1-cpn)/*путь к ребё*/;ccvref=sget_ref(tidc,TermList,cw);ccvtype=sget_type(tidc,TermList,cw);
+  /*сравниваем деревья типов*/
+  RC=scmp_trs(tidd,cfpt,ccvref,ccvtype,1);
+  if(RC!=0) {sprintf(msg,"!check_call:Types of fact and formal parameters must be the same: (tidd=%i,cfpt=%i), (ccvref=%i,ccvtype=%i), RC=%i, WFC(trmf-2-2)!",tidd,cfpt,ccvref,ccvtype,RC);
+  return &msg[0];};
+ };
+ msg[0]=0; return &msg[0];
+}
+int sget_pf(char* prfx,int ref,int type)/*Лес. по префиксу возвращает его ф-ю (tid её декларации)*/{
+ /*ф-я должна быть унарик и тип аргумента должен быть (ref,type). если не находим - ABORT это серьёзная ошибка рассогласования системы!*/
+ int ftid=0/*tid декларации ф-и*/;char cw[123]/*рабочая*/;int sig_arg;
+ strcpy(wc,prfx);
+ /* declare cprf cursor for select ref_f from infixes where v = $1  */
+#line 1102 "YL_db.pgc"
+
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "declare cprf cursor for select ref_f from infixes where v = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1103 "YL_db.pgc"
+
+ /* exec sql whenever not found  goto  cend ; */
+#line 1104 "YL_db.pgc"
+
+ loop: 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "fetch cprf", ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1106 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1106 "YL_db.pgc"
+
+ /*обрабатываем очередного претендента: совпадает ли тип аргумента с нашим?*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1108 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1108 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_pf-select-tid"); 
+ ftid=wi;/*получаем sig_arg от st - "1.3.1."*/int strt=sget_strt(ftid);sget_attr(3,ftid,strt,"1.3.1.",cw); sig_arg=atoi(cw);
+ /*унарик проверяется там*/
+ int RC=check_prfx_call(ftid,sig_arg,ref,type); if(RC==0) goto end;
+ goto loop;
+ cend:
+ /*не нашли. падаем.*/printf("\n!sget_pf: Prefix '%s' is used but not found in infixes tables. Abort!",prfx);exit(EXIT_FAILURE);
+ end:
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "close cprf", ECPGt_EOIT, ECPGt_EORT);}
+#line 1116 "YL_db.pgc"
+
+ /* exec sql whenever not found  continue ; */
+#line 1117 "YL_db.pgc"
+
+ return ftid;
+}
+int sget_if(char* infx,int ref1,int type1,int ref2,int type2)/*Лес. по инфиксу возвращает его ф-ю (tid её декларации) ЛИБО -9*/{
+ /*ф-я должна быть бинарик и типы аргументов должны быть (ref1,type1) (ref2,type2). если не находим - возвращаем -9 (типа RC)!*/
+ int ftid=0/*tid декларации ф-и*/;char cw[123]/*рабочая*/;int sig_arg;
+ /*!ищем ф-и приписанные инфиксу и выбираем подходящего типа аргументов*/
+ strcpy(wc,infx);
+ /* declare cinf cursor for select ref_f from infixes where v = $1  */
+#line 1125 "YL_db.pgc"
+
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "declare cinf cursor for select ref_f from infixes where v = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1126 "YL_db.pgc"
+
+ /* exec sql whenever not found  goto  cend ; */
+#line 1127 "YL_db.pgc"
+
+ loop: 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "fetch cinf", ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1129 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1129 "YL_db.pgc"
+
+ /*обрабатываем очередного претендента: совпадает ли тип аргумента с нашим? получаем tid ф-и*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where id = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1131 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1131 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sget_if-select-tid"); 
+ ftid=wi;/*получаем sig_arg от st - "1.3.1."*/int strt=sget_strt(ftid);sget_attr(3,ftid,strt,"1.3.1.",cw); sig_arg=atoi(cw);
+ /*бинарик проверяется там*/
+ int RC=check_infx_call(ftid,sig_arg,ref1,type1,ref2,type2); if(RC==0) goto end;
+ goto loop;
+ cend:
+ /*не нашли.*/printf("\n!sget_if!ERROR!: infix '%s' of this kind is used but not assigned.",infx);return -9;
+ end:
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "close cinf", ECPGt_EOIT, ECPGt_EORT);}
+#line 1139 "YL_db.pgc"
+
+ /* exec sql whenever not found  continue ; */
+#line 1140 "YL_db.pgc"
+
+ return ftid;
+}
+void type_tt(int tid,int rnid/*корень терма*/)/*Лес. обработка до типизации term-узлов у которых справа в правиле есть term*/{
+ /*в <>-скобках заметки при переходе на YL_NODE_DONE...*/
+ /*логика значений flg: мы начинаем с  <YL_NODE_DO> - надо обработать, и выставляем в <YL_NODE_DONE> - обработан. Назначаем <YL_NODE_POSTPONED> если не готов к обработке из-за детей.
+   До первой ошибки в YL_NODE_DO: сообщение в протокол, ref=-10, flg=YL_NODE_DONE, return.*/
+  /*Схема алгоритма.
+ #define YL_NODE_OD 0 зачение flg - узел не надо обрабатывать
+ #define YL_NODE_DO 1 /зачение flg - узел надо обработать/
+ #define YL_NODE_DONE 2 /зачение flg - узел обработан/
+ #define YL_NODE_POSTPONED 3 /зачение flg - обработка узла отложена/
+ Логика значений флажка: мы начинаем с YL_NODE_OD и YL_NODE_DO, по ходу обработаки появляются YL_NODE_DONE и YL_NODE_POSTPONED.
+ loop:
+ Ищем с YL_NODE_DO. если НЕТ то на end.
+ Если есть и реб с flg<>YL_NODE_DONE, то назначаем YL_NODE_POSTPONED и на loop. 
+ если нет обработчика то назначаем YL_NODE_POSTPONED и на loop.
+ обрабатываем.
+ если есть ошибка то сообщение, ref в -10, flg=YL_NODE_DONE и return. 
+ <Иначе> его flg в YL_NODE_DONE, ап (если он наш!), а в случае если ап - TermList, его ап(!) в YL_NODE_DO и на loop.
+ end:<в этой точке: YL_NODE_DO нет. если есть YL_NODE_POSTPONED(?) и обработчики все то что-то не так. если обработчики не все то ОК>
+ сообщить есть ли YL_NODE_POSTPONED. <любопытно - терм останется в лесу!>
+ return.
+ */
+ /*+$Алгоритм обработки не эффективен:
+   1. берём _произвольный_ узел с YL_NODE_DO. Если таких нет return ОК.
+   Если его нельзя обработать из-за детей выставляем ему YL_NODE_POSTPONED. На 1.
+   Обрабатываем и выставляем ему YL_NODE_DONE. Если он не корень выставляем его ап YL_NODE_DO (хотя другие дети могут быть ещё не обработаны!). На 1.
+ */
+ char cw[123]/*рабочая*/; char rid[22]; char sid[22]; char* msgw/*на сообщение об ошибке*/;
+ loop:/*получаем очередной с flg=YL_NODE_DO. НЕТ - на end.*/
+ wi1=tid; wi2=YL_NODE_DO;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and sid = 'term' and flg = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1172 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_tt-select-count-1"); 
+ if(wi==0) goto end;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and sid = 'term' and flg = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1174 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_tt-select-min");
+ /*обработка*/
+ int tnid=wi/*ид узла term0*/; /*получаем его rid*/ sget_attr(1,tid,tnid,"0.",rid);
+ if(strcmp(rid,"trmf")==0) /*term l_p TermList r_p*/{
+  /*получаем flg term-1*/int flg=sget_flg(tid,tnid,"1."); if(flg!=YL_NODE_DONE)/*term0 не готов*/ {sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*Все дети TermList обработаны?*/
+  sget_attr(3,tid,tnid,"3.",cw); int TermList=atoi(cw); flg=flg_all_done_q(tid,TermList); if(flg!=1)/*term0 не готов*/{sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*можно обрабатывать*/
+  /*получаем ref,type term-1*/int t1ref=sget_ref(tid,tnid,"1."); int t1type=sget_type(tid,tnid,"1.");
+  /*получаем sid типа term-1*/ sget_attr(4,t1ref,t1type,"0.",sid);
+  if(strcmp(sid,"sig_f")!=0) {printf("\n!type_tt: ERROR - term-1 of (%i,%i) must be functional but '%s', WFC(trmf-1-1)!",tid,tnid,sid); 
+  sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+  /*получаем nid sig_arg*/ sget_attr(3,t1ref,t1type,"1.",cw); int sig_arg=atoi(cw);
+  /*обрабатываем детей двух родителей: sig_arg и TermList*/
+  msgw=check_call(t1ref,sig_arg,tid,TermList); 
+  if(*msgw!=0){printf("\n!type_tt: ERROR - term-1 of (%i,%i) CALL is wrong>(%s)!",tid,tnid,msgw); sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+  /*назначаем term0 тип результата term-1*/
+  int t0type=sget_fpt(t1ref,t1type,3)/*мы в sig_f поэтому нужен тип 3-его ребёнка*/;sput_ref(tid,tnid,t1ref); sput_type(tid,tnid,t0type);
+  /*нормальное завершение обработки.*/ 
+  sput_flg(tid,tnid,YL_NODE_DONE); 
+  if (tnid!=rnid) {int pid=sget_up(tid,tnid); /*получаем sid ап*/sget_attr(4,tid,pid,"0.",cw);
+   /*шагаем за TermList*/if (strcmp(cw,"TermList")==0) pid=sget_up(tid,pid); sput_flg(tid,pid,YL_NODE_DO);}; 
+  goto loop;
+ };
+ if(strcmp(rid,"trmp")==0) /*l_p INFIX term r_p*/{/*получаем flg term-1*/int flg=sget_flg(tid,tnid,"3."); 
+  if(flg!=YL_NODE_DONE)/*term0 не готов*/ {sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*можно обрабатывать*/
+  /*получаем ref,type term-1*/int t1ref=sget_ref(tid,tnid,"3."); int t1type=sget_type(tid,tnid,"3.");
+  /*получаем а в случае спец префикса находим ref,type функции префикса (это sig_f)*/
+  int iref=sget_ref(tid,tnid,"2.");int itype=sget_type(tid,tnid,"2."); 
+  if(iref==0)/*спец префикс. добываем iref, itype*/{/*получаем префикс*/sget_attr(2,tid,tnid,"2.",cw);/*получаем tid декл ф-и префикса.*/int pfd=sget_pf(cw,t1ref,t1type);
+  /*назначаем iref,itype.*/iref=pfd; int rt=sget_strt(pfd); sget_attr(3,iref,rt,"1.3.",cw); itype=atoi(cw);};
+  /*получаем nid sig_arg*/ sget_attr(3,iref,itype,"1.",cw); int sig_arg=atoi(cw);
+  int RC=check_prfx_call(iref,sig_arg,t1ref,t1type);
+  if(RC!=0){printf("\n!type_tt: ERROR! term-1 of (%i,%i) CALL is wrong>RC(check_prfx_call)=%i!",tid,tnid,RC); sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+   /*назначаем длинный тип INFIX'у*/ /*получаем ид префикса*/sget_attr(3,tid,tnid,"2.",cw); int prid=atoi(cw);sput_ref(tid,prid,iref); sput_type(tid,prid,itype);
+   /*назначаем term0 тип результата INFIX*/
+   int t0type=sget_fpt(iref,itype,3)/*мы в sig_f поэтому нужен тип 3-его ребёнка*/;sput_ref(tid,tnid,iref); sput_type(tid,tnid,t0type);
+   /*нормальное завершение обработки.*/ 
+   sput_flg(tid,tnid,YL_NODE_DONE); 
+   if (tnid!=rnid) {int pid=sget_up(tid,tnid); /*получаем sid ап*/sget_attr(4,tid,pid,"0.",cw);
+    /*шагаем за TermList*/if (strcmp(cw,"TermList")==0) pid=sget_up(tid,pid); sput_flg(tid,pid,YL_NODE_DO);}; 
+   goto loop;
+ };
+ if(strcmp(rid,"trmin")==0) /*l_p term INFIX term r_p*/{/*получаем flg term-1*/int flg=sget_flg(tid,tnid,"2."); 
+  if(flg!=YL_NODE_DONE)/*term0 не готов*/ {sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*получаем flg term-2*/flg=sget_flg(tid,tnid,"4."); if(flg!=YL_NODE_DONE)/*term0 не готов*/ {sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*можно обрабатывать*/
+  /*получаем ref,type term-1*/int t1ref=sget_ref(tid,tnid,"2."); int t1type=sget_type(tid,tnid,"2.");
+  /*получаем ref,type term-2*/int t2ref=sget_ref(tid,tnid,"4."); int t2type=sget_type(tid,tnid,"4.");
+  /*получаем а в случае спец инфикса находим ref,type функции инфикса (это sig_f)*/
+  int iref=sget_ref(tid,tnid,"3.");int itype=sget_type(tid,tnid,"3."); 
+  if(iref==0)/*спец инфикс. добываем iref, itype*/{/*получаем инфикс*/sget_attr(2,tid,tnid,"3.",cw);/*получаем tid декл ф-и инфикса.*/int pfd=sget_if(cw,t1ref,t1type,t2ref,t2type);
+   if(pfd<0)/*не найден! возвращаем код ошибки!*/{sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;}; 
+   /*получаем iref,itype.*/iref=pfd; int rt=sget_strt(pfd); sget_attr(3,iref,rt,"1.3.",cw); itype=atoi(cw);};
+  /*получаем nid sig_arg*/ sget_attr(3,iref,itype,"1.",cw); int sig_arg=atoi(cw);
+  int RC=check_infx_call(iref,sig_arg,t1ref,t1type,t2ref,t2type);
+  if(RC!=0){printf("\n!type_tt: ERROR! term-1 or term-2 of (%i,%i) CALL is wrong>RC(check_infx_call)=%i!",tid,tnid,RC); sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+  /*назначаем длинный тип INFIX'у*/ /*получаем ид инфикса*/sget_attr(3,tid,tnid,"3.",cw); int prid=atoi(cw);sput_ref(tid,prid,iref); sput_type(tid,prid,itype);
+  /*назначаем term0 тип результата INFIX*/
+  int t0type=sget_fpt(iref,itype,3)/*мы в sig_f поэтому нужен тип 3-его ребёнка*/;sput_ref(tid,tnid,iref); sput_type(tid,tnid,t0type);
+   /*нормальное завершение обработки.*/ 
+   sput_flg(tid,tnid,YL_NODE_DONE); 
+   if (tnid!=rnid) {int pid=sget_up(tid,tnid); /*получаем sid ап*/sget_attr(4,tid,pid,"0.",cw);
+    /*шагаем за TermList*/if (strcmp(cw,"TermList")==0) pid=sget_up(tid,pid); sput_flg(tid,pid,YL_NODE_DO);}; 
+   goto loop;
+ };
+ if(strcmp(rid,"trma")==0 || strcmp(rid,"trme")==0) /*l_p <Q> Id COLON Id term r_p*/{/*получаем flg term-1*/int flg=sget_flg(tid,tnid,"6.");
+  if(flg!=YL_NODE_DONE)/*term0 не готов*/ {sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;};
+  /*можно обрабатывать*/
+  /*получаем ref,type term-1*/int t1ref=sget_ref(tid,tnid,"6."); int t1type=sget_type(tid,tnid,"6.");
+  /*Это должен быть TV*//*получаем sid типа*/sget_attr(4,t1ref,t1type,"0.",cw);
+  if(strcmp(cw,"Id")!=0) {printf("\n!type_tt: ERROR! term-1 of (%i,%i) must have type TV but type-sid='%s'!WFC(trmQ-4)",tid,tnid,cw); 
+  sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+  /*получаем v типа*/sget_attr(2,t1ref,t1type,"0.",cw);
+  if(strcmp(cw,"TV")!=0) {printf("\n!type_tt: ERROR! term-1 of (%i,%i) must have type TV but type-v='%s'!WFC(trmQ-4)",tid,tnid,cw); 
+  sput_ref(tid,tnid,-10); sput_flg(tid,tnid,YL_NODE_DONE); return;};
+  /*назначаем term0 тип term-1*/sput_ref(tid,tnid,t1ref); sput_type(tid,tnid,t1type);
+   /*нормальное завершение обработки.*/ 
+   sput_flg(tid,tnid,YL_NODE_DONE); 
+   if (tnid!=rnid) {int pid=sget_up(tid,tnid); /*получаем sid ап*/sget_attr(4,tid,pid,"0.",cw);
+    /*шагаем за TermList*/if (strcmp(cw,"TermList")==0) pid=sget_up(tid,pid); sput_flg(tid,pid,YL_NODE_DO);}; 
+   goto loop;
+ };
+ /*если нет обработчика то назначаем 2<YL_NODE_POSTPONED> и на loop.*/
+ printf("<type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! for term (%i,%i) no code for' rid='%s' />",tid,tnid,rid);
+ sput_flg(tid,tnid,YL_NODE_POSTPONED); goto loop;
+ end:
+ /*сообщить есть ли YL_NODE_POSTPONED.*/
+ wi1=tid; wi2=YL_NODE_POSTPONED;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and sid = 'term' and flg = $2 ", 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1264 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_tt-select-count-2"); 
+ if(wi!=0) {printf("<type_tt msg='!!!!!!!!!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!!!!!!!!!! term (%i,%i) has %i unprocessed nodes!' />",tid,rnid,wi);
+  /*DEBUG*/sprt_subtreeLD(tid,rnid);};
+ commit();
+ return;
+}
+int st_has_err(int tid)/*Лес. есть ли ошибки зафиксированные в ref в flg=YL_NODE_DONE узлах*/{
+ /*возвращает мин значение ref. Null->0. наличие ошибок возврат <0*/
+ /*!!!все ref могут быть Null, например если для "=" обработка отложена;-)*/
+ wi=tid; wi2=YL_NODE_DONE;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( coalesce ( ref , 0 ) ) from dts where tid = $1  and flg = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1274 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("st_has_err-select-min");
+ return wi1;
+}
+int trm_viss(int tid, int nid){/*у trmf-узла проверяет вди значения и возвращает: 0 - тип значения терма простой, 1 - ф-я.*/
+ /*получаем ref+type - ссылка на sig_e узел. если у него sid=Id рез-т простой, =sig_f - сложный, иначе сист-ош!*/
+ int ref=sget_ref(tid,nid,"0."); int type=sget_type(tid,nid,"0."); char sid[22]="";/*получаем rid*/sget_attr(4,ref,type,"0.",sid);
+ if(strcmp(sid,"Id")==0) return 0; if(strcmp(sid,"sig_f")==0) return 1;
+ /*сист-ош!*/printf("\n!trm_viss: sid='%s' is wrong! Abort! (tid=%i nid=%i ref=%i type=%i)",sid,tid,nid,ref,type);exit(EXIT_FAILURE);
+}
+void fm_chkv(int tid,int nid){/*дополнительные проверки терма на КСз (мода 6). код ошибки в ref*/
+ /*КСз: простое значение (эо, строка, число) или идентификатор первичной ф-и (в том числе 0-функции)*/
+ /*переформулировка на ДРВ: корень может иметь rid: trms, trmn, trmi. Остальные проверки в trmi_ideb.*/
+ char rid[22]="";/*получаем rid*/sget_attr(1,tid,nid,"0.",rid);
+ if(strcmp(rid,"trms")!=0 && strcmp(rid,"trmn")!=0 && strcmp(rid,"trmi")!=0) {printf("\n!fm_chkv:bad term rid (%s) for FM value. WFC(fm_chkv-1)",rid); sput_ref(tid,nid,-61);};
+ /*!приемлемость Id проверяется в trmi_ideb*/
+ return;
+}
+void fm_chkt(int tid,int nid, int fixN){/*дополнительные проверки терма на КСт (мода 4). код ошибки в ref*/
+ /*КСт: trmf-терм(здесь) без кванторов, фиксов(здесь) и свободных переменных, идентификаторы констант и функций которого первичны.*/
+ /*остальные проверки см. ОЯ*/
+ /*переформулировка на ДРВ: корень должен иметь rid: trmf...*/
+ char V[122]=""/*буфер значений*/; char rid[22]="";
+ /*получаем rid*/sget_attr(1,tid,nid,"0.",rid);
+ if(strcmp(rid,"trmf")!=0) {printf("\n!fm_chkt:bad term rid (%s) for FM term. WFC(fm_chkt-1)",rid); sput_ref(tid,nid,-41);};
+ if(fixN!=0) {printf("\n!fm_chkt:INFIX forbidden in FM term. WFC(fm_chkt-2)"); sput_ref(tid,nid,-42);};
+ return;
+}
+char* term_proc(int tid, int nid, int mod)/*Лес. полная обработка в лесу корневого терма: идентификация, связывание, типизация значащих узлов*/{
+ /*tid - ид дерева, nid - ид в дереве узла вершины корневого терма, 
+   mod - мода обработки: 1 - константный терм, 2 - терм определения ф-и, 3 - замкнутая формула, 4 - терм-1 (КСт) конечной модели, 5 - терм запроса, 6 - КСз.*/
+ /*возврат - указатель на сообщение, нулевое - ОК. Ошибки ищются в обработанных узлах с ref<0*/
+ /*!!!это собственно диспетчер обработчиков!!!*/
+ /*!!!в flag_subtree один раз выставляется флаг обработки на все узлы терма. обработчики не пересекаются по узлам, постепенно заменяя флаг узлов терма с 1 - "обработать" на 2 - "обработан"*/
+ /*!!!хороший узел получает ref>0 (trmQ_3 заносит 0), ошибочный <0, если обработка задержана остаётся Null*/
+ static char msg[256]=""; int mref/*мин значение ref*/;
+ /*выделяем дерево терма*/ flag_subtree(tid,nid);
+ /*обработка INFIX и их к-во*/ int fixN=infix_ideb(tid); /*обработка Id/trmi*/ trmi_ideb(tid,nid,mod); /*заменяем флаг у trmi узлов с 1 на 2*/trmi_deflag(tid);
+ /*обработка trmn узлов*/type_trmn(tid); /*обработка trms узлов*/type_trms(tid);
+ /*проверка сортов при кванторах. Id.irn=5*/ trmQ_5(tid); /*проверка переменных при кванторах. Id.irn=3*/ trmQ_3(tid);
+ /*обработка и типизация sid=term, flg=1. пропускаем если ошибки уже есть!*/ mref=st_has_err(tid); if(mref>=0) type_tt(tid,nid);
+ /*ОБРАБОТКА МОД*/
+ if (mod==1)/*константный терм*/ {};
+ /*WFC-6: правильно ф-но устроен*/
+ 
+ /*WFC-5: все листовые ид-аргументы - константы*/
+ 
+ /*WFC-8: В терме не должно быть кванторов.*/
+ 
+ if (mod==2) /*терм определения ф-и*/ {};
+ /*WFC-5: Согласованность строения форм-пар и сигнатуры декларации...*/
+ 
+ /*WFC-6: терм правильно ф-но устроен*/
+ 
+ /*WFC-7: состав свободных переменных терма должен совпадать с составом форм- параметров.*/
+ if (mod==3) /*замкнутая формула*/ {};
+ if (mod==4) /*КСт*/ fm_chkt(tid,nid,fixN);
+ if (mod==5) /* WFC(st-11-1) терм - замкнутый.*/ {};
+ if (mod==6) /*КСз*/ fm_chkv(tid,nid);
+ /*ЗАВЕРШЕНИЕ ОБРАБОТКИ*/
+ /*есть ли ошибки?*/
+ /*получить мин значение ref среди flg=YL_NODE_DONE в mref. Если ошибки были то ref<0 у некоторых узлов терма, т.е. где-то в предложении!*/
+ mref=st_has_err(tid); /*printf("\nterm_proc: DEBUG mref=%i.",mref);*/
+ /*если mref<0 сообщить*/
+ if (mref<0) {sprintf(msg,"!term_proc: term (%i,%i) has at least one error:%i!",tid,nid,mref); return &msg[0];};
+ /*иначе*/
+ msg[0]=0; return &msg[0];
+}
+void type_fpl(int tid,int Ilr,int sigf_t,int sa,int n)/*Лес. типизирует фп одного конкретного ()-списка*/{
+ /*у нас есть два семейства детей одинаковой длины (n). i-ому ребёнку Id_list (Ilr) надо ref=sigf_t, type=<от i-ого реба sig_arg (sa) добраться до sig_f или Id!>*/
+ char cw[123]/*рабочая*/; char cw2[123]/*рабочая*/; char cp[15]/*путь к ребё*/; char rid[22]; int type/*id узла декл с типом*/; int fpid/*nid очередного фп*/;
+ /*printf("\n!type_fpl!DEBUG! in: tid=%i Ilr=%i sigf_t=%i sa=%i n=%i.\n",tid,Ilr,sigf_t,sa,n);*/
+ int i; for (i=1;i<n+1;i++){/*обработать i-ых*/
+  /*у sig_e: rid='sig_eF' -> 1.2. от sa| rid='sig_eI' -> 1.1. от sa.*/
+  /*получаем id узла типа*/
+  /*формируем путь к текущему арг*/ 
+  sprintf(cp,"%i.",i);
+  /*получаем rid sig_e и формируем путь к узлу type*/
+  sget_attr(1,sigf_t,sa,cp,rid); 
+  if(strcmp(rid,"sig_eF")==0) strcpy(cw,"1.2.");
+  else if(strcmp(rid,"sig_eI")==0) strcpy(cw,"1.1.");
+  else {printf("\n!type_fpl:unexpected rid='%s'!ABORT",rid); exit(EXIT_FAILURE);};
+  /*получаем type*/
+  sget_attr(3,sigf_t,sa,cw,cw2); type=atoi(cw2);
+  /*получаем ид узла фп*/
+  sget_attr(3,tid,Ilr,cp,cw); fpid=atoi(cw);
+  wi=tid; wi1=fpid; wi2=sigf_t; wi3=type;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set ref = $1  , type = $2  where tid = $3  and nid = $4 ", 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1360 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_fpl-update-fp");
+ }
+}
+char* type_fps(int tid)/*Лес. типизирует фп заголовка определения ф-и связывая их с элементами сигнатуры декларации*/{ 
+ /*tid - ид дерева определения*/ /*не проверяем что дерево - опр-функ!*/
+ /*возвращает сообщение об ошибке либо пустое - ОК*/
+ static char msg[256]; char attrv[123]/*рабочая*/; char cw[123]/*рабочая*/; char Idf[22]/*Id ф-и*/;  char rid[22]; 
+ int flg /*состояние в конце шага цикла: 0 - есть продолжение у обоих...*/;
+ /*printf("\n!type_fps!DEBUG! in: tid=%i.",tid);*/
+ /*получаем корень дерева*/ int rt=sget_strt(tid);
+ /*получаем корень списка списков фп - Id_list_bch*/ sget_attr(3,tid,rt,"1.4.",attrv); int Ilbch=atoi(attrv);
+ /*получаем к-во Id_list_b списков*/ int IlbN=sget_chn(tid,Ilbch);
+ /*добываем корень сигнатуры ф-и*/ sget_attr(2,tid,rt,"1.3.",Idf)/*получаем ид ф-и*/;
+ /*получаем tid декларации*/
+ strcpy(wc,Idf);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid from entities where id = $1  and type = 'func'", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1375 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("type_fps-select");
+ int sigf_t=wi/*tid дерева сигнатуры*/;
+ /*получаем корень дерева*/ rt=sget_strt(sigf_t);
+ /*получаем корень сигнатуры ф-и - sig_f*/ sget_attr(3,sigf_t,rt,"1.3.",attrv); int sigf=atoi(attrv);
+ /*предусловие: tid - ид дерева определения, sigf_t - ид дерева декларации;
+ 				Ilbch - узел Id_list_bch в tid, sigf - узел корневого (в цикле - текущего) sig_f в sigf_t;*/
+ int Ilbi=1/*номер обрабатываемого Id_list_b из подвешенных к Id_list_bch*/;
+ loop:
+ printf("\n!type_fps!DEBUG! loop-in (IlbN=%i): Ilbi=%i (tid=%i Ilbch=%i) (sigf_t=%i sigf=%i)",IlbN,Ilbi,tid,Ilbch,sigf_t,sigf);
+ /*ОПРЕДЕЛЕНИЕ*/
+ /*формируем путь к текущему Id_list*/ sprintf(attrv,"%i.2.",Ilbi);
+ /*получаем ид Id_list*/ sget_attr(3,tid,Ilbch,attrv,cw); int Ilr=atoi(cw);
+ /*получаем к-во фп членов*/int Iln=sget_chn(tid,Ilr);
+ /*ДЕКЛАРАЦИЯ*/
+ /*получаем ид sig_arg*/ sget_attr(3,sigf_t,sigf,"1.",attrv); int sa=atoi(attrv);
+ /*получаем к-во арг членов*/ int san=sget_chn(sigf_t,sa);
+ if(Iln!=san) {printf("\n!type_fps: ERROR! Number %i of args in decl (tid=%i, nid=%i) <> number %i of fp in def (tid=%i, nid=%i)!",san,sigf_t,sa,Iln,tid,Ilr);
+  sprintf(msg,"type_fps: Bad news!"); return &msg[0];};
+ /*типизировать ()-список*/ type_fpl(tid,Ilr,sigf_t,sa,Iln);
+ /*синхронный шаг с проверками*/
+ /*фп (Id_list) ещё есть?*/
+ if(Ilbi==IlbN) flg=1/*НЕТ*/;else/*ДА*/ flg=0;
+ /*арги есть?*//*получаем rid у "3." от sigf. если sig_eF - есть. тогда берём узел "3.2."*/
+ sget_attr(1,sigf_t,sigf,"3.",rid);
+ if(strcmp(rid,"sig_eI")==0)/*НЕТ*/flg=flg+10;
+ /*здесь flg=1: фп нет, а арги есть; ЛИБО =0: фп есть и арги есть; 
+   ЛИБО  flg=11: фп нет и арги нет; ЛИБО =10: фп есть, а арги нет;*/
+ if(flg==11) /*оба состава кончились*/{msg[0]=0;return &msg[0];};
+ if(flg==1) {printf("\n!type_fps:!WARNING! Number of arg-sets in decl (tid=%i, nid=%i) > number of fp-sets (IlbN=%i) in def (tid=%i, nid=%i). flg=%i!",sigf_t,sa,IlbN,tid,Ilr,flg);
+  msg[0]=0; return &msg[0];};
+ if(flg==10) {printf("\n!type_fps:!ERROR! Number of arg-sets in decl (tid=%i, nid=%i) < number of fp-sets (IlbN=%i) in def (tid=%i, nid=%i). flg=%i!",sigf_t,sa,IlbN,tid,Ilr,flg);
+  sprintf(msg,"type_fps: Bad news!"); return &msg[0];};
+ /*получаем очередной sig_f*/
+ sget_attr(3,sigf_t,sigf,"3.2.",attrv); sigf=atoi(attrv);
+ Ilbi=Ilbi+1;
+ goto loop;
+}
+/*ОБРАБОТЧИКИ ПРЕДЛОЖЕНИЙ*/
+int sort_add(char *st_id, char *re) /*st_id - ид узла предложения, re - флаг наличия РВ (если не x00)*/{
+ char Id_v[122]/*значение нт Id*/; char String_v[122]/*для РВ*/;
+ get_attr(2,st_id,"1.2.",Id_v); char t[22]/*t - тип сущего если Id уже им занят*/;int en/*номер сущего*/;
+ if (e_exists_q(Id_v,t)==0) return 1;/*не порядок - сущее уже есть!*/
+ /*в лес*/
+ int tr_id=st_store(st_id); 
+ /*в сем-таб*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1420 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sort_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1421 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sort_add-2");
+ en=wi;
+ if (*re!=0) /*РВ есть*/ get_attr(2,st_id,"1.4.",String_v); else strcpy(String_v,"");
+ strcpy(wc,String_v); strcpy(wc1,Id_v); wi=en; wi2=tr_id;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , expr , tid ) values ( $1  , 'sort' , $2  , $3  , $4  )", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1425 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("sort_add-3");
+ commit(); return 0; /*ОК*/
+}
+int const_add(char *st_id, char *t) /*st_id - ид узла предложения, t - тип если уже есть*/{
+ char Id_v[122]/*значение нт Id*/; char st[22]; /*тип назначаемого как сорт*/
+ get_attr(2,st_id,"1.2.",Id_v); char Sort_v[122]; get_attr(2,st_id,"1.4.",Sort_v); 
+ if (e_exists_q(Id_v,t)==0) return 1;/*не порядок - сущее уже есть!*/
+ if (e_exists_q(Sort_v,st)!=0) return 2;/*не порядок - сущего для сорта нет!*/
+ if (strcmp(st,"sort")!=0) return 3;/*не порядок - сущее для сорта есть, но не сорт!*/
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ /*в сущие*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1437 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1438 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add-2");
+ strcpy(wc,Id_v); strcpy(wc1,Sort_v); wi1=tr_id;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , ref_r , tid ) values ( $1  , 'const' , $2  , $3  , $4  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1440 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add-3");
+ commit(); return 0; /*ОК*/
+}
+int f_add(char* st_id, int prime, char** msg)/*декларация ф-и.*/{
+ /*st_id - ид дрв обрабатываемого предложения, prime: 0 - нет, 1 - да без Сиф, 2 - да с Сиф; msg - для сообщений*/
+ char id[122]/*значение нт Id-1*/; char arg[22]/*ид- узла sig_arg*/; char res[22]/*ид- узла sig_res*/; char t[22]; /*тип проверяемого сущего*/
+ char sig_f[22] /*ид- узла sig_f*/; char cf[22]="" /*ид- Сиф если приписан prime*/;
+ static char err_msg_1[]="f_add:!ERROR! Id is already used! (WFC-1)";
+ static char err_msg_2[]="f_add:!ERROR! Not all Id are sorts! WFC(sig_eI)";
+ get_attr(2,st_id,"1.2.",id); get_attr(3,st_id,"1.3.1.",arg); get_attr(3,st_id,"1.3.3.",res);
+ /*(WFC-1) Все элементы теории должны иметь различные имена!*/
+ if (e_exists_q(id,t)==0) {*msg=&err_msg_1[0]; return 1;};/*не порядок - id занят!*/
+ /*begin доп ПРОВЕРКИ РАЗНОГО РОДА*/
+ /*WFC(sig_eI): Значение Id должно быть сортом, т.е. все ид в дереве вывода любого sig_f - сорта.*/
+ get_attr(3,st_id,"1.3.",sig_f);
+ if (check_sig_eI(sig_f)!=0) {*msg=&err_msg_2[0]; return 1;};/*не порядок!*/
+ if (prime==2) /*получаем ид Сиф*/get_attr(2,st_id,"1.5.",cf);
+ /*end доп ПРОВЕРКИ РАЗНОГО РОДА*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1458 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("f_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1459 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("f_add-2");
+ /*в wi порядковый номер создаваемого сущего*/
+ int ein=wi;
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ /*в сем-таб*/
+ /*корректируем prime в БД*/ if(prime==2) wi1=1; else wi1=prime;
+ strcpy(wc2,id); strcpy(wc,arg); strcpy(wc1,res); strcpy(wc3,""); wi2=tr_id; wi=ein; strcpy(wc4,cf);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ref_arg , ref_r , ein , prime , sers , tid , cf ) values ( $1  , 'func' , $2  , $3  , $4  , $5  , $6  , $7  , $8  )", 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc3),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc4),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1467 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("f_add-3");
+ commit(); 
+ return 0; /*ОК*/
+}
+char* const_add_d(char *st_id)/*"Def-1" Definition : DEFINITION Id Id constant term Dot*/{
+ /*Id-1 - уникальный идентификатор определения. Id-2 - уникальный идентификатор определяемого.*/
+ /*defid - Id определения, cid - Id константы, term - nid терма определения. возврат - указатель на сообщение*/
+ static char msg[256]="";
+ char t[22]/*тип проверяемого*/; char defid[22]; char cid[22]; char term[22];
+ get_attr(2,st_id,"1.2.",defid); get_attr(2,st_id,"1.3.",cid);  get_attr(3,st_id,"1.5.",term);
+ /*WFC-1: def_id не должен использоваться для сущего!*/
+ if (e_exists_q(defid,t)==0) {sprintf(msg,"const_add_d: Id %s is already used as %s!",defid,t); return &msg[0];}; /*не порядок - сущее уже есть!*/
+ /*WFC-2: А есть ли константа?*/
+ if (e_exists_q(cid,t)!=0) {sprintf(msg,"const_add_d: Id %s does not exist!",cid); return &msg[0];}; /*не порядок - сущего нет!*/
+ if (strcmp(t,"const")!=0) {sprintf(msg,"const_add_d: Id %s must be a constant!",cid); return &msg[0];};/*не порядок - сущее есть, но не константа!*/
+ /*WFC-3: проверяем что определения ещё нет!*/
+ strcpy(wc,cid); strcpy(wc1,"");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select def_id from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1484 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add_d-SD");
+ if (wc1[0]!=0) {sprintf(msg,"const_add_d: Constant %s already has definition %s!",cid,wc1); return &msg[0];};/*не порядок - определение уже есть!*/
+ /*в лес*/
+ int tr_id=st_store(st_id); 
+ /*обработка терма. идентиф и привязка*/
+ int termi=atoi(term);
+ char* msgw=term_proc(tr_id,termi,1); if (*msgw!=0) {st_del(tr_id); sprintf(msg,"const_add_d: can not add definition to theory. msg=(%s).",msgw); return &msg[0];};
+ /*заносим в сем-таб*/
+ strcpy(wc,defid); strcpy(wc1,cid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update entities set def_id = $1  where id = $2 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1493 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add_d-UE");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1494 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add_d-fenG");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1495 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add-fenU"); 
+ strcpy(wc,defid);  strcpy(wc2,term); wi1=tr_id; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , expr , tid ) values ( $1  , 'def' , $2  , $3  , $4  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1497 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("const_add_d-IE");
+ /*трансляция*/
+ int rc=st_trans(tr_id);/*DEBUG*/printf("\nconst_add_d(DEBUG)st_trans.rc=%i.",rc);
+ commit(); strcpy(msg,""); return &msg[0];
+}
+char* func_add_d(char *st_id) /*"Def-2"	| DEFINITION Id Id Id_list_bch COLON term Dot*/{
+ /*Функция термом с фп из Id_list_bch.*/
+ /*возврат - указатель на сообщение*/
+ char t[22]/*тип проверяемого*/; char defid[22]; char fid[22]; char lid[22]; char term[22]; 
+ /*defid - Id определения, fid - Id константы, lid - id узла списка форм- парам-, term - tid терма определения.*/
+ static char msg[256]="";
+ get_attr(2,st_id,"1.2.",defid); get_attr(2,st_id,"1.3.",fid); get_attr(3,st_id,"1.4.",lid); get_attr(3,st_id,"1.6.",term);
+ /*WFC-1: def_id не должен использоваться для сущего!*/
+ if (e_exists_q(defid,t)==0) {sprintf(msg,"func_add_d:!ERROR! Id %s is already used as %s!",defid,t); return &msg[0];}; /*не порядок - сущее уже есть!*/
+ /*WFC-2: А есть ли функция?*/
+ if (e_exists_q(fid,t)!=0) {sprintf(msg,"func_add_d:!ERROR! Id %s does not exist!",fid); return &msg[0];}; /*не порядок - сущего нет!*/
+ if (strcmp(t,"func")!=0) {sprintf(msg,"func_add_d:!ERROR! Id %s must be a function!",fid); return &msg[0];};/*не порядок - сущее есть, но не ф-я!*/
+ /*WFC-3: проверяем что определения ещё нет!*/
+ strcpy(wc,fid); strcpy(wc1,"");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select def_id from entities where id = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1516 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("func_add_d-SD");
+ if (wc1[0]!=0) {sprintf(msg,"func_add_d:!ERROR! Function %s has definition %s already!",fid,wc1); return &msg[0];};/*не порядок - определение уже есть!*/
+ /*проверяем форм пар*/char* msg1=def_chk_fp(lid); if (*msg1!=0) {sprintf(msg,"func_add_d>(%s).",msg1);  return &msg[0];};
+ /*в лес*/int tr_id=st_store(st_id);
+ /*типизация фп*/
+ char* msgw=type_fps(tr_id); if (*msgw!=0) {sprintf(msg,"func_add_d>(%s).",msgw); return &msg[0];};
+ /*обработка терма. идентиф и привязка*/
+ int termi=atoi(term);
+ msgw=term_proc(tr_id,termi,2); if (*msgw!=0) {st_del(tr_id); sprintf(msg,"func_add_d>(%s).",msgw); return &msg[0];};
+ /*заносим в сем-таб*/
+ strcpy(wc,defid); strcpy(wc1,fid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update entities set def_id = $1  where id = $2 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1527 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("func_add_d-UE");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1528 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("func_add_d-fenG");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1529 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("func_add_d-fenU"); 
+ strcpy(wc,defid);  strcpy(wc2,term); strcpy(wc3,lid); wi1=tr_id; 
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , expr , fp_id , tid ) values ( $1  , 'def' , $2  , $3  , $4  , $5  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc3),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1531 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("func_add_d-IE");
+ /*трансляция*/
+ int rc=st_trans(tr_id);/*DEBUG*/printf("\nfunc_add_d(DEBUG)st_trans.rc=%i.",rc);
+ commit(); strcpy(msg,""); return &msg[0];
+}
+char* a_i2f(char* st_id)/*Add infix String to Id Dot*/{
+ /*добавляет инфикс str к функции fid. Возвращает rc и msg.*/
+ static char msg[256] /*буфер сообщения*/;
+ char fid[22]/*ид ф-и*/; get_attr(2,st_id,"5.",fid); char str[22]/*инфикс*/; get_attr(2,st_id,"3.",str); char t[22]=""/*тип если fid занят*/;
+ /*(st-4-3-1) строка не может быть пустой.*/
+ if (*str==0) {sprintf(msg,"a_i2f: Infix can not be Null!"); return &msg[0];};
+ /*(st-4-5-1) Элемент теории, которому приписывается инфикс должен быть и быть ф-ей.*/
+ strcpy(wc2,fid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from entities where id = $1  and type = 'func'", 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1544 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-2");
+ if (wi==0) {sprintf(msg,"a_i2f: There is no such a function '%s'!",fid); return &msg[0];};
+ /*(st-4-5-2) Арность ф-и должна быть 1 или 2.*/ /*берём tid и в лес*/
+ strcpy(wc2,fid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select tid , cast ( ref_arg as integer ) from entities where id = $1 ", 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1548 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-sel-tid");
+ int tid=wi; int arg_nid=wi1/*ид узла sig_arg внутри дерева*/;
+ /*получаем к-во детей узла в лесу*/
+ int chn=sget_chn(tid,arg_nid);
+ if (chn!=1 && chn!=2) {sprintf(msg,"a_i2f: For infix function number of arguments must be 1 or 2!"); return &msg[0];};
+ /**/
+ /*проверяем что инфикс не занят для ф-и. Иначе insert упадёт из-за ПК!*/
+ strcpy(wc1,str); strcpy(wc2,fid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from infixes where v = $1  and ref_f = $2 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1556 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-1");
+ if (wi!=0) {sprintf(msg,"a_i2f:WARNING! This infix %s is already assigned to this function %s!",str,fid); return &msg[0];};
+ /*(st-4-3-4) Инфикс не может совпадать с именем элемента теории.*/
+ int flgb=e_exists_q(str,t); /*0 - занят и в t - тип*/
+ if (flgb==0 && strcmp(t,"infx")!=0) {sprintf(msg,"a_i2f: This infix '%s' is already used as '%s'!",str,t); return &msg[0];};
+ /*?спец-инфикс?*/
+ strcpy(wc1,str);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from sinfixes where v = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1563 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-sin");
+ if (wi!=0) goto sinfx;/*обходим часть проверок*/
+ /*обычный инфикс*/
+ /*(st-4-3-3) Обычный инфикс должен быть однозначен.*/
+ strcpy(wc1,str);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from infixes where v = $1 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1568 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-count_infx");
+ if (wi!=0) {sprintf(msg,"a_i2f: This infix '%s' must be unique!",str); return &msg[0];};
+ sinfx:
+ /*добавляем инфикс*/ /*printf("\nDEBUG. wc1=(%s), wc2=(%s).\n",wc1,wc2);*/
+ strcpy(wc1,str); strcpy(wc2,fid);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into infixes ( v , ref_f ) values ( $1  , $2  )", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1573 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("a_i2f-3");
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ commit(); 
+ msg[0]=0; return &msg[0]; /*ОК*/
+}
+char* axm_add(char *st_id) /*Axiom Id term Dot*/{
+ static char msg[256]=""/*заточено на ОК*/;
+ char t[22]; char c[22]; char s[22];/*c - Id аксиомы, s - ид- узла терма, t - тип если уже есть*/
+ get_attr(2,st_id,"2.",c); get_attr(3,st_id,"3.",s);
+ /*WFC(st-5-0) Id - ещё не используется в эт.*/
+ if (e_exists_q(c,t)==0)/*не порядок - сущее уже есть!*/
+ {sprintf(msg,"axm_add: Id %s is already used as %s! WFC(st-5-0)",c,t); return &msg[0];};
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ int termi=atoi(s);
+ /*WFC(st-5-1) term - замкнутая формула!*/
+ char* msgw=term_proc(tr_id,termi,3); if (*msgw!=0) {st_del(tr_id); sprintf(msg,"axm_add: can not add axiom to theory. in-msg=(%s). WFC(st-5-1)",msgw); return &msg[0];};
+ /*в сущие*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1592 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("axm_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1593 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("axm_add-2");
+ strcpy(wc,c); strcpy(wc1,s); wi1=tr_id;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , expr , tid ) values ( $1  , 'axi' , $2  , $3  , $4  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1595 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("axm_add-3"); 
+ /*трансляция*/
+ int rc=st_trans(tr_id);/*DEBUGprintf("\naxm_add(DEBUG)st_trans.rc=%i.",rc);*/
+ commit(); msg[0]=0;
+ return &msg[0];
+}
+void prt_store(int mod){/*mod=1 выдаёт всё содержимое леса в Y!L виде и с tid. mod=0 выдаёт !0! и "исходники" содержимого леса в Y!L виде, т.е. трансляции не выдаются*/
+ /*printf("\n<DTS msg='dump begin'>");*/
+ /* declare prtsc cursor for select tid , nid , coalesce ( ref , 0 ) from dts where up is null order by tid */
+#line 1603 "YL_db.pgc"
+
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "declare prtsc cursor for select tid , nid , coalesce ( ref , 0 ) from dts where up is null order by tid", ECPGt_EOIT, ECPGt_EORT);}
+#line 1604 "YL_db.pgc"
+
+ /* exec sql whenever not found  goto  cend ; */
+#line 1605 "YL_db.pgc"
+
+ if(mod==0) printf("\n!0!");
+ loop: 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "fetch prtsc", ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi2),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi3),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1608 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1608 "YL_db.pgc"
+
+  int ctid=wi1; int cnid=wi2; int ref=wi3; 
+  /*выдаём очередное дерево*/ 
+  if(mod==1) {printf("\n%04i ",ctid); sprt_subtreeL(ctid,cnid);}; 
+  if(mod==0 && (ref==0 || ref>ctid)) {printf("\n"); sprt_subtreeL(ctid,cnid)/*признак исходника - ref есть и вперёд на трансляцию*/;};
+ goto loop;
+ cend:
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "close prtsc", ECPGt_EOIT, ECPGt_EORT);}
+#line 1615 "YL_db.pgc"
+
+ /* exec sql whenever not found  continue ; */
+#line 1616 "YL_db.pgc"
+
+ /*printf("\n</DTS>");*/
+}
+void prt_fmtv(){/*выдаёт fm_tv в виде команд загрузки*/
+ printf("\n--fm_tv dump begins-----------------------------------------");
+ /* declare prtfmtv cursor for select t , v from fm_tv order by t */
+#line 1621 "YL_db.pgc"
+
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "declare prtfmtv cursor for select t , v from fm_tv order by t", ECPGt_EOIT, ECPGt_EORT);}
+#line 1622 "YL_db.pgc"
+
+ /* exec sql whenever not found  goto  cend ; */
+#line 1623 "YL_db.pgc"
+
+ loop: 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "fetch prtfmtv", ECPGt_EOIT, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);
+#line 1625 "YL_db.pgc"
+
+if (sqlca.sqlcode == ECPG_NOT_FOUND) goto cend;}
+#line 1625 "YL_db.pgc"
+
+  /*выдаём очередную парочку*/printf("\n!%s:%s!",wc,wc1);
+ goto loop;
+ cend:
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "close prtfmtv", ECPGt_EOIT, ECPGt_EORT);}
+#line 1629 "YL_db.pgc"
+
+ /* exec sql whenever not found  continue ; */
+#line 1630 "YL_db.pgc"
+
+
+}
+int doc(char *cc/*номер команды*/)/*обработка команд YL: 0 - инициализация СИСТЕМЫ, 1 - выдача всего леса с номерами деревьев, 2 - выдача !0!, исходников леса и значений термов*/{
+ if (*cc=='0') /*очистка БД*/
+ {{ ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from entities", ECPGt_EOIT, ECPGt_EORT);}
+#line 1635 "YL_db.pgc"
+ 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from infixes", ECPGt_EOIT, ECPGt_EORT);}
+#line 1636 "YL_db.pgc"
+ 
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from dts", ECPGt_EOIT, ECPGt_EORT);}
+#line 1637 "YL_db.pgc"
+
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from fm_tv", ECPGt_EOIT, ECPGt_EORT);}
+#line 1638 "YL_db.pgc"
+
+  /*EXEC SQL vacuum; после него команды не работают:-(*/
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = 1 , ftrn = 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1640 "YL_db.pgc"
+
+  commit();
+  /*printf("\nDEBUG.doc.before return 0\n");*/
+  return 0;} 
+ else if(*cc=='1') {prt_store(1); return 0;}
+ else if(*cc=='2') {prt_store(0); prt_fmtv(); return 0;}
+ ;
+ return 1;
+}
+char* fmca_proc(char *st_id)/*e_m Id Id e_m*/{
+ /*st_id - ид узла предложения*//*Добавление эл-та Id-1 в основу Id-2.*/
+ static char msg[256]="";
+ char Id_v[122]/*значение нт Id-1*/; char Id2_v[122]/*значение нт Id-2*/; char st[22]; /*рабочая для типов*/
+ get_attr(2,st_id,"2.",Id_v); get_attr(2,st_id,"3.",Id2_v); 
+ /*printf("\n!fmca_proc!DEBUG! Id_v=%s, Id2_v=%s, df_nidc=%s\n",Id_v,Id2_v,df_nidc);*/
+ /*- WFC(fmca-0) Id-1 (эо) должен отличаться от эт. В том числе от констант!*/
+ if (e_exists_q(Id_v,st)==0)/*не порядок - сущее уже есть!*/{sprintf(msg,"fmca_proc: Id %s is already used as %s! WFC(fmca-d-1):-(",Id_v,st); return &msg[0];};
+ /*- WFC(fmca-2): Id-2 должен быть в эт и быть сорт.*/
+ if (e_exists_q(Id2_v,st)!=0)/*не порядок - сущего для сорта нет!*/{sprintf(msg,"fmca_proc: Sort %s is missing! WFC(fmca-2):-(",Id2_v); return &msg[0];};
+ if (strcmp(st,"sort")!=0)/*не порядок - сущее для сорта есть, но не сорт!*/{sprintf(msg,"fmca_proc: %s is not a sort! WFC(fmca-2):-(",Id2_v); return &msg[0];};
+ /*WFC(fmca-1): Если он есть в какой-либо основе (в том числе Id-2) - ОШИБКА.*/
+ int w=get_pcm(Id_v);
+ if (w!=0) {sprintf(msg,"fmca_proc: %s is already used as pcm! WFC(fmca-1):-(",Id_v); return &msg[0];};
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ commit(); msg[0]=0; return &msg[0]; /*ОК*/
+}
+char* fmcd_proc(char *st_id)/*e_m Id e_m*/{
+ /*st_id - ид узла предложения*//*Удаление эл-та Id-1 из основы.*/
+ static char msg[256]="";
+ char Id_v[122]/*значение нт Id*/; char st[22]; /*рабочая для типов*/
+ get_attr(2,st_id,"2.",Id_v);
+ /*printf("\n!fmcd_proc!DEBUG! Id_v=%s, Id2_v=%s, df_nidc=%s\n",Id_v,Id2_v,df_nidc);*/
+ /*WFC(fmcd-1) Если он не обнаружен в основах - ОШИБКА.*/
+ int w=get_pcm(Id_v);
+ if (w==0) {sprintf(msg,"fmcd_proc:ERROR! %s is not used as pcm! WFC(fmcd-1):-(",Id_v); return &msg[0];};
+ /*WFC(fmcd-2) Если он не изолирован - ОШИБКА.*/
+ wi=w;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where sid = 'Id' and ref = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1678 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("fmcd_proc-1");
+ if (wi1!=0) {sprintf(msg,"fmcd_proc:ERROR! %s is used as pcm %i times! WFC(fmcd-2):-(",Id_v,wi1); return &msg[0];};
+ /*из леса*/
+ st_del(w);
+ commit(); msg[0]=0; return &msg[0]; /*ОК*/
+}
+int fm_tGetv(char* t,char* v){/*ищет в КС значение для сериализации терма t и помещает в v. возвращает RC: 0 - ОК, 1 - нет значения.*/
+ strcpy(wc,t);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from fm_tv where t = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1686 "YL_db.pgc"
+
+ if(sqlca.sqlcode==0){strcpy(v,wc1); return 0;};
+ if(sqlca.sqlcode==100) {printf("\n!fm_tGetv!WARNING! FM-term '%s' is absent!",t); return 1;};
+ YL_abort("fm_tGetv-sel-v"); 
+}
+void fm_td(){/*КС. удаление значения терма. сериализация в wc!*/
+ /*ищем по серализации*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from fm_tv where t = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1693 "YL_db.pgc"
+
+ if(sqlca.sqlcode==0){{ ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from fm_tv where t = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1694 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("fm_td-upd");}
+ else if(sqlca.sqlcode==100) {printf("\n!fm_td!WARNING! FM-term '%s' is absent!",wc);}
+ else YL_abort("fm_td-sel-v"); 
+ commit();
+ return;
+}
+char* fmtd_proc(char *st_id)/*обработка предложения fmtd: e_m term COLON e_m*/{
+ /*st_id - ид узла предложения в ДРВ*/
+ /*терм-1 проверяется как модельный (КСт) (mod=4). см. ОЯ.*/
+ static char msg[256]="" /*буфер сообщения*/; char V[122]=""/*буфер значений*/;
+ int RC=0 /*накопитель к-ва ошибок*/;
+ /*!!!мы сразу переходим в лес!!!*/
+ int tr_id=st_store(st_id); int snid=atoi(st_id)/*nid корня дерева*/;
+ int t1_id/*id вершины терма-1*/; /*получаем корень терма-1*/ sget_attr(3,tr_id,snid,"2.",V); t1_id=atoi(V);
+ /*!обработка модельного терма-1*/  char* msgw=term_proc(tr_id,t1_id,4); if (*msgw!=0) {printf("\n!fmtd_proc:term_proc-1:(%s).",msgw); RC=1;};
+ if(RC!=0) {sprintf(msg,"!fmtd_proc:bad term-1!"); st_del(tr_id); return &msg[0];};
+ /*сериализуем терм-1*/wc[0]=0; fm_t2s(tr_id,t1_id,wc); 
+ if(strlen(wc)>YL_STRING_BUF_LEN-1) {sprintf(msg,"!fmtd_proc:serialization length > %i",YL_STRING_BUF_LEN-1); st_del(tr_id); return &msg[0];};
+ printf("\n!fmtd_proc!DEBUG! term-1 serialized: '%s'",wc);
+ /*!сериализация КСт находится в wc*/
+ /*удаляем из КС*/fm_td();
+ /*удаляем дерево из леса*/st_del(tr_id);
+ printf("\n!fmtd_proc!DEBUG! end!");
+ return &msg[0];
+}
+void fm_tvupd(char* val){/*КС. добавление/обновление значения терма. сериализация в wc!*/
+ /*ищем по серализации*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select v from fm_tv where t = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1721 "YL_db.pgc"
+
+ strcpy(wc1,val);
+ if(sqlca.sqlcode==0){{ ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update fm_tv set v = $1  where t = $2 ", 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1723 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("fm_tvupd-upd");}
+ else if(sqlca.sqlcode==100) {/*вставляем*/{ ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into fm_tv ( t , v ) values ( $1  , $2  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1724 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("fm_tvupd-ins");}
+ else YL_abort("fm_tvupd-sel-v"); 
+ commit();
+ return;
+}
+char* fmta_proc(char *st_id)/*e_m term COLON term e_m*/{
+ /*st_id - ид узла предложения в ДРВ*/
+ /*терм-1 проверяется как модельный (КСт) (mod=4), терм-2 как КСз. см. ОЯ.*/
+ int dbg=0;
+ static char msg[256]="" /*буфер сообщения*/; char V[122]=""/*буфер значений*/; char wv[122]=""/*значение терма*/; /*static char ws[YL_STRING_BUF_LEN]=""*//*буфер сериализации в БД 1023*/; 
+ int RC=0 /*накопитель к-ва ошибок*/;
+ if(dbg!=0) printf("\n<fmta_proc msg='!DEBUG!begin!'>");
+ /*!!!мы сразу переходим в лес!!!*/
+ int tr_id=st_store(st_id); int snid=atoi(st_id)/*nid корня дерева*/;
+ int t1_id/*id вершины терма-1*/; /*получаем корень терма-1*/ sget_attr(3,tr_id,snid,"2.",V); t1_id=atoi(V);
+ /*!обработка модельного терма-1*/  char* msgw=term_proc(tr_id,t1_id,4); if (*msgw!=0) {printf("\n<fmta_proc msg=':term_proc-1:(%s).'/>",msgw); RC=1;};
+ int t2_id/*id вершины терма-2*/; /*получаем корень терма-2*/ sget_attr(3,tr_id,snid,"4.",V);t2_id=atoi(V);
+ /*!обработка модельного терма-2*/ msgw=term_proc(tr_id,t2_id,6); if (*msgw!=0) {printf("\n<fmta_proc msg=':term_proc-2:(%s).'/>",msgw); RC=RC+1;};
+ if(RC!=0) {sprintf(msg,"!fmta_proc:number of bad terms is %i!",RC); st_del(tr_id); return &msg[0];};
+ /*!проверка совпадения типов рез-та КСт и КСз*/
+ int t1_ref=sget_ref(tr_id,t1_id,"0."); int t1_type=sget_type(tr_id,t1_id,"0."); int t2_ref=sget_ref(tr_id,t2_id,"0."); int t2_type=sget_type(tr_id,t2_id,"0.");
+ /*сравниваем деревья типов*/RC=scmp_trs(t1_ref,t1_type,t2_ref,t2_type,1);  
+ if(RC!=0) {sprintf(msg,"!fmta_proc: types not equ. RC=%i!WFC(fmta_proc-1)",RC); st_del(tr_id); return &msg[0];};
+ /*сериализуем терм-1*/wc[0]=0; fm_t2s(tr_id,t1_id,wc); 
+ if(strlen(wc)>YL_STRING_BUF_LEN-1) {sprintf(msg,"!fmta_proc:serialization length > %i",YL_STRING_BUF_LEN-1); st_del(tr_id); return &msg[0];};
+ if(dbg!=0) printf("\n<fmta_proc msg='!DEBUG! term-1 serialized:%s'/>",wc);
+ /*получаем значение КСз*/sget_attr(2,tr_id,t2_id,"1.",wv);
+ /*получаем сорт КСз*/sget_attr(2,t2_ref,t2_type,"0.",V); 
+ /*если тип значения - S, добавляем кавычки*/if(strcmp(V,"S")==0) {strcpy(V,"\"");strcat(V,wv);strcat(V,"\"");strcpy(wv,V);};
+ /*!сериализация КСт находится в wc, значение КСз - в wv*/
+ /*обновляем КС*/fm_tvupd(wv);
+ /*удаляем дерево из леса*/st_del(tr_id);
+ if(dbg!=0) printf("\n</fmta_proc>");
+ msg[0]=0; return &msg[0];
+}
+int fm_cgetFirst(char* sort){/*выдаёт tid первого элемента сорта, 0 - пусто*/
+ /*для перебора предложения состава сорта считаем упорядоченными по tid!*/
+ strcpy(wc,sort);
+ /*п.п. min не найдя будет выдавать какое-то дурацкое число типа суперминимум! = INT_MIN т.к. у нас отключена индикация Null*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( r . tid ) from dts r , dts ch where r . up is null and r . rid = 'fmca' and ch . tid = r . tid and ch . up = r . nid and ch . irn = 3 and ch . v = $1 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1763 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("fm_cgetFirst-sel-min"); 
+ if(wi1<0) return 0; return wi1;
+}
+int fm_cgetNext(char* sort,int cur){/*выдаёт tid следующего элемента сорта, 0 - нет*/
+ strcpy(wc,sort); wi=cur;
+ /*п.п. min не найдя будет выдавать какое-то дурацкое число типа суперминимум! = INT_MIN т.к. у нас отключена индикация Null*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( r . tid ) from dts r , dts ch where r . up is null and r . rid = 'fmca' and ch . tid = r . tid and ch . up = r . nid and ch . irn = 3 and ch . v = $1  and r . tid > $2 ", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1769 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("fm_cgetNext-sel-min"); 
+ if(wi1<0) return 0; return wi1;
+}
+void fm_cGetv(int tid,char* v){/*выдаёт значение заданного элемента п.п. сорта*/
+ sget_attr(2,tid,sget_strt(tid),"2.",v);
+}
+int infx_subst(int tid)/*подстановка всех INFIX в заданном предложении. перебор через flg*/{
+ /*возвращает: 0 - подстановки не было, 1 - подстановка была.*/
+ /*см. документацию.*/
+ int RC=0; int cnid/*текущий инфикс - ид узла*/; int Iirn/*irn INFIX: 2 - префикс, 3 - инфикс*/; char val[22]/*рабочая*/; char fId[22]/*имя ф-и*/;
+ /*printf("\n!infx_subst!DEBUG! begin tid=%i",tid);*/
+ /*снимаем flg в предложении и выставляем у INFIX*/wi=tid; strcpy(wc,"INFIX");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1781 "YL_db.pgc"
+  if (sqlca.sqlcode!=0) YL_abort("infx_subst-upd-flg-0");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 1 where tid = $1  and sid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1782 "YL_db.pgc"
+ if(sqlca.sqlcode==100) goto end; if(sqlca.sqlcode!=0) YL_abort("infx_subst-upd-flg-1");
+ RC=1;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select count ( * ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1784 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("infx_subst-sel_count");
+ int N=wi1;/*к-во INFIX*/
+ int i; for(i=1;i<N+1;i++){
+  wi=tid;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select min ( nid ) from dts where tid = $1  and flg = 1", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1788 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("infx_subst-sel-min"); 
+  cnid=wi1; Iirn=sget_irn(tid,cnid);
+  /*printf("\n!infx_subst!DEBUG! loop cnid=%i Iirn=%i.",cnid,Iirn);*/
+  /*получаем ссылку на ф-ю и её атриб*/int ftid=sget_ref(tid,cnid,"0.")/*tid декларации ф-и*/; int frt=sget_strt(ftid); 
+  sget_attr(3,ftid,frt,"1.3.",val); int ftype=atoi(val)/*sig_f*/; sget_attr(2,ftid,frt,"1.2.",fId);
+  /*обрабатываем очередной INFIX.*/
+  /*получаем id родителя*/int pid=sget_up(tid,cnid);
+  /*заменяем родителю rid. больше ничего у него менять не нужно!*/sput_rid(tid,pid,"trmf");
+  /*назначить INFIX irn=0 для соблюдения строения дерева и откладывая удаление чтобы не связываться с курсором!*/sput_irn(tid,cnid,0);
+  /*ДЕЛАЕМ НОВЫЕ НО up у term-0 и TermList НЕ НАЗНАЧЕМ. чтобы не мешать перестройке старого дерева*/
+  /*term-0(новый): rid=trmi, sid=term, irn=1, v=Null; ref=#ftid, type=#ftype. структурные: tid=#tid, nid=NEW-1, up=#pid.*/
+  int t0=scrt_node(tid,"term","trmi",""); sput_irn(tid,t0,1); sput_ref(tid,t0,ftid); sput_type(tid,t0,ftype);
+  /*Id(INFIX)(новый): rid=Null, sid=Id, irn=1, v=<Id f>; ref=#ftid, type=#ftype. структурные: tid=#tid, nid=NEW-2, up=NEW-1.*/
+  int Idnid=scrt_node(tid,"Id","",fId); sput_irn(tid,Idnid,1); sput_ref(tid,Idnid,ftid); sput_type(tid,Idnid,ftype); sput_up(tid,Idnid,t0);
+  /*TermList(новый): rid='#trml', sid=TermList, irn=3, v=""; ref=Null, type=Null. структурные: tid=#tid, nid=NEW-3, up=#pid.*/
+  int tl=scrt_node(tid,"TermList","#trml",""); sput_irn(tid,tl,3);
+  /*перестраиваем остальные*/
+  /*term-1: получить ид (пре pid"3."/инф pid"2."). замены up=NEW-3, irn=(пре -1/инф -2).*/ int t1irn;
+  /*готовим путь и атрибутику*/if(Iirn==2) {strcpy(val,"3.");t1irn=-1;} else {strcpy(val,"2.");t1irn=-2;};
+  sget_attr(3,tid,pid,val,val); int t1=atoi(val)/*ид*/; sput_up(tid,t1,tl); sput_irn(tid,t1,t1irn);
+  /*term-2: получить ид (pid"4."). замены up=NEW-3, irn= -1.*/
+  if(Iirn==3) {sget_attr(3,tid,pid,"4.",val); int t2=atoi(val)/*ид*/; sput_up(tid,t2,tl); sput_irn(tid,t2,-1);};
+  /*l_p: из первой становиться второй: получить ид (pid"1.") и заменить irn=2.*/sget_attr(3,tid,pid,"1.",val); int lp=atoi(val)/*ид*/; sput_irn(tid,lp,2);
+  /*r_p:в случае префикса ничего делать не надо. в случае инфикса получить ид и заменить irn=4.*/
+  if(Iirn==3) {sget_attr(3,tid,pid,"5.",val); int rp=atoi(val)/*ид*/; sput_irn(tid,rp,4);};
+  /*назначаем up t0, tl*/sput_up(tid,t0,pid); sput_up(tid,tl,pid);
+  /*снимаем флаг*/wi=tid; wi1=cnid;
+  { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set flg = 0 where tid = $1  and nid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1815 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("infx_subst-upd-flg-0");
+ };
+ /*кончились. удаляем узлы INFIX*/  wi=tid; strcpy(wc,"INFIX");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "delete from dts where tid = $1  and sid = $2 ", 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1818 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("infx_subst-delete"); 
+ commit(); printf("\n<infx_subst msg='RESULT'>");int srt=sget_strt(tid); sprt_subtreeL(tid,srt);printf("\n</infx_subst>");
+ end:
+ /*printf("\n!infx_subst!DEBUG! end RC=%i",RC);*/
+ return RC;
+}
+void term_subst_qv(int tid, int nid, char* v){/*Для кванторов строения: l_p Q Id COLON Id term r_p. назначает вхождениям Id-1 в term-1 значение v.*/
+ /*вход: term0*/char val[121]/*рабочая*/;
+ /*наличие не проверяем(!) это делают WFC-шники*/
+ /*type ссылается на узел ква-фразы см. таблицу ТермТиО*/
+ strcpy(wc,v); wi=tid; wi1=nid;/*именно ref=0 говорит что сслыка внутренняя! по идее sid лишний*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update dts set v = $1  where tid = $2  and type = $3  and ref = 0 and sid = 'Id'", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1829 "YL_db.pgc"
+ if(sqlca.sqlcode!=0) YL_abort("term_subst_qv-upd");
+}
+int ApplyTL(int tid, int nid){/* вычисляет значение заданного узла - терма (sid=term rid=trmf). возвращает RC: 0,1.*/
+ /*Логика хчф: применить <term-1>.v к значениям TermList и занести результат в .v*/
+ /*Логика внешних чф: применить Сиф назначенный <term-1>.v к значениям TermList и занести результат в .v*/
+ /*Алгоритм trmf-узла. (Сиф) критерий проверки: trmf\1 = trmi тогда его v (ид ф-и) проверяется в entities на Сиф (первичность можно не проверять;-).
+  если Сиф обнаружен, то в переключателе вызова формируются значения аргументов (сколько надо), проверяются на наличие и вызывается зашитая ф-я!*/
+  int dbg=0;/*управляет выдачей протокола отладки: 0 - не выдавать*/
+  char buf[YL_STRING_BUF_LEN]=""/*буфер сериализации*/; char arg1[22]/*арг1 Сиф*/; char arg2[22]/*арг2 Сиф*/;char v[122]=""/*значение терма*/;
+  char rid1[22]/*rid term-1*/;sget_attr(1,tid,nid,"1.",rid1); if(strcmp(rid1,"trmi")!=0) goto strf;
+  char Id1[22]/*Id ф-и*/;sget_attr(2,tid,nid,"1.",Id1); char cf[22]/*Id Сиф*/; int RC=Sget_cf(Id1,cf);
+  if(RC!=0) {printf("\n<ApplyTL msg='!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!! Id-1 %s is not a function!'/>",Id1);return 1;};
+  if(strcmp(cf,"")==0) goto strf;
+  /*Сиф есть*/
+  if(strcmp(cf,"fm_strcmp")==0){/*это тождество*/if(dbg!=0) printf("<ApplyTL msg='!DEBUG!fm_strcmp is called'/>");
+   /*собираем значения аргументов через TermList. Проверяем что они есть. Вызываем fm_strcmp*/
+   sget_attr(2,tid,nid,"3.-2.",arg1);if(strcmp(arg1,"")==0) {printf("\n<ApplyTL msg='!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!! arg-1 %s is Null!'/>",arg1);return 1;};
+   sget_attr(2,tid,nid,"3.-1.",arg2);if(strcmp(arg2,"")==0) {printf("\n<ApplyTL msg='!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!! arg-2 %s is Null!'/>",arg2);return 1;};
+   fm_strcmp(arg1,arg2,v); if(dbg!=0) printf("<ApplyTL msg='!DEBUG!fm_strcmp done' arg1='%s' arg2='%s' res='%s'/>",arg1,arg2,v);
+   goto end;
+  };
+  printf("\n<ApplyTL msg='!!!!!!!!!!!!!!!!!!SERROR!!!!!!!!!!!!!!!!!! Add this C-func %s to Yp!'/>",cf) ;return 1;
+ /*Алгоритм trmf-узла. (хранимая ф-я) надо собрать сериализацию правой части и искать в КС:
+  -если нет и терм имеет простое значение, RC=1 - нет значения, если значение - ф-я: v не назначать и возвращать 0 - сериализатор учтёт!
+  -если есть, значение заносится в v и RC=0.*/
+ strf:
+ /*собрать сериализацию правой части*/trm_t2s(tid,nid,buf); 
+ if(dbg!=0) printf("<ApplyTL msg='!DEBUG!' ser-val='%s' tid='%i' nid='%i' />",buf,tid,nid);
+ /*искать в КС*/ RC=fm_tGetv(buf,v); if(dbg!=0) printf("<ApplyTL msg='!DEBUG!after fm_tGetv' v='%s' RC='%i' />",v,RC);
+ if(RC!=0)/*у терма нет значения*/{if(trm_viss(tid,nid)==0)/*значение простое*/ return 1; else return 0;};
+ end: sput_v(tid,nid,v); return 0;
+}
+int trm_Val(int tid, int nid){/* вычисляет значение заданного узла - терма (sid='term') кроме trmf. Если значение есть, заполняет значением атрибут v узла и возвращает 0; иначе 1.*/
+ /*алгоритм пишется для случая хчф - хранимых частичных ф-й*/
+ int dbg=0;/*управляет выдачей протокола отладки: 0 - не выдавать*/
+ char Rv[122]=""/*рекорд для минимаксов*/; char V[122]=""/*текущее для минимаксов...*/; int cf=0/*флаг переборов - было значение в 1*/;
+ char crid[21]/*rid текущего терм-узла*/; char sort[21]/*имя сорта в котором перебор*/; int term1/*ид первого терма справа*/;
+ int i;
+ /*+$?проверить на всякий случай что мы в sid='term'*/
+ sget_attr(1,tid,nid,"0.",crid)/*получили rid*/;
+ if(dbg!=0) printf("\n!trm_Val!DEBUG! IN rid=%s (tid=%i,nid=%i)",crid,tid,nid);
+ /*обработчики*/
+ if((strcmp(crid,"trmi")==0)||(strcmp(crid,"trmn")==0)||(strcmp(crid,"trms")==0)) {/*берём значение у правой части*/sget_attr(2,tid,nid,"1.",V); 
+  sput_v(tid,nid,V); if(dbg!=0) printf(" !trm_Val!DEBUG!OUT v='%s'",V); return 0;};
+ if(strcmp(crid,"trmf")==0){/*мы в trmf-узле: term l_p TermList r_p.*/
+  /*получаем nid term-1*/sget_attr(3,tid,nid,"1.",V); term1=atoi(V);
+  if(trm_Val(tid,term1)==1) return 1; /*+$1здесь ветвление на внешнюю алгоритмику*//*Логика вычисления хранимых чф: в <term-1>.v какая-то чхф.*/
+  /*получаем nid TermList*/sget_attr(3,tid,nid,"3.",V); int TL=atoi(V); /*Получить в N кол-во членов TermList*/int N=sget_chn(tid,TL);
+  /*обработать членов TermList*/for(i=1;i<N+1;i++){/*получить ид i-ого ребё*/int TLi=sget_chi(tid,TL,i); /*обработать его*/if(trm_Val(tid,TLi)==1) return 1;};
+  /*применить <term-1>.v к значениям TermList и занести результат в .v*/if(ApplyTL(tid,nid)==1) return 1; 
+  return 0;
+ };
+ if(strcmp(crid,"trme")==0){/*l_p EXISTS  Id COLON Id term r_p. Формула: MAX[i:1..M(Id-2)]Val(term-1(Id-1/Id-2(i)...))*/
+  /*Делаем общий случай MAX! см. https://docs.google.com/document/d/1qxapPmDhCYC9zAb3H_NdYmNzYauO-JsPqAooO8CwH_o/edit#bookmark=id.nimeg3lgn0ib */
+  /*тупо - через рекорд. все виды значений сравниваются и хранятся - как строки!*/
+  sget_attr(2,tid,nid,"5.",sort)/*получили Id-2.v*/;
+  /*получить tid первого элемента сорта (носителя) 0 - пусто*/int cce=fm_cgetFirst(sort);
+  if(dbg!=0) printf("\n<trme msg='!trm_Val.trme!DEBUG!first' cce='%i'>",cce);
+  /*Если cce=0 то return 1. Не соответствует кванторам!!!*/if(cce==0) {if(dbg!=0) printf("\n!trm_Val.trme!DEBUG!EMPTY! sort='%s'! </trme>",sort);return 1;};
+  /*получаем nid term-1*/sget_attr(3,tid,nid,"6.",V); term1=atoi(V);
+  /*!!!если при переборе очередное применение ф-и не имеет значения то идём дальше*/
+  while(cce!=0){
+   /*получаем значение текущего элемента основы*/fm_cGetv(cce,V);if(dbg!=0) printf("\n<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='%s' V='%s'>",Rv,V);
+   /*назначаем вхождениям Id-1 в term-1 значение V*/term_subst_qv(tid,nid,V);/*чистим trmf.v*/trm_cl_trmf_v(tid,nid);
+   /*вычисляем значение term-1*/ if(trm_Val(tid,term1)==1) goto nexte;
+   /*получаем значение term-1 в V*/sget_attr(2,tid,term1,"0.",V); if(cf==0){strcpy(Rv,V);cf=1;};
+   /*обрабатываем рекорд*/ int rc=strcmp(Rv,V); if (rc>=0) goto nexte; strcpy(Rv,V);
+   nexte:/*получаем следующий*/cce=fm_cgetNext(sort,cce);if(dbg!=0) printf("\n!trm_Val.trme!DEBUG!next ce cce=%i.\n</trmec>",cce);
+  };
+  /*возможен(!) случай когда ни на одном значения нет - пустая ф-я!*/if(cf==0) return 1;
+  /*заносим рекорд*/ sput_v(tid,nid,Rv); if(dbg!=0) printf("\n!trm_Val.trme!DEBUG!final value Rv='%s'.\n</trme>",Rv); return 0;
+ };
+ if(strcmp(crid,"trma")==0){/*l_p FOR_ANY Id COLON Id term r_p. Формула: MIN[i:1..M(Id-2)]Val(term-1(Id-1/Id-2(i)...))*/
+  /*Делаем общий случай MIN! см. https://docs.google.com/document/d/1qxapPmDhCYC9zAb3H_NdYmNzYauO-JsPqAooO8CwH_o/edit#bookmark=id.nimeg3lgn0ib */
+  /*тупо - через рекорд. все виды значений сравниваются и хранятся - как строки!*/
+  sget_attr(2,tid,nid,"5.",sort)/*получили Id-2.v*/;
+  /*получить tid первого элемента сорта (носителя) 0 - пусто*/int cce=fm_cgetFirst(sort);
+  if(dbg!=0) printf("\n<trma msg='!trm_Val.trma!DEBUG!first' cce='%i'>",cce);
+  /*Если cce=0 то return 1. Не соответствует кванторам!!!*/if(cce==0) {if(dbg!=0) printf("\n!trm_Val.trma!DEBUG!EMPTY! sort='%s'! </trma>",sort);return 1;};
+  /*получаем nid term-1*/sget_attr(3,tid,nid,"6.",V); term1=atoi(V);
+  /*!!!+$если при переборе очередное применение ф-и не имеет значения то no value! а потом лучше False?*/
+  /*было "идём дальше", но это скорее от min - там оно оправдано!!! И это первое отступление от min!!!*/
+  while(cce!=0){
+   /*получаем значение текущего элемента основы*/fm_cGetv(cce,V);if(dbg!=0) printf("\n<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='%s' V='%s'>",Rv,V);
+   /*назначаем вхождениям Id-1 в term-1 значение V*/term_subst_qv(tid,nid,V);/*чистим trmf.v*/trm_cl_trmf_v(tid,nid);
+   /*вычисляем значение term-1*/ if(trm_Val(tid,term1)==1) return 1;
+   /*получаем значение term-1 в V*/sget_attr(2,tid,term1,"0.",V); if(cf==0){strcpy(Rv,V);cf=1;};
+   /*обрабатываем рекорд*/ int rc=strcmp(Rv,V); if (rc<=0) goto nexta; strcpy(Rv,V);
+   nexta:/*получаем следующий*/cce=fm_cgetNext(sort,cce);if(dbg!=0) printf("\n!trm_Val.trma!DEBUG!next ce cce=%i.\n</trmac>",cce);
+  };
+  /*возможен(!) случай когда ни на одном значения нет - пустая ф-я!*/if(cf==0) return 1;
+  /*заносим рекорд*/ sput_v(tid,nid,Rv); if(dbg!=0) printf("\n!trm_Val.trma!DEBUG!final value Rv='%s'.\n</trma>",Rv);
+  return 0;
+ };
+ /*неправильный rid!!!*/printf("\n!trm_Val: Unknown rid=%s. Abort!",crid);exit(EXIT_FAILURE);
+}
+char* q_term(char *st_id)/*q_m term q_m*/{
+ /*st_id - ид узла предложения в ДРВ*/
+ static char msg[256] /*буфер сообщения*/;char V[256]=""/*буфер значения*/;
+ int dbg=0/*флаг отладочной выдачи: 1 - включена*/;
+ /*!!!мы сразу переходим в лес!!!*/
+ printf("\n<q_term msg='begin'>");
+ int tr_id=st_store(st_id); int t_id/*id вершины терма*/;/*узел вершины дерева предложения*/ int snid=atoi(st_id);
+ sget_attr(3,tr_id,snid,"2.",V);t_id=atoi(V);
+ /*обработка запросного терма!*/
+ char* msgw=term_proc(tr_id,t_id,5); if (*msgw!=0) {sprintf(msg,"q_term.term_proc:(%s).",msgw); st_del(tr_id); goto end;};
+ /*трансляция*/
+ int rc=st_trans(tr_id);/*DEBUG printf("\n!q_term(DEBUG)st_trans.rc=%i.",rc);*/
+ /*К ЗНАЧЕНИЮ*/
+ /*получаем указатель на приведённый терм и вперёд!*/
+ int trt_id/*странслированное дерево*/=sget_ref(tr_id,snid,"0.");
+ sget_attr(3,trt_id,snid,"2.",V); t_id=atoi(V);/*предполагается что t_id мог смениться!*/
+ /*ВТОРИЧНАЯ ПОЛНАЯ(+$ЭТО ГРУБО!!!) обработка запросного терма!*/
+ msgw=term_proc(trt_id,t_id,5); if (*msgw!=0) {sprintf(msg,"q_term.term_proc-2:(%s).",msgw); st_del(tr_id); st_del(trt_id); goto end;};
+ rc=trm_Val(trt_id,t_id); if(dbg==1){/*выдаём терм посмотреть*/ printf("\n!q_term!DEBUG! after trm_Val point! rc=%i.",rc);sprt_subtreeLD(trt_id,t_id);};
+ if(rc!=0) sprintf(msg,"NO VALUE"); else {sget_attr(2,trt_id,snid,"2.",V); sprintf(msg,"%s",V);};
+ /*printf("\n!q_term!DEBUG! st_del off!");*/st_del(tr_id); st_del(trt_id);
+ end:printf("</q_term>");
+ return &msg[0];
+}
+char* prf_add(char *st_id)/*Proof Id Id derived_formula Dot*/{
+ /*st_id - ид узла предложения*//*Id-2 - имя теоремы! Может быть несколько доказательств одной и той же теоремы!*/
+ static char msg[256]="";
+ char Id_v[122]/*значение нт Id-1*/; char Id2_v[122]/*значение нт Id-2*/; char st[22]; /*рабочая для типов*/
+ get_attr(2,st_id,"2.",Id_v); get_attr(2,st_id,"3.",Id2_v); char df_nidc[22]/*узел формулы вывода*/; get_attr(3,st_id,"4.",df_nidc);
+ /*printf("\n!prf_add!DEBUG! Id_v=%s, Id2_v=%s, df_nidc=%s\n",Id_v,Id2_v,df_nidc);*/
+ /*WFC(st-12-0) Id - ещё не используется в эт.*/
+ if (e_exists_q(Id_v,st)==0)/*не порядок - сущее уже есть!*/{sprintf(msg,"prf_add: Id %s is already used as %s! WFC(st-12-0)",Id_v,st); return &msg[0];};
+ /*WFC(st-12-1) Id-2 - имя теоремы!*/
+ if (e_exists_q(Id2_v,st)!=0)/*не порядок - сущего для теоремы нет!*/{sprintf(msg,"prf_add: Theorem %s is missing! WFC(st-12-1)",Id2_v); return &msg[0];};
+ if (strcmp(st,"theo")!=0)/*не порядок - сущее для теоремы есть, но не теорема!*/{sprintf(msg,"prf_add: %s is not a theorem! WFC(st-12-1)",Id2_v); return &msg[0];};
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ /*WFC(st-12-2) derived_formula правильная.*/
+ /*проверка термов...*/
+ 
+ /*в сущие*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1966 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("prf_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1967 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("prf_add-2");
+ strcpy(wc,Id_v); strcpy(wc1,Id2_v); wi1=tr_id; strcpy(wc2,df_nidc);
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , def_id , ein , expr , tid ) values ( $1  , 'proof' , $2  , $3  , $4  , $5  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc2),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1969 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("prf_add-3");
+ commit(); msg[0]=0; return &msg[0]; /*ОК*/
+}
+char* theo_add(char *st_id) /*Theorem Id term Dot*/{
+ static char msg[256]=""/*заточено на ОК*/;
+ char t[22]; char c[22]; char s[22];/*c - Id теоремы, s - ид- узла терма, t - тип если уже есть*/
+ get_attr(2,st_id,"2.",c); get_attr(3,st_id,"3.",s);
+ /*WFC(st-13-0) Id - ещё не используется в эт.*/
+ if (e_exists_q(c,t)==0)/*не порядок - сущее уже есть!*/{sprintf(msg,"theo_add: Id %s is already used as %s! WFC(st-13-0)",c,t); return &msg[0];};
+ /*в лес*/
+ int tr_id=st_store(st_id);
+ int termi=atoi(s);
+ /*WFC(st-13-1) term - замкнутая формула!*/
+ char* msgw=term_proc(tr_id,termi,3); if (*msgw!=0) {sprintf(msg,"theo_add>(%s). WFC(st-13-1)",msgw); st_del(tr_id); return &msg[0];};
+ /*в сущие*/
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "select fen from system where id = 'YL'", ECPGt_EOIT, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EORT);}
+#line 1984 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("theo_add-1");
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "update system set fen = fen + 1", ECPGt_EOIT, ECPGt_EORT);}
+#line 1985 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("theo_add-2");
+ strcpy(wc,c); strcpy(wc1,s); wi1=tr_id;
+ { ECPGdo(__LINE__, 0, 0, NULL, 0, ECPGst_normal, "insert into entities ( id , type , ein , expr , tid ) values ( $1  , 'theo' , $2  , $3  , $4  )", 
+	ECPGt_char,(wc),(long)1024,(long)1,(1024)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_char,(wc1),(long)220,(long)1,(220)*sizeof(char), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, 
+	ECPGt_int,&(wi1),(long)1,(long)1,sizeof(int), 
+	ECPGt_NO_INDICATOR, NULL , 0L, 0L, 0L, ECPGt_EOIT, ECPGt_EORT);}
+#line 1987 "YL_db.pgc"
+ if (sqlca.sqlcode!=0) YL_abort("theo_add-3");
+ /*трансляция*/
+ int rc=st_trans(tr_id);/*DEBUG*/printf("\ntheo_add(DEBUG)st_trans.rc=%i.",rc);
+ commit(); msg[0]=0; return &msg[0];
+}

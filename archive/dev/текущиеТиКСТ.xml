@@ -1,0 +1,282 @@
+﻿!2!
+--Declaration WPC ( sample : TV ) : ( sample : Number ) prime .
+--Declaration VPC ( sample : TV ) : ( sample : Number ) prime .
+--?(WPC=VPC)?
+--?("f"="f")?
+--?( ∀ x : TV ( ∃ y : TV ( ( ¬x ) ≡ y ) ) )?
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+!0!
+ "TV DADA"
+ Declaration TV sort .
+ "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"
+ Declaration EQ_TV TV TV : TV prime fm_strcmp .
+ Add fix "=" to EQ_TV .
+ Declaration NOT TV : TV prime .
+ Add fix "¬" to NOT .
+ Add fix "not" to NOT .
+ Declaration AND TV TV : TV prime .
+ Add fix "∧" to AND .
+ Add fix "and" to AND .
+ Declaration OR TV TV : TV prime .
+ Add fix "∨" to OR .
+ Add fix "or" to OR .
+ Declaration IMPLIES TV TV : TV .
+ Add fix "→" to IMPLIES .
+ Add fix "impl" to IMPLIES .
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+ Declaration EQUIV TV TV : TV .
+ Add fix "≡" to EQUIV .
+ Add fix "eqv" to EQUIV .
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+ "Axioms"
+ Declaration NOT_full  : TV .
+ Definition def_NOT_full NOT_full (  ) : ( ∀ x : TV ( ∃ y : TV ( ( ¬ x ) = y ) ) ) .
+ Declaration AND_full  : TV .
+ Definition def_AND_full AND_full (  ) : ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV ( ( x ∧ z ) = y ) ) ) ) .
+ Declaration OR_full  : TV .
+ Definition def_OR_full OR_full (  ) : ( ∀ x : TV ( ∀ z : TV ( ∃ y : TV ( ( x ∨ z ) = y ) ) ) ) .
+ "Ide DADA"
+ "Ide должен быть после TV, чтобы можно было задать =!"
+ Declaration Ide sort "{US}{Id}" .
+ Declaration EQ_Ide Ide Ide : TV prime fm_strcmp .
+ Add fix "=" to EQ_Ide .
+ "String DADA"
+ "strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ Declaration String sort "[^DQ]*" .
+ Declaration S_EQ String String : TV prime fm_strcmp .
+ Add fix "=" to S_EQ .
+ "Number DADA. Числа"
+ Declaration Number sort "[-]?{DIGIT}+({Dot}{DIGIT}+)?" .
+ "Объявления функций арифметики десятичных рациональных чисел"
+ Declaration R_EQ Number Number : TV prime fm_req .
+ Add fix "=" to R_EQ .
+ Declaration R_LT Number Number : TV prime fm_rlt .
+ Add fix "<" to R_LT .
+ Declaration R_GT Number Number : TV .
+ Add fix ">" to R_GT .
+ Definition R_GT_d R_GT ( x y ) : ( ( ¬ ( x = y ) ) ∧ ( ¬ ( x < y ) ) ) .
+ Declaration R_LE Number Number : TV .
+ Add fix "≤" to R_LE .
+ Definition R_LE_d R_LE ( x y ) : ( ( x = y ) ∨ ( x < y ) ) .
+ Declaration R_GE Number Number : TV .
+ Add fix "≥" to R_GE .
+ Definition R_GE_d R_GE ( x y ) : ( ( x = y ) ∨ ( x > y ) ) .
+ Declaration R_PLUS Number Number : Number prime fm_radd .
+ Add fix "+" to R_PLUS .
+ Declaration R_MINUS Number Number : Number prime fm_rminus .
+ Add fix "-" to R_MINUS .
+ Declaration R_MULTIPLY Number Number : Number prime fm_rmult .
+ Add fix "*" to R_MULTIPLY .
+ Declaration R_DEVIDE Number Number : Number prime fm_rdev .
+ Add fix "/" to R_DEVIDE .
+ "+подумать над аксиоматикой и порядка и операций и точностью вычислений!!!"
+ "Year DADA. Числа с единицами измерения"
+ Declaration Year sort "{NN}{DQ}y{DQ}" .
+ "это отрезок временной оси [01.01.N..31.12.N] где N - нат-число."
+ "Начальная КС. это заполнение должно быть после DADA TV и Ide"
+ ! _False TV !
+ ! _True TV !
+ "Это Y!L часть проекта Algor"
+ "Введение"
+ Declaration body sort .
+ Declaration VPC ( body : TV ) : ( body : Number ) .
+ "Definition def_VPC VPC(x)(y):((Volume_in(x y)/Volume(y))*100)."
+ "Объёмное процентное содержание минералов"
+ Declaration melilite body : TV prime .
+ Declaration kalsilite body : TV prime .
+ Declaration leucite body : TV prime .
+ "Ol for olivine."
+ Declaration Ol body : TV prime .
+ "Opx is not prime and we are looking forward for definition of orthopyroxene class of minerals."
+ Declaration Opx body : TV .
+ "Cpx is not prime and we are looking forward for definition of clinopyroxene class of minerals."
+ Declaration Cpx body : TV .
+ Declaration hornblende body : TV prime .
+ Declaration garnet body : TV prime .
+ Declaration spinel body : TV prime .
+ Declaration biotite body : TV prime .
+ "минералы в определениях пород"
+ Declaration calcite body : TV prime .
+ Declaration dolomite body : TV prime .
+ Declaration magnesite body : TV prime .
+ Declaration siderite body : TV prime .
+ Declaration ankerite body : TV prime .
+ Declaration aragonite body : TV prime .
+ Declaration vaterite body : TV prime .
+ Declaration strontianite body : TV prime .
+ Declaration Q body : TV .
+ Declaration A body : TV .
+ Declaration P body : TV .
+ Declaration F body : TV .
+ Declaration M body : TV .
+ "Требования к VPC значениям (VPC-range)"
+ Declaration A_VPC_biotite_0  : TV .
+ Definition def_A_VPC_biotite_0 A_VPC_biotite_0 (  ) : ( ∀ x : body ( 0 ≤ VPC ( biotite ) ( x ) ) ) .
+ Declaration A_VPC_biotite_100  : TV .
+ Definition def_A_VPC_biotite_100 A_VPC_biotite_100 (  ) : ( ∀ x : body ( VPC ( biotite ) ( x ) ≤ 100 ) ) .
+ "Используя квантор по предикату можно записать единую аксиому формулой второго порядка:"
+ "(∀p:(body:TV)∀x:body Substance(p) → (0 ≤ VPC(p)(x) ≤ 100))."
+ "Качественные характеристики образца"
+ Declaration pyroclastic body : TV prime .
+ Declaration kimberlite body : TV prime .
+ Declaration lamproite body : TV prime .
+ Declaration lamprophyre body : TV prime .
+ Declaration charnockite body : TV prime .
+ Declaration plutonic body : TV prime .
+ Declaration volcanic body : TV prime .
+ Declaration clast body : TV prime .
+ "+добавить в отчёт"
+ Declaration clastic body : TV prime .
+ "+длина Id - 21 поэтому volcanic_eruption_result сокращён!"
+ Declaration volcanic_eruption_rs_ body : TV prime .
+ "+добавить в отчёт"
+ Declaration part_of body body : TV prime .
+ "Px - предикат пироксенов"
+ Declaration Px body : TV .
+ Definition def_Px Px ( x ) : ( Opx ( x ) or Cpx ( x ) ) .
+ "OOC, OPH - группировки минералов для диаграмм"
+ Declaration OOC body : TV .
+ Declaration OPH body : TV .
+ Definition def_OOC OOC ( sb1 ) : ( Ol ( sb1 ) or ( Opx ( sb1 ) or Cpx ( sb1 ) ) ) .
+ Definition def_OPH OPH ( sb1 ) : ( Ol ( sb1 ) or ( Px ( sb1 ) or hornblende ( sb1 ) ) ) .
+ "M - показатель мафичности M"
+ Definition def_M M ( sb1 ) : ( not ( Q ( sb1 ) or ( A ( sb1 ) or ( P ( sb1 ) or F ( sb1 ) ) ) ) ) .
+ Declaration Th_M100  : TV .
+ Definition def_Th_M100 Th_M100 (  ) : ( ∀ sb1 : body ( VPC ( M ) ( sb1 ) = ( 100 - ( VPC ( Q ) ( sb1 ) + ( VPC ( A ) ( sb1 ) + ( VPC ( P ) ( sb1 ) + VPC ( F ) ( sb1 ) ) ) ) ) ) ) .
+ "Группировка carbonates и их модальное содержание"
+ Declaration carbonates body : TV .
+ Definition def_car carbonates ( sb1 ) : ( calcite ( sb1 ) or ( dolomite ( sb1 ) or ( magnesite ( sb1 ) or ( siderite ( sb1 ) or ( ankerite ( sb1 ) or ( aragonite ( sb1 ) or ( vaterite ( sb1 ) or strontianite ( sb1 ) ) ) ) ) ) ) ) .
+ Declaration Th_carbo1  : TV .
+ Definition def_Th_carbo1 Th_carbo1 (  ) : ( ∀ sb1 : body ( VPC ( carbonates ) ( sb1 ) = ( VPC ( calcite ) ( sb1 ) + ( VPC ( dolomite ) ( sb1 ) + ( VPC ( magnesite ) ( sb1 ) + ( VPC ( siderite ) ( sb1 ) + ( VPC ( ankerite ) ( sb1 ) + ( VPC ( aragonite ) ( sb1 ) + ( VPC ( vaterite ) ( sb1 ) + VPC ( strontianite ) ( sb1 ) ) ) ) ) ) ) ) ) ) .
+ "pyroclastic rocks"
+ Definition def_pyroclastic pyroclastic ( x ) : ( clastic ( x ) and ( ∀ y : body ( ( clast ( y ) and part_of ( y x ) ) → volcanic_eruption_rs_ ( y ) ) ) ) .
+ "pyroclast"
+ Declaration pyroclast body : TV .
+ Definition def_pyroclast pyroclast ( x ) : ( clast ( x ) and volcanic_eruption_rs_ ( x ) ) .
+ "not_first_9. вспомогательный предикат"
+ Declaration nf9 body : TV .
+ Definition def_nf9 nf9 ( sb1 ) : ( ( not ( pyroclastic ( sb1 ) or ( kimberlite ( sb1 ) or ( lamproite ( sb1 ) or ( lamprophyre ( sb1 ) or charnockite ( sb1 ) ) ) ) ) ) and ( ( VPC ( carbonates ) ( sb1 ) ≤ 50 ) and ( ( VPC ( melilite ) ( sb1 ) ≤ 10 ) and ( ( VPC ( kalsilite ) ( sb1 ) = 0 ) and ( VPC ( leucite ) ( sb1 ) = 0 ) ) ) ) ) .
+ "harzburgite"
+ Declaration harzburgite body : TV .
+ Definition def_harzburgite harzburgite ( sb1 ) : ( plutonic ( sb1 ) and ( ( not ( pyroclastic ( sb1 ) or ( kimberlite ( sb1 ) or ( lamproite ( sb1 ) or ( lamprophyre ( sb1 ) or charnockite ( sb1 ) ) ) ) ) ) and ( ( VPC ( carbonates ) ( sb1 ) ≤ 50 ) and ( ( VPC ( melilite ) ( sb1 ) ≤ 10 ) and ( ( VPC ( M ) ( sb1 ) ≥ 90 ) and ( ( VPC ( kalsilite ) ( sb1 ) = 0 ) and ( ( VPC ( leucite ) ( sb1 ) = 0 ) and ( ( VPC ( hornblende ) ( sb1 ) = 0 ) and ( ( ( 0.4 * VPC ( OOC ) ( sb1 ) ) ≤ VPC ( Ol ) ( sb1 ) ) and ( ( VPC ( Ol ) ( sb1 ) ≤ ( 0.9 * VPC ( OOC ) ( sb1 ) ) ) and ( VPC ( Cpx ) ( sb1 ) < ( 0.05 * VPC ( OOC ) ( sb1 ) ) ) ) ) ) ) ) ) ) ) ) ) .
+ "dunite"
+ Declaration dunite body : TV .
+ Definition def_dunite dunite ( sb1 ) : ( ( nf9 ( sb1 ) and ( plutonic ( sb1 ) and ( ( VPC ( M ) ( sb1 ) ≥ 90 ) and ( ( VPC ( hornblende ) ( sb1 ) = 0 ) and ( ( ( 0.9 * VPC ( OOC ) ( sb1 ) ) < VPC ( Ol ) ( sb1 ) ) and ( ( 0 ≤ VPC ( Opx ) ( sb1 ) ) and ( 0 ≤ VPC ( Cpx ) ( sb1 ) ) ) ) ) ) ) ) or ( nf9 ( sb1 ) and ( plutonic ( sb1 ) and ( ( VPC ( M ) ( sb1 ) ≥ 90 ) and ( ( VPC ( hornblende ) ( sb1 ) > 0 ) and ( ( ( 0.9 * VPC ( OPH ) ( sb1 ) ) < VPC ( Ol ) ( sb1 ) ) and ( ( 0 ≤ VPC ( Px ) ( sb1 ) ) and ( 0 ≤ VPC ( hornblende ) ( sb1 ) ) ) ) ) ) ) ) ) .
+ Declaration nf9_ body : TV .
+ Definition def_nf9_ nf9_ ( sb1 ) : ( pyroclastic ( sb1 ) or ( kimberlite ( sb1 ) or lamproite ( sb1 ) ) ) .
+ Declaration НЕТ TV : TV prime .
+ Declaration абвгдеёжзийклмн TV : TV prime .
+ Declaration опрстуфхцчшщъыьэюя TV : TV prime .
+ Declaration АБВГДЕЁЖЗИЙКЛМН TV : TV prime .
+ Declaration ОПРСТУФХЦЧШЩЪЫЬЭЮЯ TV : TV prime .
+ Declaration m_N body : Number prime .
+ ! _B1 body !
+ "Это Y!L часть отчёта проекта ОВиМ"
+ "заголовки взяты из отчёта и соответствуют местам вхождения Y!L-предложений."
+ "Введение"
+ Declaration партия_песка sort .
+ Declaration массовая_доля ( body : TV ) : ( body : Number ) .
+ "Definition def_VPC массовая_доля(x)(y):((Mass_in(x y)/Mass(y))*100)."
+ "химические вещества и фракции"
+ Declaration оксид_кремния body : TV prime .
+ Declaration оксид_железа body : TV prime .
+ Declaration оксид_алюминия body : TV prime .
+ Declaration вода body : TV prime .
+ Declaration тяжелая_фракция body : TV prime .
+ "требования к маркам"
+ "Это Y!L часть отчёта проекта ОВиМ"
+ "заголовки взяты из отчёта и соответствуют местам вхождения Y!L-предложений."
+ "Введение"
+ "Definition def_VPC массовая_доля(x)(y):((Mass_in(x y)/Mass(y))*100)."
+ "химические вещества и фракции"
+ "требования к маркам"
+ Declaration ООВС_010_В_req body : TV .
+ Declaration обогащённый body : TV prime .
+ Definition ООВС_010_В_REQ ООВС_010_В_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req1 body : TV .
+ Definition ООВС_010_В_REQ1 ООВС_010_В_req1 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req2 body : TV .
+ Definition ООВС_010_В_REQ2 ООВС_010_В_req2 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req3 body : TV .
+ Definition ООВС_010_В_REQ3 ООВС_010_В_req3 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req4 body : TV .
+ Definition ООВС_010_В_REQ4 ООВС_010_В_req4 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req5 body : TV .
+ Definition ООВС_010_В_REQ5 ООВС_010_В_req5 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req6 body : TV .
+ Definition ООВС_010_В_REQ6 ООВС_010_В_req6 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req7 body : TV .
+ Definition ООВС_010_В_REQ7 ООВС_010_В_req7 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req8 body : TV .
+ Definition ООВС_010_В_REQ8 ООВС_010_В_req8 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req9 body : TV .
+ Definition ООВС_010_В_REQ9 ООВС_010_В_req9 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ "фффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффф"
+ "фффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффф"
+ "фффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффф"
+ "ыфффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффаб"
+ "ыфффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффаб"
+ "ыфффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффаб"
+ Declaration ООВС_010_В_req21 body : TV .
+ Definition ООВС_010_В_REQ21 ООВС_010_В_req21 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req22 body : TV .
+ Definition ООВС_010_В_REQ22 ООВС_010_В_req22 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req23 body : TV .
+ Definition ООВС_010_В_REQ23 ООВС_010_В_req23 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req24 body : TV .
+ Definition ООВС_010_В_REQ24 ООВС_010_В_req24 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req25 body : TV .
+ Definition ООВС_010_В_REQ25 ООВС_010_В_req25 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req26 body : TV .
+ Definition ООВС_010_В_REQ26 ООВС_010_В_req26 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ООВС_010_В_req27 body : TV .
+ Declaration ООВС_010_В_req27 body : TV .
+ Definition ООВС_010_В_REQ27 ООВС_010_В_req27 ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.8% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.010% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.1% ) and ( обогащённый ( x ) and ( ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.5% ) ) ) ) ) ) .
+ Declaration ОВС_020_В_req body : TV .
+ Definition ОВС_020_В_req_DEF ОВС_020_В_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 99.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.02% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.4% ) and ( ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.05% ) ) ) ) ) .
+ Declaration ОВС_025_1_req body : TV .
+ Definition ОВС_025_1_req_DEF ОВС_025_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.025% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.4% ) and ( ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.05% ) ) ) ) ) .
+ Declaration ОВС_025_1А_req body : TV .
+ Definition ОВС_025_1А_req_DEF ОВС_025_1А_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.025% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.4% ) and ( ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) and ( массовая_доля ( тяжелая_фракция ) ( x ) ≤ 0.2% ) ) ) ) ) .
+ Declaration ВС_030_В_req body : TV .
+ Declaration ВС_040_1_req body : TV .
+ Declaration ВС_050_1_req body : TV .
+ Declaration ВС_050_2_req body : TV .
+ Declaration С_070_1_req body : TV .
+ Declaration С_070_2_req body : TV .
+ Declaration Б_100_1_req body : TV .
+ Declaration Б_100_2_req body : TV .
+ Declaration ПБ_150_1_req body : TV .
+ Declaration ПБ_150_2_req body : TV .
+ Definition ПБ_150_2_req_DEF ПБ_150_2_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.15% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 2.0% ) and ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) .
+ Declaration ПС_250_req body : TV .
+ Definition ПС_250_req_DEF ПС_250_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.25% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 4.0% ) and ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) .
+ Declaration Т_req body : TV .
+ Definition Т_req_DEF Т_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 4.0% ) and ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) .
+ Definition ВС_030_В_req_DEF ВС_030_В_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.03% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.6% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition ВС_040_1_req_DEF ВС_040_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.04% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.6% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition ВС_050_1_req_DEF ВС_050_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.05% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.6% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition ВС_050_2_req_DEF ВС_050_2_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.05% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 2.0% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition С_070_1_req_DEF С_070_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.07% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.6% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition С_070_2_req_DEF С_070_2_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.07% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 2.0% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition Б_100_1_req_DEF Б_100_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.5% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.10% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 0.6% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition Б_100_2_req_DEF Б_100_2_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 95.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.10% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 2.0% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+ Definition ПБ_150_1_req_DEF ПБ_150_1_req ( x ) : ( ( массовая_доля ( оксид_кремния ) ( x ) ≥ 98.0% ) and ( ( массовая_доля ( оксид_железа ) ( x ) ≤ 0.15% ) and ( ( массовая_доля ( оксид_алюминия ) ( x ) ≤ 1.5% ) and ( ( обогащённый ( x ) and ( массовая_доля ( вода ) ( x ) ≤ 0.5% ) ) or ( ( not обогащённый ( x ) ) and ( массовая_доля ( вода ) ( x ) ≤ 7% ) ) ) ) ) ) .
+--fm_tv dump begins-----------------------------------------
+! AND ( _False _False ):_False!
+! AND ( _False _True ):_False!
+! AND ( _True _False ):_False!
+! AND ( _True _True ):_True!
+! m_N ( _B1 ):-10.11!
+! NOT ( _False ):_True!
+! NOT ( _True ):_False!
+! OR ( _False _False ):_False!
+! OR ( _False _True ):_True!
+! OR ( _True _False ):_True!
+! OR ( _True _True ):_True!
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

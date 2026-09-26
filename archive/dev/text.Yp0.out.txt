@@ -1,0 +1,11 @@
+﻿--? WPC ( MGO ) ( _SAM30685 )? 
+--?1?
+--Add infix "or" to WPC. --???
+--?(""<"")? --падает
+--?(∀x:TV(∀z:TV (∃y:TV ((x or z)=y) )))? --_True при полноте
+--?("1"+"2")?
+--!0!
+--Add fix "=" to NOT.
+--Add fix "=" to AND. --WFC ругается т.к. такого типа аргу уже есть
+--?(_True and _True)? --ОК
+?(_True ≠ _True)?

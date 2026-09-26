@@ -1,0 +1,23 @@
+RUS_SWF Ô
+Unrecognized character: <ª>
+Unrecognized character: <ø>
+RUS_SWF ‚
+Unrecognized character: <à>
+Unrecognized character: <Ä>
+WS 
+
+RUS_CWF —
+Unrecognized character: <Ñ>
+RUS_CWF —
+Unrecognized character: <Ñ>
+RUS_CWF —
+Unrecognized character: <Ñ>
+WS  
+LAT_SWF aaa
+WS  
+Comm --—ç—Ç–æ –ø—Ä–æ–±–∞
+RUS_CWF –
+Unrecognized character: <î>
+RUS_CWF –
+Unrecognized character: <∞>
+SSD !

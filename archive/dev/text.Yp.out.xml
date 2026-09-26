@@ -1,0 +1,13 @@
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<ABORT> get_chld_id: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: 7214889121284620313
+sqlerrm.sqlerrml: 543257697
+sqlerrm.sqlerrmc: found on line 164
+sqlerrd: 0 0 3472330494442471424 48 0 15640319743692
+sqlwarn: 16 26 -14 0 0 0 0 0
+sqlstate:   Pò
+===============
+</ABORT>

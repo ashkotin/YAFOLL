@@ -1,0 +1,18 @@
+﻿--Declaration pla R R:R prime.
+--!pla(1 -1):_pla!
+--?( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) )?
+--?( ∀ x : TV ((x∨x)=x))? --даёт True:-)
+--?( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) )?
+--?(∀x:sample (∀y:sample ((authorial_number(x)=authorial_number(y))  → (x=y))))?
+Axiom<SA.yyerror msg='syntax error before this element!'> AN_full ( ∀ x : sample ( ∃ y : S ( authorial_number ( x ) = y ) ) ) .
+<SA STOP_Dot_Statement_token='Axiom'>
+<ABORT> up_node-update: UNEXPECTED sqlcode!
+==== sqlca ====
+sqlcode: 7214889121284620313
+sqlerrm.sqlerrml: 543257697
+sqlerrm.sqlerrmc: found on line 166
+sqlerrd: 0 0 3472330494442471424 48 0 1153080666978391168
+sqlwarn: -96 109 105 0 0 0 0 0
+sqlstate:      
+===============
+</ABORT>

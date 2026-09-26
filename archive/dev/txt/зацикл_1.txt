@@ -1,0 +1,14 @@
+﻿
+
+<Yp1 BEGIN st_id=0000000018>
+<st_store Tree=90 added=1>
+					 ? ( ∀ x : TV AND ( x x ) ) ?
+!defc_subst!DEBUG! begin tid=91
+!defc_subst!WARNING! Id x does not exist in entities!
+!defc_subst!WARNING! Id x does not exist in entities!
+(defc_subst: RESULT			 ? ( ∀ x : TV AND ( x x ) ) ?
+!defc_subst!DEBUG! end RC=0
+!deff_subst!DEBUG! begin tid=91
+(deff_subst: RESULT			 ? ( ∀ x : TV AND ( x x ) ) ?
+!deff_subst!DEBUG! end RC=0
+!q_term(DEBUG)st_trans.rc=0.

@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s st_id='0000000001' st_rid='st-6'>
+!0!
+ "TV DAD"
+ Declaration TV sort .
+ "Равенство на TV нужно лишь(!) для проверки полноты предикатов!"
+ Declaration EQ_TV TV TV : TV prime fm_strcmp .
+ Add infix "=" to EQ_TV .
+ Declaration NOT TV : TV prime .
+ Add infix "¬" to NOT .
+ Add infix "not" to NOT .
+ Declaration AND TV TV : TV prime .
+ Add infix "∧" to AND .
+ Add infix "and" to AND .
+ Declaration OR TV TV : TV prime .
+ Add infix "∨" to OR .
+ Add infix "or" to OR .
+ Declaration IMPLIES TV TV : TV .
+ Add infix "→" to IMPLIES .
+ Add infix "impl" to IMPLIES .
+ Definition IMPL_d IMPLIES ( x z ) : ( ( ¬ x ) ∨ z ) .
+ Declaration EQUIV TV TV : TV .
+ Add infix "≡" to EQUIV .
+ Add infix "eqv" to EQUIV .
+ Definition EQV_d EQUIV ( x y ) : ( ( x → y ) ∧ ( y → x ) ) .
+ ! True TV !
+ ! False TV !
+ "String DAD"
+ "sort of strings without double quote (DQ). То что в тексте они в DQ есть соглашение СЕРИАЛИЗАЦИИ;-)"
+ Declaration S sort "[^DQ]*" .
+ Declaration S_EQ S S : TV prime fm_strcmp .
+ Add infix "=" to S_EQ .
+ "Number DAD"
+ "Числа"
+ Declaration R sort "[-+]?{DIGIT}+({Dot}{DIGIT}+)?" .
+ "Объявления функций арифметики десятичных рациональных чисел"
+ "--первичные"
+ Declaration R_EQ R R : TV prime fm_req .
+ Add infix "=" to R_EQ .
+ Declaration R_LT R R : TV prime fm_rlt .
+ Add infix "<" to R_LT .
+ Declaration R_PLUS R R : R prime fm_radd .
+ Add infix "+" to R_PLUS .
+ Declaration R_MINUS R R : R prime fm_rminus .
+ Add infix "-" to R_MINUS .
+ Declaration R_MULTIPLY R R : R prime fm_rmult .
+ Add infix "*" to R_MULTIPLY .
+ Declaration R_DEVIDE R R : R prime fm_rdev .
+ Add infix "/" to R_DEVIDE .
+ "--могли бы иметь определения"
+ Declaration R_GT R R : TV prime fm_rgt .
+ Add infix ">" to R_GT .
+ Declaration R_LE R R : TV prime fm_rle .
+ Add infix "≤" to R_LE .
+ Declaration R_GE R R : TV prime fm_rge .
+ Add infix "≥" to R_GE .
+ ""
+ "БД Проба DAD"
+ "сорта с равенством"
+ Declaration publication sort .
+ Declaration EQU_publication publication publication : TV prime fm_strcmp .
+ Add infix "=" to EQU_publication .
+ Declaration sample sort .
+ Declaration EQU_sample sample sample : TV prime fm_strcmp .
+ Add infix "=" to EQU_sample .
+ Declaration place sort .
+ Declaration EQU_place place place : TV prime fm_strcmp .
+ Add infix "=" to EQU_place .
+ "атрибуты статьи"
+ Declaration title publication : S prime .
+ Declaration journal_reference publication : S prime .
+ Declaration year publication : R prime .
+ Declaration first_page publication : R prime .
+ Declaration last_page publication : R prime .
+ "атрибуты образца"
+ Declaration authorial_number sample : S prime .
+ Declaration reference sample : S prime .
+ "связи образца"
+ Declaration described sample : publication prime .
+ Declaration gathering_place sample : place prime .
+ "атрибуты места"
+ Declaration latitude place : R prime .
+ Declaration longitude place : R prime .
+ "связи места"
+ Declaration part_of place place : TV prime .
+ "оператор весового процентного содержания вещества"
+ Declaration WPC ( sample : TV ) : ( sample : R ) prime .
+ "аксиомы"
+ "GPfull: Каждый образец имеет место сбора."
+ Axiom GPfull ( ∀ x : sample ( ∃ y : place ( gathering_place ( x ) = y ) ) ) .
+ "Dfull: Каждый образец описан."
+ Theorem Dfull ( ∀ x : sample ( ∃ y : publication ( described ( x ) = y ) ) ) .
+ "горные породы"
+ Declaration rhyolite sample : TV prime .
+ Axiom full_rhyolite ( ∀ x : sample ( ∃ y : TV ( rhyolite ( x ) = y ) ) ) .
+ Declaration basalt_and_olivine sample : TV prime .
+ Declaration trachydolerite sample : TV prime .
+ Declaration trachyte sample : TV prime .
+ Declaration obsidian sample : TV prime .
+ Declaration basalt sample : TV prime .
+ Declaration trachyandesite sample : TV prime .
+ Declaration andesite sample : TV prime .
+ "химические вещества, элементы, изотопы..."
+ Declaration SIO2 sample : TV prime .
+ Declaration AL2O3 sample : TV prime .
+ Declaration FE2O3 sample : TV prime .
+ Declaration MGO sample : TV prime .
+ Declaration CAO sample : TV prime .
+ Declaration NA2O sample : TV prime .
+ Declaration K2O sample : TV prime .
+ Declaration H2Op sample : TV prime .
+ Declaration TIO2 sample : TV prime .
+ Declaration FEO sample : TV prime .
+ Declaration MNO sample : TV prime .
+ Declaration P2O5 sample : TV prime .
+ Declaration CO2 sample : TV prime .
+ Declaration H2Om sample : TV prime .
+ "географические названия"
+ ! Iceland place !
+ ! Atlantic_Ocean place !
+ ! Ascension place !
+ ! Second_Aleutian_Arc place !
+ ! Aleutian_Arc place !
+ "постатейная часть"
+ ! PUB5633 publication !
+ ! PLC1809 place !
+ ! SAM32994 sample !
+ ! SAM32995 sample !
+ ! SAM32996 sample !
+ ! PUB5918 publication !
+ ! SAM30681 sample !
+ ! PLC1555 place !
+ ! SAM30683 sample !
+ ! SAM30684 sample !
+ ! SAM30685 sample !
+ ! SAM30686 sample !
+ ! SAM30687 sample !
+ ! SAM30688 sample !
+ ! SAM30689 sample !
+ ! SAM30690 sample !
+ ! SAM30691 sample !
+ ! SAM30692 sample !
+ ! SAM30693 sample !
+ ! SAM30696 sample !
+ ! SAM30697 sample !
+ ! SAM30682 sample !
+ ! SAM30695 sample !
+ ! SAM30694 sample !
+ ! PUB4061 publication !
+ ! SAM56195 sample !
+ ! PLC2318 place !
+ ! SAM56196 sample !
+ Declaration disjoint ( sample : TV ) ( sample : TV ) : TV .
+ ! s1_ sample !
+ ! s2_ sample !
+ ! a1 sample !
+ Declaration rock ( sample : TV ) : TV prime .
+ Declaration disjoint_sample ( sample : TV ) ( sample : TV ) : TV .
+ Definition dsj_sample disjoint_sample ( z y ) : ( ∀ x : sample ( ¬ ( z ( x ) ∧ y ( x ) ) ) ) .
+ "the end"
+ "相机就绪"
+--fm_tv dump begins-----------------------------------------
+! AND ( False False ):False!
+! AND ( False True ):False!
+! AND ( True False ):False!
+! AND ( True True ):True!
+! andesite ( SAM56196 ):True!
+! authorial_number ( SAM32994 ):"A"!
+! authorial_number ( SAM32995 ):"B"!
+! authorial_number ( SAM32996 ):"C"!
+! authorial_number ( SAM56195 ):"E"!
+! authorial_number ( SAM56196 ):"F"!
+! basalt ( SAM30682 ):True!
+! basalt ( SAM56195 ):True!
+! basalt_and_olivine ( SAM30681 ):True!
+! described ( SAM30681 ):PUB5918!
+! described ( SAM30682 ):PUB5918!
+! described ( SAM30683 ):PUB5918!
+! described ( SAM30684 ):PUB5918!
+! described ( SAM30685 ):PUB5918!
+! described ( SAM30686 ):PUB5918!
+! described ( SAM30687 ):PUB5918!
+! described ( SAM30688 ):PUB5918!
+! described ( SAM30689 ):PUB5918!
+! described ( SAM30690 ):PUB5918!
+! described ( SAM30691 ):PUB5918!
+! described ( SAM30692 ):PUB5918!
+! described ( SAM30693 ):PUB5918!
+! described ( SAM30694 ):PUB5918!
+! described ( SAM30695 ):PUB5918!
+! described ( SAM30696 ):PUB5918!
+! described ( SAM30697 ):PUB5918!
+! described ( SAM32994 ):PUB5633!
+! described ( SAM32995 ):PUB5633!
+! described ( SAM32996 ):PUB5633!
+! described ( SAM56195 ):PUB4061!
+! described ( SAM56196 ):PUB4061!
+! first_page ( PUB4061 ):268!
+! first_page ( PUB5633 ):1!
+! first_page ( PUB5918 ):3!
+! gathering_place ( SAM30681 ):PLC1555!
+! gathering_place ( SAM30682 ):PLC1555!
+! gathering_place ( SAM30683 ):PLC1555!
+! gathering_place ( SAM30684 ):PLC1555!
+! gathering_place ( SAM30685 ):PLC1555!
+! gathering_place ( SAM30686 ):PLC1555!
+! gathering_place ( SAM30687 ):PLC1555!
+! gathering_place ( SAM30688 ):PLC1555!
+! gathering_place ( SAM30689 ):PLC1555!
+! gathering_place ( SAM30690 ):PLC1555!
+! gathering_place ( SAM30691 ):PLC1555!
+! gathering_place ( SAM30692 ):PLC1555!
+! gathering_place ( SAM30693 ):PLC1555!
+! gathering_place ( SAM30694 ):PLC1555!
+! gathering_place ( SAM30695 ):PLC1555!
+! gathering_place ( SAM30696 ):PLC1555!
+! gathering_place ( SAM30697 ):PLC1555!
+! gathering_place ( SAM32994 ):PLC1809!
+! gathering_place ( SAM32995 ):PLC1809!
+! gathering_place ( SAM32996 ):PLC1809!
+! gathering_place ( SAM56195 ):PLC2318!
+! gathering_place ( SAM56196 ):PLC2318!
+! journal_reference ( PUB4061 ):"NATURE 308"!
+! journal_reference ( PUB5633 ):"ACTA NAT. ISLAND. 1 (2)"!
+! journal_reference ( PUB5918 ):"PROC. AM. ACAD. ARTS SCI. 60"!
+! last_page ( PUB4061 ):270!
+! last_page ( PUB5633 ):15!
+! last_page ( PUB5918 ):80!
+! latitude ( PLC1555 ):-7.93!
+! latitude ( PLC1809 ):64.7!
+! latitude ( PLC2318 ):53.95!
+! longitude ( PLC1555 ):-14.37!
+! longitude ( PLC1809 ):-19.2!
+! longitude ( PLC2318 ):-168.07!
+! NOT ( False ):True!
+! NOT ( True ):False!
+! obsidian ( SAM30696 ):True!
+! OR ( False False ):False!
+! OR ( False True ):True!
+! OR ( True False ):True!
+! OR ( True True ):True!
+! part_of ( PLC1555 Ascension ):True!
+! part_of ( PLC1555 Atlantic_Ocean ):True!
+! part_of ( PLC1809 Atlantic_Ocean ):True!
+! part_of ( PLC1809 Iceland ):True!
+! part_of ( PLC2318 Aleutian_Arc ):True!
+! part_of ( PLC2318 Second_Aleutian_Arc ):True!
+! reference ( SAM32994 ):"KERLINGARFJELL"!
+! reference ( SAM32995 ):"KERLINGARFJELL"!
+! reference ( SAM32996 ):"KERLINGARFJELL"!
+! reference ( SAM56195 ):"BOGOSLOF"!
+! reference ( SAM56196 ):"BOGOSLOF"!
+! rhyolite ( SAM30697 ):True!
+! rhyolite ( SAM32994 ):True!
+! rhyolite ( SAM32995 ):True!
+! rhyolite ( SAM32996 ):True!
+! rock ( basalt ):True!
+! title ( PUB4061 ):"ON HORNBLENDE ANDESITES FROM THE NEW VOLCANO ON BOGOSLOF ISLAND IN THE BERING SEA "!
+! title ( PUB5633 ):"A CONTRIBUTION TO THE GEOLOGY OF THE KERLINGARFJELL"!
+! title ( PUB5918 ):"THE GEOLOGY OF ASCENSION ISLAND. "!
+! trachyandesite ( SAM30686 ):True!
+! trachydolerite ( SAM30683 ):True!
+! trachydolerite ( SAM30684 ):True!
+! trachydolerite ( SAM30685 ):True!
+! trachyte ( SAM30687 ):True!
+! trachyte ( SAM30688 ):True!
+! trachyte ( SAM30689 ):True!
+! trachyte ( SAM30690 ):True!
+! trachyte ( SAM30691 ):True!
+! trachyte ( SAM30692 ):True!
+! trachyte ( SAM30693 ):True!
+! trachyte ( SAM30694 ):True!
+! trachyte ( SAM30695 ):True!
+! WPC ( AL2O3 ) ( SAM30681 ):16.23!
+! WPC ( AL2O3 ) ( SAM30682 ):15.54!
+! WPC ( AL2O3 ) ( SAM30683 ):16.68!
+! WPC ( AL2O3 ) ( SAM30684 ):21.41!
+! WPC ( AL2O3 ) ( SAM30685 ):19.58!
+! WPC ( AL2O3 ) ( SAM30686 ):14.92!
+! WPC ( AL2O3 ) ( SAM30687 ):15.91!
+! WPC ( AL2O3 ) ( SAM30688 ):14.3!
+! WPC ( AL2O3 ) ( SAM30689 ):15.51!
+! WPC ( AL2O3 ) ( SAM30690 ):16!
+! WPC ( AL2O3 ) ( SAM30691 ):15.43!
+! WPC ( AL2O3 ) ( SAM30692 ):15.75!
+! WPC ( AL2O3 ) ( SAM30693 ):18.56!
+! WPC ( AL2O3 ) ( SAM30694 ):12.85!
+! WPC ( AL2O3 ) ( SAM30695 ):14.84!
+! WPC ( AL2O3 ) ( SAM30696 ):12.8!
+! WPC ( AL2O3 ) ( SAM30697 ):14.09!
+! WPC ( AL2O3 ) ( SAM32994 ):15!
+! WPC ( AL2O3 ) ( SAM32995 ):12.8!
+! WPC ( AL2O3 ) ( SAM32996 ):14.35!
+! WPC ( CAO ) ( SAM30681 ):10.02!
+! WPC ( CAO ) ( SAM30682 ):9.03!
+! WPC ( CAO ) ( SAM30683 ):7.32!
+! WPC ( CAO ) ( SAM30684 ):6.56!
+! WPC ( CAO ) ( SAM30685 ):5.54!
+! WPC ( CAO ) ( SAM30686 ):4.5!
+! WPC ( CAO ) ( SAM30687 ):0.81!
+! WPC ( CAO ) ( SAM30688 ):0.83!
+! WPC ( CAO ) ( SAM30689 ):1.05!
+! WPC ( CAO ) ( SAM30690 ):1.58!
+! WPC ( CAO ) ( SAM30691 ):1.06!
+! WPC ( CAO ) ( SAM30692 ):1.49!
+! WPC ( CAO ) ( SAM30693 ):0.7!
+! WPC ( CAO ) ( SAM30694 ):0.6!
+! WPC ( CAO ) ( SAM30695 ):0.6!
+! WPC ( CAO ) ( SAM30696 ):0.58!
+! WPC ( CAO ) ( SAM30697 ):0.8!
+! WPC ( CAO ) ( SAM32994 ):0.72!
+! WPC ( CAO ) ( SAM32995 ):2.55!
+! WPC ( CAO ) ( SAM32996 ):1.22!
+! WPC ( CO2 ) ( SAM30681 ):0.04!
+! WPC ( CO2 ) ( SAM30682 ):0.03!
+! WPC ( CO2 ) ( SAM30687 ):0.09!
+! WPC ( FE2O3 ) ( SAM30681 ):2.2!
+! WPC ( FE2O3 ) ( SAM30682 ):5.31!
+! WPC ( FE2O3 ) ( SAM30683 ):4.54!
+! WPC ( FE2O3 ) ( SAM30684 ):4.63!
+! WPC ( FE2O3 ) ( SAM30685 ):5.09!
+! WPC ( FE2O3 ) ( SAM30686 ):1.73!
+! WPC ( FE2O3 ) ( SAM30687 ):4.41!
+! WPC ( FE2O3 ) ( SAM30688 ):3.85!
+! WPC ( FE2O3 ) ( SAM30689 ):3.27!
+! WPC ( FE2O3 ) ( SAM30690 ):2.57!
+! WPC ( FE2O3 ) ( SAM30691 ):3.25!
+! WPC ( FE2O3 ) ( SAM30692 ):0.52!
+! WPC ( FE2O3 ) ( SAM30693 ):6.8!
+! WPC ( FE2O3 ) ( SAM30694 ):3.6!
+! WPC ( FE2O3 ) ( SAM30695 ):3.76!
+! WPC ( FE2O3 ) ( SAM30696 ):2.64!
+! WPC ( FE2O3 ) ( SAM30697 ):1.41!
+! WPC ( FE2O3 ) ( SAM32994 ):1.05!
+! WPC ( FE2O3 ) ( SAM32995 ):5.1!
+! WPC ( FE2O3 ) ( SAM32996 ):3.3!
+! WPC ( FEO ) ( SAM30681 ):9.93!
+! WPC ( FEO ) ( SAM30682 ):7.73!
+! WPC ( FEO ) ( SAM30683 ):4.79!
+! WPC ( FEO ) ( SAM30684 ):3.32!
+! WPC ( FEO ) ( SAM30685 ):3.75!
+! WPC ( FEO ) ( SAM30686 ):5.78!
+! WPC ( FEO ) ( SAM30687 ):0.98!
+! WPC ( FEO ) ( SAM30688 ):0.33!
+! WPC ( FEO ) ( SAM30689 ):0.93!
+! WPC ( FEO ) ( SAM30690 ):2.12!
+! WPC ( FEO ) ( SAM30691 ):1.25!
+! WPC ( FEO ) ( SAM30692 ):3.15!
+! WPC ( FEO ) ( SAM30693 ):0.03!
+! WPC ( FEO ) ( SAM30694 ):0.05!
+! WPC ( FEO ) ( SAM30695 ):0.35!
+! WPC ( FEO ) ( SAM30696 ):1.48!
+! WPC ( FEO ) ( SAM30697 ):2.32!
+! WPC ( H2Om ) ( SAM30681 ):0.09!
+! WPC ( H2Om ) ( SAM30682 ):0.16!
+! WPC ( H2Om ) ( SAM30683 ):0.4!
+! WPC ( H2Om ) ( SAM30684 ):1.08!
+! WPC ( H2Om ) ( SAM30685 ):1.16!
+! WPC ( H2Om ) ( SAM30686 ):0.09!
+! WPC ( H2Om ) ( SAM30687 ):0.45!
+! WPC ( H2Om ) ( SAM30688 ):0.08!
+! WPC ( H2Om ) ( SAM30694 ):0.18!
+! WPC ( H2Op ) ( SAM30681 ):0.19!
+! WPC ( H2Op ) ( SAM30682 ):0.18!
+! WPC ( H2Op ) ( SAM30683 ):0.3!
+! WPC ( H2Op ) ( SAM30686 ):0.31!
+! WPC ( H2Op ) ( SAM30687 ):0.53!
+! WPC ( H2Op ) ( SAM30688 ):0.44!
+! WPC ( H2Op ) ( SAM30689 ):1.98!
+! WPC ( H2Op ) ( SAM30690 ):0.61!
+! WPC ( H2Op ) ( SAM30691 ):0.56!
+! WPC ( H2Op ) ( SAM30692 ):4.83!
+! WPC ( H2Op ) ( SAM30693 ):8.3!
+! WPC ( H2Op ) ( SAM30694 ):0.17!
+! WPC ( H2Op ) ( SAM30695 ):0.4!
+! WPC ( H2Op ) ( SAM30696 ):0.48!
+! WPC ( H2Op ) ( SAM30697 ):0.85!
+! WPC ( H2Op ) ( SAM32994 ):0.51!
+! WPC ( H2Op ) ( SAM32995 ):1.27!
+! WPC ( H2Op ) ( SAM32996 ):3.08!
+! WPC ( K2O ) ( SAM30681 ):0.64!
+! WPC ( K2O ) ( SAM30682 ):1.24!
+! WPC ( K2O ) ( SAM30683 ):2.06!
+! WPC ( K2O ) ( SAM30684 ):3.53!
+! WPC ( K2O ) ( SAM30685 ):3.78!
+! WPC ( K2O ) ( SAM30686 ):2.76!
+! WPC ( K2O ) ( SAM30687 ):4.6!
+! WPC ( K2O ) ( SAM30688 ):4.34!
+! WPC ( K2O ) ( SAM30689 ):5.4!
+! WPC ( K2O ) ( SAM30690 ):5.18!
+! WPC ( K2O ) ( SAM30691 ):5.32!
+! WPC ( K2O ) ( SAM30692 ):5.21!
+! WPC ( K2O ) ( SAM30693 ):4!
+! WPC ( K2O ) ( SAM30694 ):4.78!
+! WPC ( K2O ) ( SAM30695 ):2.4!
+! WPC ( K2O ) ( SAM30696 ):3.87!
+! WPC ( K2O ) ( SAM30697 ):3.52!
+! WPC ( K2O ) ( SAM32994 ):2.37!
+! WPC ( K2O ) ( SAM32995 ):1.68!
+! WPC ( K2O ) ( SAM32996 ):1.55!
+! WPC ( MGO ) ( SAM30681 ):7.15!
+! WPC ( MGO ) ( SAM30682 ):4.96!
+! WPC ( MGO ) ( SAM30683 ):3.92!
+! WPC ( MGO ) ( SAM30684 ):1.75!
+! WPC ( MGO ) ( SAM30685 ):1.99!
+! WPC ( MGO ) ( SAM30686 ):2.23!
+! WPC ( MGO ) ( SAM30687 ):0.1!
+! WPC ( MGO ) ( SAM30688 ):0.3!
+! WPC ( MGO ) ( SAM30689 ):0.17!
+! WPC ( MGO ) ( SAM30690 ):0.64!
+! WPC ( MGO ) ( SAM30691 ):0.16!
+! WPC ( MGO ) ( SAM30692 ):0.38!
+! WPC ( MGO ) ( SAM30693 ):0.62!
+! WPC ( MGO ) ( SAM30694 ):0.18!
+! WPC ( MGO ) ( SAM30695 ):0.14!
+! WPC ( MGO ) ( SAM30696 ):0.1!
+! WPC ( MGO ) ( SAM30697 ):0.08!
+! WPC ( MGO ) ( SAM32994 ):0.15!
+! WPC ( MGO ) ( SAM32995 ):0.25!
+! WPC ( MGO ) ( SAM32996 ):0.1!
+! WPC ( MNO ) ( SAM30681 ):0.17!
+! WPC ( MNO ) ( SAM30682 ):0.17!
+! WPC ( MNO ) ( SAM30683 ):0.37!
+! WPC ( MNO ) ( SAM30686 ):0.11!
+! WPC ( MNO ) ( SAM30687 ):0.17!
+! WPC ( MNO ) ( SAM30688 ):0.21!
+! WPC ( MNO ) ( SAM30694 ):0.29!
+! WPC ( NA2O ) ( SAM30681 ):2.87!
+! WPC ( NA2O ) ( SAM30682 ):3.6!
+! WPC ( NA2O ) ( SAM30683 ):4.63!
+! WPC ( NA2O ) ( SAM30684 ):4.72!
+! WPC ( NA2O ) ( SAM30685 ):4.7!
+! WPC ( NA2O ) ( SAM30686 ):5.88!
+! WPC ( NA2O ) ( SAM30687 ):6.24!
+! WPC ( NA2O ) ( SAM30688 ):6.76!
+! WPC ( NA2O ) ( SAM30689 ):6.31!
+! WPC ( NA2O ) ( SAM30690 ):6.45!
+! WPC ( NA2O ) ( SAM30691 ):6.12!
+! WPC ( NA2O ) ( SAM30692 ):6.11!
+! WPC ( NA2O ) ( SAM30693 ):3.17!
+! WPC ( NA2O ) ( SAM30694 ):5.32!
+! WPC ( NA2O ) ( SAM30695 ):5.94!
+! WPC ( NA2O ) ( SAM30696 ):6.5!
+! WPC ( NA2O ) ( SAM30697 ):6.01!
+! WPC ( NA2O ) ( SAM32994 ):5.3!
+! WPC ( NA2O ) ( SAM32995 ):4.33!
+! WPC ( NA2O ) ( SAM32996 ):4.22!
+! WPC ( P2O5 ) ( SAM30681 ):0.59!
+! WPC ( P2O5 ) ( SAM30682 ):0.64!
+! WPC ( P2O5 ) ( SAM30683 ):0.52!
+! WPC ( P2O5 ) ( SAM30684 ):0.48!
+! WPC ( P2O5 ) ( SAM30685 ):0.31!
+! WPC ( P2O5 ) ( SAM30686 ):0.71!
+! WPC ( P2O5 ) ( SAM30687 ):0.08!
+! WPC ( P2O5 ) ( SAM30688 ):0.22!
+! WPC ( P2O5 ) ( SAM30691 ):0.04!
+! WPC ( P2O5 ) ( SAM30694 ):0.05!
+! WPC ( SIO2 ) ( SAM30681 ):47.69!
+! WPC ( SIO2 ) ( SAM30682 ):48.64!
+! WPC ( SIO2 ) ( SAM30683 ):52.87!
+! WPC ( SIO2 ) ( SAM30684 ):51.18!
+! WPC ( SIO2 ) ( SAM30685 ):54.04!
+! WPC ( SIO2 ) ( SAM30686 ):58!
+! WPC ( SIO2 ) ( SAM30687 ):65.18!
+! WPC ( SIO2 ) ( SAM30688 ):66.98!
+! WPC ( SIO2 ) ( SAM30689 ):66.12!
+! WPC ( SIO2 ) ( SAM30690 ):63.98!
+! WPC ( SIO2 ) ( SAM30691 ):67.05!
+! WPC ( SIO2 ) ( SAM30692 ):63.02!
+! WPC ( SIO2 ) ( SAM30693 ):55.1!
+! WPC ( SIO2 ) ( SAM30694 ):71.88!
+! WPC ( SIO2 ) ( SAM30695 ):70.99!
+! WPC ( SIO2 ) ( SAM30696 ):72.71!
+! WPC ( SIO2 ) ( SAM30697 ):71.42!
+! WPC ( SIO2 ) ( SAM32994 ):73.95!
+! WPC ( SIO2 ) ( SAM32995 ):72.25!
+! WPC ( SIO2 ) ( SAM32996 ):71.32!
+! WPC ( TIO2 ) ( SAM30681 ):2.79!
+! WPC ( TIO2 ) ( SAM30682 ):3.52!
+! WPC ( TIO2 ) ( SAM30683 ):2.01!
+! WPC ( TIO2 ) ( SAM30684 ):1.34!
+! WPC ( TIO2 ) ( SAM30685 ):0.94!
+! WPC ( TIO2 ) ( SAM30686 ):3.38!
+! WPC ( TIO2 ) ( SAM30687 ):0.44!
+! WPC ( TIO2 ) ( SAM30688 ):0.89!
+! WPC ( TIO2 ) ( SAM30690 ):0.28!
+! WPC ( TIO2 ) ( SAM30691 ):0.1!
+! WPC ( TIO2 ) ( SAM30694 ):0.25!
+! year ( PUB4061 ):1886!
+! year ( PUB5633 ):1946!
+! year ( PUB5918 ):1925!
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

@@ -1,0 +1,1698 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<DT>
+<Yp1s msg='BEGIN' st_id='0000000090' st_rid='st-11'>
+<st_store Tree='188' added='1' />
+					 ? ( ∀ e1 : A ( ∀ e2 : A ( ( tov ( e1 ) = from ( e2 ) ) → ( ∃ e3 : A ( ( from ( e3 ) = from ( e1 ) ) ∧ ( tov ( e3 ) = tov ( e2 ) ) ) ) ) ) ) ?
+<infx_subst msg='RESULT'> ? ( ∀ e1 : A ( ∀ e2 : A IMPLIES ( EQU_V ( tov ( e1 ) from ( e2 ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+</infx_subst><defc_subst msg='!WARNING! Id e1 does not exist in entities!'/><defc_subst msg='!WARNING! Id e2 does not exist in entities!'/><defc_subst msg='!WARNING! Id e3 does not exist in entities!'/><defc_subst msg='!WARNING! Id e1 does not exist in entities!'/><defc_subst msg='!WARNING! Id e3 does not exist in entities!'/><defc_subst msg='!WARNING! Id e2 does not exist in entities!'/>
+<defc_subst msg='RESULT'> ? ( ∀ e1 : A ( ∀ e2 : A IMPLIES ( EQU_V ( tov ( e1 ) from ( e2 ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+</defc_subst>
+<deff_subst msg='RESULT'> ? ( ∀ e1 : A ( ∀ e2 : A OR ( NOT ( EQU_V ( tov ( e1 ) from ( e2 ) ) ) ( ∃ e3 : A AND ( EQU_V ( from ( e3 ) from ( e1 ) ) EQU_V ( tov ( e3 ) tov ( e2 ) ) ) ) ) ) ) ?
+</deff_subst>
+<st_trans msg='RESULT'><Statement tid='188' nid='90' up='0' rid='st-11' v='' irn='-2147483648' ref='189' type='0' flg='0' flg2='-2147483648'><q_m tid='188' nid='91' up='90' rid='' v='?' irn='1' ref='0' type='0' flg='0' flg2='-2147483648'/><term tid='188' nid='83' up='90' rid='trma' v='' irn='2' ref='13' type='125' flg='2' flg2='-2147483648'><l_p tid='188' nid='84' up='83' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='188' nid='85' up='83' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='86' up='83' rid='' v='e1' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='188' nid='87' up='83' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='88' up='83' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='188' nid='76' up='83' rid='trma' v='' irn='6' ref='13' type='125' flg='2' flg2='-2147483648'><l_p tid='188' nid='77' up='76' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><FOR_ANY tid='188' nid='78' up='76' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='79' up='76' rid='' v='e2' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='188' nid='80' up='76' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='81' up='76' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='188' nid='72' up='76' rid='trmin' v='' irn='6' ref='13' type='125' flg='2' flg2='-2147483648'><l_p tid='188' nid='73' up='72' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='188' nid='17' up='72' rid='trmin' v='' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='188' nid='18' up='17' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='188' nid='6' up='17' rid='trmf' v='' irn='2' ref='61' type='183' flg='2' flg2='-2147483648'><term tid='188' nid='1' up='6' rid='trmi' v='' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'><Id tid='188' nid='2' up='1' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='7' up='6' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='5' up='6' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='3' up='5' rid='trmi' v='' irn='-1' ref='188' type='88' flg='2' flg2='-2147483648'><Id tid='188' nid='4' up='3' rid='' v='e1' irn='1' ref='0' type='83' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='8' up='6' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='188' nid='19' up='17' rid='' v='=' irn='3' ref='45' type='15' flg='2' flg2='-2147483648'/><term tid='188' nid='14' up='17' rid='trmf' v='' irn='4' ref='60' type='170' flg='2' flg2='-2147483648'><term tid='188' nid='9' up='14' rid='trmi' v='' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'><Id tid='188' nid='10' up='9' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='15' up='14' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='13' up='14' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='11' up='13' rid='trmi' v='' irn='-1' ref='188' type='81' flg='2' flg2='-2147483648'><Id tid='188' nid='12' up='11' rid='' v='e2' irn='1' ref='0' type='76' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='16' up='14' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='20' up='17' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='188' nid='74' up='72' rid='' v='→' irn='3' ref='13' type='126' flg='2' flg2='-2147483648'/><term tid='188' nid='65' up='72' rid='trme' v='' irn='4' ref='7' type='67' flg='2' flg2='-2147483648'><l_p tid='188' nid='66' up='65' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><EXISTS tid='188' nid='67' up='65' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='68' up='65' rid='' v='e3' irn='3' ref='0' type='0' flg='2' flg2='-2147483648'/><COLON tid='188' nid='69' up='65' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/><Id tid='188' nid='70' up='65' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='-2147483648'/><term tid='188' nid='61' up='65' rid='trmin' v='' irn='6' ref='7' type='67' flg='2' flg2='-2147483648'><l_p tid='188' nid='62' up='61' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='188' nid='37' up='61' rid='trmin' v='' irn='2' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='188' nid='38' up='37' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='188' nid='26' up='37' rid='trmf' v='' irn='2' ref='60' type='170' flg='2' flg2='-2147483648'><term tid='188' nid='21' up='26' rid='trmi' v='' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'><Id tid='188' nid='22' up='21' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='27' up='26' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='25' up='26' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='23' up='25' rid='trmi' v='' irn='-1' ref='188' type='70' flg='2' flg2='-2147483648'><Id tid='188' nid='24' up='23' rid='' v='e3' irn='1' ref='0' type='65' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='28' up='26' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='188' nid='39' up='37' rid='' v='=' irn='3' ref='45' type='15' flg='2' flg2='-2147483648'/><term tid='188' nid='34' up='37' rid='trmf' v='' irn='4' ref='60' type='170' flg='2' flg2='-2147483648'><term tid='188' nid='29' up='34' rid='trmi' v='' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'><Id tid='188' nid='30' up='29' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='35' up='34' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='33' up='34' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='31' up='33' rid='trmi' v='' irn='-1' ref='188' type='88' flg='2' flg2='-2147483648'><Id tid='188' nid='32' up='31' rid='' v='e1' irn='1' ref='0' type='83' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='36' up='34' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='40' up='37' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='188' nid='63' up='61' rid='' v='∧' irn='3' ref='7' type='68' flg='2' flg2='-2147483648'/><term tid='188' nid='57' up='61' rid='trmin' v='' irn='4' ref='45' type='14' flg='2' flg2='-2147483648'><l_p tid='188' nid='58' up='57' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='-2147483648'/><term tid='188' nid='46' up='57' rid='trmf' v='' irn='2' ref='61' type='183' flg='2' flg2='-2147483648'><term tid='188' nid='41' up='46' rid='trmi' v='' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'><Id tid='188' nid='42' up='41' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='47' up='46' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='45' up='46' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='43' up='45' rid='trmi' v='' irn='-1' ref='188' type='70' flg='2' flg2='-2147483648'><Id tid='188' nid='44' up='43' rid='' v='e3' irn='1' ref='0' type='65' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='48' up='46' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><INFIX tid='188' nid='59' up='57' rid='' v='=' irn='3' ref='45' type='15' flg='2' flg2='-2147483648'/><term tid='188' nid='54' up='57' rid='trmf' v='' irn='4' ref='61' type='183' flg='2' flg2='-2147483648'><term tid='188' nid='49' up='54' rid='trmi' v='' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'><Id tid='188' nid='50' up='49' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='-2147483648'/></term><l_p tid='188' nid='55' up='54' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='-2147483648'/><TermList tid='188' nid='53' up='54' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='-2147483648'><term tid='188' nid='51' up='53' rid='trmi' v='' irn='-1' ref='188' type='81' flg='2' flg2='-2147483648'><Id tid='188' nid='52' up='51' rid='' v='e2' irn='1' ref='0' type='76' flg='2' flg2='-2147483648'/></term></TermList><r_p tid='188' nid='56' up='54' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='60' up='57' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='64' up='61' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='71' up='65' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='75' up='72' rid='' v=')' irn='5' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='82' up='76' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><r_p tid='188' nid='89' up='83' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='-2147483648'/></term><q_m tid='188' nid='92' up='90' rid='' v='?' irn='3' ref='0' type='0' flg='0' flg2='-2147483648'/></Statement>
+</st_trans>
+!trm_Val!DEBUG! IN rid=trma (tid=189,nid=83)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trma (tid=189,nid=76)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trma (tid=189,nid=76)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trma (tid=189,nid=76)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trma (tid=189,nid=76)
+<trma msg='!trm_Val.trma!DEBUG!first' cce='68'>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=69.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=94.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( False )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v1 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( True True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=95.
+</trmac>
+<trmac msg='!trm_Val.trma!DEBUG!Record and cur-ce value' Rv='True' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=162)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=522) !trm_Val!DEBUG!OUT v='OR'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=156)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=519) !trm_Val!DEBUG!OUT v='NOT'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=541)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=618) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=530)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=525) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=527) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='530' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=538)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=533) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=535) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='538' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='541' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' NOT ( True )' tid='189' nid='156' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trme (tid=189,nid=665)
+<trme msg='!trm_Val.trme!DEBUG!first' cce='68'>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='' V='a1'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' from ( a1 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a1'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a1 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=69.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a2'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' from ( a2 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a2'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a2 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=94.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a3'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' from ( a3 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a3'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a3 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v1' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v1 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( False False )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='False' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=95.
+</trmec>
+<trmec msg='!trm_Val.trme!DEBUG!Record and cur-ce value' Rv='False' V='a4'>
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=661)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=703) !trm_Val!DEBUG!OUT v='AND'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=637)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=697) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=626)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=621) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=623) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='626' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=634)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=629) !trm_Val!DEBUG!OUT v='from'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=631) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' from ( a4 )' tid='189' nid='634' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='637' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=657)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=700) !trm_Val!DEBUG!OUT v='EQU_V'
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=646)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=641) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=643) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='646' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' />
+!trm_Val!DEBUG! IN rid=trmf (tid=189,nid=654)
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=649) !trm_Val!DEBUG!OUT v='tov'
+!trm_Val!DEBUG! IN rid=trmi (tid=189,nid=651) !trm_Val!DEBUG!OUT v='a4'<ApplyTL msg='!DEBUG!' ser-val=' tov ( a4 )' tid='189' nid='654' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='v2' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' EQU_V ( v2 v2 )' tid='189' nid='657' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' /><ApplyTL msg='!DEBUG!' ser-val=' AND ( True True )' tid='189' nid='661' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trme!DEBUG!next ce cce=0.
+</trmec>
+!trm_Val.trme!DEBUG!final value Rv='True'.
+</trme><ApplyTL msg='!DEBUG!' ser-val=' OR ( False True )' tid='189' nid='162' /><ApplyTL msg='!DEBUG!after fm_tGetv' v='True' RC='0' />
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+!trm_Val.trma!DEBUG!next ce cce=0.
+</trmac>
+!trm_Val.trma!DEBUG!final value Rv='True'.
+</trma>
+<q_term msg='after trm_Val'><term tid='189' nid='83' up='90' rid='trma' v='True' irn='2' ref='10' type='96' flg='2' flg2='0'><l_p tid='189' nid='84' up='83' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='189' nid='85' up='83' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='86' up='83' rid='' v='e1' irn='3' ref='0' type='0' flg='2' flg2='0'/><COLON tid='189' nid='87' up='83' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='88' up='83' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='0'/><term tid='189' nid='76' up='83' rid='trma' v='True' irn='6' ref='10' type='96' flg='2' flg2='0'><l_p tid='189' nid='77' up='76' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><FOR_ANY tid='189' nid='78' up='76' rid='' v='∀' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='79' up='76' rid='' v='e2' irn='3' ref='0' type='0' flg='2' flg2='0'/><COLON tid='189' nid='80' up='76' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='81' up='76' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='0'/><term tid='189' nid='162' up='76' rid='trmf' v='True' irn='6' ref='10' type='96' flg='2' flg2='0'><term tid='189' nid='522' up='162' rid='trmi' v='OR' irn='1' ref='10' type='97' flg='2' flg2='0'><Id tid='189' nid='523' up='522' rid='' v='OR' irn='1' ref='10' type='97' flg='2' flg2='0'/></term><l_p tid='189' nid='163' up='162' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='524' up='162' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='156' up='524' rid='trmf' v='False' irn='-2' ref='4' type='38' flg='2' flg2='0'><term tid='189' nid='519' up='156' rid='trmi' v='NOT' irn='1' ref='4' type='39' flg='2' flg2='0'><Id tid='189' nid='520' up='519' rid='' v='NOT' irn='1' ref='4' type='39' flg='2' flg2='0'/></term><l_p tid='189' nid='157' up='156' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='521' up='156' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='541' up='521' rid='trmf' v='True' irn='-1' ref='45' type='14' flg='2' flg2='0'><term tid='189' nid='618' up='541' rid='trmi' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'><Id tid='189' nid='619' up='618' rid='' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'/></term><l_p tid='189' nid='542' up='541' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='620' up='541' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='530' up='620' rid='trmf' v='v2' irn='-2' ref='61' type='183' flg='2' flg2='0'><term tid='189' nid='525' up='530' rid='trmi' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'><Id tid='189' nid='526' up='525' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'/></term><l_p tid='189' nid='531' up='530' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='529' up='530' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='527' up='529' rid='trmi' v='a4' irn='-1' ref='189' type='88' flg='2' flg2='0'><Id tid='189' nid='528' up='527' rid='' v='a4' irn='1' ref='0' type='83' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='532' up='530' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='189' nid='538' up='620' rid='trmf' v='v2' irn='-1' ref='60' type='170' flg='2' flg2='0'><term tid='189' nid='533' up='538' rid='trmi' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'><Id tid='189' nid='534' up='533' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'/></term><l_p tid='189' nid='539' up='538' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='537' up='538' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='535' up='537' rid='trmi' v='a4' irn='-1' ref='189' type='81' flg='2' flg2='0'><Id tid='189' nid='536' up='535' rid='' v='a4' irn='1' ref='0' type='76' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='540' up='538' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='544' up='541' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='159' up='156' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='189' nid='665' up='524' rid='trme' v='True' irn='-1' ref='7' type='67' flg='2' flg2='0'><l_p tid='189' nid='666' up='665' rid='' v='(' irn='1' ref='0' type='0' flg='1' flg2='0'/><EXISTS tid='189' nid='667' up='665' rid='' v='∃' irn='2' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='668' up='665' rid='' v='e3' irn='3' ref='0' type='0' flg='2' flg2='0'/><COLON tid='189' nid='669' up='665' rid='' v=':' irn='4' ref='0' type='0' flg='1' flg2='0'/><Id tid='189' nid='670' up='665' rid='' v='A' irn='5' ref='0' type='0' flg='2' flg2='0'/><term tid='189' nid='661' up='665' rid='trmf' v='True' irn='6' ref='7' type='67' flg='2' flg2='0'><term tid='189' nid='703' up='661' rid='trmi' v='AND' irn='1' ref='7' type='68' flg='2' flg2='0'><Id tid='189' nid='704' up='703' rid='' v='AND' irn='1' ref='7' type='68' flg='2' flg2='0'/></term><l_p tid='189' nid='662' up='661' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='705' up='661' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='637' up='705' rid='trmf' v='True' irn='-2' ref='45' type='14' flg='2' flg2='0'><term tid='189' nid='697' up='637' rid='trmi' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'><Id tid='189' nid='698' up='697' rid='' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'/></term><l_p tid='189' nid='638' up='637' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='699' up='637' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='626' up='699' rid='trmf' v='v2' irn='-2' ref='60' type='170' flg='2' flg2='0'><term tid='189' nid='621' up='626' rid='trmi' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'><Id tid='189' nid='622' up='621' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'/></term><l_p tid='189' nid='627' up='626' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='625' up='626' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='623' up='625' rid='trmi' v='a4' irn='-1' ref='189' type='670' flg='2' flg2='0'><Id tid='189' nid='624' up='623' rid='' v='a4' irn='1' ref='0' type='665' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='628' up='626' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='189' nid='634' up='699' rid='trmf' v='v2' irn='-1' ref='60' type='170' flg='2' flg2='0'><term tid='189' nid='629' up='634' rid='trmi' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'><Id tid='189' nid='630' up='629' rid='' v='from' irn='1' ref='60' type='171' flg='2' flg2='0'/></term><l_p tid='189' nid='635' up='634' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='633' up='634' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='631' up='633' rid='trmi' v='a4' irn='-1' ref='189' type='88' flg='2' flg2='0'><Id tid='189' nid='632' up='631' rid='' v='a4' irn='1' ref='0' type='83' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='636' up='634' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='640' up='637' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='189' nid='657' up='705' rid='trmf' v='True' irn='-1' ref='45' type='14' flg='2' flg2='0'><term tid='189' nid='700' up='657' rid='trmi' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'><Id tid='189' nid='701' up='700' rid='' v='EQU_V' irn='1' ref='45' type='15' flg='2' flg2='0'/></term><l_p tid='189' nid='658' up='657' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='702' up='657' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='646' up='702' rid='trmf' v='v2' irn='-2' ref='61' type='183' flg='2' flg2='0'><term tid='189' nid='641' up='646' rid='trmi' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'><Id tid='189' nid='642' up='641' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'/></term><l_p tid='189' nid='647' up='646' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='645' up='646' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='643' up='645' rid='trmi' v='a4' irn='-1' ref='189' type='670' flg='2' flg2='0'><Id tid='189' nid='644' up='643' rid='' v='a4' irn='1' ref='0' type='665' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='648' up='646' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><term tid='189' nid='654' up='702' rid='trmf' v='v2' irn='-1' ref='61' type='183' flg='2' flg2='0'><term tid='189' nid='649' up='654' rid='trmi' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'><Id tid='189' nid='650' up='649' rid='' v='tov' irn='1' ref='61' type='184' flg='2' flg2='0'/></term><l_p tid='189' nid='655' up='654' rid='' v='(' irn='2' ref='0' type='0' flg='1' flg2='0'/><TermList tid='189' nid='653' up='654' rid='#trml' v='' irn='3' ref='0' type='0' flg='1' flg2='0'><term tid='189' nid='651' up='653' rid='trmi' v='a4' irn='-1' ref='189' type='81' flg='2' flg2='0'><Id tid='189' nid='652' up='651' rid='' v='a4' irn='1' ref='0' type='76' flg='2' flg2='0'/></term></TermList><r_p tid='189' nid='656' up='654' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='660' up='657' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='664' up='661' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='189' nid='671' up='665' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></TermList><r_p tid='189' nid='165' up='162' rid='' v=')' irn='4' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='189' nid='82' up='76' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term><r_p tid='189' nid='89' up='83' rid='' v=')' irn='7' ref='0' type='0' flg='1' flg2='0'/></term></q_term>
+<answer msg='True' />
+</Yp1s>
+<End msg='of Statement nodes in dt. Stop.' />
+</DT>

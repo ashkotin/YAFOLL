@@ -1,0 +1,1 @@
+select CAST(tid as varchar)||CAST(nid as varchar)||' [label="'||sid||' '||COALESCE(v,'')||'\n'||COALESCE(rid,'')||'"];' from dts where tid=29 order by tid,nid;
